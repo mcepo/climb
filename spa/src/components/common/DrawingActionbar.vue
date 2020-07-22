@@ -12,7 +12,7 @@
 
 import { mapState } from 'vuex'
 
-const drawingService = import('../../services/drawing.service')
+import drawingService from '../../services/drawing.service'
 
 export default {
 
