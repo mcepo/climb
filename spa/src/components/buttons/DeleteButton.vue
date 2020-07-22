@@ -1,0 +1,73 @@
+<template>
+  <div style='display:inline'>
+    <v-btn text icon @click.stop='showDialog()' :title="'Delete ' + type">
+      <v-icon>delete</v-icon>
+    </v-btn>
+    <v-dialog v-model="dialog" persistent max-width="290">
+      <v-card>
+        <v-card-title>Are you sure ?</v-card-title>
+        <v-card-text>Deleting this {{ type }} will remove all refrences to it as well as all depended items.</v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn text icon title="Dismiss action" @click="dialog = false">
+            <v-icon>close</v-icon>
+          </v-btn>
+          <v-btn text icon title="Confirm delete" @click="confirmDelete()">
+            <v-icon>check</v-icon>
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </div>
+</template>
+
+<script>
+
+import Vue from 'vue'
+import api from '../../store/api'
+
+export default Vue.extend({
+  props: {
+    type: String,
+    item: Object,
+    returnBack: Boolean
+  },
+  data: () => {
+    return {
+      dialog: false
+    }
+  },
+  methods: {
+    showDialog () {
+      this.$store.dispatch('auth/authorize', { item: this.item, callback: () => { this.dialog = true } })
+    },
+    confirmDelete () {
+      // area, route, trail, pitch, tag, image
+
+      // if tag then take tagged_type and tagged_id and image_id
+      // and remove it from there
+
+      api.delete(this.type + '/' + this.item.id).then(() => {
+        // if a tag is beeing deleted
+        if (this.type === 'tag') {
+          const imageId = this.$store.getters.openImage
+
+          // if tag is on a image or map
+          if (imageId) {
+            this.$store.commit('image/removeImageTag', { imageId: imageId, tag: this.item })
+          } else {
+            // eslint-disable-next-line @typescript-eslint/camelcase
+            this.$store.commit(this.item.tagged_type + '/removeMapTag', this.item.tagged_id)
+          }
+        } else {
+          this.returnBack && this.$router.back()
+          this.$store.commit(this.type + '/remove', this.item)
+        }
+
+        this.$store.commit('snackbar/success', 'Deleted!')
+      })
+      this.dialog = false
+    }
+  }
+})
+</script>

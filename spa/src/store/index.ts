@@ -1,0 +1,62 @@
+import Vue from 'vue'
+import Vuex from 'vuex'
+import registerWatches from './watches'
+
+import modules from './modules'
+import { AuthState } from './modules/auth'
+import { Route } from 'vue-router'
+import { ImageState } from './modules/image'
+import { AreaState } from './modules/area'
+import { RouteState } from './modules/route'
+import { TrailState } from './modules/trail'
+import { Tag } from '@/models'
+import { HighlightState } from './modules/highlight'
+import { UserState } from './modules/user'
+
+Vue.use(Vuex)
+
+export interface RootState {
+  url?: Route; // route vuex sync module, will contain vue router route data
+  auth?: AuthState;
+  image?: ImageState;
+  area?: AreaState;
+  route?: RouteState;
+  trail?: TrailState;
+  drawing: boolean;
+  highlight?: HighlightState;
+  user?: UserState;
+}
+
+const store = new Vuex.Store<RootState>({
+  state: {
+    drawing: false
+  },
+  mutations: {
+    setDrawingMode (state: RootState, drawing: boolean) {
+      state.drawing = drawing
+    }
+  },
+  getters: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    tags (state: RootState, getters: any): Tag[] {
+      return state.url?.params.imageId ? getters['image/tags'] : getters['area/tags']
+    },
+    openImage (state: RootState) {
+      return state.url?.params.imageId
+    },
+    // used by tag-control to determin if an item has a tag on the map/image
+    // TODO: i think it would be useful to optimize this so that complexity
+    // isn't O(n), it could be O(1), if i store the tags in an object
+    // with key (type+id)
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    hasTag: (state: RootState, getters: any) => (key: string) => {
+      return getters.tags.some((tag: Tag) => key === (tag.tagged_type + tag.tagged_id))
+    }
+  },
+  modules
+})
+
+registerWatches(store)
+
+export default store

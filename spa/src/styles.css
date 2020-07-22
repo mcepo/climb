@@ -1,0 +1,30 @@
+.climb-area {
+  color: red;
+  font-size: large;
+  font: message-box;
+  width: 50px;
+  height: 50px;
+}
+
+.climb-area-highlight{
+  color: blue;
+  font-size: large;
+  font: message-box;
+  width: 50px;
+  height: 50px;
+}
+
+.climb-area-selected{
+  color: orangered;
+  text-shadow: mintcream;
+  text-decoration: double;
+  font-size: large;
+  font: message-box;
+  width: 50px;
+  height: 50px;
+}
+
+.popup-box {
+  width: 150px;
+  height: auto;
+}

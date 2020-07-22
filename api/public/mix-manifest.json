@@ -1,0 +1,12 @@
+{
+    "/js/guide.js": "/js/guide.js",
+    "/css/app.css": "/css/app.css",
+    "/css/guide.css": "/css/guide.css",
+    "/js/guide.js.map": "/js/guide.js.map",
+    "/css/app.css.map": "/css/app.css.map",
+    "/css/guide.css.map": "/css/guide.css.map",
+    "/js/manifest.js": "/js/manifest.js",
+    "/js/manifest.js.map": "/js/manifest.js.map",
+    "/js/vendor.js": "/js/vendor.js",
+    "/js/vendor.js.map": "/js/vendor.js.map"
+}
