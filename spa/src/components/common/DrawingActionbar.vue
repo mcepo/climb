@@ -10,9 +10,9 @@
 </template>
 <script>
 
-import drawingService from '../../services/drawing.service'
-
 import { mapState } from 'vuex'
+
+const drawingService = import('../../services/drawing.service')
 
 export default {
 

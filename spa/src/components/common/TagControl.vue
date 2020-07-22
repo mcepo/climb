@@ -12,7 +12,7 @@
 <script>
 
 import Vue from 'vue'
-import drawingService from '../../services/drawing.service'
+const drawingService = import('../../services/drawing.service')
 
 export default Vue.extend({
   props: {

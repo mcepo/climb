@@ -2,7 +2,6 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 // const CircularDependencyPlugin = require('circular-dependency-plugin')
 // const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-// const PurgecssPlugin = require('purgecss-webpack-plugin')
 
 module.exports = {
   transpileDependencies: [

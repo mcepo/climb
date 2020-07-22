@@ -1,4 +1,3 @@
-import '../../node_modules/leaflet/dist/leaflet.css'
 import { svgIconUrl } from '../utils/svg'
 import { Marker, Icon } from 'leaflet'
 
