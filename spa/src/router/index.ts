@@ -7,17 +7,16 @@ import RouteDetails from '../components/details/RouteDetails.vue'
 import LeafletMap from '../components/map/LeafletMap.vue'
 import ImageMap from '../components/map/ImageMap.vue'
 
-import AdminMenuList from '../admin/components/lists/MenuList.vue'
-import UsersPage from '../admin/pages/UsersPage.vue'
-import ActivityLogPage from '../admin/pages/ActivityLogPage.vue'
-import ImagesPage from '../admin/pages/ImagesPage.vue'
-import UserOverviewPage from '../admin/pages/UserOverviewPage.vue'
-
 import store from '../store'
 
 Vue.use(VueRouter)
 
-const AdminPanel = () => import('../views/AdminPanel.vue')
+const AdminPanel = () => import(/* webpackChunkName: "admin.panel" */'../views/AdminPanel.vue')
+const AdminMenuList = () => import(/* webpackChunkName: "admin.panel" */'../admin/components/lists/MenuList.vue')
+const UsersPage = () => import(/* webpackChunkName: "admin.panel" */'../admin/pages/UsersPage.vue')
+const ActivityLogPage = () => import(/* webpackChunkName: "admin.panel" */'../admin/pages/ActivityLogPage.vue')
+const ImagesPage = () => import(/* webpackChunkName: "admin.panel" */'../admin/pages/ImagesPage.vue')
+const UserOverviewPage = () => import(/* webpackChunkName: "admin.panel" */'../admin/pages/UserOverviewPage.vue')
 
 const routes = [
   {

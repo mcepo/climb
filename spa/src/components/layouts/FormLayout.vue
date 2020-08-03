@@ -27,14 +27,14 @@ export default {
   },
   components: {
 
-    'area-form': () => import('../forms/AreaForm.vue'),
-    'route-form': () => import('../forms/RouteForm.vue'),
-    'image-upload-form': () => import('../forms/ImageUploadForm.vue'),
-    'route-filters-form': () => import('../forms/RouteFiltersForm.vue'),
-    'pitch-form': () => import('../forms/PitchForm.vue'),
-    'moderator-form': () => import('../../admin/components/forms/ModeratorForm'),
-    'login-form': () => import('../auth/Login.vue'),
-    'register-form': () => import('../auth/Register.vue')
+    'area-form': () => import(/* webpackChunkName: "area.form" */'../forms/AreaForm.vue'),
+    'route-form': () => import(/* webpackChunkName: "route.form" */'../forms/RouteForm.vue'),
+    'image-upload-form': () => import(/* webpackChunkName: "image.upload" */'../forms/ImageUploadForm.vue'),
+    'route-filters-form': () => import(/* webpackChunkName: "route.filters" */'../forms/RouteFiltersForm.vue'),
+    'pitch-form': () => import(/* webpackChunkName: "pitch.form" */'../forms/PitchForm.vue'),
+    'moderator-form': () => import(/* webpackChunkName: "moderator.form" */'../../admin/components/forms/ModeratorForm'),
+    'login-form': () => import(/* webpackChunkName: "login.form" */'../auth/Login.vue'),
+    'register-form': () => import(/* webpackChunkName: "register.form" */'../auth/Register.vue')
   }
 }
 </script>

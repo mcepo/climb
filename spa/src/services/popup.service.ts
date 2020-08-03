@@ -1,6 +1,8 @@
 import { LatLng } from 'leaflet'
 import { Feature } from './layer.service'
 
+import popups from '../components/popups'
+
 const popupService = {
   // i have to import these dynamicly because otherwise the router is undefined
   // in the popup component
@@ -11,15 +13,19 @@ const popupService = {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   createPopup (feature: Feature, location: LatLng) {
-    const capitalizedType = feature.tag.tagged_type.charAt(0).toUpperCase() + feature.tag.tagged_type.slice(1)
-    import('../components/popups/' + capitalizedType + '.vue')
-      .then(
-        (module) => {
-          const ModuleDefault = module.default
+    const capitalizedType =
+      feature.tag.tagged_type.charAt(0).toUpperCase() +
+      feature.tag.tagged_type.slice(1)
 
-          feature.layer.bindPopup((new ModuleDefault({ propsData: { item: feature.item, tag: feature.tag } })).$mount().$el).openPopup(location)
-        }
+    const Popup = popups[capitalizedType]
+
+    feature.layer
+      .bindPopup(
+        new Popup({
+          propsData: { item: feature.item, tag: feature.tag }
+        }).$mount().$el
       )
+      .openPopup(location)
   }
 }
 

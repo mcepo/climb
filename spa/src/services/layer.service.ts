@@ -2,7 +2,6 @@ import { Map as LeafletMap, FeatureGroup, Marker, Polyline, Layer, LeafletMouseE
 import { Tag, MapType, Area, Route, Pitch, Image } from '@/models'
 import store, { RootState } from '@/store'
 import styleService from './style.service'
-import popupService from './popup.service'
 import tooltipService from './tooltip.service'
 
 export interface Feature {
@@ -244,7 +243,10 @@ export class LayerService {
       })
       .on('click', (e: LeafletMouseEvent) => {
         if (e.target.getPopup() === undefined) {
-          popupService.createPopup(feature, e.latlng)
+          import(/* webpackChunkName: "popup.service" */'./popup.service').then(
+            ({ default: popupService }) => {
+              popupService.createPopup(feature, e.latlng)
+            })
         }
       })
   }
