@@ -63,7 +63,7 @@
     "html-webpack-plugin": "^4.0.4",
     "material-design-icons-iconfont": "^5.0.1",
     "mini-css-extract-plugin": "^0.9.0",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.14.1",
     "path": "^0.12.7",
     "prettier": "^2.0.2",
     "purgecss-webpack-plugin": "^2.1.2",
