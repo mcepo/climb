@@ -1,3 +1,7 @@
+html {
+  overflow: auto;
+}
+
 .climb-area {
   color: red;
   font-size: large;
