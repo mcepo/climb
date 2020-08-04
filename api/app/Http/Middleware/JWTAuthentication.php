@@ -48,7 +48,9 @@ class JWTAuthentication
       } else {
         if(config('app.debug')) {
           $user = User::first();
-          Auth::login($user);
+          if($user) {
+            Auth::login($user);
+          }
         }
       }
         return $next($request);
