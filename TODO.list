@@ -1,10 +1,19 @@
 
 TODO: send frontend errors
+  i have to setup a backend in order for this to work,
+  because it seems as thou i can't send errors directly from frontend
 
-TODO: add links as a drop down like moderators
+  once the error gets to backend then mail it to me
 
-TODO: cms for adding external links, not pressing
+  add for backend errors as well
+  
 
 TODO: prettify popups
 
 TODO: validate image size, so small images can't be submited
+
+---- NOT pressing ----
+
+TODO: add links as a drop down like moderators
+
+TODO: cms for adding external links
