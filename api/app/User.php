@@ -2,18 +2,22 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as AuthUser;
 use App\Models\Filters\QueryFilter;
 use App\Models\Traits\Filterable;
 
+use \Firebase\JWT\JWT;
+
+use Illuminate\Support\Facades\Mail;
+use App\Mail\EmailVerification;
+
 use App\Models\Area;
 
 class User extends AuthUser  implements MustVerifyEmail
 {
-    use Notifiable, SoftDeletes, QueryFilter, Filterable;
+    use SoftDeletes, QueryFilter, Filterable;
 
     // role ids
     const ADMIN = 1;
@@ -128,6 +132,36 @@ class User extends AuthUser  implements MustVerifyEmail
         $user->save();
         return $user;
     }
+
+    public function getToken()
+    {
+        // using app key for signiture, the key string is in format
+        // base64:KEY
+        // so i need to get the key and base64 decode it
+        $key = base64_decode(explode(':', config('app.key'))[1]);
+
+        return [
+            'token' => JWT::encode($this, $key),
+            'user' => $this
+        ];
+    }
+
+    public function sendEmailVerificationMail()
+    {
+        Mail::to($this)->send(new EmailVerification($this));
+    }
+
+    public function hasVerifiedEmail()
+    {
+        return $this->email_verified_at != null;
+    }
+
+    public function getEmailForVerification()
+    {
+
+        return (config("app.key") . $this->email);
+    }
+
 
     public static function register($userArray)
     {

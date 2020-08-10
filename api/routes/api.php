@@ -1,10 +1,11 @@
 <?php
 
-Route::post('login', 'AuthController@login');
-Route::post('register', 'AuthController@register');
-Route::post('social_login/{provider}', 'AuthController@socialLogin');
-Route::post('forgot_password', 'AuthController@forgotPassword');
-Route::post('reset_password', 'AuthController@resetPassword');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('register', 'Auth\RegisterController@register');
+Route::post('social_login/{provider}', 'Auth\LoginController@socialLogin');
+
+Route::post('forgot_password', 'Auth\PasswordController@forgotten');
+Route::post('reset_password', 'Auth\PasswordController@reset');
 
 Route::post('area/{area}/image', 'AreaController@addImage');
 Route::put('area/{area}/move', 'AreaController@move');
