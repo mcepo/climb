@@ -8,8 +8,6 @@ TODO: send frontend errors
   add for backend errors as well
   
 
-TODO: prettify popups
-
 TODO: validate image size, so small images can't be submited
 
 TODO: finish registration process with email validations
