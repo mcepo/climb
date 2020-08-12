@@ -1,10 +1,12 @@
 <template>
   <popup :tag='tag' :item='item' type='trail'>
     <template v-slot:header>
-      {{item.name}}
+      <v-chip>Trail</v-chip>
+    </template>
+    <template v-slot:item>
+      <h2>{{item.name}}</h2>
     </template>
     <template v-slot:content>
-      Pretty little trail
     </template>
   </popup>
 </template>

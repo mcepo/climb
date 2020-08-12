@@ -13,7 +13,7 @@
       <v-list-item-subtitle>
         <v-layout justify-space-between>
           <div>{{grade}}</div>
-          <div>{{route.length}}m</div>
+          <div>{{length}}</div>
         </v-layout>
       </v-list-item-subtitle>
     </v-list-item-content>
@@ -47,6 +47,9 @@ export default {
     },
     grade () {
       return this.route && gradeService.forge(this.route.grades)
+    },
+    length() {
+      return this.route.length ? this.route.length + 'm' : ''
     }
   },
   methods: {

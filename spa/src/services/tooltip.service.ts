@@ -1,6 +1,10 @@
 import { Layer } from 'leaflet'
 import gradeService from '../services/grade.service'
 
+function lengthString(length) {
+  return length ? length + 'm' : ''
+}
+
 const tooltipService = {
   set (layer: Layer, content: string) {
     layer.bindTooltip(content, {
@@ -12,10 +16,10 @@ const tooltipService = {
     )
   },
   route ({ layer, item }) {
-    this.set(layer, item.name + '<br/>' + gradeService.forge(item.grades) + '<br/>' + item.length + 'm')
+    this.set(layer, item.name + '<br/>' + gradeService.forge(item.grades) + '<br/>' + lengthString(item.length))
   },
   pitch ({ layer, item }) {
-    this.set(layer, gradeService.forge(item.grades) + ' ' + item.length + 'm')
+    this.set(layer, gradeService.forge(item.grades) + ' ' + lengthString(item.length))
   },
   trail ({ layer, item }) {
     this.set(layer, item.name)

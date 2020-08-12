@@ -1,9 +1,11 @@
 <template>
   <v-card flat class='popup-box'>
+    <slot name='header'></slot>
     <router-link :to='link' style='white-space: nowrap'>
-      <slot name='header'></slot>
+      <slot name='item'></slot>
     </router-link>
     <slot name="content"></slot>
+    <v-divider></v-divider>
     <v-card-actions>
       <tag-control :type="type" :item="item"></tag-control>
       <delete-button type="tag" :item="tag"></delete-button>

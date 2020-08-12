@@ -16,7 +16,7 @@
           @mouseleave="onMouseLeave()">
           <td>{{ index + 1 }}</td>
           <td>{{ forgeGrade(pitch.grades) }}</td>
-          <td>{{ pitch.length }}m</td>
+          <td>{{ pitch.length ? pitch.length + 'm' : ''}}</td>
           <td>
             <tag-control v-if="notMap" type="pitch" :item="pitch"></tag-control>
             <v-btn text icon @click.stop="openForm({component: 'pitch-form', params: {pitch, route}})">
