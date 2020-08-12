@@ -3,29 +3,41 @@ html {
 }
 
 .climb-area {
-  color: red;
   font-size: large;
   font: message-box;
-  width: 50px;
-  height: 50px;
+  background-color: grey;
+  padding: 5px;
+  display:table;
+  -webkit-border-radius: 9px;/*Safari, Chrome*/
+  -moz-border-radius: 9px;/*Firefox*/
+  border-radius: 9px;
+}
+
+/* .climb-area:after {
+	right: 100%;
+	top: 10px;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-color: rgba(136, 183, 213, 0);
+	border-right-color: grey;
+	border-width: 5px;
+	margin-top: 0px;
+} */
+
+.climb-area-none {
+  color: red;
 }
 
 .climb-area-highlight{
   color: blue;
-  font-size: large;
-  font: message-box;
-  width: 50px;
-  height: 50px;
 }
 
 .climb-area-selected{
   color: orangered;
-  text-shadow: mintcream;
-  text-decoration: double;
-  font-size: large;
-  font: message-box;
-  width: 50px;
-  height: 50px;
 }
 
 .popup-box {

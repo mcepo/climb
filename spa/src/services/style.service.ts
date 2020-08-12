@@ -40,18 +40,20 @@ function setMarkerStyle (layer: Marker, svg: string) {
 
 const areaLayerStyle = {
 
-  style (layer: Marker, className: string, html: string) {
+  style (layer: Marker, className: string, name: string) {
+
+    let html = '<div class="climb-area">'+name+"</div>"
+
     layer.setIcon(
       new DivIcon({
         className,
-        html,
-        iconSize: [50, 50]
+        html
       })
     )
   },
 
   default (obj: StylingMarker) {
-    this.style(obj.layer, 'climb-area', obj.item.name)
+    this.style(obj.layer, 'climb-area-none', obj.item.name)
   },
   highlight (obj: StylingMarker) {
     this.style(obj.layer, 'climb-area-highlight', obj.item.name)
