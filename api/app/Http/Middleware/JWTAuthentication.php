@@ -51,6 +51,7 @@ class JWTAuthentication
           if($user) {
             Auth::login($user);
           }
+
         }
       }
         return $next($request);

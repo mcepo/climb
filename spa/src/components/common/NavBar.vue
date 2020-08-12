@@ -74,7 +74,7 @@
 // @ is an alias to /src
 import Vue from 'vue'
 import FormLayout from '../layouts/FormLayout'
-import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default Vue.extend({
 
@@ -107,14 +107,12 @@ export default Vue.extend({
   },
   methods: {
     ...mapActions({
-      openForm: 'form/open'
+      openForm: 'form/open',
+      logout: 'auth/logout'
     }),
     ...mapGetters({
       checkAuth: 'auth/check',
       getUserName: 'auth/username'
-    }),
-    ...mapMutations({
-      logout: 'auth/logout'
     })
   },
   components: {

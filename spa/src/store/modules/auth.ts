@@ -23,6 +23,10 @@ function setAuthToStorage (auth: AuthState) {
   window.localStorage.setItem('auth', JSON.stringify(auth))
 }
 
+function clearAuthFromStorage () {
+  window.localStorage.removeItem('auth')
+}
+
 const namespaced = true
 
 const auth: Module<AuthState, RootState> = {
@@ -47,6 +51,10 @@ const auth: Module<AuthState, RootState> = {
       setAuthToStorage(auth)
       commit('snackbar/success', 'Successfully logged in!', { root: true })
       dispatch('form/close', null, { root: true })
+    },
+    logout ({ commit }) {
+      clearAuthFromStorage()
+      commit('logout')
     },
     authorize (store, { item, callback }) {
       const user = store.state.user
