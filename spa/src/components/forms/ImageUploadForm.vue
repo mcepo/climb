@@ -184,12 +184,10 @@ export default {
           return prevent()
         }
 
-        if (
-            newFile.size < this.minSize
-          ) {
-            this.$store.commit('snackbar/error', 'Image low quality.')
-            return prevent()
-          }
+        if (newFile.size < this.minSize) {
+          this.$store.commit('snackbar/error', 'Image low quality.')
+          return prevent()
+        }
       }
 
       if (newFile && (!oldFile || newFile.file !== oldFile.file)) {

@@ -33,7 +33,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('authorize', function ($user, $item) {
-            if ($user->hasPermissionInPath($item->path)) {
+            if ($user->hasPermissionInArea($item->path)) {
                 return true;
             }
 
