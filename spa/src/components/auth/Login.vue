@@ -56,9 +56,6 @@ export default {
           this.$store.dispatch('auth/login', response.data)
           this.closeForm()
         })
-        .catch(err => {
-          console.log({ err: err })
-        })
     },
     authProvider (provider) {
       this.$auth
@@ -66,18 +63,12 @@ export default {
         .then(response => {
           this.socialLogin(provider, response)
         })
-        .catch(err => {
-          console.log({ err: err })
-        })
     },
     socialLogin (provider, response) {
       api.post('/social_login/' + provider, response)
         .then(response => {
           this.$store.dispatch('auth/login', response.data)
           this.closeForm()
-        })
-        .catch(err => {
-          console.log({ err: err })
         })
     }
   }

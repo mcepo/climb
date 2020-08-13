@@ -24,9 +24,9 @@ api.interceptors.request.use(function (config) {
 api.interceptors.response.use(
   (response) => response,
   (error: AxiosError) => {
-    console.log(error.toJSON())
+    // console.log(error.toJSON())
     if (error.response) {
-      store.commit('snackbar/throwError', error.response.status)
+      store.commit('snackbar/throwError', { code: error.response.status, message: error.response.data })
       if (error.response.status === 404) {
         router.push('/')
       }

@@ -38,7 +38,6 @@ export default {
 
   watch: {
     search (newQuery, oldQuery) {
-      console.log(newQuery, oldQuery)
       if (newQuery === oldQuery) return
 
       this.$options.cancelToken && clearTimeout(this.$options.cancelToken)
@@ -53,9 +52,6 @@ export default {
         .then(({ data }) => {
           this.entries = data
         })
-        .catch(err => {
-          console.log(err)
-        })
         .finally(() => (this.isLoading = false))
     },
     submit () {
@@ -65,9 +61,6 @@ export default {
           this.$store.commit('area/addModerator', { area: this.area, moderator: this.selectedUser })
           this.selectedUser = null
           this.$store.commit('snackbar/success', this.selectedUser.name + ' added as moderator to' + this.area.name)
-        })
-        .catch(err => {
-          console.log(err)
         })
         .finally(() => (this.isLoading = false))
     }

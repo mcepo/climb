@@ -36,7 +36,7 @@ const parent: Module<AdoptionState, RootState> = {
       // authorization - parent changing, only admin can change parent
       if (rootGetters['auth/check']) {
         if (!rootGetters['auth/isAdmin']) {
-          commit('snackbar/throwError', 403, { root: true })
+          commit('snackbar/throwError', { code: 403 }, { root: true })
         } else {
           commit('set', payload)
           commit(
@@ -48,7 +48,7 @@ const parent: Module<AdoptionState, RootState> = {
           )
         }
       } else {
-        commit('snackbar/throwError', 401, { root: true })
+        commit('snackbar/throwError', { code: 401 }, { root: true })
         dispatch('form/open', { component: 'login-form', params: null }, { root: true })
       }
     },

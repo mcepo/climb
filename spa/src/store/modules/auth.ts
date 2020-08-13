@@ -63,11 +63,11 @@ const auth: Module<AuthState, RootState> = {
         if (store.getters.authorize(item)) {
           callback()
         } else {
-          store.commit('snackbar/throwError', 403, { root: true })
+          store.commit('snackbar/throwError', { code: 403 }, { root: true })
         }
       } else {
         store.dispatch('form/open', { component: 'login-form', params: null }, { root: true })
-        store.commit('snackbar/throwError', 401, { root: true })
+        store.commit('snackbar/throwError', { code: 401 }, { root: true })
       }
     }
   },

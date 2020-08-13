@@ -16,6 +16,14 @@ TODO: cms for trails
 
 ---- NOT pressing ----
 
+TODO: review message system, where will user messages come from
+
 TODO: add links as a drop down like moderators
 
 TODO: cms for adding external links
+
+
+OPTIMIZATION
+
+TODO: all messages should be on the server side and sent from the server as request response
+that way the inital bundle size will be reduced and initial load will be faster

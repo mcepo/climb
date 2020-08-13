@@ -44,9 +44,6 @@ export default {
           this.$store.commit('area/removeModerator', { area: this.area, moderator })
           this.$store.commit('snackbar/success', moderator.name + ' removed as moderator to ' + this.area.name)
         })
-        .catch(err => {
-          console.log(err)
-        })
         .finally(() => (this.isLoading = false))
     }
   }

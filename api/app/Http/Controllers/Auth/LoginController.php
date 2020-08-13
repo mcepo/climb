@@ -29,12 +29,19 @@ class LoginController extends Controller
   
       $credentials = $request->only('email', 'password');
   
-      if (Auth::attempt($credentials)) {
-        return response(auth()->user()->getToken());
-      } else {
-        // failed to login, 401 is taken when users aren't logged in 
-        // and need to to perform an action, so i am using 400 for failed login
-        return response(null, 400);
+      // failed to login, 401 is taken when users aren't logged in 
+      // and need to to perform an action, so i am using 400 for failed login
+
+      if (!Auth::attempt($credentials)) {
+
+        return response('Invalid credentials.', 400);
       }
+
+      if(!auth()->user()->hasVerifiedEmail()) {
+
+        return response('Please verify your email before using the apllication.', 400);
+      }
+
+      return response(auth()->user()->getToken());
     }
 }

@@ -73,9 +73,6 @@ export default {
           this.$store.dispatch('form/close')
           this.$store.commit('snackbar/show', 'A link was send to your email account.<br>Please verify your email by <br> following the link.')
         })
-        .catch(err => {
-          console.log({ err: err })
-        })
     }
   }
 }

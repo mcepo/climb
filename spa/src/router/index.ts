@@ -87,7 +87,7 @@ const routes = [
         if (isAdmin) {
           next()
         } else {
-          store.commit('snackbar/throwError', 403)
+          store.commit('snackbar/throwError', { code: 403 })
         }
       } else {
         store.dispatch('form/open', { component: 'login-form', params: null })

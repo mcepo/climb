@@ -7,6 +7,11 @@ interface SnackbarState {
   show: boolean;
 }
 
+interface ErrorMessage {
+  message?: string;
+  code?: number;
+}
+
 const namespaced = true
 
 const snackbar: Module<SnackbarState, RootState> = {
@@ -36,12 +41,16 @@ const snackbar: Module<SnackbarState, RootState> = {
       state.show = false
     },
 
-    // TODO: move error messages to backend, because most of these
-    // messages won't be displayed to to user
-    // so there is no need to preload them with the app
+    throwError (state: SnackbarState, status: ErrorMessage) {
+      state.status = 'error'
+      state.show = true
 
-    throwError (state: SnackbarState, status: number) {
-      switch (status) {
+      if (status.message && status.message !== '') {
+        state.text = status.message
+        return
+      }
+
+      switch (status.code) {
         case 400:
           state.text = 'Failed login attempt.'
           break
@@ -64,8 +73,6 @@ const snackbar: Module<SnackbarState, RootState> = {
         default:
           state.text = 'Well this is awkward :/'
       }
-      state.status = 'error'
-      state.show = true
     }
   }
 }
