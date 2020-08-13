@@ -48,7 +48,7 @@ export default {
     grade () {
       return this.route && gradeService.forge(this.route.grades)
     },
-    length() {
+    length () {
       return this.route.length ? this.route.length + 'm' : ''
     }
   },

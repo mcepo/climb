@@ -27,13 +27,13 @@ export default Vue.extend({
     Popup
   },
   computed: {
-    type() {
+    type () {
       return typeService.route[this.item.type_id]
     },
     grade () {
       return this.item && gradeService.forge(this.item.grades)
     },
-    length() {
+    length () {
       return this.item.length ? this.item.length + 'm' : ''
     }
   }

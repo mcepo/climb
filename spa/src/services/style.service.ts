@@ -41,8 +41,7 @@ function setMarkerStyle (layer: Marker, svg: string) {
 const areaLayerStyle = {
 
   style (layer: Marker, className: string, name: string) {
-
-    let html = '<div class="climb-area">'+name+"</div>"
+    const html = '<div class="climb-area">' + name + '</div>'
 
     layer.setIcon(
       new DivIcon({

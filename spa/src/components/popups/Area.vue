@@ -22,7 +22,7 @@ export default Vue.extend({
     Popup
   },
   computed: {
-    type() {
+    type () {
       return typeService.area[this.item.type_id]
     }
   }

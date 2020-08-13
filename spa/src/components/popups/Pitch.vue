@@ -36,7 +36,7 @@ export default Vue.extend({
     grade () {
       return this.item && gradeService.forge(this.item.grades)
     },
-    length() {
+    length () {
       return this.item.length ? this.item.length + 'm' : ''
     }
   }
