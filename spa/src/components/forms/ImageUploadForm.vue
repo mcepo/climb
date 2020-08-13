@@ -104,11 +104,9 @@ export default {
   data () {
     return {
       files: [],
-      accept: 'image/png,image/gif,image/jpeg,image/webp',
-      extensions: 'gif,jpg,jpeg,png,webp',
-      // extensions: ['gif', 'jpg', 'jpeg','png', 'webp'],
-      // extensions: /\.(gif|jpe?g|png|webp)$/i,
-      minSize: 1024,
+      accept: 'image/png,image/jpeg,image/webp',
+      extensions: 'jpg,jpeg,png,webp',
+      minSize: 1024 * 1024,
       // size: 1024 * 1024 * 10,
       multiple: true,
       directory: false,
@@ -176,13 +174,22 @@ export default {
 
         // Filter system files or hide files
         if (/(\/|^)(Thumbs\.db|desktop\.ini|\..+)$/.test(newFile.name)) {
+          this.$store.commit('snackbar/error', 'Forbidden file type.')
           return prevent()
         }
 
         // Filter php html js file
         if (/\.(php5?|html?|jsx?)$/i.test(newFile.name)) {
+          this.$store.commit('snackbar/error', 'Forbidden file type.')
           return prevent()
         }
+
+        if (
+            newFile.size < this.minSize
+          ) {
+            this.$store.commit('snackbar/error', 'Image low quality.')
+            return prevent()
+          }
       }
 
       if (newFile && (!oldFile || newFile.file !== oldFile.file)) {

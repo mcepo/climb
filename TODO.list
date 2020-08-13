@@ -6,15 +6,14 @@ TODO: send frontend errors
   once the error gets to backend then mail it to me
 
   add for backend errors as well
-  
-
-TODO: validate image size, so small images can't be submited
 
 TODO: add password change/forgottenPassword
 
 TODO: cms for trails
 
 ---- NOT pressing ----
+
+TODO: protect admin routes
 
 TODO: pretify login form
 

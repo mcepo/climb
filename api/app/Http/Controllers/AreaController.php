@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ImageUploadRequest;
 use App\Models\Area;
 use App\Models\Route;
 use App\Models\Trail;
@@ -80,7 +81,7 @@ class AreaController extends Controller
         return $area->path;
     }
 
-    public function addImage(Area $area, Request $request)
+    public function addImage(Area $area, ImageUploadRequest $request)
     {
         return $area->addImage($request);
     }
