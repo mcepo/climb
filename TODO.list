@@ -10,7 +10,7 @@ TODO: send frontend errors
 
 TODO: validate image size, so small images can't be submited
 
-TODO: finish registration process with email validations
+TODO: add password change/forgottenPassword
 
 TODO: cms for trails
 

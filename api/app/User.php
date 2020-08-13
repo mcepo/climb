@@ -29,7 +29,7 @@ class User extends AuthUser  implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'avatar', 'role_id', 'permitted_paths', 'id'
+        'name', 'email', 'password', 'avatar', 'role_id', 'permitted_paths'
     ];
 
     protected $casts = [
