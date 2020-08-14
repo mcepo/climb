@@ -5,7 +5,7 @@ html {
 .climb-area {
   font-size: large;
   font: message-box;
-  background-color: grey;
+  background-color: lightgray;
   padding: 5px;
   display:table;
   -webkit-border-radius: 9px;/*Safari, Chrome*/
@@ -28,12 +28,11 @@ html {
 	margin-top: 0px;
 } */
 
-.climb-area-none {
-  color: red;
-}
+/* .climb-area-none {
+} */
 
 .climb-area-highlight{
-  color: blue;
+  color: #3490dc;
 }
 
 .climb-area-selected{

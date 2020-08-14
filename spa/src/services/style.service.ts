@@ -12,6 +12,8 @@ interface StylingPolyline {
   item: Area;
 }
 
+const highlighColor = '#3490dc'
+
 function getStarSvg (color: string) {
   return '<path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z" fill="' + color + '"/>'
 }
@@ -68,7 +70,7 @@ const routeLeafletLayerStyle = {
     setMarkerStyle(obj.layer, getStarSvg('red'))
   },
   highlight (obj: StylingMarker) {
-    setMarkerStyle(obj.layer, getStarSvg('blue'))
+    setMarkerStyle(obj.layer, getStarSvg(highlighColor))
   },
   selected (obj: StylingMarker) {
     setMarkerStyle(obj.layer, getStarSvg('orange'))
@@ -81,7 +83,7 @@ const routeImageLayerStyle = {
     setPolylineStyle(obj.layer, 'red')
   },
   highlight (obj: StylingPolyline) {
-    setPolylineStyle(obj.layer, 'blue')
+    setPolylineStyle(obj.layer, highlighColor)
   },
   selected (obj: StylingPolyline) {
     setPolylineStyle(obj.layer, 'orange')
@@ -94,7 +96,7 @@ const imageLayerStyle = {
     setMarkerStyle(obj.layer, getCircleSvg('red'))
   },
   highlight (obj: StylingMarker) {
-    setMarkerStyle(obj.layer, getCircleSvg('blue'))
+    setMarkerStyle(obj.layer, getCircleSvg(highlighColor))
   },
   selected (obj: StylingMarker) {
     setMarkerStyle(obj.layer, getCircleSvg('orange'))
@@ -107,7 +109,7 @@ const pitchLayerStyle = {
     setPolylineStyle(obj.layer, 'red')
   },
   highlight (obj: StylingPolyline) {
-    setPolylineStyle(obj.layer, 'blue')
+    setPolylineStyle(obj.layer, highlighColor)
   },
   selected (obj: StylingPolyline) {
     setPolylineStyle(obj.layer, 'orange')
@@ -120,7 +122,7 @@ const trailLayerStyle = {
     setPolylineStyle(obj.layer, 'green')
   },
   highlight (obj: StylingPolyline) {
-    setPolylineStyle(obj.layer, 'blue')
+    setPolylineStyle(obj.layer, highlighColor)
   },
   selected (obj: StylingPolyline) {
     setPolylineStyle(obj.layer, 'orange')
