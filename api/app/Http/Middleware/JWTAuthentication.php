@@ -38,6 +38,10 @@ class JWTAuthentication
         // create a new user object from user array data
           $user = new User($userArray);
 
+          // don't want the user id to be fillable in the user model
+          // better this way
+          $user->id = $userArray['id'];
+
         // login the new user
           Auth::login($user);
           
