@@ -19,6 +19,8 @@ TODO: check that verification is working correctlly
   TODO: setup area types su that a Sector can't have country for a type
     like a area type hierarchy
 
+  TODO: resend verification link
+
 ---- NOT pressing ----
 
 TODO: protect admin routes
