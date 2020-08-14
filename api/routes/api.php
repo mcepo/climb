@@ -5,7 +5,7 @@ Route::post('register', 'Auth\RegisterController@register');
 Route::post('social_login/{provider}', 'Auth\LoginController@socialLogin');
 
 Route::post('forgot_password', 'Auth\PasswordController@forgotten');
-Route::post('reset_password', 'Auth\PasswordController@reset');
+Route::post('change_password', 'Auth\PasswordController@change');
 
 Route::post('area/{area}/image', 'AreaController@addImage');
 Route::put('area/{area}/move', 'AreaController@move');

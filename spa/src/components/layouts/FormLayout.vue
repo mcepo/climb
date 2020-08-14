@@ -34,7 +34,8 @@ export default {
     'pitch-form': () => import(/* webpackChunkName: "pitch.form" */'../forms/PitchForm.vue'),
     'moderator-form': () => import(/* webpackChunkName: "moderator.form" */'../../admin/components/forms/ModeratorForm'),
     'login-form': () => import(/* webpackChunkName: "login.form" */'../auth/Login.vue'),
-    'register-form': () => import(/* webpackChunkName: "register.form" */'../auth/Register.vue')
+    'register-form': () => import(/* webpackChunkName: "register.form" */'../auth/Register.vue'),
+    'change-password-form': () => import(/* webpackChunkName: "change-password.form" */'../auth/ChangePassword.vue')
   }
 }
 </script>

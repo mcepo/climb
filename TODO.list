@@ -7,9 +7,11 @@ TODO: send frontend errors
 
   add for backend errors as well
 
-TODO: add password change/forgottenPassword
+TODO: add forgottenPassword
 
 TODO: cms for trails
+
+TODO: prettify all forms! add titles
 
 ---- NOT pressing ----
 
@@ -22,6 +24,8 @@ TODO: review message system, where will user messages come from
 TODO: add links as a drop down like moderators
 
 TODO: cms for adding external links
+
+TODO: snackbar multiple messages overrun each other
 
 
 OPTIMIZATION

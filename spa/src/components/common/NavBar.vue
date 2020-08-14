@@ -27,7 +27,9 @@
         left
         bottom
         v-if='checkAuth()'
-        style='z-index: 1000'
+        style='z-index: 3000'
+        :close-on-click='true'
+        :close-on-content-click="true"
       >
         <template v-slot:activator="{ on, attrs }">
           <v-btn
@@ -44,7 +46,10 @@
             <v-list-item-title>{{getUserName()}}</v-list-item-title>
           </v-list-item>
           <v-divider></v-divider>
-          <v-list-item @click.stop="logout()">
+          <v-list-item @click="openForm({component: 'change-password-form', params: null})">
+            <v-list-item-title>Change password</v-list-item-title>
+          </v-list-item>
+          <v-list-item @click="logout()">
             <v-list-item-title>Logout</v-list-item-title>
           </v-list-item>
         </v-list>

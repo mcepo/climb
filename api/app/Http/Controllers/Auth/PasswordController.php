@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 
+use App\Http\Requests\Request;
+
+use App\User;
+
 class PasswordController extends Controller
 {
 
@@ -11,7 +15,13 @@ class PasswordController extends Controller
 
     }
 
-    public function change() {
+    public function change(Request $request) {
+
+        $user = User::findOrFail(auth()->user()->id);
+
+        $user->password = $request->password;
+
+        $user->save();
 
     }
 }
