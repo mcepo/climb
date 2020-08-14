@@ -21,6 +21,8 @@ TODO: check that verification is working correctlly
 
   TODO: resend verification link
 
+  TODO: review authorization on front and backend
+
 ---- NOT pressing ----
 
 TODO: protect admin routes
