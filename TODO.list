@@ -11,13 +11,17 @@ TODO: add forgottenPassword
 
 TODO: cms for trails
 
-TODO: prettify all forms! add titles
+TODO: check that verification is working correctlly
+  and that password changing doesn't get you unverified :P
+
+  TODO: on area get altitude borders from parent
+
+  TODO: setup area types su that a Sector can't have country for a type
+    like a area type hierarchy
 
 ---- NOT pressing ----
 
 TODO: protect admin routes
-
-TODO: pretify login form
 
 TODO: review message system, where will user messages come from
 

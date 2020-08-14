@@ -2,6 +2,9 @@
   <v-container fluid>
     <v-form ref="form" v-model="valid">
       <v-layout column>
+        <v-card-title>
+          Route filters
+        </v-card-title>
 
         <v-flex>
           <v-card flat class="pa-1">
@@ -45,9 +48,9 @@
 
       </v-layout>
 
-      <v-btn color="success" @click="apply">Apply</v-btn>
-      <v-btn color="warning" @click="disableAll">Disable all</v-btn>
-      <v-btn color="error" @click="close">Cancel</v-btn>
+      <v-btn class='ma-1' color="success" @click="apply">Apply</v-btn>
+      <v-btn class='ma-1' color="warning" @click="disableAll">Disable all</v-btn>
+      <v-btn class='ma-1' color="error" @click="close">Cancel</v-btn>
     </v-form>
   </v-container>
 </template>

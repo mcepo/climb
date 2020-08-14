@@ -1,6 +1,9 @@
 <template>
   <v-form ref="form" v-model="valid">
-    <v-card text color="transparent">
+    <v-card text color="transparent" flat>
+      <v-card-title>
+        {{ route ? 'Editing - ' + route.name : 'Adding route'}}
+      </v-card-title>
       <v-card-text>
         <v-text-field v-model="formData.name" :rules="nameRules" label="Route name" required></v-text-field>
       </v-card-text>
@@ -17,7 +20,7 @@
 
       <orientation v-model='formData.orientation'/>
 
-      <v-card-text>
+      <v-card-text class='pa-0'>
         <grade-input v-model="formData.grades" :type='formData.type_id' :key='formData.type_id'></grade-input>
       </v-card-text>
 
@@ -28,7 +31,7 @@
           <v-flex class="px-3">
             <v-slider v-model="formData.length" max="3000" min="0"/>
           </v-flex>
-          <v-flex shrink style="width: 80px">
+          <v-flex shrink style="width: 50px">
             <v-text-field
               v-model="formData.length"
               class="mt-0"

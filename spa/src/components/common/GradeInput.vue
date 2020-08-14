@@ -1,9 +1,10 @@
 <template>
   <v-container fluid>
     <v-layout column>
+      <v-subheader>Grade</v-subheader>
       <v-flex v-for="(filter, index) in filters" :key="index">
-        <v-card text class="pa-1">
-          <v-card-title class="pa-0 justify-center">{{typeName(index)}}</v-card-title>
+        <v-card text class="pa-1" flat>
+          <v-subheader class="pa-0 justify-center">{{typeName(index)}}</v-subheader>
           <v-card-text class="pa-0">
             <v-slider
               v-model="filters[index]"

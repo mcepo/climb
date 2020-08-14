@@ -1,7 +1,6 @@
 <template>
   <div>
-    <v-toolbar>
-      <v-toolbar-title>Upload photos</v-toolbar-title>
+    <v-toolbar flat>
       <v-spacer></v-spacer>
       <v-btn
         color="success"
@@ -10,7 +9,7 @@
       >Upload</v-btn>
     </v-toolbar>
 
-    <v-card text>
+    <v-card text flat>
       <v-container fluid grid-list-lg>
         <v-layout row wrap>
           <v-flex v-for="file in files" :key="file.id" xs12>

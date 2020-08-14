@@ -1,6 +1,7 @@
 <template>
   <v-form ref="form" v-model="valid">
-    <v-card text color="transparent">
+    <v-card-title>Registration</v-card-title>
+    <v-card text color="transparent" flat>
       <v-card-text>
         <v-text-field
           label="Name"

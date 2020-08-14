@@ -1,8 +1,12 @@
 <template>
   <v-form ref="form" v-model="valid">
-    <v-card text color="transparent">
+    <v-card text color="transparent" flat>
 
-      <v-card-text>
+      <v-card-title>
+        {{ 'Adding a pitch for - ' + route.name}}
+      </v-card-title>
+
+      <v-card-text class='pa-0'>
         <grade-input v-model="formData.grades" :key='1'></grade-input>
       </v-card-text>
 

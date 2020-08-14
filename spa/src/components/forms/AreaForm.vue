@@ -1,6 +1,9 @@
 <template>
   <v-form ref="form" v-model="valid">
-    <v-card text color="transparent">
+    <v-card text color="transparent" flat class='ma-2'>
+      <v-card-title>
+        {{ area ? 'Editing - ' + area.name : 'Adding area'}}
+      </v-card-title>
       <v-card-text>
         <v-text-field v-model="formData.name" :rules="nameRules" label="Area name" required></v-text-field>
       </v-card-text>
@@ -16,11 +19,11 @@
       </v-card-text>
       <orientation v-if='allowedOrientation' v-model='formData.orientation'/>
 
-      <v-subheader>Minimum and maximum altitude (m)</v-subheader>
+      <v-subheader>Minimum and maximum altitude in this area (m)</v-subheader>
 
       <v-card-text class="pt-0">
         <v-layout row>
-          <v-flex shrink style="width: 80px">
+          <v-flex shrink style="width: 50px">
             <v-text-field
               v-model="formData.altitude[0]"
               class="mt-0"
@@ -36,7 +39,7 @@
               :min="altitudeLimits[0]"
             ></v-range-slider>
           </v-flex>
-          <v-flex shrink style="width: 80px">
+          <v-flex shrink style="width: 50px">
             <v-text-field
               v-model="formData.altitude[1]"
               class="mt-0"

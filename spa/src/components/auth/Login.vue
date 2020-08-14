@@ -1,6 +1,8 @@
 <template>
   <v-form ref="form" v-model="valid">
-    <v-card text color="transparent">
+    <v-card text color="transparent" flat>
+
+      <v-card-title>Sign in</v-card-title>
       <v-card-text>
         <v-text-field
           label="Email"
@@ -19,16 +21,15 @@
         />
       </v-card-text>
 
-      <v-btn @click="authProvider('google')">Google login</v-btn> or
-      <v-btn @click.stop="openForm({component: 'register-form', params: null})">Sign up</v-btn>
-
       <v-layout justify-center>
         <v-card-actions>
+          <v-btn @click="authProvider('google')">Google login</v-btn>
           <v-btn :disabled="!valid" color="success" @click="submit">Login</v-btn>
 
           <v-btn color="error" @click="closeForm()">Cancel</v-btn>
         </v-card-actions>
       </v-layout>
+      <v-card-text>Don't have an account yet ...      <a @click.stop="openForm({component: 'register-form', params: null})">Sign up</a></v-card-text>
     </v-card>
   </v-form>
 </template>
