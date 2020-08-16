@@ -8,6 +8,8 @@ Route::namespace('Auth')->group(function() {
   Route::post('forgot_password', 'PasswordController@forgotten');
   Route::post('change_password', 'PasswordController@change');
 
+  Route::post('resend_verification', 'VerificationController@resend');
+
 });
 
 Route::post('area/{area}/image', 'AreaController@addImage');

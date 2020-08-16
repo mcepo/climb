@@ -40,14 +40,22 @@ class VerificationController extends Controller
     public function resend(Request $request)
     {
 
-        $user = auth()->user();
+        if(!$request->has('email')) {
+            return abort(400);
+        }
+
+        $user = User::where('email', $request->get('email'))->first();
+
+        if(!isset($user)) {
+            return abort(400);
+        }
 
         if ($user->hasVerifiedEmail()) {
-            return response(null, 204);
+            return response('Email already verified', 204);
         }
 
         $user->sendEmailVerificationMail();
 
-        return response(null, 200);
+        return response('Verification email resend to '.$request->get('email'), 200);
     }
 }

@@ -12,6 +12,10 @@
           :rules="emailRules"
         />
 
+        <a v-if='statusCode == 422' @click='resendVerificationMail()'>
+          Resend verification mail
+        </a>
+
         <v-text-field
           v-model="formData.password"
           label="Password"
@@ -19,6 +23,10 @@
           type="password"
           :rules="passwordRules"
         />
+
+        <a v-if='statusCode == 400' @click='resendVerificationMail()'>
+          Forgotten password?
+        </a>
       </v-card-text>
 
       <v-layout justify-center>
@@ -44,18 +52,32 @@ export default {
     valid: true,
     emailRules: [v => !!v || 'Email is required'],
     passwordRules: [v => !!v || 'Password is required'],
-    formData: {}
+    formData: {},
+    statusCode: null
   }),
   methods: {
     ...mapActions({
       openForm: 'form/open',
       closeForm: 'form/close'
     }),
+
+    resendVerificationMail () {
+      api.post('/resend_verification/', this.formData)
+        .then(response => {
+          this.$store.commit('snackbar/success', response.data)
+        }).catch((error) => {
+          console.log(error.response.status)
+          this.statusCode = error.response.status
+        })
+    },
     submit () {
       api.post('/login/', this.formData)
         .then(response => {
           this.$store.dispatch('auth/login', response.data)
           this.closeForm()
+        }).catch((error) => {
+          console.log(error.response.status)
+          this.statusCode = error.response.status
         })
     },
     authProvider (provider) {

@@ -39,7 +39,7 @@ class LoginController extends Controller
 
       if(!auth()->user()->hasVerifiedEmail()) {
 
-        return response('Please verify your email before using the apllication.', 400);
+        return response('Please verify your email before using the aplication.', 422);
       }
 
       return response(auth()->user()->getToken());

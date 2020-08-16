@@ -19,14 +19,14 @@ TODO: on area get altitude borders from parent
 TODO: setup area types so that a Sector can't have country for a type
     like a area type hierarchy
 
-TODO: resend verification link
-
 TODO: review authorization on front and backend
 
 TODO: in routes list put name of next area after opened area in the route item component
 
 TODO: only routes, sectors, mountain sides and crags can have orientation
   or add multiple orientation
+
+TODO: images can only be added on some type of areas, like: sectors, crags, mountain sides
 
 ---- NOT pressing ----
 
