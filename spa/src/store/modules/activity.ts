@@ -13,6 +13,8 @@ export interface ActivityState {
   loading: boolean;
 }
 
+const BASE_URL = 'admin/'
+
 const namespaced = true
 const activity: Module<ActivityState, RootState> = {
   namespaced,
@@ -46,7 +48,7 @@ const activity: Module<ActivityState, RootState> = {
       commit('snackbar/show', 'Loading activities!', { root: true })
 
       api
-        .get('getNotApprovedActivities')
+        .get(BASE_URL + 'getNotApprovedActivities')
         .then(({ data }) => {
           data.forEach(activity => {
             dispatch('normalizeData', activity)
@@ -61,7 +63,7 @@ const activity: Module<ActivityState, RootState> = {
       commit('snackbar/show', 'Approving activity ...', { root: true })
 
       api
-        .get('approveActivity/' + activityId)
+        .get(BASE_URL + 'approveActivity/' + activityId)
         .then(() => {
           commit('resolveActivity', activityId)
 
@@ -74,7 +76,7 @@ const activity: Module<ActivityState, RootState> = {
       commit('snackbar/show', 'Reverting activity ...', { root: true })
 
       api
-        .get('revertActivity/' + activityId)
+        .get(BASE_URL + 'revertActivity/' + activityId)
         .then(() => {
           commit('resolveActivity', activityId)
 

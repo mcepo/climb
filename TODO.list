@@ -14,18 +14,21 @@ TODO: cms for trails
 TODO: check that verification is working correctlly
   and that password changing doesn't get you unverified :P
 
-  TODO: on area get altitude borders from parent
+TODO: on area get altitude borders from parent
 
-  TODO: setup area types su that a Sector can't have country for a type
+TODO: setup area types so that a Sector can't have country for a type
     like a area type hierarchy
 
-  TODO: resend verification link
+TODO: resend verification link
 
-  TODO: review authorization on front and backend
+TODO: review authorization on front and backend
+
+TODO: in routes list put name of next area after opened area in the route item component
+
+TODO: only routes, sectors, mountain sides and crags can have orientation
+  or add multiple orientation
 
 ---- NOT pressing ----
-
-TODO: protect admin routes
 
 TODO: review message system, where will user messages come from
 

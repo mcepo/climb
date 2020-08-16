@@ -42,6 +42,9 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         //    \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class
         ],
+        'admin' => [
+            \App\Http\Middleware\IsAdmin::class
+        ]
     ];
 
     /**

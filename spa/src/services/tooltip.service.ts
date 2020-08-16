@@ -1,7 +1,7 @@
 import { Layer } from 'leaflet'
 import gradeService from '../services/grade.service'
 
-function lengthString(length) {
+function lengthString (length) {
   return length ? length + 'm' : ''
 }
 

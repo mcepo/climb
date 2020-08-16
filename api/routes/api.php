@@ -1,11 +1,14 @@
 <?php
 
-Route::post('login', 'Auth\LoginController@login');
-Route::post('register', 'Auth\RegisterController@register');
-Route::post('social_login/{provider}', 'Auth\LoginController@socialLogin');
+Route::namespace('Auth')->group(function() {
+  Route::post('login', 'LoginController@login');
+  Route::post('register', 'RegisterController@register');
+  Route::post('social_login/{provider}', 'LoginController@socialLogin');
 
-Route::post('forgot_password', 'Auth\PasswordController@forgotten');
-Route::post('change_password', 'Auth\PasswordController@change');
+  Route::post('forgot_password', 'PasswordController@forgotten');
+  Route::post('change_password', 'PasswordController@change');
+
+});
 
 Route::post('area/{area}/image', 'AreaController@addImage');
 Route::put('area/{area}/move', 'AreaController@move');
@@ -24,18 +27,18 @@ Route::resource('image', 'ImageController');
 
 Route::resource('trail', 'TrailController');
 
-// admin routes
-// TODO: protect these routes that a user must be admin to access them
+Route::middleware('admin')->prefix('admin')->group(function() {
 
-Route::get('user/search', 'UserController@search');
-Route::get('user/{user}/addArea/{areaId}', 'UserController@addArea');
-Route::get('user/{user}/removeArea/{areaId}', 'UserController@removeArea');
-
-Route::resource('user', 'UserController');
-
-Route::get('getNotApprovedActivities', 'AdminController@getNotApprovedActivities');
-Route::get('approveActivity/{activity}', 'AdminController@approveActivity');
-Route::get('revertActivity/{activity}', 'AdminController@revertActivity');
-
-Route::get('getImages', 'AdminController@getImages');
-Route::get('imageReviewed/{id}', 'AdminController@imageReviewed');
+  Route::get('user/search', 'UserController@search');
+  Route::get('user/{user}/addArea/{areaId}', 'UserController@addArea');
+  Route::get('user/{user}/removeArea/{areaId}', 'UserController@removeArea');
+  
+  Route::resource('user', 'UserController');
+  
+  Route::get('getNotApprovedActivities', 'AdminController@getNotApprovedActivities');
+  Route::get('approveActivity/{activity}', 'AdminController@approveActivity');
+  Route::get('revertActivity/{activity}', 'AdminController@revertActivity');
+  
+  Route::get('getImages', 'AdminController@getImages');
+  Route::get('imageReviewed/{id}', 'AdminController@imageReviewed');
+});

@@ -45,10 +45,8 @@ export default {
       this.$store.commit('snackbar/show', 'Updating image ... ', { root: true })
 
       api
-        .get('imageReviewed/' + image.id)
+        .get('admin/imageReviewed/' + image.id)
         .then(() => {
-          // eslint-disable-next-line @typescript-eslint/camelcase
-          image.reviewer_id = this.$store.state.auth.user.id
           this.$store.commit('image/add', image, { root: true })
           this.$store.commit('snackbar/success', 'Image approved!', { root: true })
         })

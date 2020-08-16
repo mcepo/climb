@@ -39,7 +39,7 @@ export default {
   },
   methods: {
     remove (moderator) {
-      api.get('/user/' + moderator.id + '/removeArea/' + this.area.id)
+      api.get('admin/user/' + moderator.id + '/removeArea/' + this.area.id)
         .then(() => {
           this.$store.commit('area/removeModerator', { area: this.area, moderator })
           this.$store.commit('snackbar/success', moderator.name + ' removed as moderator to ' + this.area.name)

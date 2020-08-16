@@ -97,7 +97,7 @@ const image: Module<ImageState, RootState> = {
       commit('snackbar/show', 'Loading images!', { root: true })
 
       api
-        .get('getImages')
+        .get('admin/getImages')
         .then(({ data }) => {
           data.forEach(image => {
             commit('add', image)

@@ -48,14 +48,14 @@ export default {
     getUsers (query) {
       this.isLoading = true
 
-      api.get('/user/search', { params: { query } })
+      api.get('admin/user/search', { params: { query } })
         .then(({ data }) => {
           this.entries = data
         })
         .finally(() => (this.isLoading = false))
     },
     submit () {
-      api.get('/user/' + this.selectedUser.id + '/addArea/' + this.area.id)
+      api.get('admin/user/' + this.selectedUser.id + '/addArea/' + this.area.id)
         .then(() => {
           this.$store.commit('user/add', this.selectedUser)
           this.$store.commit('area/addModerator', { area: this.area, moderator: this.selectedUser })

@@ -34,7 +34,7 @@ const user: Module<UserState, RootState> = {
       commit('snackbar/show', 'Loading users!', { root: true })
 
       api
-        .get('user')
+        .get('admin/user')
         .then(({ data }) => {
           data.forEach(user => {
             commit('add', user)
