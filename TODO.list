@@ -11,9 +11,6 @@ TODO: add forgottenPassword
 
 TODO: cms for trails
 
-TODO: check that verification is working correctlly
-  and that password changing doesn't get you unverified :P
-
 TODO: on area get altitude borders from parent
 
 TODO: setup area types so that a Sector can't have country for a type
