@@ -30,7 +30,6 @@ class ErrorNotification extends Mailable
      */
     public function build()
     {
-        return $this->from('climb@noreplay.com')
-                    ->view('emails.error-notification');
+        return $this->view('emails.error-notification');
     }
 }
