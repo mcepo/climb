@@ -1,12 +1,4 @@
 
-TODO: send frontend errors
-  i have to setup a backend in order for this to work,
-  because it seems as thou i can't send errors directly from frontend
-
-  once the error gets to backend then mail it to me
-
-  add for backend errors as well
-
 TODO: cms for trails
 
 TODO: review authorization on front and backend
