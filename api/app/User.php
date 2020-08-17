@@ -12,6 +12,7 @@ use \Firebase\JWT\JWT;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\EmailVerification;
+use App\Mail\EmailPasswordReset;
 
 use App\Models\Area;
 
@@ -149,6 +150,11 @@ class User extends AuthUser  implements MustVerifyEmail
     public function sendEmailVerificationMail()
     {
         Mail::to($this)->send(new EmailVerification($this));
+    }
+
+    public function sendPasswordResetLink()
+    {
+        Mail::to($this)->send(new EmailPasswordReset($this));
     }
 
     public function hasVerifiedEmail()

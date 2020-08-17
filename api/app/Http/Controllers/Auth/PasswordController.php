@@ -11,8 +11,21 @@ use App\User;
 class PasswordController extends Controller
 {
 
-    public function forgotten() {
+    public function forgotten(Request $request) {
 
+        if(!$request->has('email')) {
+            return abort(400);
+        }
+
+        $user = User::where('email', $request->get('email'))->first();
+
+        if(!isset($user)) {
+            return abort(400);
+        }
+
+        $user->sendPasswordResetLink();
+
+        return response('Password reset link was sent to '.$request->get('email'), 200);
     }
 
     public function change(Request $request) {
