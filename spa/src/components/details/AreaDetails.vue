@@ -39,6 +39,9 @@
       <v-layout row v-for="(stats, type) in area.statistics" :key="type">
         <statistics-chart :type='type' :stats='stats'></statistics-chart>
       </v-layout>
+      <v-layout row >
+        <length-chart :stats='area.lengthStatistics'></length-chart>
+      </v-layout>
       <v-divider></v-divider>
       <moderator-list :moderators='moderators' :area='area'></moderator-list>
       <v-divider></v-divider>
@@ -63,6 +66,7 @@ import DeleteButton from '../buttons/DeleteButton.vue'
 import DetailsLoading from '../common/DetailsLoading.vue'
 import TagControl from '../common/TagControl'
 import StatisticsChart from '../common/StatisticsChart'
+import LengthChart from '../common/LengthChart'
 import ModeratorList from '../lists/ModeratorList'
 import { mapGetters, mapActions } from 'vuex'
 
@@ -123,7 +127,8 @@ export default {
     DeleteButton,
     TagControl,
     ModeratorList,
-    StatisticsChart
+    StatisticsChart,
+    LengthChart
   },
   methods: {
     ...mapActions({
