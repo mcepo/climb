@@ -27,7 +27,7 @@
         <v-tab v-if="item.areas" href="#areas">Areas</v-tab>
         <v-tab v-if="type === 'area'" href="#routes">Routes</v-tab>
         <v-tab v-if="item.pitches && item.length > 50" href="#pitches">Pitches</v-tab>
-        <v-tab v-if="item.type_id !== undefined" href="#pictures">Pictures</v-tab>
+        <v-tab v-if="item.type_id !== undefined && picturesAllowed" href="#pictures" >Pictures</v-tab>
         <v-tab v-if="item.type_id !== undefined" href="#links">Links</v-tab>
         <v-tabs-items v-model="tabs" class="mt-2">
           <v-tab-item v-if="item.areas" value="areas">
@@ -55,7 +55,7 @@
             </v-btn>
             <pitch-list :route="item" />
           </v-tab-item>
-          <v-tab-item value="pictures">
+          <v-tab-item value="pictures" v-if='picturesAllowed'>
             <v-btn
               text
               title="Upload photo"
@@ -89,6 +89,15 @@ export default {
   data: () => ({
     tabs: null
   }),
+  computed: {
+    picturesAllowed () {
+      if (this.type === 'area') {
+        // type_id of areas that can have a picture
+        return [2, 3, 4, 5, 6, 7].find((id) => id === this.item.type_id) !== undefined
+      }
+      return true
+    }
+  },
   methods: {
     ...mapActions({
       openForm: 'form/open'
