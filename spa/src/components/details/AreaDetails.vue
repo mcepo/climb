@@ -29,7 +29,7 @@
         <v-flex>{{area.altitude[0] + 'm - ' + area.altitude[1] + 'm'}}</v-flex>
       </v-layout>
       <v-divider></v-divider>
-      <v-layout row>
+      <v-layout row v-if='allowedOrientation'>
         <v-flex>
           <strong>Orientation:</strong>
         </v-flex>
@@ -98,7 +98,10 @@ export default {
         )
       )
     },
-
+    allowedOrientation () {
+      // type_id of areas that can have orientation
+      return typeService.orientation.areaTypes.find((id) => id === this.area.type_id)
+    },
     moderators () {
       if (!this.area && !this.area.moderators) return []
 

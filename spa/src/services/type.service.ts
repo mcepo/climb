@@ -17,7 +17,9 @@ export default {
         return (min < value) && (value < max)
       })
       return item ? item.label : 'Not set'
-    }
+    },
+    // array of area types that can have orientation
+    areaTypes: [4, 6, 7]
   },
   area: [
     'Country', // 0

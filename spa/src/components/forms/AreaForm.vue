@@ -101,7 +101,7 @@ export default {
   computed: {
     allowedOrientation () {
       // type_id of areas that can have orientation
-      return [4, 6, 7].find((id) => id === this.formData.type_id)
+      return typeService.orientation.areaTypes.find((id) => id === this.formData.type_id)
     },
     types () {
       if (!this.parent) {
