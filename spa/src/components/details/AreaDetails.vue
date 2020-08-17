@@ -36,19 +36,8 @@
         <v-flex>{{orientation}}</v-flex>
       </v-layout>
       <v-divider></v-divider>
-      <v-layout row style='font-weight:bold'>
-        <div class="statType">
-          Statistics:
-        </div>
-        <div class="statValueItem">Min</div>
-        <div class="statValueItem">Avg</div>
-        <div class="statValueItem">Max</div>
-      </v-layout>
-      <v-layout row v-for="(stat, type) in statistics" :key="type">
-        <div class="statType">{{ typeName(type) }}</div>
-        <div class="statValueItem">{{stat[0]}}</div>
-        <div class="statValueItem">{{stat[1]}}</div>
-        <div class="statValueItem">{{stat[2]}}</div>
+      <v-layout row v-for="(stats, type) in area.statistics" :key="type">
+        <statistics-chart :type='type' :stats='stats'></statistics-chart>
       </v-layout>
       <v-divider></v-divider>
       <moderator-list :moderators='moderators' :area='area'></moderator-list>
@@ -73,6 +62,7 @@ import DetailsLayout from '../layouts/DetailsLayout.vue'
 import DeleteButton from '../buttons/DeleteButton.vue'
 import DetailsLoading from '../common/DetailsLoading.vue'
 import TagControl from '../common/TagControl'
+import StatisticsChart from '../common/StatisticsChart'
 import ModeratorList from '../lists/ModeratorList'
 import { mapGetters, mapActions } from 'vuex'
 
@@ -122,40 +112,6 @@ export default {
       }
       return null
     },
-    statistics () {
-      const statistics = {}
-
-      const showStats = [0, 1, 2, 3, 5, 10]
-
-      let min, max, avg, count, i
-
-      if (!this.area) return
-
-      for (const gradeType in this.area.statistics) {
-        if (!showStats.includes(parseInt(gradeType))) continue
-
-        min = 100000
-        max = 0
-        avg = 0
-        count = 0
-
-        for (const gradeWeight in this.area.statistics[gradeType]) {
-          i = parseInt(gradeWeight)
-          if (min > i) min = i
-          if (max < i) max = i
-          avg += i * this.area.statistics[gradeType][gradeWeight]
-          count += this.area.statistics[gradeType][gradeWeight]
-        }
-
-        statistics[gradeType] = [
-          gradeService.charts[gradeService.types[gradeType].charts[0]][min],
-          gradeService.charts[gradeService.types[gradeType].charts[0]][Math.round(avg / count)],
-          gradeService.charts[gradeService.types[gradeType].charts[0]][max]
-        ]
-      }
-
-      return statistics
-    },
     orientation () {
       return typeService.orientation.getLabel(this.area.orientation)
     }
@@ -166,7 +122,8 @@ export default {
     DetailsLoading,
     DeleteButton,
     TagControl,
-    ModeratorList
+    ModeratorList,
+    StatisticsChart
   },
   methods: {
     ...mapActions({
