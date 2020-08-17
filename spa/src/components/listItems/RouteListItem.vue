@@ -9,6 +9,9 @@
       <v-chip>{{typeName}}</v-chip>
     </v-list-item-icon>
     <v-list-item-content>
+      <v-list-item-subtitle>
+        {{nextAreaName}}
+      </v-list-item-subtitle>
       <v-list-item-title>{{route.name}}</v-list-item-title>
       <v-list-item-subtitle>
         <v-layout justify-space-between>
@@ -50,6 +53,33 @@ export default {
     },
     length () {
       return this.route.length ? this.route.length + 'm' : ''
+    },
+    nextAreaName () {
+      if (!this.route) return ''
+
+      const areas = this.route.path.split('.')
+
+      const currentAreaId = this.$router.currentRoute.params.areaId
+
+      if (!currentAreaId) return ''
+
+      const currentAreaIndex = areas.indexOf(currentAreaId)
+
+      if (currentAreaIndex !== -1) {
+        const nextAreaIndex = currentAreaIndex + 1
+        let area = null
+        if (nextAreaIndex < areas.length) {
+          area = this.$store.state.area.byIds[areas[nextAreaIndex]]
+        } else {
+          area = this.$store.state.area.byIds[currentAreaId]
+        }
+
+        if (area) {
+          return area.name
+        }
+      }
+
+      return ''
     }
   },
   methods: {
