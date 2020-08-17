@@ -11,14 +11,10 @@ TODO: add forgottenPassword
 
 TODO: cms for trails
 
-TODO: on area get altitude borders from parent
-
 TODO: setup area types so that a Sector can't have country for a type
     like a area type hierarchy
 
 TODO: review authorization on front and backend
-
-TODO: in routes list put name of next area after opened area in the route item component
 
 TODO: only routes, sectors, mountain sides and crags can have orientation
   or add multiple orientation
@@ -27,6 +23,8 @@ TODO: images can only be added on some type of areas, like: sectors, crags, moun
 
 ---- NOT pressing ----
 
+TODO: in routes list put name of next area after opened area in the route item component
+
 TODO: review message system, where will user messages come from
 
 TODO: add links as a drop down like moderators
@@ -34,6 +32,10 @@ TODO: add links as a drop down like moderators
 TODO: cms for adding external links
 
 TODO: snackbar multiple messages overrun each other
+
+TODO: chart.js statistics for grades and route counts on area details
+
+TODO: on area get altitude borders from parent
 
 
 OPTIMIZATION
