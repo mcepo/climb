@@ -5,8 +5,6 @@ TODO: review authorization on front and backend
 
 ---- NOT pressing ----
 
-TODO: review message system, where will user messages come from
-
 TODO: add links as a drop down like moderators
 
 TODO: cms for adding external links
@@ -19,6 +17,8 @@ TODO: on area get altitude borders from parent
 
 
 OPTIMIZATION
+
+TODO: review message system, where will user messages come from
 
 TODO: all messages should be on the server side and sent from the server as request response
 that way the inital bundle size will be reduced and initial load will be faster
