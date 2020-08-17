@@ -20,14 +20,14 @@ export default {
     }
   },
   area: [
-    'Country',
-    'Area',
-    'Mountain',
-    'Peak',
-    'Mountain side',
-    'Climbing site',
-    'Crag',
-    'Sector'
+    'Country', // 0
+    'Area', // 1
+    'Mountain', // 2
+    'Peak', // 3
+    'Mountain side', // 4
+    'Climbing site', // 5
+    'Crag', // 6
+    'Sector' // 7
   ],
   route: [
     'Multipitch',

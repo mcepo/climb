@@ -74,6 +74,24 @@ export default {
   components: {
     Orientation
   },
+  areaHierarchy: [
+    // Country can have : Area, Mountain, Peak, Climbing site, Crag
+    [1, 2, 3, 5, 6],
+    // Area can have : Area, Mountain, Peak, Climbing site, Crag
+    [1, 2, 3, 5, 6],
+    // Mountain can have: Peak, Climbing site, Crag, Mountain side
+    [3, 4, 5, 6],
+    // peak can have: Climbing site, Crag, Mountain side
+    [4, 5, 6],
+    // mountain side can have: Climbing site, Crag, sector
+    [5, 6, 7],
+    // climbing site can have: Crag, sector
+    [6, 7],
+    // crag can have: sector
+    [7],
+    // sector can have: sector
+    [7]
+  ],
   data: () => ({
     valid: true,
     nameRules: [v => !!v || 'Name is required'],
@@ -86,11 +104,20 @@ export default {
       return [4, 6, 7].find((id) => id === this.formData.type_id)
     },
     types () {
+      if (!this.parent) {
+        // if there is no parent of newly added area, the area type can only be country
+        return [
+          {
+            text: typeService.area[0],
+            value: 0
+          }
+        ]
+      }
       const types = []
-      typeService.area.forEach((text, value) => {
+      this.$options.areaHierarchy[this.parent.type_id].forEach(typeId => {
         types.push({
-          text,
-          value
+          text: typeService.area[typeId],
+          value: typeId
         })
       })
       return types

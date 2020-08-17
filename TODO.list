@@ -9,9 +9,6 @@ TODO: send frontend errors
 
 TODO: cms for trails
 
-TODO: setup area types so that a Sector can't have country for a type
-    like a area type hierarchy
-
 TODO: review authorization on front and backend
 
 TODO: only routes, sectors, mountain sides and crags can have orientation
