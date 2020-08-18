@@ -5,7 +5,7 @@
       title="Add country"
       text
       icon
-      @click.stop="openOnlyAdminForm({form: {component: 'area-form', params: null}})"
+      @click.stop="openOnlyAdminForm({component: 'area-form', params: null})"
     >
       <v-icon>add</v-icon>
     </v-btn>
