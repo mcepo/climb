@@ -16,6 +16,3 @@ yarn-error.log
 /python
 /public/vue-circle-range-slider
 /*.log
-
-/public/assets
-/resources/views/index.blade.*
