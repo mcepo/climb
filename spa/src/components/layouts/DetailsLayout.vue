@@ -35,7 +35,7 @@
               title="Add area"
               text
               icon
-              @click.stop="openForm({component: 'area-form', params: {parent: item}})"
+              @click.stop="openAuthorizedForm({form: {component: 'area-form', params: {parent: item}}})"
             >
               <v-icon>add</v-icon>
             </v-btn>
@@ -49,7 +49,7 @@
               text
               title="Add pitch"
               icon
-              @click.stop="openForm({component: 'pitch-form', params: {route: item }})"
+              @click.stop="openAuthorizedForm({form: {component: 'pitch-form', params: {route: item }}})"
             >
               <v-icon>add</v-icon>
             </v-btn>
@@ -60,7 +60,7 @@
               text
               title="Upload photo"
               icon
-              @click.stop="openForm({component: 'image-upload-form', params: {type, id: item.id}})"
+              @click.stop="openAuthorizedForm({form: {component: 'image-upload-form', params: {type, id: item.id}}})"
             >
               <v-icon>add_photo_alternate</v-icon>
             </v-btn>
@@ -100,7 +100,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      openForm: 'form/open'
+      openAuthorizedForm: 'form/authorizeAndOpen'
     }),
     closeDrawer () {
       this.$store.commit('drawers/setLeft', false)

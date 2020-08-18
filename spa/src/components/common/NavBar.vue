@@ -46,7 +46,7 @@
             <v-list-item-title>{{getUserName()}}</v-list-item-title>
           </v-list-item>
           <v-divider></v-divider>
-          <v-list-item @click="openForm({component: 'change-password-form', params: null})">
+          <v-list-item @click="openAuthorizedForm({form: {component: 'change-password-form', params: null}})">
             <v-list-item-title>Change password</v-list-item-title>
           </v-list-item>
           <v-list-item @click="logout()">
@@ -113,6 +113,7 @@ export default Vue.extend({
   methods: {
     ...mapActions({
       openForm: 'form/open',
+      openAuthorizedForm: 'form/authorizeAndOpen',
       logout: 'auth/logout'
     }),
     ...mapGetters({

@@ -1,12 +1,15 @@
 <template>
-  <div style='display:inline'>
-    <v-btn text icon @click.stop='showDialog()' :title="'Delete ' + type">
+  <div style="display: inline;">
+    <v-btn text icon @click.stop="showDialog()" :title="'Delete ' + type">
       <v-icon>delete</v-icon>
     </v-btn>
     <v-dialog v-model="dialog" persistent max-width="290">
       <v-card>
         <v-card-title>Are you sure ?</v-card-title>
-        <v-card-text>Deleting this {{ type }} will remove all refrences to it as well as all depended items.</v-card-text>
+        <v-card-text
+          >Deleting this {{ type }} will remove all refrences to it as well as
+          all depended items.</v-card-text
+        >
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn text icon title="Dismiss action" @click="dialog = false">
@@ -22,7 +25,6 @@
 </template>
 
 <script>
-
 import Vue from 'vue'
 import api from '../../store/api'
 
@@ -39,7 +41,14 @@ export default Vue.extend({
   },
   methods: {
     showDialog () {
-      this.$store.dispatch('auth/authorize', { item: this.item, callback: () => { this.dialog = true } })
+      this.$store.dispatch('auth/authorize', this.item).then(
+        () => {
+          this.dialog = true
+        },
+        () => {
+          /* so the error won't get dumped in the console */
+        }
+      )
     },
     confirmDelete () {
       // area, route, trail, pitch, tag, image
@@ -54,10 +63,16 @@ export default Vue.extend({
 
           // if tag is on a image or map
           if (imageId) {
-            this.$store.commit('image/removeImageTag', { imageId: imageId, tag: this.item })
+            this.$store.commit('image/removeImageTag', {
+              imageId: imageId,
+              tag: this.item
+            })
           } else {
             // eslint-disable-next-line @typescript-eslint/camelcase
-            this.$store.commit(this.item.tagged_type + '/removeMapTag', this.item.tagged_id)
+            this.$store.commit(
+              this.item.tagged_type + '/removeMapTag',
+              this.item.tagged_id
+            )
           }
         } else {
           this.returnBack && this.$router.back()

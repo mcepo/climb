@@ -30,7 +30,7 @@ class DrawingService {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private _item!: any
 
-  private _tag!: Tag|undefined|null;
+  private _tag!: Tag | undefined | null
 
   private _taggedType!: string
 
@@ -49,22 +49,25 @@ class DrawingService {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   createTag (type: TaggedType, item: any) {
-    // if there is no map stop drawing
-    if (!this.setMapAndType(type)) return
+    // authorize this action
+    store.dispatch('auth/authorize').then(() => {
+      // if there is no map stop drawing
+      if (!this.setMapAndType(type)) return
 
-    store.commit('snackbar/show', 'Adding tag for ' + (item.name || type))
+      store.commit('snackbar/show', 'Adding tag for ' + (item.name || type))
 
-    store.commit('setDrawingMode', true)
+      store.commit('setDrawingMode', true)
 
-    this._layer = null
+      this._layer = null
 
-    this._item = item
+      this._item = item
 
-    // register a listener for drawing on the map
-    this.registerListenerOnDraw()
+      // register a listener for drawing on the map
+      this.registerListenerOnDraw()
 
-    // enable drawing on the map with a specific layer type (Marker or Polyline)
-    this.enableDrawing()
+      // enable drawing on the map with a specific layer type (Marker or Polyline)
+      this.enableDrawing()
+    }).catch(() => { /* so the error won't get dumped in the console */ })
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -78,18 +81,25 @@ class DrawingService {
 
     this._tag = layerService.getTag(key)
 
-    layerService.hideTag(key)
+    store
+      .dispatch('auth/authorize', { item: this._tag })
+      .then(() => {
+        layerService.hideTag(key)
 
-    // if there is no map stop drawing
-    if (!this.setMapAndType(type)) return
+        // if there is no map stop drawing
+        if (!this.setMapAndType(type)) return
 
-    this._item = item
+        this._item = item
 
-    store.commit('snackbar/show', 'Editing tag for ' + (item.name || type))
+        store.commit('snackbar/show', 'Editing tag for ' + (item.name || type))
 
-    store.commit('setDrawingMode', true)
+        store.commit('setDrawingMode', true)
 
-    this.createDrawingLayer()
+        this.createDrawingLayer()
+      })
+      .catch(() => {
+        this._tag = null
+      })
   }
 
   createDrawingLayer () {
@@ -101,7 +111,7 @@ class DrawingService {
   }
 
   registerListenerOnDraw () {
-    this._map.once('pm:create', e => {
+    this._map.once('pm:create', (e) => {
       this._map.pm.disableDraw(this._drawingType)
 
       this._layer = e.layer
@@ -112,19 +122,16 @@ class DrawingService {
 
   enableDrawing () {
     this._map.pm.enableDraw(this._drawingType, {
-
       snappable: true,
 
       snapDistance: 20,
 
       snapMiddle: true
-
     })
   }
 
   createRequest () {
     return {
-
       id: this._tag?.id || null,
 
       // eslint-disable-next-line @typescript-eslint/camelcase
@@ -137,7 +144,6 @@ class DrawingService {
 
       // eslint-disable-next-line @typescript-eslint/camelcase
       tagged_id: this._item.id
-
     } as Tag
   }
 
@@ -146,23 +152,28 @@ class DrawingService {
 
     const request = this.createRequest()
 
-    const apiCall = this._tag ? api.put('tag/' + this._tag?.id, request) : api.post('tag', request)
+    const apiCall = this._tag
+      ? api.put('tag/' + this._tag?.id, request)
+      : api.post('tag', request)
 
-    apiCall.then(({ data }) => {
-      store.commit('snackbar/success', 'Tag stored')
+    apiCall
+      .then(({ data }) => {
+        store.commit('snackbar/success', 'Tag stored')
 
-      if (data && request.id == null) request.id = data
+        if (data && request.id == null) request.id = data
 
-      if (store.getters.openImage) {
-        store.commit('image/storeImageTag', request)
-      } else {
-        store.commit(request.tagged_type + '/storeMapTag', request)
-      }
-    }).catch(() => {
-      this.discardLayer()
-    }).finally(() => {
-      this.afterDrawing()
-    })
+        if (store.getters.openImage) {
+          store.commit('image/storeImageTag', request)
+        } else {
+          store.commit(request.tagged_type + '/storeMapTag', request)
+        }
+      })
+      .catch(() => {
+        this.discardLayer()
+      })
+      .finally(() => {
+        this.afterDrawing()
+      })
   }
 
   afterDrawing () {

@@ -5,7 +5,7 @@
       title="Add country"
       text
       icon
-      @click.stop="openForm({component: 'area-form', params: {parent: null}})"
+      @click.stop="openOnlyAdminForm({form: {component: 'area-form', params: null}})"
     >
       <v-icon>add</v-icon>
     </v-btn>
@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      openForm: 'form/open'
+      openOnlyAdminForm: 'form/onlyAdminOpen'
     })
   },
   components: {

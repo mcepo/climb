@@ -146,4 +146,12 @@ class Area extends Model
         
         return $area;
     }
+
+    public function canBeDeleted() {
+        return Route::where('area_id', $this->id)->count() == 0
+            && Trail::where('area_id', $this->id)->count() == 0
+            && Area::where('parent_id', $this->id)->count() == 0
+            && Image::where(['captured_type' => 'area', 'captured_id' => $this->id])->count() == 0
+            && Tag::where(['tagged_type' => 'area', 'tagged_id' => $this->id])->count() == 0;
+    }
 }

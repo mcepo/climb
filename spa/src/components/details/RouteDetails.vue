@@ -5,7 +5,7 @@
       <v-btn
         text
         icon
-        @click.stop="openForm({component: 'route-form', params: {route: route, area}})"
+        @click.stop="openAuthorizedForm({form: {component: 'route-form', params: {route, area}}, item: route})"
       >
         <v-icon>edit</v-icon>
       </v-btn>
@@ -72,7 +72,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      openForm: 'form/open',
+      openAuthorizedForm: 'form/authorizeAndOpen',
       setChildForAdoption: 'adoption/setChild'
     })
   },

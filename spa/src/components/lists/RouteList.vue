@@ -6,11 +6,11 @@
       text
       title="Add route"
       icon
-      @click.stop="openForm({component: 'route-form', params: {area: item}})"
+      @click.stop="openAuthorizedForm({form: {component: 'route-form', params: {area: item}}})"
     >
       <v-icon>add</v-icon>
     </v-btn>
-    <v-btn text title="Filters" icon @click.stop="openForm({component: 'route-filters-form'})">
+    <v-btn text title="Filters" icon @click.stop="openAuthorizedForm({form: {component: 'route-filters-form'}})">
       <v-icon>filter_list</v-icon>
     </v-btn>
     <v-text-field label="Search" v-model="routeQueryString"></v-text-field>
@@ -58,7 +58,7 @@ export default {
   methods: {
     ...mapActions({
       loadRoutes: 'route/loadFiltered',
-      openForm: 'form/open'
+      openAuthorizedForm: 'form/authorizeAndOpen'
     }),
     ...mapMutations({
       setQueryString: 'route/setQueryString'

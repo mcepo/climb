@@ -32,25 +32,18 @@ const parent: Module<AdoptionState, RootState> = {
     }
   },
   actions: {
-    setChild ({ commit, rootGetters, dispatch }, payload) {
+    setChild ({ commit, dispatch }, payload) {
       // authorization - parent changing, only admin can change parent
-      if (rootGetters['auth/check']) {
-        if (!rootGetters['auth/isAdmin']) {
-          commit('snackbar/throwError', { code: 403 }, { root: true })
-        } else {
-          commit('set', payload)
-          commit(
-            'snackbar/show',
-            'Moving ' +
-              payload.type +
-              ' ... now go to the area you want to move it to',
-            { root: true }
-          )
-        }
-      } else {
-        commit('snackbar/throwError', { code: 401 }, { root: true })
-        dispatch('form/open', { component: 'login-form', params: null }, { root: true })
-      }
+      dispatch('auth/authorizeOnlyAdmin', null, { root: true }).then(() => {
+        commit('set', payload)
+        commit(
+          'snackbar/show',
+          'Moving ' +
+            payload.type +
+            ' ... now go to the area you want to move it to',
+          { root: true }
+        )
+      }).catch(() => { /* so the error won't get dumped in the console */ })
     },
     setParent ({ state, commit }, parentId) {
       state.item &&

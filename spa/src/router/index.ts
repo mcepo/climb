@@ -80,18 +80,9 @@ const routes = [
     component: AdminPanel,
     // making sure only admin users get here
     beforeEnter: (to, from, next) => {
-      const isLogged = store.getters['auth/check']
-
-      if (isLogged) {
-        const isAdmin = store.getters['auth/isAdmin']
-        if (isAdmin) {
-          next()
-        } else {
-          store.commit('snackbar/throwError', { code: 403 })
-        }
-      } else {
-        store.dispatch('form/open', { component: 'login-form', params: null })
-      }
+      store.dispatch('auth/authorizeOnlyAdmin').then(() => {
+        next()
+      }).catch(() => { /* so the error won't get dumped in the console */ })
     },
     children: [
       {

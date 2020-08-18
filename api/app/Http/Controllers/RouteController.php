@@ -56,8 +56,7 @@ class RouteController extends Controller
     {
         $this->canUserModify($route);
 
-        if(Tag::where(['tagged_type' => 'route', 'tagged_id' => $route->id])->count() == 0 && 
-            Pitch::where(['route_id' => $route->id])->count() == 0 ) {
+        if($route->canBeDeleted()) {
         
             $route->delete();
         } else {

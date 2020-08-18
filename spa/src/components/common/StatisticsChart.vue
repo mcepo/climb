@@ -34,6 +34,7 @@ export default {
   },
   mounted () {
     const ctx = document.getElementById(this.divId)
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const myChart = new Chart(ctx, {
       type: 'bar',
       data: {

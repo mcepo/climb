@@ -58,13 +58,7 @@ class AreaController extends Controller
     {
         $this->canUserModify($area);
 
-        if (
-            Route::where('area_id', $area->id)->count() == 0
-            && Trail::where('area_id', $area->id)->count() == 0
-            && Area::where('parent_id', $area->id)->count() == 0
-            && Image::where(['captured_type' => 'area', 'captured_id' => $area->id])->count() == 0
-            && Tag::where(['tagged_type' => 'area', 'tagged_id' => $area->id])->count() == 0
-        ) {
+        if ( $area->canBeDeleted() ) {
             $area->delete();
         } else {
             return response("Can't delete area while it has content, or is tagged!", 403);

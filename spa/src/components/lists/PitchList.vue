@@ -19,7 +19,7 @@
           <td>{{ pitch.length ? pitch.length + 'm' : ''}}</td>
           <td>
             <tag-control v-if="notMap" type="pitch" :item="pitch"></tag-control>
-            <v-btn text icon @click.stop="openForm({component: 'pitch-form', params: {pitch, route}})">
+            <v-btn text icon @click.stop="openAuthorizedForm({form: {component: 'pitch-form', params: {pitch, route}}, item:pitch})">
               <v-icon>edit</v-icon>
             </v-btn>
             <delete-button type="pitch" :item="pitch"></delete-button>
@@ -56,7 +56,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      openForm: 'form/open'
+      openAuthorizedForm: 'form/authorizeAndOpen'
     }),
     ...mapMutations({
       onMouseEnter: 'highlight/set',

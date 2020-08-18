@@ -109,4 +109,9 @@ class Route extends Model
             )
             ->toArray();
     }
+
+    public function canBeDeleted() {
+        return Tag::where(['tagged_type' => 'route', 'tagged_id' => $this->id])->count() == 0 && 
+                Pitch::where(['route_id' => $this->id])->count() == 0 ;
+    }
 }

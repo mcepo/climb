@@ -5,7 +5,7 @@
       <v-btn
         text
         icon
-        @click.stop="openForm({component: 'area-form', params: {area, parent} })"
+        @click.stop="openAuthorizedForm({form: {component: 'area-form', params: {area, parent} }, item: area})"
       >
         <v-icon>edit</v-icon>
       </v-btn>
@@ -17,7 +17,7 @@
       <v-btn text icon title="Move this area to another area" @click.stop="setChildForAdoption({type: 'area', item: area})">
         <v-icon>import_export</v-icon>
       </v-btn>
-      <v-btn text icon title="Add a moderator for this area" @click.stop="openForm({component: 'moderator-form', params: {area} })">
+      <v-btn text icon title="Add a moderator for this area" @click.stop="openOnlyAdminForm({component: 'moderator-form', params: {area} })">
         <v-icon>person_add</v-icon>
       </v-btn>
       <tag-control type="area" :item="area"></tag-control>
@@ -132,7 +132,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      openForm: 'form/open',
+      openAuthorizedForm: 'form/authorizeAndOpen',
+      openOnlyAdminForm: 'form/onlyAdminOpen',
       setChildForAdoption: 'adoption/setChild',
       setAdoptingParent: 'adoption/setParent'
     }),

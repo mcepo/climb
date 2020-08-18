@@ -7,8 +7,10 @@ export interface AuthState {
   user?: User;
 }
 
+const storageKey = 'auth'
+
 function getAuthFromStorage<AuthState> () {
-  const auth = window.localStorage.getItem('auth')
+  const auth = window.localStorage.getItem(storageKey)
 
   if (auth) {
     return JSON.parse(auth)
@@ -20,17 +22,16 @@ function getAuthFromStorage<AuthState> () {
 }
 
 function setAuthToStorage (auth: AuthState) {
-  window.localStorage.setItem('auth', JSON.stringify(auth))
+  window.localStorage.setItem(storageKey, JSON.stringify(auth))
 }
 
 function clearAuthFromStorage () {
-  window.localStorage.removeItem('auth')
+  window.localStorage.removeItem(storageKey)
 }
 
 const namespaced = true
 
 const auth: Module<AuthState, RootState> = {
-
   namespaced,
 
   state: getAuthFromStorage(),
@@ -56,18 +57,50 @@ const auth: Module<AuthState, RootState> = {
       clearAuthFromStorage()
       commit('logout')
     },
-    authorize (store, { item, callback }) {
-      const user = store.state.user
+    authorize ({ getters, dispatch }, item) {
+      // if there is no item to authorize agains
+      // just set it to true
+      // that way i limit the add forms to only loggedin users
+      const isAuthorized = item ? getters.authorize(item) : true
 
-      if (user) {
-        if (store.getters.authorize(item)) {
-          callback()
-        } else {
-          store.commit('snackbar/throwError', { code: 403 }, { root: true })
+      return dispatch('authorizationHandler', { isAuthorized })
+    },
+    authorizeOnlyAdmin ({ getters, dispatch }) {
+      return dispatch('authorizationHandler', {
+        isAuthorized: getters.isAdmin
+      })
+    },
+    authorizationHandler ({ state, dispatch }, { isAuthorized }) {
+      return new Promise((resolve, reject) => {
+        if (!state.user) {
+          reject(Error('401'))
+          return
         }
-      } else {
-        store.dispatch('form/open', { component: 'login-form', params: null }, { root: true })
-        store.commit('snackbar/throwError', { code: 401 }, { root: true })
+
+        if (!isAuthorized) {
+          reject(Error('403'))
+          return
+        }
+
+        if (state.user && isAuthorized) {
+          resolve()
+        }
+      }).catch((error: Error) => {
+        dispatch('unauthorized', error)
+        throw error
+      })
+    },
+    unauthorized (store, error) {
+      const code = parseInt(error.message)
+
+      store.commit('snackbar/throwError', { code }, { root: true })
+
+      if (code === 401) {
+        store.dispatch(
+          'form/open',
+          { component: 'login-form', params: null },
+          { root: true }
+        )
       }
     }
   },
@@ -77,7 +110,9 @@ const auth: Module<AuthState, RootState> = {
       return !!state.token && !!state.user
     },
     // check if a user has specific permission
-    authorize: (state, getters) => (item: Area|Trail|Image|Route|Tag) => {
+    authorize: (state, getters) => (
+      item: Area | Trail | Image | Route | Tag
+    ) => {
       if (getters.isAdmin) return true
 
       if (!item.path) return false
@@ -90,9 +125,7 @@ const auth: Module<AuthState, RootState> = {
         })
       }
 
-      // TODO: allow actions if user is owner of item
-
-      return false
+      return state.user && state.user.id === item.owner_id
     },
     isAdmin (state) {
       return state.user && state.user.role_id === Role.ADMIN
@@ -105,7 +138,6 @@ const auth: Module<AuthState, RootState> = {
 
       return 'User not logged in!'
     }
-
   }
 }
 

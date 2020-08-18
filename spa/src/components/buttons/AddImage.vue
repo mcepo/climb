@@ -3,7 +3,7 @@
     text
     title="Upload photo"
     icon
-    @click.stop="openForm({component: 'image-upload-form', params})"
+    @click.stop="openAuthorizedForm({form: {component: 'image-upload-form', params}})"
   >
     <v-icon>add_photo_alternate</v-icon>
   </v-btn>
@@ -16,7 +16,7 @@ export default {
   props: ['params'],
   methods: {
     ...mapActions({
-      openForm: 'form/open'
+      openAuthorizedForm: 'form/authorizeAndOpen'
     })
   }
 }
