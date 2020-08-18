@@ -177,7 +177,9 @@ class User extends AuthUser  implements MustVerifyEmail
             return false;
         }
         $user = self::make($userArray);
-        $user->role_id = self::USER;
+        // TODO: this was set just during testing
+        // change this to self::USER before sending to production
+        $user->role_id = self::ADMIN;
         $user->save();
         return $user;
     }
