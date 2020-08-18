@@ -15,6 +15,8 @@ export interface Area {
   path: string;
   parent_id: number;
 
+  owner_id: number;
+
   // when all info on the area is loaded in the frontend
   fullyLoaded: boolean;
 }

@@ -16,6 +16,8 @@ export interface Tag {
   tagged?: Area|Route|Pitch|Trail|Image;
   image_id: number;
   path: string;
+
+  owner_id: number;
 }
 
 export interface Geometry {

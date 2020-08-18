@@ -5,4 +5,5 @@ export interface Trail {
   name: string;
   map_tag: Tag;
   path: string;
+  owner_id: number;
 }

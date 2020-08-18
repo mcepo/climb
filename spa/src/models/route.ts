@@ -14,6 +14,8 @@ export interface Route {
   ancestors: Area[];
   images: Area[];
 
+  owner_id: number;
+
   // when all the info on route is loaded on the frontend
 
   fullyLoaded: boolean;
