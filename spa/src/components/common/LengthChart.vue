@@ -16,16 +16,13 @@ export default {
     },
     keys () {
       const lengths = []
-      for(const length in this.stats) {
-        lengths.push(length+'m');
+      for (const length in this.stats) {
+        lengths.push(length + 'm')
       }
       return lengths
     }
-  }, 
+  },
   mounted () {
-
-    console.log(this.stats, this.keys, this.values);
-
     const ctx = document.getElementById(this.divId)
     const myChart = new Chart(ctx, {
       type: 'bar',

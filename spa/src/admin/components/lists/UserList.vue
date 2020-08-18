@@ -4,8 +4,11 @@
     :items="users"
     @click:row="openUserDetails"
   >
+    <template v-slot:item.email_verified_at="{ item }">
+      <v-chip :color="item.email_verified_at ? 'green' : 'red'"><i>{{ item.email_verified_at !== null ? 'Verified': 'Not verified' }}</i></v-chip>
+    </template>
     <template v-slot:item.role_id="{ item }">
-      <v-chip :color="item.email_verified_at ? 'green' : 'red'">{{ item.role_id === 1 ? 'Admin': 'User' }}</v-chip>
+      <v-chip>{{ item.role_id === 1 ? 'Admin': 'User' }}</v-chip>
     </template>
   </v-data-table>
 </template>
@@ -17,6 +20,7 @@ export default {
       headers: [
         { text: 'Name', value: 'name' },
         { text: 'Email', value: 'email' },
+        { text: 'Email verification', value: 'email_verified_at' },
         { text: 'Role', value: 'role_id' }
       ]
     }
