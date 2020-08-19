@@ -6,7 +6,7 @@
       width="400"
       id="drawerLeft"
       fill-height
-      style="z-index:2000"
+      class="drawer"
     >
       <router-view></router-view>
     </v-navigation-drawer>
@@ -67,7 +67,7 @@
       clipped
       app
       width="400"
-      style="z-index:2000"
+      class="drawer"
       disable-resize-watcher
       >
       <form-layout></form-layout>
@@ -130,5 +130,9 @@ export default Vue.extend({
 <style>
 .map{
   height:100%;
+}
+
+.drawer {
+  z-index:2000;
 }
 </style>

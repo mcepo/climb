@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class="pa-0">
+  <v-container fluid class="pa-0 mb-5">
     <v-layout column>
       <v-toolbar dense flat>
         <v-spacer></v-spacer>
