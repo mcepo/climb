@@ -35,7 +35,6 @@ const form: Module<FormState, RootState> = {
       // authorize based on the item the user wants to edit
       dispatch('auth/authorize', item, { root: true }).then(
         () => {
-          console.log('openning form')
           dispatch('open', form)
         },
         () => {

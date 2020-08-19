@@ -34,9 +34,6 @@ const area: Module<AreaState, RootState> = {
         state.rootIds.push(areaId)
       }
     },
-    appendRoute (state: AreaState, payload) {
-      state.byIds[payload.areaId].routes.push(payload.routeId)
-    },
     appendImage (state: AreaState, payload) {
       state.byIds[payload.id].images.push(payload.imageId)
     },

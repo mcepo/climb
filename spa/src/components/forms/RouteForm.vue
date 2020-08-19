@@ -136,9 +136,8 @@ export default {
               // api returns id of newly added item
               // appending id to created item
               this.formData.id = data
+              this.formData.path = this.area.path + '.' + this.area.id
               this.afterSubmit(this.formData)
-              // adding newly created item to area routes list
-              this.$store.commit('area/appendRoute', { routeId: data, areaId: this.area.id })
             }
           )
       }

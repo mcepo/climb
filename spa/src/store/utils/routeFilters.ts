@@ -7,7 +7,7 @@ export function routePassesFilter (route: Route, filters: RouteFilters) {
   // check route has required length
   if (filters.length && (route.length < filters.length[0] || route.length > filters.length[1])) return false
 
-  // check route has required gradess
+  // check route has required grades
   for (const id in route.grades) {
     const type = route.grades[id][0]
     const value = route.grades[id][1]
