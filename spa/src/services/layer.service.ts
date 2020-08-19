@@ -140,6 +140,7 @@ export class LayerService {
   }
 
   addTagsToView (tags: Tag[]) {
+
     this.removeLayers()
 
     tags.forEach((tag: Tag) => {
@@ -173,7 +174,8 @@ export class LayerService {
 
     try {
       // FIX: this keeps dropping an error, but seems to get the job done
-      this._map.fitBounds(this._layerGroup.getBounds(), { maxZoom: 15 })
+      this._map.fitBounds(this._layerGroup.getBounds(), {padding: [30,30]})
+
     } catch (err) {
       // console.log(err)
     }

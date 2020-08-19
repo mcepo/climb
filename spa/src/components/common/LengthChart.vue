@@ -47,6 +47,15 @@ export default {
           rectangle: {
             backgroundColor: 'grey'
           }
+        },
+        scales: {
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: true
+              }
+            }
+          ]
         }
       }
     })

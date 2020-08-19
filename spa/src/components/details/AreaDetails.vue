@@ -5,6 +5,7 @@
       <v-btn
         text
         icon
+        title="Edit this area"
         @click.stop="openAuthorizedForm({form: {component: 'area-form', params: {area, parent} }, item: area})"
       >
         <v-icon>edit</v-icon>
@@ -22,29 +23,22 @@
       </v-btn>
       <tag-control type="area" :item="area"></tag-control>
       <delete-button type='area' :item="area" return-back></delete-button>
+      <v-divider></v-divider>
       <v-layout row v-if='area.altitude[0] || area.altitude[1]'>
         <v-flex>
           <strong>Altitude:</strong>
         </v-flex>
         <v-flex>{{area.altitude[0] + 'm - ' + area.altitude[1] + 'm'}}</v-flex>
       </v-layout>
-      <v-divider></v-divider>
       <v-layout row v-if='allowedOrientation'>
         <v-flex>
           <strong>Orientation:</strong>
         </v-flex>
         <v-flex>{{orientation}}</v-flex>
       </v-layout>
-      <v-divider></v-divider>
-      <v-layout row v-for="(stats, type) in area.statistics" :key="type">
-        <statistics-chart :type='type' :stats='stats'></statistics-chart>
-      </v-layout>
-      <v-layout row >
-        <length-chart :stats='area.lengthStatistics'></length-chart>
-      </v-layout>
-      <v-divider></v-divider>
+      <statistics-chart :type='type' :stats='stats' v-for="(stats, type) in area.statistics" :key="type"></statistics-chart>
+      <length-chart v-if='area.lengthStatistics.length !== 0' :stats='area.lengthStatistics'></length-chart>
       <moderator-list :moderators='moderators' :area='area'></moderator-list>
-      <v-divider></v-divider>
     </template>
   </details-layout>
 </template>

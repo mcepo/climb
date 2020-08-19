@@ -1,5 +1,5 @@
 <template>
-  <canvas :id="divId" height='250'></canvas>
+  <canvas :id="divId" height="250"></canvas>
 </template>
 
 <script>
@@ -58,6 +58,15 @@ export default {
           rectangle: {
             backgroundColor: 'grey'
           }
+        },
+        scales: {
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: true
+              }
+            }
+          ]
         }
       }
     })

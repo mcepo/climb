@@ -17,7 +17,6 @@
             </h3>
           </v-layout>
         </v-card-title>
-        <v-divider />
         <v-card-text>
           <slot name="item-details" />
         </v-card-text>
