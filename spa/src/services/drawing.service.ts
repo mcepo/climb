@@ -49,7 +49,7 @@ class DrawingService {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   createTag (type: TaggedType, item: any) {
-    // authorize this action
+    // authorize this action, only checking if user is logged in
     store.dispatch('auth/authorize').then(() => {
       // if there is no map stop drawing
       if (!this.setMapAndType(type)) return
@@ -82,7 +82,7 @@ class DrawingService {
     this._tag = layerService.getTag(key)
 
     store
-      .dispatch('auth/authorize', { item: this._tag })
+      .dispatch('auth/authorize', this._tag )
       .then(() => {
         layerService.hideTag(key)
 
