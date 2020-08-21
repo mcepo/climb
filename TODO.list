@@ -1,7 +1,10 @@
 
 TODO: cms for trails
 
-TOOD: location from gps device
+TODO: route tagging sort it out, only tags for short routes are shown
+  and set current location for long routes
+
+TODO: set current location only for sectors, crags and long routes
 
 ---- NOT pressing ----
 
@@ -27,3 +30,5 @@ that way the inital bundle size will be reduced and initial load will be faster
 REFACTORING
 
 TODO: maybe move frontend authorization from to store to a service ?
+
+TODO: add gradeService, typeService as vue plugin

@@ -22,6 +22,9 @@
         <v-icon>person_add</v-icon>
       </v-btn>
       <tag-control type="area" :item="area"></tag-control>
+      <v-btn text icon title="Set my current location as area location" @click.stop="setTagAtCurrentLocation()">
+        <v-icon>gps_fixed</v-icon>
+      </v-btn>
       <delete-button type='area' :item="area" return-back></delete-button>
       <v-divider></v-divider>
       <v-layout row v-if='area.altitude[0] || area.altitude[1]'>
@@ -67,6 +70,7 @@ import { mapGetters, mapActions } from 'vuex'
 import gradeService from '../../services/grade.service'
 
 import typeService from '../../services/type.service'
+import drawingService from '../../services/drawing.service'
 
 export default {
   computed: {
@@ -131,6 +135,9 @@ export default {
       setChildForAdoption: 'adoption/setChild',
       setAdoptingParent: 'adoption/setParent'
     }),
+    setTagAtCurrentLocation () {
+      drawingService.setCurrentLocation('area', this.area)
+    },
     typeName (type) {
       return gradeService.types[type].name
     }

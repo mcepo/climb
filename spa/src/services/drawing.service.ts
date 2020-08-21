@@ -4,6 +4,7 @@ import { TaggedType, Tag } from '@/models'
 import api from '@/store/api'
 import '@geoman-io/leaflet-geoman-free'
 import '@geoman-io/leaflet-geoman-free/dist/leaflet-geoman.css'
+import geolocationService from './geolocation.service'
 
 const drawingTypes = {
   map: {
@@ -82,7 +83,7 @@ class DrawingService {
     this._tag = layerService.getTag(key)
 
     store
-      .dispatch('auth/authorize', this._tag )
+      .dispatch('auth/authorize', this._tag)
       .then(() => {
         layerService.hideTag(key)
 
@@ -100,6 +101,39 @@ class DrawingService {
       .catch(() => {
         this._tag = null
       })
+  }
+
+  // TODO: add method for adding/editing map tag to the current location
+  // of the user
+
+  setCurrentLocation (type: TaggedType, item: any) {
+
+    store.commit('snackbar/show', "Setting your current location as the location of '" + item.name +  "' <br/>Depending on your device/browser, this may take some time ...")
+
+    const key = type + item.id
+
+    let tag: any
+
+    if (layerService.hasTag(key)) {
+      tag = layerService.getTag(key)
+    } else {
+      tag = {
+        tagged_type: type,
+        tagged_id: item.id
+      }
+    }
+
+    geolocationService.getCurrentLocation(
+      (position: Position) => {
+        if (!position) return
+
+        tag.geometry = {
+          type: 'Point',
+          coordinates: [position.coords.longitude, position.coords.latitude]
+        }
+        this.storeTag(tag)
+      }
+    )
   }
 
   createDrawingLayer () {
@@ -147,13 +181,13 @@ class DrawingService {
     } as Tag
   }
 
-  storeTag () {
+  storeTag (tag?: Tag) {
     store.commit('snackbar/show', 'Storing tag')
 
-    const request = this.createRequest()
+    const request = tag || this.createRequest()
 
-    const apiCall = this._tag
-      ? api.put('tag/' + this._tag?.id, request)
+    const apiCall = request.id
+      ? api.put('tag/' + request.id, request)
       : api.post('tag', request)
 
     apiCall

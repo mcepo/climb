@@ -35,6 +35,9 @@
     </template>
     <template v-if="route.length < 40" slot="tag">
       <tag-control type="route" :item="route" />
+        <v-btn text icon title="Set my current location as area location" @click.stop="setTagAtCurrentLocation()">
+          <v-icon>gps_fixed</v-icon>
+      </v-btn>
     </template>
   </details-layout>
 </template>
@@ -74,7 +77,10 @@ export default {
     ...mapActions({
       openAuthorizedForm: 'form/authorizeAndOpen',
       setChildForAdoption: 'adoption/setChild'
-    })
+    }),
+    setTagAtCurrentLocation () {
+      drawingService.setCurrentLocation('route', this.route)
+    },
   },
   components: {
     DetailsLayout,
