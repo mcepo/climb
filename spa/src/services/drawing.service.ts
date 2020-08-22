@@ -123,17 +123,24 @@ class DrawingService {
       }
     }
 
-    geolocationService.getCurrentLocation(
-      (position: Position) => {
-        if (!position) return
-
-        tag.geometry = {
-          type: 'Point',
-          coordinates: [position.coords.longitude, position.coords.latitude]
+    store
+    .dispatch('auth/authorize', tag.id ? tag : null)
+    .then(() => {
+      geolocationService.getCurrentLocation(
+        (position: Position) => {
+          if (!position) return
+  
+          tag.geometry = {
+            type: 'Point',
+            coordinates: [position.coords.longitude, position.coords.latitude]
+          }
+          this.storeTag(tag)
         }
-        this.storeTag(tag)
-      }
-    )
+      )
+    })
+    .catch(() => {
+      /* so i dont get an error */
+    })
   }
 
   createDrawingLayer () {
