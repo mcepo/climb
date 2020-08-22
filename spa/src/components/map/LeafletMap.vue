@@ -54,9 +54,13 @@ export default {
   methods: {
 
     showLocation () {
+      this.$store.commit('snackbar/show', 'Getting location,<br>this may take some time ...')
+
       geolocationService.registerWatch(this.moveMarker)
 
-      // TODO: style the location marker
+      if (this.$options.locationMarker) {
+        this.$options.map.setView(this.$options.locationMarker.getLatLng(), 12)
+      }
 
       // TODO: map my trail, when walking it should map a trail show it on the map and be able
       // to store it to the server
@@ -69,7 +73,7 @@ export default {
         this.$options.locationMarker.remove()
       }
 
-      this.$options.locationMarker = new Marker([position.coords.latitude, position.coords.longitude], { title: 'My Location' })
+      this.$options.locationMarker = new Marker([position.coords.latitude, position.coords.longitude], { title: 'My Location' }).bindTooltip('My Location')
 
       styleService.currentLocation.default(this.$options.locationMarker)
 

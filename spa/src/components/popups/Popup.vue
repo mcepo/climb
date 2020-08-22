@@ -1,7 +1,7 @@
 <template>
   <v-card flat class='popup-box'>
     <slot name='header'></slot>
-    <router-link :to='link' style='white-space: nowrap'>
+    <router-link :to='link' style='white-space: nowrap' @click.native='openLeftDrawer()'>
       <slot name='item'></slot>
     </router-link>
     <slot name="content"></slot>
@@ -33,6 +33,11 @@ export default Vue.extend({
   computed: {
     link () {
       return this.url || getUrl(this.type, this.item.id)
+    }
+  },
+  methods: {
+    openLeftDrawer () {
+      this.$store.commit('drawers/setLeft', true)
     }
   }
 })
