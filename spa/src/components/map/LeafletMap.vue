@@ -69,7 +69,7 @@ export default {
         this.$options.locationMarker.remove()
       }
 
-      this.$options.locationMarker = new Marker([position.coords.latitude, position.coords.longitude],{title: 'My Location'})
+      this.$options.locationMarker = new Marker([position.coords.latitude, position.coords.longitude], { title: 'My Location' })
 
       styleService.currentLocation.default(this.$options.locationMarker)
 

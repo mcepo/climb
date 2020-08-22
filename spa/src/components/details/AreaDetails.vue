@@ -73,7 +73,6 @@ import { mapGetters, mapActions } from 'vuex'
 import gradeService from '../../services/grade.service'
 
 import typeService from '../../services/type.service'
-import drawingService from '../../services/drawing.service'
 
 export default {
   computed: {

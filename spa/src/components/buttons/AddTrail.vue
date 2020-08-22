@@ -22,10 +22,10 @@ export default Vue.extend({
   methods: {
     createTag () {
       // i am packing area id in the item id field, because
-      // i need it in the back end to know in what area is this 
+      // i need it in the back end to know in what area is this
       // trail located
       // not a very good solution, but the easiest for now
-      drawingService.createTag('trail', {id: this.area.id})
+      drawingService.createTag('trail', { id: this.area.id })
     }
   }
 })

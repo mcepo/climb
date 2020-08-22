@@ -31,8 +31,8 @@ class GeolocationService {
       (position) => {
         callback(position)
       },
-      error => {
-        this._errorMessage(error)
+      () => {
+        this._errorMessage()
         callback()
       },
       {
@@ -51,9 +51,9 @@ class GeolocationService {
       this.lastPosition = position
       this.resolveResponse(position)
     },
-    (error) => {
+    () => {
       this.lastPosition = undefined
-      this._errorMessage(error)
+      this._errorMessage()
       this.resolveResponse()
     })
   }
@@ -78,7 +78,7 @@ class GeolocationService {
     store.commit('snackbar/error', "Your current browser doesn't support this feature")
   }
 
-  _errorMessage (error) {
+  _errorMessage () {
     store.commit('snackbar/info', "Climbers guide doesn't have permission to use your location")
   }
 }

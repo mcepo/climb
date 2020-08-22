@@ -68,9 +68,9 @@ class DrawingService {
 
       // enable drawing on the map with a specific layer type (Marker or Polyline)
       this.enableDrawing()
-    }).catch((error) => { 
+    }).catch((error) => {
       console.log(error)
-     })
+    })
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -108,41 +108,44 @@ class DrawingService {
   // TODO: add method for adding/editing map tag to the current location
   // of the user
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setTagAtCurrentLocation (type: TaggedType, item: any) {
-
-    store.commit('snackbar/show', "Setting your current location as the location of '" + item.name +  "' <br/>Depending on your device/browser, this may take some time ...")
+    store.commit('snackbar/show', "Setting your current location as the location of '" + item.name + "' <br/>Depending on your device/browser, this may take some time ...")
 
     const key = type + item.id
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let tag: any
 
     if (layerService.hasTag(key)) {
       tag = layerService.getTag(key)
     } else {
       tag = {
+        // eslint-disable-next-line @typescript-eslint/camelcase
         tagged_type: type,
+        // eslint-disable-next-line @typescript-eslint/camelcase
         tagged_id: item.id
       }
     }
 
     store
-    .dispatch('auth/authorize', tag.id ? tag : null)
-    .then(() => {
-      geolocationService.getCurrentLocation(
-        (position: Position) => {
-          if (!position) return
-  
-          tag.geometry = {
-            type: 'Point',
-            coordinates: [position.coords.longitude, position.coords.latitude]
+      .dispatch('auth/authorize', tag.id ? tag : null)
+      .then(() => {
+        geolocationService.getCurrentLocation(
+          (position: Position) => {
+            if (!position) return
+
+            tag.geometry = {
+              type: 'Point',
+              coordinates: [position.coords.longitude, position.coords.latitude]
+            }
+            this.storeTag(tag)
           }
-          this.storeTag(tag)
-        }
-      )
-    })
-    .catch(() => {
+        )
+      })
+      .catch(() => {
       /* so i dont get an error */
-    })
+      })
   }
 
   createDrawingLayer () {
