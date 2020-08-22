@@ -88,8 +88,6 @@ export default {
     // climbing site can have: Crag, sector
     [6, 7],
     // crag can have: sector
-    [7],
-    // sector can have: sector
     [7]
   ],
   data: () => ({
@@ -113,6 +111,10 @@ export default {
           }
         ]
       }
+
+      console.log(this.$options)
+      console.log(this.$options.areaHierarchy)
+      console.log(this.parent)
       const types = []
       this.$options.areaHierarchy[this.parent.type_id].forEach(typeId => {
         types.push({

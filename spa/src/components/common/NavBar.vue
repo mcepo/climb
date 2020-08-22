@@ -69,6 +69,7 @@
       width="400"
       class="drawer"
       disable-resize-watcher
+      touchless
       >
       <form-layout></form-layout>
       </v-navigation-drawer>
