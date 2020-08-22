@@ -28,10 +28,18 @@ export default Vue.extend({
   },
   methods: {
     createTag () {
+      this.closeDrawerIfMobile()
       drawingService.createTag(this.type, this.item)
     },
     editTag () {
+      this.closeDrawerIfMobile()
       drawingService.editTag(this.type, this.item)
+    },
+    closeDrawerIfMobile () {
+      if (window.innerWidth < 1264) {
+        /// hack
+        this.$store.commit('drawers/setLeft', false)
+      }
     }
   }
 })

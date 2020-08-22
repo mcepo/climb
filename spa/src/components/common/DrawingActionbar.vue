@@ -1,13 +1,21 @@
 <template>
-    <v-snackbar absolute v-model="drawing" :timeout=0 top>
-        <v-btn text @click="save">
+    <v-snackbar absolute v-model="drawing" :timeout=0 top class='action-snackbar'>
+        <v-btn text @click="save" class='ma-0 pa-0'>
           Save
         </v-btn>
-        <v-btn text @click="discard">
+        <v-btn text @click="discard" class='ma-0 pa-0'>
           Discard
         </v-btn>
     </v-snackbar>
 </template>
+
+<style>
+.action-snackbar{
+  margin: auto;
+  max-width:200px;
+}
+</style>
+
 <script>
 
 import { mapState } from 'vuex'
