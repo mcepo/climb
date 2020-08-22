@@ -106,7 +106,7 @@ class DrawingService {
   // TODO: add method for adding/editing map tag to the current location
   // of the user
 
-  setCurrentLocation (type: TaggedType, item: any) {
+  setTagAtCurrentLocation (type: TaggedType, item: any) {
 
     store.commit('snackbar/show', "Setting your current location as the location of '" + item.name +  "' <br/>Depending on your device/browser, this may take some time ...")
 

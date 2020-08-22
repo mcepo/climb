@@ -35,9 +35,7 @@
     </template>
     <template v-if="canTag(route)" slot="tag">
       <tag-control type="route" :item="route" />
-        <v-btn text icon title="Set my current location as route entrance" @click.stop="setTagAtCurrentLocation()">
-          <v-icon>gps_fixed</v-icon>
-      </v-btn>
+      <current-location-tagger type='route' :item='route' />
     </template>
   </details-layout>
 </template>
@@ -46,6 +44,7 @@ import DetailsLayout from '../layouts/DetailsLayout.vue'
 import DeleteButton from '../buttons/DeleteButton'
 import DetailsLoading from '../common/DetailsLoading.vue'
 import TagControl from '../buttons/TagControl'
+import CurrentLocationTagger from '../buttons/CurrentLocationTagger'
 
 import typeService from '../../services/type.service'
 
@@ -78,16 +77,14 @@ export default {
     ...mapActions({
       openAuthorizedForm: 'form/authorizeAndOpen',
       setChildForAdoption: 'adoption/setChild'
-    }),
-    setTagAtCurrentLocation () {
-      drawingService.setCurrentLocation('route', this.route)
-    },
+    })
   },
   components: {
     DetailsLayout,
     DetailsLoading,
     TagControl,
-    DeleteButton
+    DeleteButton,
+    CurrentLocationTagger
   }
 }
 </script>
