@@ -16,6 +16,7 @@
 import { LatLngBounds, LatLng, Map, control, Marker } from 'leaflet'
 import setupTiles from '../../utils/tiles'
 import layerService from '../../services/layer.service'
+import styleService from '../../services/style.service'
 import geolocationService from '../../services/geolocation.service'
 
 export default {
@@ -68,7 +69,9 @@ export default {
         this.$options.locationMarker.remove()
       }
 
-      this.$options.locationMarker = new Marker([position.coords.latitude, position.coords.longitude])
+      this.$options.locationMarker = new Marker([position.coords.latitude, position.coords.longitude],{title: 'My Location'})
+
+      styleService.currentLocation.default(this.$options.locationMarker)
 
       this.$options.locationMarker.addTo(this.$options.map)
     }
