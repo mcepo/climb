@@ -74,6 +74,6 @@ class Image extends Model
         // admin overrides this restriction
         return $this->tags->count() == 0 
             && $this->mapTag == null
-            && $this->imageTags == null;
+            && $this->imageTags->count() == 0;
     }
 }
