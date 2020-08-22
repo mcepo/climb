@@ -29,6 +29,7 @@ class GeolocationService {
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
+        this._updatedMessage()
         callback(position)
       },
       () => {
@@ -80,11 +81,11 @@ class GeolocationService {
   }
 
   _errorMessage () {
-    store.commit('snackbar/info', "Climbers guide doesn't have permission to use your location")
+    store.commit('snackbar/show', "Climbers guide doesn't have permission to use your location")
   }
 
   _updatedMessage () {
-    store.commit('snackbar/info', 'Your location updated')
+    store.commit('snackbar/success', 'Your location updated')
   }
 }
 
