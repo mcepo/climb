@@ -22,10 +22,11 @@ function getCircleSvg (color: string) {
   return '<circle cx="12" cy="12" r="6" fill="' + color + '"/>'
 }
 
-function setPolylineStyle (layer: Polyline, color: string) {
+function setPolylineStyle (layer: Polyline, color: string, dashArray?: string) {
   layer.setStyle(
     {
-      color
+      color,
+      dashArray
     }
   )
 }
@@ -73,7 +74,7 @@ const routeLeafletLayerStyle = {
     setMarkerStyle(obj.layer, getStarSvg(highlighColor))
   },
   selected (obj: StylingMarker) {
-    setMarkerStyle(obj.layer, getStarSvg('orange'))
+    setMarkerStyle(obj.layer, getStarSvg('orangered'))
   }
 }
 
@@ -86,7 +87,7 @@ const routeImageLayerStyle = {
     setPolylineStyle(obj.layer, highlighColor)
   },
   selected (obj: StylingPolyline) {
-    setPolylineStyle(obj.layer, 'orange')
+    setPolylineStyle(obj.layer, 'orangered')
   }
 }
 
@@ -99,7 +100,7 @@ const imageLayerStyle = {
     setMarkerStyle(obj.layer, getCircleSvg(highlighColor))
   },
   selected (obj: StylingMarker) {
-    setMarkerStyle(obj.layer, getCircleSvg('orange'))
+    setMarkerStyle(obj.layer, getCircleSvg('orangered'))
   }
 }
 
@@ -112,25 +113,31 @@ const pitchLayerStyle = {
     setPolylineStyle(obj.layer, highlighColor)
   },
   selected (obj: StylingPolyline) {
-    setPolylineStyle(obj.layer, 'orange')
+    setPolylineStyle(obj.layer, 'orangered')
   }
 }
 
 const trailLayerStyle = {
 
   default (obj: StylingPolyline) {
-    setPolylineStyle(obj.layer, 'green')
+    setPolylineStyle(obj.layer, 'green', '10 5')
   },
   highlight (obj: StylingPolyline) {
-    setPolylineStyle(obj.layer, highlighColor)
+    setPolylineStyle(obj.layer, highlighColor, '10 5')
   },
   selected (obj: StylingPolyline) {
-    setPolylineStyle(obj.layer, 'orange')
+    setPolylineStyle(obj.layer, 'orangered', '10 5')
+  }
+}
+
+const currentLocationStyle = {
+  default (layer: Marker) {
+    setMarkerStyle(layer, getCircleSvg('orangered'))
   }
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const style: Record<string, Record<TaggedType, any>> = {
+const style: Record<string, Record<TaggedType, any>|any> = {
   map: {
     area: areaLayerStyle,
     trail: trailLayerStyle,
@@ -144,7 +151,8 @@ const style: Record<string, Record<TaggedType, any>> = {
     pitch: pitchLayerStyle,
     route: routeImageLayerStyle,
     image: imageLayerStyle
-  }
+  },
+  currentLocation: currentLocationStyle
 }
 
 export default style

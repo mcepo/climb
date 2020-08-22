@@ -8,8 +8,8 @@
     >
     <v-icon>map</v-icon>
   </v-btn>
-    <div id="image-map" class="map"></div>
-    </div>
+  <div id="image-map" class="map"></div>
+</div>
 </template>
 
 <style>

@@ -1,10 +1,10 @@
 <template>
   <div v-if="!drawing" style="display: inline;">
     <v-btn v-if="edit" text icon @click.stop="editTag" title="Edit tag">
-      <v-icon>location_on</v-icon>
+      <v-icon>edit_location</v-icon>
     </v-btn>
     <v-btn v-else text icon @click.stop="createTag" title="Add tag">
-      <v-icon>location_on</v-icon>
+      <v-icon>add_location</v-icon>
     </v-btn>
   </div>
 </template>

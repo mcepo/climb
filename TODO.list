@@ -1,7 +1,8 @@
 
-TODO: cms for trails
-
-TOOD: location from gps device
+FIX: after adding a trail it doesn't appear in the map
+  beacuse the tagged trail isn't in the store
+  i need to somehow get the tagged trail and add it to 
+  the current area and store it in the store
 
 ---- NOT pressing ----
 
@@ -15,6 +16,7 @@ TODO: on area get altitude borders from parent
 
 TODO: calculate area bounds on the backend and return it with area
 
+TODO: set current location only for sectors and crags
 
 OPTIMIZATION
 
@@ -27,3 +29,5 @@ that way the inital bundle size will be reduced and initial load will be faster
 REFACTORING
 
 TODO: maybe move frontend authorization from to store to a service ?
+
+TODO: add gradeService, typeService as vue plugin

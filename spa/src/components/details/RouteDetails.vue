@@ -33,8 +33,9 @@
         </div>
       </v-layout>
     </template>
-    <template v-if="route.length < 40" slot="tag">
+    <template v-if="canTag(route)" slot="tag">
       <tag-control type="route" :item="route" />
+      <current-location-tagger type='route' :item='route' />
     </template>
   </details-layout>
 </template>
@@ -42,7 +43,8 @@
 import DetailsLayout from '../layouts/DetailsLayout.vue'
 import DeleteButton from '../buttons/DeleteButton'
 import DetailsLoading from '../common/DetailsLoading.vue'
-import TagControl from '../common/TagControl'
+import TagControl from '../buttons/TagControl'
+import CurrentLocationTagger from '../buttons/CurrentLocationTagger'
 
 import typeService from '../../services/type.service'
 
@@ -52,7 +54,8 @@ import gradeService from '../../services/grade.service'
 export default {
   computed: {
     ...mapGetters({
-      route: 'route/get'
+      route: 'route/get',
+      canTag: 'route/canTag'
     }),
     loading () {
       return this.$store.state.route.loading || this.$store.state.area.loading || !this.route
@@ -80,7 +83,8 @@ export default {
     DetailsLayout,
     DetailsLoading,
     TagControl,
-    DeleteButton
+    DeleteButton,
+    CurrentLocationTagger
   }
 }
 </script>

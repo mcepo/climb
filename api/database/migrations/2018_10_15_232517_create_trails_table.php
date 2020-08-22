@@ -17,7 +17,6 @@ class CreateTrailsTable extends Migration
             'trails',
             function (Blueprint $table) {
                 $table->increments('id');
-                $table->string('name');
                 $table->unsignedInteger('area_id');
                 $table->mediumText('path')->nullable()->index();
                 $table->integer('owner_id');

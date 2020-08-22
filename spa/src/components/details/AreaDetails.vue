@@ -21,7 +21,7 @@
       <v-btn text icon title="Add a moderator for this area" @click.stop="openOnlyAdminForm({component: 'moderator-form', params: {area} })">
         <v-icon>person_add</v-icon>
       </v-btn>
-      <tag-control type="area" :item="area"></tag-control>
+      <add-trail :area='area'/>
       <delete-button type='area' :item="area" return-back></delete-button>
       <v-divider></v-divider>
       <v-layout row v-if='area.altitude[0] || area.altitude[1]'>
@@ -39,6 +39,10 @@
       <statistics-chart :type='type' :stats='stats' v-for="(stats, type) in area.statistics" :key="type"></statistics-chart>
       <length-chart v-if='area.lengthStatistics.length !== 0' :stats='area.lengthStatistics'></length-chart>
       <moderator-list :moderators='moderators' :area='area'></moderator-list>
+    </template>
+    <template slot="tag">
+      <tag-control type="area" :item="area"></tag-control>
+      <current-location-tagger type='area' :item='area' />
     </template>
   </details-layout>
 </template>
@@ -58,7 +62,9 @@
 import DetailsLayout from '../layouts/DetailsLayout.vue'
 import DeleteButton from '../buttons/DeleteButton.vue'
 import DetailsLoading from '../common/DetailsLoading.vue'
-import TagControl from '../common/TagControl'
+import TagControl from '../buttons/TagControl'
+import CurrentLocationTagger from '../buttons/CurrentLocationTagger'
+import AddTrail from '../buttons/AddTrail'
 import StatisticsChart from '../common/StatisticsChart'
 import LengthChart from '../common/LengthChart'
 import ModeratorList from '../lists/ModeratorList'
@@ -67,6 +73,7 @@ import { mapGetters, mapActions } from 'vuex'
 import gradeService from '../../services/grade.service'
 
 import typeService from '../../services/type.service'
+import drawingService from '../../services/drawing.service'
 
 export default {
   computed: {
@@ -122,7 +129,9 @@ export default {
     TagControl,
     ModeratorList,
     StatisticsChart,
-    LengthChart
+    LengthChart,
+    CurrentLocationTagger,
+    AddTrail
   },
   methods: {
     ...mapActions({

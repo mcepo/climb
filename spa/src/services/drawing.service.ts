@@ -4,6 +4,7 @@ import { TaggedType, Tag } from '@/models'
 import api from '@/store/api'
 import '@geoman-io/leaflet-geoman-free'
 import '@geoman-io/leaflet-geoman-free/dist/leaflet-geoman.css'
+import geolocationService from './geolocation.service'
 
 const drawingTypes = {
   map: {
@@ -54,7 +55,7 @@ class DrawingService {
       // if there is no map stop drawing
       if (!this.setMapAndType(type)) return
 
-      store.commit('snackbar/show', 'Adding tag for ' + (item.name || type))
+      store.commit('snackbar/show', 'Adding tag for ' + (item?.name || type))
 
       store.commit('setDrawingMode', true)
 
@@ -67,7 +68,9 @@ class DrawingService {
 
       // enable drawing on the map with a specific layer type (Marker or Polyline)
       this.enableDrawing()
-    }).catch(() => { /* so the error won't get dumped in the console */ })
+    }).catch((error) => { 
+      console.log(error)
+     })
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -82,7 +85,7 @@ class DrawingService {
     this._tag = layerService.getTag(key)
 
     store
-      .dispatch('auth/authorize', this._tag )
+      .dispatch('auth/authorize', this._tag)
       .then(() => {
         layerService.hideTag(key)
 
@@ -100,6 +103,46 @@ class DrawingService {
       .catch(() => {
         this._tag = null
       })
+  }
+
+  // TODO: add method for adding/editing map tag to the current location
+  // of the user
+
+  setTagAtCurrentLocation (type: TaggedType, item: any) {
+
+    store.commit('snackbar/show', "Setting your current location as the location of '" + item.name +  "' <br/>Depending on your device/browser, this may take some time ...")
+
+    const key = type + item.id
+
+    let tag: any
+
+    if (layerService.hasTag(key)) {
+      tag = layerService.getTag(key)
+    } else {
+      tag = {
+        tagged_type: type,
+        tagged_id: item.id
+      }
+    }
+
+    store
+    .dispatch('auth/authorize', tag.id ? tag : null)
+    .then(() => {
+      geolocationService.getCurrentLocation(
+        (position: Position) => {
+          if (!position) return
+  
+          tag.geometry = {
+            type: 'Point',
+            coordinates: [position.coords.longitude, position.coords.latitude]
+          }
+          this.storeTag(tag)
+        }
+      )
+    })
+    .catch(() => {
+      /* so i dont get an error */
+    })
   }
 
   createDrawingLayer () {
@@ -143,17 +186,17 @@ class DrawingService {
       tagged_type: this._taggedType,
 
       // eslint-disable-next-line @typescript-eslint/camelcase
-      tagged_id: this._item.id
+      tagged_id: this._item?.id || null
     } as Tag
   }
 
-  storeTag () {
+  storeTag (tag?: Tag) {
     store.commit('snackbar/show', 'Storing tag')
 
-    const request = this.createRequest()
+    const request = tag || this.createRequest()
 
-    const apiCall = this._tag
-      ? api.put('tag/' + this._tag?.id, request)
+    const apiCall = request.id
+      ? api.put('tag/' + request.id, request)
       : api.post('tag', request)
 
     apiCall
