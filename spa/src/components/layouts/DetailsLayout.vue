@@ -21,13 +21,13 @@
           <slot name="item-details" />
         </v-card-text>
       </v-card>
+      <external-link-list :links='item.links'></external-link-list>
 
       <v-tabs v-model="tabs" grow mobile-break-point=300>
         <v-tab v-if="item.areas" href="#areas">Areas</v-tab>
         <v-tab v-if="type === 'area'" href="#routes">Routes</v-tab>
         <v-tab v-if="item.pitches && item.length > 50" href="#pitches">Pitches</v-tab>
         <v-tab v-if="item.type_id !== undefined && picturesAllowed" href="#pictures" >Pictures</v-tab>
-        <v-tab v-if="item.type_id !== undefined" href="#links">Links</v-tab>
         <v-tabs-items v-model="tabs" class="mt-2">
           <v-tab-item v-if="item.areas" value="areas">
             <v-btn
@@ -65,9 +65,6 @@
             </v-btn>
             <image-list v-if="item.images" :imageIds="item.images" />
           </v-tab-item>
-          <v-tab-item v-if="item.type_id" value="links">
-            <link-list :links="item.links" />
-          </v-tab-item>
         </v-tabs-items>
       </v-tabs>
     </v-layout>
@@ -79,7 +76,7 @@ import ImageList from '../lists/ImageList'
 import AreaList from '../lists/AreaList'
 import RouteList from '../lists/RouteList'
 import PitchList from '../lists/PitchList'
-import LinkList from '../lists/LinkList'
+import ExternalLinkList from '../lists/ExternalLinkList'
 import AncestorBreadcrumbs from '../common/AncestorBreadcrumbs'
 import { mapActions } from 'vuex'
 
@@ -114,7 +111,7 @@ export default {
     ImageList,
     AreaList,
     RouteList,
-    LinkList,
+    ExternalLinkList,
     PitchList,
     AncestorBreadcrumbs
   }
