@@ -29,7 +29,7 @@
 
 </style>
 <script>
-import TagControl from '../common/TagControl'
+import TagControl from '../buttons/TagControl'
 import DeleteButton from '../buttons/DeleteButton'
 import { getUrl } from '../../router'
 

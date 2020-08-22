@@ -45,7 +45,7 @@
 import DetailsLayout from '../layouts/DetailsLayout.vue'
 import DeleteButton from '../buttons/DeleteButton'
 import DetailsLoading from '../common/DetailsLoading.vue'
-import TagControl from '../common/TagControl'
+import TagControl from '../buttons/TagControl'
 
 import typeService from '../../services/type.service'
 

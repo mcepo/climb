@@ -27,7 +27,7 @@
 </template>
 <script>
 import typeService from '../../services/type.service'
-import TagControl from '../common/TagControl'
+import TagControl from '../buttons/TagControl'
 import { getUrl } from '../../router'
 import gradeService from '../../services/grade.service'
 import { mapGetters } from 'vuex'

@@ -16,7 +16,7 @@
 <script>
 import Vue from 'vue'
 import DeleteButton from '../buttons/DeleteButton.vue'
-import TagControl from '../common/TagControl.vue'
+import TagControl from '../buttons/TagControl.vue'
 import store from '../../store'
 import vuetify from '../../plugins/vuetify'
 import router, { getUrl } from '../../router'
