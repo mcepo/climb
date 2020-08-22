@@ -1,5 +1,8 @@
 
-TODO: cms for trails
+FIX: after adding a trail it doesn't appear in the map
+  beacuse the tagged trail isn't in the store
+  i need to somehow get the tagged trail and add it to 
+  the current area and store it in the store
 
 ---- NOT pressing ----
 

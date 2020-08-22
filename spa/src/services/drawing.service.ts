@@ -55,7 +55,7 @@ class DrawingService {
       // if there is no map stop drawing
       if (!this.setMapAndType(type)) return
 
-      store.commit('snackbar/show', 'Adding tag for ' + (item.name || type))
+      store.commit('snackbar/show', 'Adding tag for ' + (item?.name || type))
 
       store.commit('setDrawingMode', true)
 
@@ -68,7 +68,9 @@ class DrawingService {
 
       // enable drawing on the map with a specific layer type (Marker or Polyline)
       this.enableDrawing()
-    }).catch(() => { /* so the error won't get dumped in the console */ })
+    }).catch((error) => { 
+      console.log(error)
+     })
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -184,7 +186,7 @@ class DrawingService {
       tagged_type: this._taggedType,
 
       // eslint-disable-next-line @typescript-eslint/camelcase
-      tagged_id: this._item.id
+      tagged_id: this._item?.id || null
     } as Tag
   }
 

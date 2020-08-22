@@ -21,6 +21,7 @@
       <v-btn text icon title="Add a moderator for this area" @click.stop="openOnlyAdminForm({component: 'moderator-form', params: {area} })">
         <v-icon>person_add</v-icon>
       </v-btn>
+      <add-trail :area='area'/>
       <delete-button type='area' :item="area" return-back></delete-button>
       <v-divider></v-divider>
       <v-layout row v-if='area.altitude[0] || area.altitude[1]'>
@@ -63,6 +64,7 @@ import DeleteButton from '../buttons/DeleteButton.vue'
 import DetailsLoading from '../common/DetailsLoading.vue'
 import TagControl from '../buttons/TagControl'
 import CurrentLocationTagger from '../buttons/CurrentLocationTagger'
+import AddTrail from '../buttons/AddTrail'
 import StatisticsChart from '../common/StatisticsChart'
 import LengthChart from '../common/LengthChart'
 import ModeratorList from '../lists/ModeratorList'
@@ -128,7 +130,8 @@ export default {
     ModeratorList,
     StatisticsChart,
     LengthChart,
-    CurrentLocationTagger
+    CurrentLocationTagger,
+    AddTrail
   },
   methods: {
     ...mapActions({

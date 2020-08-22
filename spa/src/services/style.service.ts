@@ -22,10 +22,11 @@ function getCircleSvg (color: string) {
   return '<circle cx="12" cy="12" r="6" fill="' + color + '"/>'
 }
 
-function setPolylineStyle (layer: Polyline, color: string) {
+function setPolylineStyle (layer: Polyline, color: string, dashArray?: string) {
   layer.setStyle(
     {
-      color
+      color,
+      dashArray
     }
   )
 }
@@ -119,13 +120,13 @@ const pitchLayerStyle = {
 const trailLayerStyle = {
 
   default (obj: StylingPolyline) {
-    setPolylineStyle(obj.layer, 'green')
+    setPolylineStyle(obj.layer, 'green', '10 5')
   },
   highlight (obj: StylingPolyline) {
-    setPolylineStyle(obj.layer, highlighColor)
+    setPolylineStyle(obj.layer, highlighColor, '10 5')
   },
   selected (obj: StylingPolyline) {
-    setPolylineStyle(obj.layer, 'orange')
+    setPolylineStyle(obj.layer, 'orange', '10 5')
   }
 }
 
