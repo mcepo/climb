@@ -27,11 +27,6 @@ class GeolocationService {
       this._noSupportMessage()
     }
 
-    if(this.lastPosition) {
-      callback(this.lastPosition)
-      return
-    }
-
     navigator.geolocation.getCurrentPosition(
       (position) => {
         callback(position)
@@ -39,11 +34,12 @@ class GeolocationService {
       error => {
         this._errorMessage(error)
         callback()
-      }),
+      },
       {
-        timeout: 1000,
-        maximumAge: Infinity
+        timeout: 5000,
+        maximumAge: 60000
       }
+    )
   }
 
   _initWatch () {
