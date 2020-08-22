@@ -33,9 +33,9 @@
         </div>
       </v-layout>
     </template>
-    <template v-if="route.length < 40" slot="tag">
+    <template v-if="canTag(route)" slot="tag">
       <tag-control type="route" :item="route" />
-        <v-btn text icon title="Set my current location as area location" @click.stop="setTagAtCurrentLocation()">
+        <v-btn text icon title="Set my current location as route entrance" @click.stop="setTagAtCurrentLocation()">
           <v-icon>gps_fixed</v-icon>
       </v-btn>
     </template>
@@ -55,7 +55,8 @@ import gradeService from '../../services/grade.service'
 export default {
   computed: {
     ...mapGetters({
-      route: 'route/get'
+      route: 'route/get',
+      canTag: 'route/canTag'
     }),
     loading () {
       return this.$store.state.route.loading || this.$store.state.area.loading || !this.route

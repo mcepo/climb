@@ -20,7 +20,7 @@
         </v-layout>
       </v-list-item-subtitle>
     </v-list-item-content>
-    <v-list-item-action v-if="canTagRoute">
+    <v-list-item-action v-if="canTag(route)">
       <tag-control type="route" :item="route"></tag-control>
     </v-list-item-action>
   </v-list-item>
@@ -30,20 +30,19 @@ import typeService from '../../services/type.service'
 import TagControl from '../common/TagControl'
 import { getUrl } from '../../router'
 import gradeService from '../../services/grade.service'
+import { mapGetters } from 'vuex'
 
 export default {
   props: ['route'],
   computed: {
+    ...mapGetters({
+      canTag: 'route/canTag'
+    }),
     highlight () {
       return this.$store.state.highlight.key === this.key
     },
     typeName () {
       return typeService.route[this.route.type_id]
-    },
-    canTagRoute () {
-      // a route can be tagged if
-      return (this.route.length < 40 && this.$route.params.imageId) || // single pitch route and a image is open
-            (this.route.length >= 40 && !this.$route.params.imageId) // multi pitch route and a image isn't open
     },
     key () {
       return 'route' + this.route.id

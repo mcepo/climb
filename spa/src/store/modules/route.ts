@@ -179,6 +179,11 @@ const route: Module<RouteState, RootState> = {
     },
     find: (state: RouteState) => (id: number) => {
       return state.byIds[id]
+    },
+    canTag: (state: RouteState, _, rootState: RootState) => (route: Route) => {
+      // a route can be tagged if
+      return (route.length < 40 && rootState.url?.params.imageId) || // single pitch route and a image is open
+            (route.length >= 40 && !rootState.url?.params.imageId) // multi pitch route and a image isn't open
     }
   }
 }
