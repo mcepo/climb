@@ -72,6 +72,8 @@ class Image extends Model
         // image can only be deleted if it doesn't have any tags on it
         // and isn't tagged anywhere
         // admin overrides this restriction
-        return $this->tags->count() == 0 && $this->captured->count() == 0;
+        return $this->tags->count() == 0 
+            && $this->mapTag == null
+            && $this->imageTags == null;
     }
 }
