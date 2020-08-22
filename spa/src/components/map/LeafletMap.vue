@@ -60,6 +60,7 @@ export default {
 
       if (this.$options.locationMarker) {
         this.$options.map.setView(this.$options.locationMarker.getLatLng(), 12)
+        this.$options.locationMarker.openTooltip()
       }
 
       // TODO: map my trail, when walking it should map a trail show it on the map and be able
