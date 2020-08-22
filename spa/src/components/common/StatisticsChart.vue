@@ -63,7 +63,8 @@ export default {
           yAxes: [
             {
               ticks: {
-                beginAtZero: true
+                beginAtZero: true,
+                precision: 0
               }
             }
           ]

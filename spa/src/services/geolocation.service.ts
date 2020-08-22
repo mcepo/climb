@@ -48,6 +48,7 @@ class GeolocationService {
     }
 
     this.watchId = navigator.geolocation.watchPosition((position) => {
+      this._updatedMessage()
       this.lastPosition = position
       this.resolveResponse(position)
     },
@@ -80,6 +81,10 @@ class GeolocationService {
 
   _errorMessage () {
     store.commit('snackbar/info', "Climbers guide doesn't have permission to use your location")
+  }
+
+  _updatedMessage () {
+    store.commit('snackbar/info', 'Your location updated')
   }
 }
 
