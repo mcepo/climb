@@ -59,6 +59,7 @@
               text
               title="Upload photo"
               icon
+              v-if='canAddPicture'
               @click.stop="openAuthorizedForm({form: {component: 'image-upload-form', params: {type, id: item.id}}})"
             >
               <v-icon>add_photo_alternate</v-icon>
@@ -92,6 +93,9 @@ export default {
         return [2, 3, 4, 5, 6, 7].find((id) => id === this.item.type_id) !== undefined
       }
       return true
+    },
+    canAddPicture () {
+      return this.type === 'area' && this.picturesAllowed
     }
   },
   methods: {
