@@ -27,6 +27,7 @@
 <script>
 import Vue from 'vue'
 import api from '../../store/api'
+import { getUrl } from '../../router'
 
 export default Vue.extend({
   props: {
@@ -57,10 +58,11 @@ export default Vue.extend({
       // and remove it from there
 
       api.delete(this.type + '/' + this.item.id).then(() => {
-        // if a tag is beeing deleted
-        if (this.type === 'tag') {
-          const imageId = this.$store.getters.openImage
+        // if a tag is being deleted
 
+        const imageId = this.$store.getters.openImage
+
+        if (this.type === 'tag') {
           // if tag is on a image or map
           if (imageId) {
             this.$store.commit('image/removeImageTag', {
@@ -75,6 +77,13 @@ export default Vue.extend({
             )
           }
         } else {
+          console.log(imageId, this.type, this.item.id)
+          if (this.type === 'image' && parseInt(imageId) === this.item.id) {
+            // the image that is being deleted is currently open
+            // close the image when deleted
+            this.$router.push(getUrl('image', null))
+          }
+
           this.returnBack && this.$router.back()
           this.$store.commit(this.type + '/remove', this.item)
         }

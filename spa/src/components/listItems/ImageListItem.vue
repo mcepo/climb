@@ -8,7 +8,7 @@
   >
   <div class='image-controls'>
     <tag-control type="image" :item="image"></tag-control>
-    <delete-button type="image" :item="image" return-back></delete-button>
+    <delete-button type="image" :item="image"></delete-button>
   </div>
   </v-img>
 </template>
