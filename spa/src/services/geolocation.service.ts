@@ -29,7 +29,7 @@ class GeolocationService {
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        this._updatedMessage()
+        this._updatedMessage(position)
         callback(position)
       },
       () => {
@@ -49,7 +49,7 @@ class GeolocationService {
     }
 
     this.watchId = navigator.geolocation.watchPosition((position) => {
-      this._updatedMessage()
+      this._updatedMessage(position)
       this.lastPosition = position
       this.resolveResponse(position)
     },
@@ -84,8 +84,17 @@ class GeolocationService {
     store.commit('snackbar/show', "Climbers guide doesn't have permission to use your location")
   }
 
-  _updatedMessage () {
-    store.commit('snackbar/success', 'Your location updated')
+  _updatedMessage (position: Position) {
+    let accuMsg: string, type: string
+
+    if (position.coords.accuracy < 100) {
+      accuMsg = 'Good accuracy (' + position.coords.accuracy + ' m)'
+      type = 'success'
+    } else {
+      accuMsg = 'Low accuracy (' + position.coords.accuracy + ' m)'
+      type = 'error'
+    }
+    store.commit('snackbar/' + type, 'Your location info updated<br>' + accuMsg)
   }
 }
 

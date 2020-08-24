@@ -47,8 +47,6 @@ export default {
     control.scale().addTo(this.$options.map)
 
     // this.setupAimer(this.$options.map, true)
-
-    this.showLocation()
   },
 
   methods: {
