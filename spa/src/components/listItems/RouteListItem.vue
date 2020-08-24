@@ -74,7 +74,7 @@ export default {
         }
 
         if (area) {
-          return area.name
+          return typeService.area[area.type_id] + ': ' + area.name
         }
       }
 
