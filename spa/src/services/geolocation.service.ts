@@ -1,7 +1,5 @@
 import store from '../store'
 
-// TODO: handle low accuracy locations
-
 class GeolocationService {
   watchCallbacks: Function[]
 

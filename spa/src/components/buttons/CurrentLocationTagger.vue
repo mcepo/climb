@@ -2,7 +2,7 @@
   <v-btn
     text
     icon
-    :title="'Set my current location as ' + type + ' location'"
+    :title="'Tag ' + type + ' at my current location'"
     @click.stop="setTag()"
   >
     <v-icon>gps_fixed</v-icon>
