@@ -51,6 +51,7 @@ export class ImageService {
 
     this._map.addLayer(this._imageOverlay)
     this._map.setMaxBounds(bounds)
+    this._map.fitBounds(bounds)
   }
 }
 
