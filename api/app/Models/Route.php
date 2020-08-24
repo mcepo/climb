@@ -87,7 +87,7 @@ class Route extends Model
     }
 
     public static function loadChunk($filters) {
-        return self::filter($filters)->with(['mapTag', 'grades'])->limit(10)->get();
+        return self::filter($filters)->with(['mapTag', 'grades'])->orderBy('id')->limit(10)->get();
     }
 
     public static function lengthStatistics($path)
