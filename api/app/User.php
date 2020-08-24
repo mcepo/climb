@@ -132,6 +132,7 @@ class User extends AuthUser  implements MustVerifyEmail
         // TODO: this was set just during testing
         // change this to self::USER before sending to production
         $user->role_id = self::ADMIN;
+        $user->email_verified_at = now();
         $user->save();
         return $user;
     }
