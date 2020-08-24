@@ -77,7 +77,6 @@ export default Vue.extend({
             )
           }
         } else {
-          console.log(imageId, this.type, this.item.id)
           if (this.type === 'image' && parseInt(imageId) === this.item.id) {
             // the image that is being deleted is currently open
             // close the image when deleted
