@@ -129,7 +129,9 @@ class User extends AuthUser  implements MustVerifyEmail
         }
         $user->google_id = $providerUser->id;
         $user->avatar = $providerUser->avatar;
-        $user->role_id = self::USER;
+        // TODO: this was set just during testing
+        // change this to self::USER before sending to production
+        $user->role_id = self::ADMIN;
         $user->save();
         return $user;
     }
