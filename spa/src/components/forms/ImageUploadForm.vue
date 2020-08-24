@@ -15,6 +15,13 @@
           <v-flex v-for="file in files" :key="file.id" xs12>
             <v-card>
               <v-img v-if="file.thumb" :src="file.thumb"></v-img>
+              <v-card-text v-if='$refs.upload.active'>
+                <v-progress-linear :value="file.progress + '%'"></v-progress-linear>
+                <div>{{(file.speed/1000).toFixed(2)}} Kbit/s</div>
+              </v-card-text>
+              <v-card-text v-if='file.error' style='color:red'>
+                An error occurred, unable to upload.
+              </v-card-text>
               <v-card-actions>
                 <v-btn title="Edit" icon @click.prevent="onEditFileShow(file)">
                   <v-icon>edit</v-icon>
@@ -32,10 +39,7 @@
             :extensions="extensions"
             :accept="accept"
             :multiple="multiple"
-            :directory="directory"
             :thread="thread"
-            :drop="true"
-            :drop-directory="dropDirectory"
             :add-index="addIndex"
             :headers='headers'
             v-model="files"
@@ -105,25 +109,14 @@ export default {
       files: [],
       accept: 'image/png,image/jpeg,image/webp',
       extensions: 'jpg,jpeg,png,webp',
-      minSize: 1024 * 1024,
-      // size: 1024 * 1024 * 10,
+      minSize: 1024 * 1024, // image min size is 1MB
+      maxSize: 1024 * 1024 * 30, // image max size is 30MB
       multiple: true,
-      directory: false,
-      drop: true,
-      dropDirectory: true,
       addIndex: false,
       thread: 3,
-      name: 'file',
       headers: {
-        //     "X-Csrf-Token": "xxxx"
         Accept: 'application/json, text/plain, */*'
       },
-      // data: {
-      //   _csrf_token: "xxxxxx"
-      // },
-
-      uploadAuto: false,
-
       editFile: {
         show: false
       }
@@ -187,6 +180,11 @@ export default {
           this.$store.commit('snackbar/error', 'Image low quality.')
           return prevent()
         }
+
+        if (newFile.size > this.maxSize) {
+          this.$store.commit('snackbar/error', 'Image too big, max 30MB.')
+          return prevent()
+        }
       }
 
       if (newFile && (!oldFile || newFile.file !== oldFile.file)) {
@@ -210,61 +208,21 @@ export default {
       if (newFile && oldFile) {
         // update
 
-        if (newFile.active && !oldFile.active) {
-          // beforeSend
-
-          // min size
-          if (
-            newFile.size >= 0 &&
-            this.minSize > 0 &&
-            newFile.size < this.minSize
-          ) {
-            this.$refs.upload.update(newFile, { error: 'size' })
-          }
-        }
-
-        if (newFile.progress !== oldFile.progress) {
-          // progress
-        }
-
         if (newFile.error && !oldFile.error) {
-          // error
+          // don't think this will ever run, because i'm not setting any errors anywhere
+          this.$store.commit('snackbar/error', 'Error occurred while uploading one of the images')
         }
 
         if (newFile.success && !oldFile.success) {
-          // todo append to image list of an selected object
-
           this.$store.commit('image/add', newFile.response)
 
           this.$store.commit(this.type + '/appendImage', { id: this.id, imageId: newFile.response.id })
 
+          this.$store.commit('snackbar/success', 'Image uploaded.')
+
           this.$refs.upload.remove(newFile)
         }
       }
-
-      if (!newFile && oldFile) {
-        // remove
-        if (oldFile.success && oldFile.response.id) {
-          // $.ajax({
-          //   type: 'DELETE',
-          //   url: '/upload/delete?id=' + oldFile.response.id,
-          // })
-        }
-      }
-
-      // Automatically activate upload
-      if (
-        Boolean(newFile) !== Boolean(oldFile) ||
-        oldFile.error !== newFile.error
-      ) {
-        if (this.uploadAuto && !this.$refs.upload.active) {
-          this.$refs.upload.active = true
-        }
-      }
-    },
-
-    alert (message) {
-      alert(message)
     },
 
     onEditFileShow (file) {
@@ -274,7 +232,7 @@ export default {
 
     onEditorFile () {
       if (!this.$refs.upload.features.html5) {
-        this.alert('Your browser does not support')
+        this.$store.commit('snackbar/error', 'Your browser does not support this feature')
         this.editFile.show = false
         return
       }

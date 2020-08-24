@@ -4,9 +4,6 @@ FIX: after adding a trail it doesn't appear in the map
   i need to somehow get the tagged trail and add it to 
   the current area and store it in the store
 
-
-FIX: image upload not working on server
-
 TODO: define what is allowed depending on area
   sector, crag, mountain side can only have 
 

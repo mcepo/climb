@@ -23,9 +23,11 @@ class ImageUploadRequest extends FormRequest
      */
     public function rules()
     {
+        $minSize = 1024; // minimal file size in kilobytes, i.e. 1MB
+        $maxSize = $minSize * 30; // maximal file size in kilobytes, i.e. 30MB
 
         return [
-            'image' => 'required|mimes:jpg,jpeg,png,webp|dimensions:min_width=1000,min_height=1000'
+            'image' => "required|mimes:jpg,jpeg,png,webp|min:{$minSize}|max:{$maxSize}"
         ];
     }
 }
