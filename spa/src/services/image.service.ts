@@ -40,6 +40,11 @@ export class ImageService {
     )
   }
 
+  // extending max bounds by 30%
+  getMaxBounds (bounds: LatLngBounds) {
+    return bounds.pad(0.3)
+  }
+
   open (image: Image) {
     const bounds = this.getBounds(image.size)
 
@@ -50,7 +55,7 @@ export class ImageService {
     this._imageOverlay = imageOverlay(baseURL + 'image/' + image.id, bounds)
 
     this._map.addLayer(this._imageOverlay)
-    this._map.setMaxBounds(bounds)
+    this._map.setMaxBounds(this.getMaxBounds(bounds))
     this._map.fitBounds(bounds)
   }
 }
