@@ -1,5 +1,5 @@
 <template>
-  <v-card flat>
+  <v-card flat class='pb-10'>
     <v-toolbar flat dense>
       <v-spacer></v-spacer>
       <v-btn v-if="formComponent" text icon title="Close" @click.stop="closeForm">
