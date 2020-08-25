@@ -5,6 +5,10 @@ TODO: define what is allowed depending on area
   FIX: on mobile if finished drawing but didn't double click
   the last point i can't save the tag
 
+FIX: need to reduce image size by 100, not 10, or 
+do a smarter way and fit image so that it has 
+max 180 and longitude and 90 latitude
+
 ---- NOT pressing ----
 
 TODO: add links as a drop down like moderators
