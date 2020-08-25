@@ -37,6 +37,9 @@ const area: Module<AreaState, RootState> = {
     appendImage (state: AreaState, payload) {
       state.byIds[payload.id].images.push(payload.imageId)
     },
+    appendTrail (state: AreaState, payload) {
+      state.byIds[payload.id].trails.push(payload.trailId)
+    },
     removeArea (state: AreaState, { parentId, areaId }) {
       const item = state.byIds[parentId]
 

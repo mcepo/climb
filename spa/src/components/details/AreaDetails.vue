@@ -21,7 +21,7 @@
       <v-btn text icon title="Add a moderator for this area" @click.stop="openOnlyAdminForm({component: 'moderator-form', params: {area} })">
         <v-icon>person_add</v-icon>
       </v-btn>
-      <add-trail :area='area'/>
+      <add-trail v-if='!openImage' :area='area'/>
       <delete-button type='area' :item="area" return-back></delete-button>
       <v-divider></v-divider>
       <v-layout row v-if='area.altitude[0] || area.altitude[1]'>
@@ -77,7 +77,8 @@ import typeService from '../../services/type.service'
 export default {
   computed: {
     ...mapGetters({
-      area: 'area/get'
+      area: 'area/get',
+      openImage: 'openImage'
     }),
     loading () {
       return this.$store.state.area.loading || !this.area

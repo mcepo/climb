@@ -198,10 +198,30 @@ class DrawingService {
     } as Tag
   }
 
+  storeTrailTag (request: Tag) {
+    api.post('trail', request).then(
+      ({ data }) => {
+        store.commit('trail/add', data)
+        store.commit('area/appendTrail', { id: data.area_id, trailId: data.id })
+        store.commit('snackbar/success', 'Tag stored')
+      })
+      .catch(() => {
+        this.discardLayer()
+      })
+      .finally(() => {
+        this.afterDrawing()
+      })
+  }
+
   storeTag (tag?: Tag) {
     store.commit('snackbar/show', 'Storing tag')
 
     const request = tag || this.createRequest()
+
+    if (request.tagged_type === 'trail' && request.id === null) {
+      this.storeTrailTag(request)
+      return
+    }
 
     const apiCall = request.id
       ? api.put('tag/' + request.id, request)
