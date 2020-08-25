@@ -211,6 +211,7 @@ export default {
         if (newFile.error && !oldFile.error) {
           // don't think this will ever run, because i'm not setting any errors anywhere
           this.$store.commit('snackbar/error', 'Error occurred while uploading one of the images')
+          console.log(newFile.error)
         }
 
         if (newFile.success && !oldFile.success) {
@@ -227,7 +228,6 @@ export default {
 
     onEditFileShow (file) {
       this.editFile = { ...file, show: true }
-      this.$refs.upload.update(file, { error: 'edit' })
     },
 
     onEditorFile () {

@@ -31,6 +31,14 @@ html {
 /* .climb-area-none {
 } */
 
+.leaflet-pane {
+  z-index: 190;
+}
+
+.leaflet-control {
+  z-index: 190;
+}
+
 .climb-area-highlight{
   color: #3490dc;
 }
