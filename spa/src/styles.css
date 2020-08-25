@@ -39,6 +39,10 @@ html {
   z-index: 190;
 }
 
+.leaflet-top {
+  top: 70px;
+}
+
 .climb-area-highlight{
   color: #3490dc;
 }

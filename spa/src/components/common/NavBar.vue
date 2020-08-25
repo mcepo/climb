@@ -11,7 +11,7 @@
       <router-view></router-view>
     </v-navigation-drawer>
 
-    <v-app-bar app clipped-right>
+    <v-app-bar app clipped-right style='z-index:900'>
       <v-app-bar-nav-icon @click.stop="drawerLeft = !drawerLeft"></v-app-bar-nav-icon>
       <router-link to="/">
       <v-toolbar-title v-text="title"></v-toolbar-title>

@@ -13,6 +13,7 @@
 .action-snackbar{
   margin: auto;
   max-width:200px;
+  top:70px;
 }
 </style>
 
