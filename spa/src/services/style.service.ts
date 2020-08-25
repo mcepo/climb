@@ -43,8 +43,12 @@ function setMarkerStyle (layer: Marker, svg: string) {
 
 const areaLayerStyle = {
 
-  style (layer: Marker, className: string, name: string) {
-    const html = '<div class="climb-area">' + name + '</div>'
+  style (layer: Marker, className: string, item: Area) {
+    const html = '<div class="climb-area">' + item.name + '</div>'
+
+    // so when zomming out the areas that are parents will be in front
+    // of subareas, crags in front of sectors ...
+    layer.setZIndexOffset(-(item.path ? item.path.length : 0) * 200)
 
     layer.setIcon(
       new DivIcon({
@@ -55,13 +59,13 @@ const areaLayerStyle = {
   },
 
   default (obj: StylingMarker) {
-    this.style(obj.layer, 'climb-area-none', obj.item.name)
+    this.style(obj.layer, 'climb-area-none', obj.item)
   },
   highlight (obj: StylingMarker) {
-    this.style(obj.layer, 'climb-area-highlight', obj.item.name)
+    this.style(obj.layer, 'climb-area-highlight', obj.item)
   },
   selected (obj: StylingMarker) {
-    this.style(obj.layer, 'climb-area-selected', obj.item.name)
+    this.style(obj.layer, 'climb-area-selected', obj.item)
   }
 }
 
