@@ -15,7 +15,7 @@
 <style>
 .map-button{
   z-index: 200;
-  top: 20px;
+  top: 70px;
   left: 20px;
 }
 </style>

@@ -2,7 +2,7 @@
   <v-app>
     <nav-bar></nav-bar>
 
-    <v-content>
+    <v-content style='padding:0px'>
       <drawing-actionbar></drawing-actionbar>
       <router-view name='map'></router-view>
     </v-content>
@@ -32,6 +32,6 @@ export default Vue.extend({
 
 <style>
 .map{
-  height:100%;
+  height: 100%;
 }
 </style>
