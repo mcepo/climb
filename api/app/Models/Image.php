@@ -24,6 +24,7 @@ class Image extends Model
 
     protected $casts = [
         'size' => 'array',
+        'boundary' => 'array',
     ];
 
     protected $hidden = [

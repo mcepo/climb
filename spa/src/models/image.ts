@@ -11,6 +11,9 @@ export interface Image {
   path: string;
   reviewer_id: number;
 
+  // [latitudeBound, longitudeBound]
+  boundary: number[];
+
   // routes for the tagged pitches
   routes: Route[];
 

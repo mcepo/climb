@@ -31,12 +31,23 @@ export class ImageService {
     { immediate: true })
   }
 
-  getBounds (bounds: number[]) {
+
+  // TODO: remove this after all images have bounderies
+  getBoundsDepricated (bounds: number[]) {
     const [width, height] = bounds
 
     return new LatLngBounds(
       new LatLng(0, 0),
       new LatLng(height / 10, width / 10)
+    )
+  }
+
+  getBounds (bounds: number[]) {
+    const [latitudeBoundary, longitudeBoundary] = bounds
+
+    return new LatLngBounds(
+      new LatLng(-latitudeBoundary, longitudeBoundary),
+      new LatLng(latitudeBoundary, -longitudeBoundary)
     )
   }
 
@@ -46,7 +57,7 @@ export class ImageService {
   }
 
   open (image: Image) {
-    const bounds = this.getBounds(image.size)
+    const bounds = image.boundary ? this.getBounds(image.boundary) : this.getBoundsDepricated(image.size)
 
     if (this._imageOverlay) {
       this._map.removeLayer(this._imageOverlay)
