@@ -1,12 +1,13 @@
 <template>
   <div>
+    <!-- has to have z-index in style, can't be a class because it get run over -->
     <v-navigation-drawer
       v-model="drawerLeft"
       app
       width="400"
       id="drawerLeft"
       fill-height
-      class="drawer"
+      style='z-index:2000;'
     >
       <router-view></router-view>
     </v-navigation-drawer>
@@ -60,14 +61,14 @@
       </v-btn>
 
     </v-app-bar>
-
+      <!-- has to have z-index in style, can't be a class because it get run over -->
     <v-navigation-drawer
       v-model="drawerRight"
       right
       clipped
       app
       width="400"
-      class="drawer"
+      style='z-index:2000;'
       disable-resize-watcher
       touchless
       >
@@ -127,10 +128,3 @@ export default Vue.extend({
   }
 })
 </script>
-
-<style>
-
-.drawer {
-  z-index:2000;
-}
-</style>

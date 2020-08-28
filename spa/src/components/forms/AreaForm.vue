@@ -112,9 +112,6 @@ export default {
         ]
       }
 
-      console.log(this.$options)
-      console.log(this.$options.areaHierarchy)
-      console.log(this.parent)
       const types = []
       this.$options.areaHierarchy[this.parent.type_id].forEach(typeId => {
         types.push({
