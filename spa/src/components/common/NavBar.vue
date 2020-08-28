@@ -129,9 +129,6 @@ export default Vue.extend({
 </script>
 
 <style>
-.map{
-  height:100%;
-}
 
 .drawer {
   z-index:2000;
