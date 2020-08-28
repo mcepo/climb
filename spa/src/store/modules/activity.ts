@@ -40,7 +40,9 @@ const activity: Module<ActivityState, RootState> = {
     normalizeData ({ commit }, activity: Activity) {
       commit('add', normalizeRelations(activity, ['subject', 'causer']))
       commit('add', activity)
-      commit('user/add', activity.causer, { root: true })
+      if(activity.causer) {
+        commit('user/add', activity.causer, { root: true })
+      }
     },
     fetchNotApproved ({ commit, dispatch }) {
       commit('loading', true)

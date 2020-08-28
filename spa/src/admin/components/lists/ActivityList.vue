@@ -7,7 +7,7 @@
     <template v-slot:item.created="{ item }">
       <div style='display:flex; flex-direction:column'>
         <span>{{new Date(item.created_at).toLocaleString()}}</span>
-        <router-link :to='"/admin/user/" + item.causer.id' >{{item.causer.name}}</router-link>
+        <router-link v-if='item.causer' :to='"/admin/user/" + item.causer.id' >{{item.causer.name}}</router-link>
         <div>{{getDescription(item)}}</div>
         <a @click.stop='showItem(item)'>View item</a>
         <a @click.stop='approveActivity(item)'>Approve</a>
