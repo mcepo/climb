@@ -32,6 +32,6 @@ export default Vue.extend({
 
 <style>
 .map{
-  height: 100%;
+  height: 100vh;
 }
 </style>
