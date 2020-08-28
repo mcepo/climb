@@ -169,6 +169,16 @@ class DrawingService {
 
       this._layer.pm.enable()
     })
+
+
+    // added this so that i can save the layer without actually 
+    // finishing it
+    // useful for mobile phone users
+    this._map.once('pm:drawstart', ({ workingLayer }) => {
+      workingLayer.on('pm:vertexadded', e => {
+        this._layer = e.workingLayer
+      })
+    })
   }
 
   enableDrawing () {
