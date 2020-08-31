@@ -31,7 +31,6 @@ export class ImageService {
     { immediate: true })
   }
 
-
   // TODO: remove this after all images have bounderies
   getBoundsDepricated (bounds: number[]) {
     const [width, height] = bounds

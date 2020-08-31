@@ -36,11 +36,10 @@ const activity: Module<ActivityState, RootState> = {
     }
   },
   actions: {
-
     normalizeData ({ commit }, activity: Activity) {
       commit('add', normalizeRelations(activity, ['subject', 'causer']))
       commit('add', activity)
-      if(activity.causer) {
+      if (activity.causer) {
         commit('user/add', activity.causer, { root: true })
       }
     },
@@ -52,12 +51,13 @@ const activity: Module<ActivityState, RootState> = {
       api
         .get(BASE_URL + 'getNotApprovedActivities')
         .then(({ data }) => {
-          data.forEach(activity => {
+          data.forEach((activity) => {
             dispatch('normalizeData', activity)
           })
 
           commit('snackbar/success', 'Done!', { root: true })
-        }).finally(() => {
+        })
+        .finally(() => {
           commit('loading', false)
         })
     },
@@ -70,7 +70,8 @@ const activity: Module<ActivityState, RootState> = {
           commit('resolveActivity', activityId)
 
           commit('snackbar/success', 'Activity approved', { root: true })
-        }).finally(() => {
+        })
+        .finally(() => {
           commit('loading', false)
         })
     },
@@ -83,7 +84,8 @@ const activity: Module<ActivityState, RootState> = {
           commit('resolveActivity', activityId)
 
           commit('snackbar/success', 'Activity reverted', { root: true })
-        }).finally(() => {
+        })
+        .finally(() => {
           commit('loading', false)
         })
     }
@@ -95,7 +97,7 @@ const activity: Module<ActivityState, RootState> = {
     notApproved (state: ActivityState) {
       const notApprovedActivities: Activity[] = []
 
-      state.allIds.forEach(id => {
+      state.allIds.forEach((id) => {
         if (state.byIds[id].status === null) {
           notApprovedActivities.push(state.byIds[id])
         }
