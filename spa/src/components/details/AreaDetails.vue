@@ -46,17 +46,6 @@
     </template>
   </details-layout>
 </template>
-<style>
-.statType {
-  width: 150px;
-}
-.statValue {
-  width: 180px;
-}
-.statValueItem {
-  width: 60px;
-}
-</style>
 
 <script>
 import DetailsLayout from '../layouts/DetailsLayout.vue'
