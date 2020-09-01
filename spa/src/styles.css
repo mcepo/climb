@@ -43,6 +43,10 @@ html {
   top: 70px;
 }
 
+.leaflet-bottom {
+  position: fixed;
+}
+
 .climb-area-highlight{
   color: #3490dc;
 }
