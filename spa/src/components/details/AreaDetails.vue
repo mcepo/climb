@@ -36,8 +36,8 @@
         </v-flex>
         <v-flex>{{orientation}}</v-flex>
       </v-layout>
-      <statistics-chart :type='type' :stats='stats' v-for="(stats, type) in area.statistics" :key="type"></statistics-chart>
-      <length-chart v-if='area.lengthStatistics.length !== 0' :stats='area.lengthStatistics'></length-chart>
+      <statistics-chart :type='type' :stats='stats' v-for="(stats, type) in area.statistics" :key="type + area.id"></statistics-chart>
+      <length-chart v-if='area.lengthStatistics.length !== 0' :stats='area.lengthStatistics' :key="'length' + area.id"></length-chart>
       <moderator-list :moderators='moderators' :area='area'></moderator-list>
     </template>
     <template slot="tag">
