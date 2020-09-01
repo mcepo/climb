@@ -8,6 +8,7 @@
       id="drawerLeft"
       fill-height
       style='z-index:2000;'
+      stateless
     >
       <router-view></router-view>
     </v-navigation-drawer>
@@ -71,6 +72,7 @@
       style='z-index:2000;'
       disable-resize-watcher
       touchless
+      stateless
       >
       <form-layout></form-layout>
       </v-navigation-drawer>
