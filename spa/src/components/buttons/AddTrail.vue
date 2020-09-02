@@ -1,7 +1,8 @@
 <template>
   <div v-if="!drawing" style="display: inline;">
-    <v-btn text icon @click.stop="createTag" title="Add trail">
+    <v-btn text :icon='!showText' @click.stop="createTag" title="Add trail" :block='showText' :class="{'menu-button': showText}">
       <v-icon>timeline</v-icon>
+      <span v-if='showText'>Add trail</span>
     </v-btn>
   </div>
 </template>
@@ -12,7 +13,8 @@ import drawingService from '../../services/drawing.service'
 
 export default Vue.extend({
   props: {
-    area: Object
+    area: Object,
+    showText: Boolean
   },
   computed: {
     drawing () {
@@ -21,11 +23,18 @@ export default Vue.extend({
   },
   methods: {
     createTag () {
+      this.closeDrawerIfMobile()
       // i am packing area id in the item id field, because
       // i need it in the back end to know in what area is this
       // trail located
       // not a very good solution, but the easiest for now
       drawingService.createTag('trail', { id: this.area.id })
+    },
+    closeDrawerIfMobile () {
+      if (this.$vuetify.breakpoint.mobile) {
+        /// hack
+        this.$store.commit('drawers/setLeft', false)
+      }
     }
   }
 })

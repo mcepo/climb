@@ -41,6 +41,7 @@ export default {
     },
     open (id) {
       this.$router.push(getUrl('image', id))
+      this.$store.commit('drawers/setLeft', false)
     }
   },
   components: {

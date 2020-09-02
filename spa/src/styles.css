@@ -31,6 +31,12 @@ html {
 /* .climb-area-none {
 } */
 
+
+.menu-button {
+  justify-content: start;
+  width:100%;
+}
+
 .leaflet-pane {
   z-index: 190;
 }

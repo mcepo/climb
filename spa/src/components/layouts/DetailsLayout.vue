@@ -1,22 +1,17 @@
 <template>
-  <v-container fluid class="pa-0 mb-5">
+  <v-container fluid flat style='padding: 0px 0px 300px 0px'>
     <v-layout column>
-      <v-toolbar dense flat>
-        <v-spacer></v-spacer>
+      <div class='d-flex pa-2'>
         <v-btn text icon title="Close sidebar" @click.stop="closeDrawer">
           <v-icon>arrow_back</v-icon>
         </v-btn>
-      </v-toolbar>
+        <h3 class="headline pa-2">
+          {{item.name}}
+        </h3>
+        <v-spacer></v-spacer>
+        <item-menu :item='item' :type='type'></item-menu>
+      </div>
       <v-card text>
-        <v-card-title class="pa-0">
-          <v-layout column>
-            <ancestor-breadcrumbs :ancestor-ids='ancestorIds'></ancestor-breadcrumbs>
-            <h3 class="headline pa-2">
-              {{item.name}}
-              <slot name="tag" />
-            </h3>
-          </v-layout>
-        </v-card-title>
         <v-card-text>
           <slot name="item-details" />
         </v-card-text>
@@ -78,11 +73,11 @@ import AreaList from '../lists/AreaList'
 import RouteList from '../lists/RouteList'
 import PitchList from '../lists/PitchList'
 import ExternalLinkList from '../lists/ExternalLinkList'
-import AncestorBreadcrumbs from '../common/AncestorBreadcrumbs'
+import ItemMenu from '../common/ItemMenu'
 import { mapActions } from 'vuex'
 
 export default {
-  props: ['item', 'ancestorIds', 'type'],
+  props: ['item', 'type'],
   data: () => ({
     tabs: null
   }),
@@ -117,7 +112,7 @@ export default {
     RouteList,
     ExternalLinkList,
     PitchList,
-    AncestorBreadcrumbs
+    ItemMenu
   }
 }
 </script>

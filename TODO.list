@@ -8,6 +8,17 @@ TODO: when a sector is open add all parent info to it
 
 TODO: add pictures of sectors to crag display ?
 
+FIX: routes aren't being displayed accordingly to the area  correctly
+or filtered correctly
+also load all routes that are directlly under a area
+
+FIX: GPS acuracy sucks, fix it
+
+TODO: replace images from the database that have bounds set in old manner
+ + remove depricated code
+
+ TODO: when can i tag and what review
+
 ---- NOT pressing ----
 
 TODO: cms for adding external links

@@ -1,10 +1,17 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify/lib'
+import Touch from 'vuetify/lib/directives/touch'
 
-Vue.use(Vuetify)
+Vue.use(Vuetify, {
+  directives: {
+    Touch
+  }
+})
 
-export default new Vuetify({
+const vuetify = new Vuetify({
   icons: {
     iconfont: 'md'
   }
 })
+
+export default vuetify

@@ -22,6 +22,7 @@ import geolocationService from '../../services/geolocation.service'
 export default {
   map: null,
   locationMarker: null,
+  goToRequest: false,
 
   mounted () {
     const bounds = new LatLngBounds(
@@ -45,8 +46,6 @@ export default {
 
     control.zoom({ position: 'bottomright' }).addTo(this.$options.map)
     control.scale().addTo(this.$options.map)
-
-    // this.setupAimer(this.$options.map, true)
   },
 
   methods: {
@@ -56,10 +55,7 @@ export default {
 
       geolocationService.registerWatch(this.moveMarker)
 
-      if (this.$options.locationMarker) {
-        this.$options.map.setView(this.$options.locationMarker.getLatLng(), 12)
-        this.$options.locationMarker.openTooltip()
-      }
+      this.$options.goToRequest = true
 
       // TODO: map my trail, when walking it should map a trail show it on the map and be able
       // to store it to the server
@@ -73,10 +69,20 @@ export default {
       }
 
       this.$options.locationMarker = new Marker([position.coords.latitude, position.coords.longitude], { title: 'My Location' }).bindTooltip('My Location')
-
       styleService.currentLocation.default(this.$options.locationMarker)
-
       this.$options.locationMarker.addTo(this.$options.map)
+
+      if (this.$options.goToRequest) {
+        this.$options.goToRequest = false
+        this.goToLocation()
+      }
+    },
+
+    goToLocation () {
+      if (this.$options.locationMarker) {
+        this.$options.map.setView(this.$options.locationMarker.getLatLng(), 12)
+        this.$options.locationMarker.openTooltip()
+      }
     }
   },
 

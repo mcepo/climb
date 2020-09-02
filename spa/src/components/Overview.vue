@@ -1,16 +1,26 @@
 <template>
-  <div>
-    <h3>Countries </h3>
-    <v-btn
-      title="Add country"
-      text
-      icon
-      @click.stop="openOnlyAdminForm({component: 'area-form', params: null})"
-    >
-      <v-icon>add</v-icon>
-    </v-btn>
-    <area-list :areaIds="areaIds" />
-  </div>
+  <v-container fluid flat style='padding: 0px 0px 300px 0px'>
+    <v-layout column>
+      <div class='d-flex pa-2'>
+        <v-btn text icon title="Close sidebar" @click.stop="closeDrawer">
+          <v-icon>arrow_back</v-icon>
+        </v-btn>
+        <h3 class="headline pa-2">
+          Countries
+        </h3>
+        <v-spacer></v-spacer>
+        <v-btn
+          title="Add country"
+          text
+          icon
+          @click.stop="openOnlyAdminForm({component: 'area-form', params: null})"
+        >
+          <v-icon>add</v-icon>
+        </v-btn>
+      </div>
+      <area-list :areaIds="areaIds" />
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -30,7 +40,10 @@ export default {
   methods: {
     ...mapActions({
       openOnlyAdminForm: 'form/onlyAdminOpen'
-    })
+    }),
+    closeDrawer () {
+      this.$store.commit('drawers/setLeft', false)
+    }
   },
   components: {
     AreaList

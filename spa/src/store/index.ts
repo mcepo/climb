@@ -52,6 +52,38 @@ const store = new Vuex.Store<RootState>({
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     hasTag: (state: RootState, getters: any) => (key: string) => {
       return getters.tags.some((tag: Tag) => key === (tag.tagged_type + tag.tagged_id))
+    },
+    breadcrumbs (state, getters) {
+      const area = getters['area/get']
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const ancestors: Array<any> = []
+
+      if (area) {
+        const ancestorIds = area.ancestors || null
+        if (ancestorIds) {
+          // making a deep copy before i push the current area id in
+          // so i don't add area id in the store
+          // TODO: maybe this should be done on the server side or in the store when the area is fetched
+
+          const deepCopyAncestorIds = ancestorIds.slice()
+          deepCopyAncestorIds.push(area.id)
+
+          deepCopyAncestorIds.forEach((id) => {
+            const ancestor = state.area?.byIds[id]
+
+            ancestor && ancestors.push(ancestor)
+          })
+        }
+      }
+
+      const route = getters['route/get']
+
+      if (route) {
+        ancestors.push(route)
+      }
+
+      return ancestors
     }
   },
   modules

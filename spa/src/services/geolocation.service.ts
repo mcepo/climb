@@ -1,11 +1,17 @@
 import store from '../store'
 
 class GeolocationService {
-  watchCallbacks: Function[]
+  watchCallbacks: Function[];
 
-  watchId: number|null;
+  watchId: number | null;
 
-  lastPosition: Position|undefined;
+  lastPosition: Position | undefined;
+
+  positionOptions: PositionOptions = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0
+  }
 
   constructor () {
     this.watchCallbacks = []
@@ -34,10 +40,7 @@ class GeolocationService {
         this._errorMessage()
         callback()
       },
-      {
-        timeout: 5000,
-        maximumAge: 60000
-      }
+      this.positionOptions
     )
   }
 
@@ -46,26 +49,29 @@ class GeolocationService {
       this._noSupportMessage()
     }
 
-    this.watchId = navigator.geolocation.watchPosition((position) => {
-      this._updatedMessage(position)
-      this.lastPosition = position
-      this.resolveResponse(position)
-    },
-    () => {
-      this.lastPosition = undefined
-      this._errorMessage()
-      this.resolveResponse()
-    })
+    this.watchId = navigator.geolocation.watchPosition(
+      (position) => {
+        this._updatedMessage(position)
+        this.lastPosition = position
+        this.resolveResponse(position)
+      },
+      () => {
+        this.lastPosition = undefined
+        this._errorMessage()
+        this.resolveResponse()
+      },
+      this.positionOptions
+    )
   }
 
   resolveResponse (position?: Position) {
-    this.watchCallbacks.forEach(callback => {
+    this.watchCallbacks.forEach((callback) => {
       callback(position)
     })
   }
 
   unregisterWatch (callback: Function) {
-    this.watchCallbacks = this.watchCallbacks.filter(c => {
+    this.watchCallbacks = this.watchCallbacks.filter((c) => {
       return c !== callback
     })
   }
@@ -75,11 +81,17 @@ class GeolocationService {
   }
 
   _noSupportMessage () {
-    store.commit('snackbar/error', "Your current browser doesn't support this feature")
+    store.commit(
+      'snackbar/error',
+      "Your current browser doesn't support this feature"
+    )
   }
 
   _errorMessage () {
-    store.commit('snackbar/show', "Climbers guide doesn't have permission to use your location")
+    store.commit(
+      'snackbar/show',
+      "Climbers guide doesn't have permission to use your location"
+    )
   }
 
   _updatedMessage (position: Position) {
@@ -92,7 +104,10 @@ class GeolocationService {
       accuMsg = 'Low accuracy (' + position.coords.accuracy + ' m)'
       type = 'error'
     }
-    store.commit('snackbar/' + type, 'Your location info updated<br>' + accuMsg)
+    store.commit(
+      'snackbar/' + type,
+      'Your location info updated<br>' + accuMsg
+    )
   }
 }
 

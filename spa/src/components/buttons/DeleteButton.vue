@@ -1,7 +1,8 @@
 <template>
   <div style="display: inline;">
-    <v-btn text icon @click.stop="showDialog()" :title="'Delete ' + type">
+    <v-btn text :icon='!showText' @click.stop="showDialog()" :title="'Delete ' + type"  :block='showText' :class="{'menu-button': showText}">
       <v-icon>delete</v-icon>
+      <div v-if='showText'>Delete</div>
     </v-btn>
     <v-dialog v-model="dialog" persistent max-width="290">
       <v-card>
@@ -33,7 +34,8 @@ export default Vue.extend({
   props: {
     type: String,
     item: Object,
-    returnBack: Boolean
+    returnBack: Boolean,
+    showText: Boolean
   },
   data: () => {
     return {
