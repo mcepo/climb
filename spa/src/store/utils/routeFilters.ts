@@ -8,14 +8,14 @@ export function routePassesFilter (route: Route, filters: RouteFilters) {
   if (filters.length && (route.length < filters.length[0] || route.length > filters.length[1])) return false
 
   // check route has required grades
-  for (const id in route.grades) {
-    const type = route.grades[id][0]
-    const value = route.grades[id][1]
+  for (const index in route.grades) {
+    const type = route.grades[index][0]
+    const value = route.grades[index][1]
 
     if (filters.gradeTypes && filters.gradeTypes.includes(type)) return false
 
     if (filters.gradeWeights && filters.gradeWeights[type]) {
-      if (filters.gradeWeights[type][0] <= value || filters.gradeWeights[type][1] >= value) return false
+      if (filters.gradeWeights[type][0] > value || filters.gradeWeights[type][1] < value) return false
     }
   }
 
