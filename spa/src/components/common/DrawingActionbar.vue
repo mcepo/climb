@@ -14,6 +14,7 @@
   margin: auto;
   max-width:200px;
   top:70px;
+  z-index:199;
 }
 </style>
 
