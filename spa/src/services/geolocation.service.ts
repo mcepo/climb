@@ -97,17 +97,14 @@ class GeolocationService {
   _updatedMessage (position: Position) {
     let accuMsg: string, type: string
 
-    if (position.coords.accuracy < 100) {
-      accuMsg = 'Good accuracy (' + position.coords.accuracy + ' m)'
-      type = 'success'
-    } else {
+    if (position.coords.accuracy > 100) {
       accuMsg = 'Low accuracy (' + position.coords.accuracy + ' m)'
       type = 'error'
+      store.commit(
+        'snackbar/' + type,
+        'Your location info updated<br>' + accuMsg
+      )
     }
-    store.commit(
-      'snackbar/' + type,
-      'Your location info updated<br>' + accuMsg
-    )
   }
 }
 
