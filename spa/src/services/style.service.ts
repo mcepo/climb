@@ -136,7 +136,7 @@ const trailLayerStyle = {
 
 const currentLocationStyle = {
   default (layer: Marker) {
-    setMarkerStyle(layer, getCircleSvg('orangered'))
+    setMarkerStyle(layer, getCircleSvg('#4285F4'))
   }
 }
 

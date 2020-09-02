@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { LatLngBounds, LatLng, Map, control, Marker } from 'leaflet'
+import { LatLngBounds, LatLng, Map, control, Marker, Circle } from 'leaflet'
 import setupTiles from '../../utils/tiles'
 import layerService from '../../services/layer.service'
 import styleService from '../../services/style.service'
@@ -21,7 +21,10 @@ import geolocationService from '../../services/geolocation.service'
 
 export default {
   map: null,
-  locationMarker: null,
+  location: {
+    marker: null,
+    circle: null
+  },
   goToRequest: false,
 
   mounted () {
@@ -64,13 +67,26 @@ export default {
     moveMarker (position) {
       if (!position) return
 
-      if (this.$options.locationMarker) {
-        this.$options.locationMarker.remove()
+      if (this.$options.location.marker) {
+        this.$options.location.marker.remove()
       }
 
-      this.$options.locationMarker = new Marker([position.coords.latitude, position.coords.longitude], { title: 'My Location' }).bindTooltip('My Location')
-      styleService.currentLocation.default(this.$options.locationMarker)
-      this.$options.locationMarker.addTo(this.$options.map)
+      if (this.$options.location.circle) {
+        this.$options.location.circle.remove()
+      }
+
+      const locationCenter = [position.coords.latitude, position.coords.longitude]
+      const accuracy = position.coords.accuracy
+
+      this.$options.location.marker = new Marker(locationCenter, { title: 'My Location' })
+        .bindTooltip('My Location<br>' + 'Accuracy: ' + accuracy.toFixed(2) + 'm')
+      styleService.currentLocation.default(this.$options.location.marker)
+      this.$options.location.marker.addTo(this.$options.map)
+
+      if (accuracy > 10) {
+        this.$options.location.circle = new Circle(locationCenter, { radius: accuracy, stroke: false })
+        this.$options.location.circle.addTo(this.$options.map)
+      }
 
       if (this.$options.goToRequest) {
         this.$options.goToRequest = false
@@ -79,9 +95,9 @@ export default {
     },
 
     goToLocation () {
-      if (this.$options.locationMarker) {
-        this.$options.map.setView(this.$options.locationMarker.getLatLng(), 12)
-        this.$options.locationMarker.openTooltip()
+      if (this.$options.location.marker) {
+        this.$options.map.setView(this.$options.location.marker.getLatLng(), 12)
+        this.$options.location.marker.openTooltip()
       }
     }
   },
