@@ -182,7 +182,7 @@ export class LayerService {
 
         let zoom = zoomOffset
 
-        if (path !== null) {
+        if (path) {
           zoom += path.split('.').length * 2
         }
 
