@@ -95,7 +95,7 @@ class Area extends Model
 
     public function getPathWithSelf()
     {
-        return $this->path ? implode('.', [$this->path, $this->id]): $this->id;
+        return $this->path ? implode('.', [$this->path, $this->id]) : $this->id;
     }
 
     // setting statistics of the grades and route length in this area
@@ -115,9 +115,15 @@ class Area extends Model
     public function loadAreaAssets($filters)
     {
 
-        $filters['path'] = $this->getPathWithSelf();
+        $directRoutes = Route::where('area_id', $this->id)->with(['mapTag', 'grades'])->get();
 
-        $this->setAttribute('routes', Route::loadChunk($filters));
+        if ($directRoutes->count() == 0) {
+            $filters['path'] = $this->getPathWithSelf();
+
+            $this->setAttribute('routes', Route::loadChunk($filters));
+        } else {
+            $this->setAttribute('routes', $directRoutes);
+        }
 
         $this->loadImages();
 
@@ -143,11 +149,12 @@ class Area extends Model
         $area = parent::toArray();
 
         unset($area['image_tags']);
-        
+
         return $area;
     }
 
-    public function canBeDeleted() {
+    public function canBeDeleted()
+    {
         return Route::where('area_id', $this->id)->count() == 0
             && Trail::where('area_id', $this->id)->count() == 0
             && Area::where('parent_id', $this->id)->count() == 0
