@@ -19,7 +19,7 @@
     <route-list-item v-for="route in routes" :key="route.id" :route='route'/>
     <v-list-item>
       <v-list-item-content>
-        <v-btn @click.stop="loadRoutes()" v-if="hasMoreRoutes">Load more ...</v-btn>
+        <v-btn text @click.stop="loadRoutes()" v-if="hasMoreRoutes">Load more ...</v-btn>
       </v-list-item-content>
   </v-list-item>
   </v-list>

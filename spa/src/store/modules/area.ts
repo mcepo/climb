@@ -71,6 +71,8 @@ const area: Module<AreaState, RootState> = {
     normalizeData ({ commit, dispatch }, area: Area) {
       area.routes && dispatch('storeRelation', { items: area.routes, fun: 'route/add', root: true })
 
+      commit('route/setHasMore', area.routes.length === 10, { root: true })
+
       delete area.routes
 
       commit('add', normalizeRelations(area, normalizationAtributes))
