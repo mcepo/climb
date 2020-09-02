@@ -5,14 +5,24 @@
     @click.native="open(image.id)"
     class='image-item'
     contain
+    @load='imageLoaded()'
   >
+
+    <v-skeleton-loader
+      v-if='loading'
+      class="mx-auto"
+      width="400"
+      type="image, actions"
+    ></v-skeleton-loader>
+
     <v-overlay
+      v-if='!loading'
       :absolute="true"
       :value="true"
     >
       Click me to view routes.
     </v-overlay>
-  <div class='image-controls'>
+  <div class='image-controls' v-if='!loading'>
     <tag-control type="image" :item="image"></tag-control>
     <delete-button type="image" :item="image"></delete-button>
   </div>
@@ -42,6 +52,11 @@ import { getUrl } from '../../router'
 
 export default {
   props: ['image'],
+  data () {
+    return {
+      loading: true
+    }
+  },
   methods: {
     src (id) {
       return '/api/image/' + id + '/thumbnail'
@@ -49,6 +64,9 @@ export default {
     open (id) {
       this.$router.push(getUrl('image', id))
       this.$store.commit('drawers/setLeft', false)
+    },
+    imageLoaded () {
+      this.loading = false
     }
   },
   components: {
