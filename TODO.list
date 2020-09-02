@@ -8,8 +8,6 @@ TODO: when a sector is open add all parent info to it
 
 TODO: add pictures of sectors to crag display ?
 
-FIX: GPS acuracy sucks, fix it
-
 TODO: replace images from the database that have bounds set in old manner
  + remove depricated code
 
