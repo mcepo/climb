@@ -171,11 +171,23 @@ export class LayerService {
       }
     })
 
-    try {
-      // FIX: this keeps dropping an error, but seems to get the job done
-      this._map.fitBounds(this._layerGroup.getBounds(), { padding: [30, 30] })
-    } catch (err) {
+    this._layerGroup.getLayers().length !== 0 &&
+        this._map.fitBounds(this._layerGroup.getBounds(), { padding: [30, 30] })
 
+    if (this._features.size === 1) {
+      this._features.forEach(feature => {
+        const path = feature.item.path
+
+        const zoomOffset = 7
+
+        let zoom = zoomOffset
+
+        if (path !== null) {
+          zoom += path.split('.').length * 2
+        }
+
+        this._map.setZoom(zoom)
+      })
     }
   }
 
