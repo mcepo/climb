@@ -6,6 +6,12 @@
     class='image-item'
     contain
   >
+    <v-overlay
+      :absolute="true"
+      :value="true"
+    >
+      Click me to view routes.
+    </v-overlay>
   <div class='image-controls'>
     <tag-control type="image" :item="image"></tag-control>
     <delete-button type="image" :item="image"></delete-button>
@@ -19,6 +25,7 @@
   position:absolute;
   bottom:0;
   right:0;
+  z-index:20
 }
 
 .image-item {
