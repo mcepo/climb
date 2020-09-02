@@ -38,7 +38,7 @@ html {
 }
 
 .map-button{
-  z-index: 200;
+  z-index: 191;
   bottom: 100px;
   right: 7px;
 }
@@ -53,10 +53,12 @@ html {
 
 .leaflet-top {
   top: 70px;
+  z-index: 190;
 }
 
 .leaflet-bottom {
   position: fixed;
+  z-index: 190;
 }
 
 .climb-area-highlight{

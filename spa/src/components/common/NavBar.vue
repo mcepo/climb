@@ -8,7 +8,7 @@
       width="400"
       id="drawerLeft"
       fill-height
-      style='z-index:2000;'
+      style='z-index:200;'
       stateless
       v-touch='{
           left: () => swipeLeft()
@@ -27,7 +27,7 @@
         v-if='checkAuth()'
         :close-on-click='true'
         :close-on-content-click="true"
-        z-index='3000'
+        z-index='901'
       >
         <template v-slot:activator="{ on, attrs }">
           <v-btn
@@ -69,7 +69,7 @@
       clipped
       app
       width="400"
-      style='z-index:2000;'
+      style='z-index:201;'
       disable-resize-watcher
       disable-route-watch
       touchless

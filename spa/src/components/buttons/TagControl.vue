@@ -39,7 +39,7 @@ export default Vue.extend({
       drawingService.editTag(this.type, this.item)
     },
     closeDrawerIfMobile () {
-      if (this.$vuetify.breakpoint.mobile) {
+      if (this.$vuetify.breakpoint.xs) {
         this.$store.commit('drawers/setLeft', false)
       }
     }

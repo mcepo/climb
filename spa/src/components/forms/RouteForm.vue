@@ -147,8 +147,7 @@ export default {
     afterSubmit (route) {
       this.$store.commit('route/add', route)
       this.$store.commit('snackbar/success', 'Done!')
-      if (window.innerWidth < 1264) {
-        /// hack
+      if (this.$vuetify.breakpoint.xs) {
         this.$store.commit('drawers/setRight', false)
       }
       this.$store.commit('drawers/setLeft', true)

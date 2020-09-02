@@ -190,8 +190,7 @@ export default {
     afterSubmit (area) {
       this.$store.commit('area/add', area)
       this.$store.commit('snackbar/success', 'Changes stored!')
-      if (window.innerWidth < 1264) {
-        /// hack
+      if (this.$vuetify.breakpoint.xs) {
         this.$store.commit('drawers/setRight', false)
       }
       this.$store.commit('drawers/setLeft', true)

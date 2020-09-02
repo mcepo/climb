@@ -31,8 +31,7 @@ export default Vue.extend({
       drawingService.createTag('trail', { id: this.area.id })
     },
     closeDrawerIfMobile () {
-      if (this.$vuetify.breakpoint.mobile) {
-        /// hack
+      if (this.$vuetify.breakpoint.xs) {
         this.$store.commit('drawers/setLeft', false)
       }
     }

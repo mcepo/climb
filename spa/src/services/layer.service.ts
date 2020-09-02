@@ -171,23 +171,25 @@ export class LayerService {
       }
     })
 
-    this._layerGroup.getLayers().length !== 0 &&
-        this._map.fitBounds(this._layerGroup.getBounds(), { padding: [30, 30] })
+    if (!store.getters.openImage) {
+      this._layerGroup.getLayers().length !== 0 &&
+      this._map.fitBounds(this._layerGroup.getBounds(), { padding: [30, 30] })
 
-    if (this._features.size === 1) {
-      this._features.forEach(feature => {
-        const path = feature.item.path
+      if (this._features.size === 1) {
+        this._features.forEach(feature => {
+          const path = feature.item.path
 
-        const zoomOffset = 7
+          const zoomOffset = 7
 
-        let zoom = zoomOffset
+          let zoom = zoomOffset
 
-        if (path) {
-          zoom += path.split('.').length * 2
-        }
+          if (path) {
+            zoom += path.split('.').length * 2
+          }
 
-        this._map.setZoom(zoom)
-      })
+          this._map.setZoom(zoom)
+        })
+      }
     }
   }
 
