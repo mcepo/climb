@@ -37,6 +37,12 @@ html {
   width:100%;
 }
 
+.map-button{
+  z-index: 200;
+  bottom: 100px;
+  right: 7px;
+}
+
 .leaflet-pane {
   z-index: 190;
 }

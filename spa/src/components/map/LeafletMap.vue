@@ -1,9 +1,11 @@
 <template>
 <div class='map'>
-  <v-btn class='map-button'
+  <v-btn
+    class='map-button'
     title="My location"
     fab
-    style='position: absolute'
+    small
+    style='position: fixed'
     @click='showLocation()'
     >
     <v-icon>gps_fixed</v-icon>

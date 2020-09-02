@@ -3,7 +3,8 @@
   <v-btn class='map-button'
     title="Open map"
     fab
-    style='position: absolute'
+    small
+    style='position: fixed'
     @click='openMap()'
     >
     <v-icon>map</v-icon>
@@ -11,14 +12,6 @@
   <div id="image-map" class="map"></div>
 </div>
 </template>
-
-<style>
-.map-button{
-  z-index: 200;
-  top: 70px;
-  left: 20px;
-}
-</style>
 
 <script>
 import { Map, control, CRS } from 'leaflet'
