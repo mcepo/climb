@@ -2,7 +2,7 @@ export default {
   orientation: {
     items: [
       { labelShort: 'N', label: 'North', value: 0 },
-      { labelShort: 'NE', label: 'Northeast', value: 45 },
+      { labelShort: 'NE', label: 'North-East', value: 45 },
       { labelShort: 'E', label: 'East', value: 90 },
       { labelShort: 'SE', label: 'South-East', value: 135 },
       { labelShort: 'S', label: 'South', value: 180 },
