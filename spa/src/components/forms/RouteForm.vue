@@ -76,14 +76,7 @@ export default {
   }),
   computed: {
     types () {
-      const types = []
-      typeService.route.forEach((text, value) => {
-        types.push({
-          text,
-          value
-        })
-      })
-      return types
+      return typeService.getRouteTypes()
     }
   },
   created () {

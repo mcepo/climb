@@ -14,7 +14,7 @@
 import Vue from 'vue'
 import Popup from './Popup'
 
-import typeService from '../../services/type.service'
+import typeService, { ItemType } from '../../services/type.service'
 
 export default Vue.extend({
   props: ['item', 'tag'],
@@ -23,7 +23,7 @@ export default Vue.extend({
   },
   computed: {
     type () {
-      return typeService.area[this.item.type_id]
+      return typeService.getTypeName(ItemType.Area, this.item.type_id)
     }
   }
 })

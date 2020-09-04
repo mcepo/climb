@@ -62,7 +62,7 @@ export default Vue.extend({
       api.delete(this.type + '/' + this.item.id).then(() => {
         // if a tag is being deleted
 
-        const imageId = this.$store.getters.openImage
+        const imageId = this.$store.getters.imageOpen
 
         if (this.type === 'tag') {
           // if tag is on a image or map

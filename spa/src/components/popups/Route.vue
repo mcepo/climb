@@ -18,7 +18,7 @@
 import Vue from 'vue'
 import Popup from './Popup.vue'
 
-import typeService from '../../services/type.service'
+import typeService, { ItemType } from '../../services/type.service'
 import gradeService from '../../services/grade.service'
 
 export default Vue.extend({
@@ -28,7 +28,7 @@ export default Vue.extend({
   },
   computed: {
     type () {
-      return typeService.route[this.item.type_id]
+      return typeService.getTypeName(ItemType.Route, this.item.type_id)
     },
     grade () {
       return this.item && gradeService.forge(this.item.grades)

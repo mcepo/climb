@@ -48,7 +48,7 @@ export class LayerService {
     if (this._map === null) {
       this._unwatchTags && this._unwatchTags()
     } else {
-      this._mapType = store.getters.openImage ? 'image' : 'map'
+      this._mapType = store.getters.imageOpen ? 'image' : 'map'
       this._layerGroup.addTo(map)
       this.registerTagsWatch()
     }
@@ -171,7 +171,7 @@ export class LayerService {
       }
     })
 
-    if (!store.getters.openImage) {
+    if (!store.getters.imageOpen) {
       this._layerGroup.getLayers().length !== 0 &&
       this._map.fitBounds(this._layerGroup.getBounds(), { padding: [30, 30] })
 

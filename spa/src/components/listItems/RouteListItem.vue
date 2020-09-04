@@ -20,35 +20,37 @@
         </v-layout>
       </v-list-item-subtitle>
     </v-list-item-content>
-    <v-list-item-action v-if="canTag(route)">
-      <tag-control type="route" :item="route"></tag-control>
+    <v-list-item-action v-if="canTag">
+      <tag-control :type='type' :item="route"></tag-control>
     </v-list-item-action>
   </v-list-item>
 </template>
 <script>
-import typeService from '../../services/type.service'
+import typeService, { ItemType } from '../../services/type.service'
 import TagControl from '../buttons/TagControl'
 import { getUrl } from '../../router'
 import gradeService from '../../services/grade.service'
-import { mapGetters } from 'vuex'
 
 export default {
   props: ['route'],
   computed: {
-    ...mapGetters({
-      canTag: 'route/canTag'
-    }),
+    canTag () {
+      return typeService.canTag(this.type, this.route.type_id)
+    },
     highlight () {
       return this.$store.state.highlight.key === this.key
     },
     typeName () {
-      return typeService.route[this.route.type_id]
+      return typeService.getTypeName(this.type, this.route.type_id)
     },
     key () {
-      return 'route' + this.route.id
+      return this.type + this.route.id
     },
     grade () {
       return this.route && gradeService.forge(this.route.grades)
+    },
+    type () {
+      return ItemType.Route
     },
     length () {
       return this.route.length ? this.route.length + 'm' : ''
@@ -74,7 +76,7 @@ export default {
         }
 
         if (area) {
-          return typeService.area[area.type_id] + ': ' + area.name
+          return typeService.getTypeName(ItemType.Area, area.type_id) + ': ' + area.name
         }
       }
 
@@ -84,7 +86,7 @@ export default {
   methods: {
     link () {
       this.onMouseOut()
-      this.$router.push(getUrl('route', this.route.id))
+      this.$router.push(getUrl(this.type, this.route.id))
     },
     onMouseOver () {
       this.$store.commit('highlight/set', this.key)

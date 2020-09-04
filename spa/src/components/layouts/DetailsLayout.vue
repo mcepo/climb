@@ -19,12 +19,13 @@
       <external-link-list :links='item.links'></external-link-list>
 
       <v-tabs v-model="tabs" grow mobile-break-point=300>
-        <v-tab v-if="item.areas" href="#areas">Areas</v-tab>
-        <v-tab v-if="type === 'area'" href="#routes">Routes</v-tab>
-        <v-tab v-if="item.pitches && item.length > 50" href="#pitches">Pitches</v-tab>
-        <v-tab v-if="item.type_id !== undefined && picturesAllowed" href="#pictures" >Pictures</v-tab>
+        <v-tab v-if="hasAreas" href="#areas">Areas</v-tab>
+        <v-tab v-if="hasRoutes" href="#routes">Routes</v-tab>
+        <v-tab v-if="hasPitches" href="#pitches">Pitches</v-tab>
+        <v-tab v-if="hasImages" href="#pictures" >Pictures</v-tab>
         <v-tabs-items v-model="tabs" class="mt-2">
-          <v-tab-item v-if="item.areas" value="areas">
+
+          <v-tab-item v-if="hasAreas" value="areas">
             <v-btn
               title="Add area"
               text
@@ -35,10 +36,12 @@
             </v-btn>
             <area-list :areaIds="item.areas" />
           </v-tab-item>
-          <v-tab-item v-if="type === 'area'" value="routes">
+
+          <v-tab-item v-if="hasRoutes" value="routes">
             <route-list />
           </v-tab-item>
-          <v-tab-item value="pitches">
+
+          <v-tab-item v-if="hasPitches" value="pitches">
             <v-btn
               text
               title="Add pitch"
@@ -49,18 +52,20 @@
             </v-btn>
             <pitch-list :route="item" />
           </v-tab-item>
-          <v-tab-item value="pictures" v-if='picturesAllowed'>
+
+          <v-tab-item value="pictures" v-if='hasImages'>
             <v-btn
               text
               title="Upload photo"
               icon
-              v-if='canAddPicture'
+              v-if='canAddImage'
               @click.stop="openAuthorizedForm({form: {component: 'image-upload-form', params: {type, id: item.id}}})"
             >
               <v-icon>add_photo_alternate</v-icon>
             </v-btn>
             <image-list v-if="item.images" :imageIds="item.images" />
           </v-tab-item>
+
         </v-tabs-items>
       </v-tabs>
     </v-layout>
@@ -75,6 +80,7 @@ import PitchList from '../lists/PitchList'
 import ExternalLinkList from '../lists/ExternalLinkList'
 import ItemMenu from '../common/ItemMenu'
 import { mapActions } from 'vuex'
+import typeService from '../../services/type.service'
 
 export default {
   props: ['item', 'type'],
@@ -82,15 +88,23 @@ export default {
     tabs: null
   }),
   computed: {
-    picturesAllowed () {
-      if (this.type === 'area') {
-        // type_id of areas that can have a picture
-        return [2, 3, 4, 5, 6, 7].find((id) => id === this.item.type_id) !== undefined
-      }
-      return true
+    hasImages () {
+      return typeService.hasImages(this.type, this.item.type_id)
     },
-    canAddPicture () {
-      return this.type === 'area' && this.picturesAllowed
+    canAddImage () {
+      return typeService.canAddImage(this.type, this.item.type_id)
+    },
+    hasRoutes () {
+      return typeService.hasRoutes(this.type, this.item.type_id)
+    },
+    canAddRoute () {
+      return typeService.canAddRoute(this.type, this.item.type_id)
+    },
+    hasPitches () {
+      return typeService.hasPitches(this.type, this.item.type_id)
+    },
+    hasAreas () {
+      return typeService.hasAreas(this.type, this.item)
     }
   },
   methods: {
@@ -101,11 +115,11 @@ export default {
       this.$store.commit('drawers/setLeft', false)
     }
   },
-  watch: {
-    item (newItem) {
-      this.tabs = newItem && newItem.children ? 'areas' : 'pitches'
-    }
-  },
+  // watch: {
+  //   item (newItem) {
+  //     this.tabs = newItem && newItem.children ? 'areas' : 'pitches'
+  //   }
+  // },
   components: {
     ImageList,
     AreaList,

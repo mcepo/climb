@@ -39,7 +39,7 @@ class DrawingService {
     this._map = layerService.map
     this._taggedType = type
 
-    if (store.getters.openImage) {
+    if (store.getters.imageOpen) {
       this._drawingType = drawingTypes.image[type] || drawingTypes.map[type]
     } else {
       this._drawingType = drawingTypes.map[type]
@@ -195,7 +195,7 @@ class DrawingService {
       id: this._tag?.id || null,
 
       // eslint-disable-next-line @typescript-eslint/camelcase
-      image_id: store.getters.openImage || null,
+      image_id: store.getters.imageOpen || null,
 
       geometry: this._layer.toGeoJSON().geometry,
 
@@ -242,7 +242,7 @@ class DrawingService {
 
         if (data && request.id == null) request.id = data
 
-        if (store.getters.openImage) {
+        if (store.getters.imageOpen) {
           store.commit('image/storeImageTag', request)
         } else {
           store.commit(request.tagged_type + '/storeMapTag', request)

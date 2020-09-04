@@ -35,6 +35,11 @@ export default {
   components: {
     RouteListItem
   },
+  created () {
+    if (this.routes.length === 0) {
+      this.loadRoutes()
+    }
+  },
   computed: {
     ...mapGetters({
       routes: 'route/getFiltered',

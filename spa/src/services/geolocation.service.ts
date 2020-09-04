@@ -9,8 +9,8 @@ class GeolocationService {
 
   positionOptions: PositionOptions = {
     enableHighAccuracy: true,
-    timeout: 5000,
-    maximumAge: 0
+    timeout: 40000,
+    maximumAge: 30000
   }
 
   constructor () {

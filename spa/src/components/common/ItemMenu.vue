@@ -60,11 +60,11 @@
           Add moderator
         </v-btn>
 
-        <add-trail v-if='!openImage && isArea' :area='item' show-text/>
+        <add-trail v-if='hasTrails' :area='item' show-text/>
 
         <tag-control v-if='canTag' :type="type" :item="item" show-text />
 
-        <current-location-tagger v-if='canTag' :type='type' :item='item'  show-text/>
+        <current-location-tagger v-if='canTagCurrentLocation' :type='type' :item='item'  show-text/>
 
         <delete-button :type='type' :item="item" return-back show-text />
       </div>
@@ -79,7 +79,8 @@ import TagControl from '../buttons/TagControl'
 import CurrentLocationTagger from '../buttons/CurrentLocationTagger'
 import AddTrail from '../buttons/AddTrail'
 
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
+import typeService, { ItemType } from '../../services/type.service'
 
 export default {
 
@@ -89,16 +90,13 @@ export default {
   ],
 
   computed: {
-    ...mapGetters({
-      openImage: 'openImage'
-    }),
     canAdopt () {
       // route can't have items
       if (this.isRoute) return false
 
       const adoption = this.$store.state.adoption
       return adoption.item && // has item for moving
-      !(adoption.type === 'area' &&
+      !(adoption.type === ItemType.Area &&
         (
           adoption.item.id === this.item.id || // can't adopt myself
           this.item.ancestors.includes(adoption.item.id) // my child can't adopt me
@@ -114,17 +112,19 @@ export default {
       return this.parentId !== null
     },
     canTag () {
-      if (this.isRoute) {
-        return this.$store.getters['route/canTag'](this.item)
-      }
-
-      return true
+      return typeService.canTag(this.type, this.item.type_id)
+    },
+    canTagCurrentLocation () {
+      return typeService.canTagCurrentLocation(this.type, this.item.type_id)
+    },
+    hasTrails () {
+      return typeService.hasTrails(this.type, this.item.type_id)
     },
     isArea () {
-      return this.type === 'area'
+      return this.type === ItemType.Area
     },
     isRoute () {
-      return this.type === 'route'
+      return this.type === ItemType.Route
     }
   },
 

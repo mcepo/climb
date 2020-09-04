@@ -12,12 +12,12 @@
       <v-list-item-title>{{area.name}}</v-list-item-title>
     </v-list-item-content>
     <v-list-item-action>
-      <tag-control type="area" :item="area"></tag-control>
+      <tag-control :type="type" :item="area"></tag-control>
     </v-list-item-action>
   </v-list-item>
 </template>
 <script>
-import typeService from '../../services/type.service'
+import typeService, { ItemType } from '../../services/type.service'
 import TagControl from '../buttons/TagControl'
 
 import { getUrl } from '../../router'
@@ -26,20 +26,23 @@ export default {
   props: ['area'],
   computed: {
     key () {
-      return 'area' + this.area.id
+      return this.type + this.area.id
     },
     highlight () {
       return this.$store.state.highlight.key === this.key
     },
     typeName () {
-      return typeService.area[this.area.type_id]
+      return typeService.getTypeName(this.type, this.area.type_id)
+    },
+    type () {
+      return ItemType.Area
     }
   },
   methods: {
     link () {
       this.onMouseOut()
 
-      this.$router.push(getUrl('area', this.area.id))
+      this.$router.push(getUrl(this.type, this.area.id))
     },
     onMouseOver () {
       this.$store.commit('highlight/set', this.key)

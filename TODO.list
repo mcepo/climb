@@ -1,7 +1,3 @@
-
-TODO: define what is allowed depending on area
-  sector, crag, mountain side can only have 
-
 TODO: add refresh button for stuff
 
 TODO: when a sector is open add all parent info to it
@@ -10,8 +6,6 @@ TODO: add pictures of sectors to crag display ?
 
 TODO: replace images from the database that have bounds set in old manner
  + remove depricated code
-
- TODO: when can i tag and what review
 
 ---- NOT pressing ----
 
@@ -22,8 +16,6 @@ TODO: snackbar multiple messages overrun each other
 TODO: on area get altitude borders from parent
 
 TODO: calculate area bounds on the backend and return it with area
-
-TODO: set current location only for sectors and crags
 
 TODO: allow trails to be added on images ?
 

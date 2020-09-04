@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Area;
 use App\Models\Route;
-use App\Models\Trail;
-use App\Models\Image;
-use App\Models\Tag;
 use Illuminate\Http\Request;
 use App\User;
 

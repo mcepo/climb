@@ -241,7 +241,7 @@ class PlezanjeCrawler extends Command
                         [$grades, $pitches] = $this->gradeParser->parse($grade);
 
                         $route = [
-                            'name' => filter_var(trim($td->eq(0)->filter('a')->eq(0)->text()), FILTER_SANITIZE_STRING),
+                            'name' => trim($td->eq(0)->filter('a')->eq(0)->text()),
                             'length' => $length,
                             'grades' => $grades
                         ];
@@ -333,7 +333,7 @@ class PlezanjeCrawler extends Command
         }
 
         $area = [
-            'name' => filter_var($name, FILTER_SANITIZE_STRING),
+            'name' => $name,
             'max_altitude' => isset($maxAltitude) ? $maxAltitude : null,
             'type_id' => $areaType,
             'orientation' => $orientation

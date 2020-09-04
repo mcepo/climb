@@ -1,6 +1,6 @@
 <template>
   <details-loading v-if="loading"></details-loading>
-  <details-layout v-else :item="area" type="area">
+  <details-layout v-else :item="area" :type="type">
     <template slot="item-details">
       <v-divider></v-divider>
       <v-layout row v-if='area.altitude[0] || area.altitude[1]'>
@@ -9,7 +9,7 @@
         </v-flex>
         <v-flex>{{area.altitude[0] + 'm - ' + area.altitude[1] + 'm'}}</v-flex>
       </v-layout>
-      <v-layout row v-if='allowedOrientation'>
+      <v-layout row v-if='hasOrientation'>
         <v-flex>
           <strong>Orientation:</strong>
         </v-flex>
@@ -32,7 +32,7 @@ import { mapGetters } from 'vuex'
 
 import gradeService from '../../services/grade.service'
 
-import typeService from '../../services/type.service'
+import typeService, { ItemType } from '../../services/type.service'
 
 export default {
   computed: {
@@ -42,9 +42,11 @@ export default {
     loading () {
       return this.$store.state.area.loading || !this.area
     },
-    allowedOrientation () {
-      // type_id of areas that can have orientation
-      return typeService.orientation.areaTypes.find((id) => id === this.area.type_id)
+    hasOrientation () {
+      return this.area && typeService.hasOrientation(this.type, this.area.type_id)
+    },
+    type () {
+      return ItemType.Area
     },
     moderators () {
       if (!this.area && !this.area.moderators) return []

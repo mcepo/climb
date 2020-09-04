@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Route;
-use App\Models\Tag;
-use App\Models\Pitch;
 use Illuminate\Http\Request;
 
 class RouteController extends Controller

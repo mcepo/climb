@@ -41,7 +41,7 @@ const store = new Vuex.Store<RootState>({
     tags (state: RootState, getters: any): Tag[] {
       return state.url?.params.imageId ? getters['image/tags'] : getters['area/tags']
     },
-    openImage (state: RootState) {
+    imageOpen (state: RootState) {
       return state.url?.params.imageId
     },
     // used by tag-control to determin if an item has a tag on the map/image

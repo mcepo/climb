@@ -114,16 +114,9 @@ class Area extends Model
 
     public function loadAreaAssets($filters)
     {
-
-        $directRoutes = Route::where('area_id', $this->id)->with(['mapTag', 'grades'])->get();
-
-        if ($directRoutes->count() == 0) {
-            $filters['path'] = $this->getPathWithSelf();
-
-            $this->setAttribute('routes', Route::loadChunk($filters));
-        } else {
-            $this->setAttribute('routes', $directRoutes);
-        }
+        // with area i only send the routes that are directly under that area
+        // and when an area has those routes then i don't show the area tab at all
+        $this->setAttribute('routes', Route::where('area_id', $this->id)->with(['mapTag', 'grades'])->get());
 
         $this->loadImages();
 

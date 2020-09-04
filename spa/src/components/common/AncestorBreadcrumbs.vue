@@ -20,6 +20,7 @@
 <script>
 
 import { getUrl } from '../../router'
+import { ItemType } from '../../services/type.service'
 
 export default {
   props: {
@@ -42,14 +43,14 @@ export default {
         if (item.area_id) {
           // this is a route
           // check first if the route is already open
-          item.id !== parseInt(this.$store.state.url.params.routeId) && this.$router.push(getUrl('route', item.id))
+          item.id !== parseInt(this.$store.state.url.params.routeId) && this.$router.push(getUrl(ItemType.Route, item.id))
         } else {
           // check first if the area is already open
-          item.id !== parseInt(this.$store.state.url.params.areaId) && this.$router.push(getUrl('area', item.id))
+          item.id !== parseInt(this.$store.state.url.params.areaId) && this.$router.push(getUrl(ItemType.Area, item.id))
         }
       } else {
         if (this.$route.path !== '/') {
-          this.$router.push(getUrl('area', null))
+          this.$router.push(getUrl(ItemType.Area, null))
         }
       }
       this.$store.commit('drawers/setRight', false)

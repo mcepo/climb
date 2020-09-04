@@ -23,22 +23,8 @@ class Request extends FormRequest
      */
     public function rules()
     {
-
-        $this->sanitize();
-
         return [
             //
         ];
-    }
-
-    public function sanitize(){
-
-        $input = $this->all();
-
-        if (isset($input['name'])) {
-            $input['name'] = filter_var($input['name'], FILTER_SANITIZE_STRING);
-        }
-
-        $this->replace($input);
     }
 }

@@ -1,6 +1,6 @@
 <template>
   <details-loading v-if="loading"></details-loading>
-  <details-layout v-else :item="route" type="route">
+  <details-layout v-else :item="route" :type="type">
     <template slot="item-details">
       <v-layout column>
         <div>
@@ -22,7 +22,7 @@
 <script>
 import DetailsLayout from '../layouts/DetailsLayout.vue'
 import DetailsLoading from '../common/DetailsLoading.vue'
-import typeService from '../../services/type.service'
+import typeService, { ItemType } from '../../services/type.service'
 import { mapGetters } from 'vuex'
 import gradeService from '../../services/grade.service'
 
@@ -42,6 +42,9 @@ export default {
     },
     grade () {
       return this.route?.grades && gradeService.forge(this.route.grades)
+    },
+    type () {
+      return ItemType.Route
     }
   },
   components: {
