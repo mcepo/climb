@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { LatLngBounds, LatLng, Map, control, Marker, Circle } from 'leaflet'
+import { LatLngBounds, LatLng, Map, control, Marker, Circle, Polyline } from 'leaflet'
 import setupTiles from '../../utils/tiles'
 import layerService from '../../services/layer.service'
 import styleService from '../../services/style.service'
@@ -25,7 +25,8 @@ export default {
   map: null,
   location: {
     marker: null,
-    circle: null
+    circle: null,
+    trail: null
   },
   goToRequest: false,
 
@@ -51,6 +52,9 @@ export default {
 
     control.zoom({ position: 'bottomright' }).addTo(this.$options.map)
     control.scale().addTo(this.$options.map)
+
+    this.$options.location.trail = new Polyline([])
+    this.$options.location.trail.addTo(this.$options.map)
   },
 
   methods: {
@@ -88,6 +92,10 @@ export default {
       if (accuracy > 10) {
         this.$options.location.circle = new Circle(locationCenter, { radius: accuracy, stroke: false })
         this.$options.location.circle.addTo(this.$options.map)
+      }
+
+      if (accuracy < 100) {
+        this.$options.location.trail.addLatLng(locationCenter)
       }
 
       if (this.$options.goToRequest) {
