@@ -12,15 +12,13 @@ module.exports = {
 
   // output built static files to Laravel's public dir.
   // note the "build" script in package.json needs to be modified as well.
-  outputDir: '../api/public/assets',
+  outputDir: '../api/public',
 
-  publicPath: process.env.NODE_ENV === 'production'
-    ? '/assets'
-    : '/',
+  publicPath: '/',
 
   // modify the location of the generated HTML file.
   indexPath: process.env.NODE_ENV === 'production'
-    ? '../../resources/views/index.blade.php'
+    ? '../resources/views/index.blade.php'
     : 'index.html',
   css: {
     extract: true
