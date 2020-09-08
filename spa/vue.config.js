@@ -2,6 +2,9 @@
 // const CircularDependencyPlugin = require('circular-dependency-plugin')
 // const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { InjectManifest } = require('workbox-webpack-plugin')
+
 module.exports = {
   transpileDependencies: ['vuetify'],
   devServer: {
@@ -15,6 +18,16 @@ module.exports = {
   outputDir: '../api/public',
 
   publicPath: '/',
+
+  configureWebpack: {
+    plugins: [
+      new InjectManifest({
+        swSrc: './src/service-worker.js',
+        swDest: '../api/public',
+        exclude: [/\.html$/]
+      })
+    ]
+  },
 
   // modify the location of the generated HTML file.
   indexPath: process.env.NODE_ENV === 'production'
