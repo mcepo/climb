@@ -42,6 +42,7 @@
     "@vue/cli-plugin-babel": "~4.2.0",
     "@vue/cli-plugin-e2e-nightwatch": "~4.2.0",
     "@vue/cli-plugin-eslint": "~4.2.0",
+    "@vue/cli-plugin-pwa": "^4.5.4",
     "@vue/cli-plugin-router": "~4.2.0",
     "@vue/cli-plugin-typescript": "~4.2.0",
     "@vue/cli-plugin-unit-mocha": "~4.2.0",

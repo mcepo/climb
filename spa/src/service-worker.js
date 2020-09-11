@@ -1,10 +1,26 @@
-/* eslint-disable no-undef */
-import { precacheAndRoute } from 'workbox-precaching/precacheAndRoute'
-import { registerRoute } from 'workbox-routing'
-import { CacheFirst } from 'workbox-strategies'
 
-registerRoute(
-  'http://localhost:8000/',
-  new CacheFirst()
+self.__precacheManifest.push({
+  url: '/', revision: Date.now()
+})
+
+self.addEventListener('install', () => self.skipWaiting())
+
+workbox.precaching.precacheAndRoute(self.__precacheManifest)
+
+// caching map tiles, only for default tiles
+
+workbox.routing.registerRoute(
+  new RegExp('https:\/\/cartodb-basemaps-.*png'),
+  new workbox.strategies.StaleWhileRevalidate({
+    cacheName: 'cartodb-basemaps'
+  })
 )
-precacheAndRoute(self.__WB_MANIFEST)
+
+// caching apps images + thumbnails + data
+
+workbox.routing.registerRoute(
+  new RegExp('\/api\/'),
+  new workbox.strategies.StaleWhileRevalidate({
+    cacheName: 'app-data'
+  })
+)
