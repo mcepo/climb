@@ -89,7 +89,9 @@ export default function (map: Map) {
 
   // loading all of the other tiles to the map
 
-  const defaultLayer = new TileLayer(first.url)
+  const defaultLayer = new TileLayer(first.url, {
+    crossOrigin: true
+  })
   map.addLayer(defaultLayer)
   controls.addBaseLayer(defaultLayer, first.name)
 
