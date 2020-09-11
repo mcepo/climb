@@ -7,6 +7,10 @@ self.__precacheManifest.push({
 
 self.addEventListener('install', () => self.skipWaiting())
 
+self.addEventListener('activate', () => {
+  clients.claim()
+})
+
 workbox.precaching.precacheAndRoute(self.__precacheManifest)
 
 // caching map tiles, only for default tiles
