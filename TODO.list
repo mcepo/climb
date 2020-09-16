@@ -1,28 +1,12 @@
-TODO: add refresh button for stuff
-
 TODO: when a sector is open add all parent info to it
-
-TODO: add pictures of sectors to crag display ?
-
-TODO: replace images from the database that have bounds set in old manner
- + remove depricated code
-
- TODO: add open on google maps coordinates
- http://www.google.com/maps/place/lat,lng
 
  TODO: password reset button on working properlly FUCK!!
 
 ---- NOT pressing ----
 
-TODO: cms for adding external links
-
-TODO: snackbar multiple messages overrun each other
-
 TODO: on area get altitude borders from parent
 
 TODO: calculate area bounds on the backend and return it with area
-
-TODO: allow trails to be added on images ?
 
 OPTIMIZATION
 

@@ -67,6 +67,17 @@
         <current-location-tagger v-if='canTagCurrentLocation' :type='type' :item='item'  show-text/>
 
         <delete-button :type='type' :item="item" return-back show-text />
+
+        <v-btn
+          text
+          v-if='canGetDirections'
+          title="Get directions for this area"
+          @click="openInGoogle()"
+          class='justify-start'
+        >
+          <v-icon>directions_car</v-icon>
+          Get directions
+        </v-btn>
       </div>
 
     </v-menu>
@@ -120,6 +131,9 @@ export default {
     hasTrails () {
       return typeService.hasTrails(this.type, this.item.type_id)
     },
+    canGetDirections () {
+      return typeService.canGetDirections(this.type, this.item)
+    },
     isArea () {
       return this.type === ItemType.Area
     },
@@ -144,6 +158,12 @@ export default {
 
       getParent () {
         return this.parentId ? this.$store.state.area.byIds[this.parentId] : null
+      },
+
+      openInGoogle () {
+        const coordinates = this.item.map_tag.geometry.coordinates
+        const win = window.open('https://www.google.com/maps/dir/?api=1&destination=' + coordinates[1] + ',' + coordinates[0], '_blank')
+        win.focus()
       },
 
       openEditForm () {

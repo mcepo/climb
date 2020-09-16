@@ -44,6 +44,9 @@ export interface AreaType {
   routes: boolean;
   // what type of areas can this area hold
   parenting: Array<AreaDatabaseId>;
+
+  // can have google directions link
+  directions: boolean;
 }
 
 export enum RouteDatabaseId {
@@ -115,7 +118,8 @@ export default {
         AreaDatabaseId.Crag,
         AreaDatabaseId.Mountain,
         AreaDatabaseId.MountainSide
-      ]
+      ],
+      directions: false
     } as AreaType,
     {
       databaseId: AreaDatabaseId.Area,
@@ -134,7 +138,8 @@ export default {
         AreaDatabaseId.Crag,
         AreaDatabaseId.Mountain,
         AreaDatabaseId.MountainSide
-      ]
+      ],
+      directions: false
     } as AreaType,
     {
       databaseId: AreaDatabaseId.Mountain,
@@ -148,7 +153,8 @@ export default {
       image: true,
       routes: false,
       currentLocationTag: false,
-      parenting: [AreaDatabaseId.Crag, AreaDatabaseId.MountainSide]
+      parenting: [AreaDatabaseId.Crag, AreaDatabaseId.MountainSide],
+      directions: true
     } as AreaType,
     {
       databaseId: AreaDatabaseId.MountainSide,
@@ -161,7 +167,8 @@ export default {
       trail: true,
       routes: true,
       currentLocationTag: false,
-      parenting: [AreaDatabaseId.Crag, AreaDatabaseId.Sector]
+      parenting: [AreaDatabaseId.Crag, AreaDatabaseId.Sector],
+      directions: false
     } as AreaType,
     {
       databaseId: AreaDatabaseId.ClimbingSite,
@@ -175,7 +182,8 @@ export default {
       trail: true,
       routes: false,
       currentLocationTag: false,
-      parenting: [AreaDatabaseId.Crag]
+      parenting: [AreaDatabaseId.Crag],
+      directions: false
     } as AreaType,
     {
       databaseId: AreaDatabaseId.Crag,
@@ -189,7 +197,8 @@ export default {
       trail: true,
       routes: true,
       currentLocationTag: true,
-      parenting: [AreaDatabaseId.Sector]
+      parenting: [AreaDatabaseId.Sector],
+      directions: true
     } as AreaType,
     {
       databaseId: AreaDatabaseId.Sector,
@@ -202,7 +211,8 @@ export default {
       trail: false,
       routes: true,
       currentLocationTag: true,
-      parenting: []
+      parenting: [],
+      directions: false
     } as AreaType
   ],
   route: [
@@ -214,7 +224,8 @@ export default {
       mapTag: true,
       imageTag: false,
       currentLocationTag: true,
-      pitches: true
+      pitches: true,
+      directions: true
     } as RouteType,
     {
       databaseId: RouteDatabaseId.Singlepitch,
@@ -225,7 +236,8 @@ export default {
       mapTag: false,
       imageTag: true,
       currentLocationTag: false,
-      pitches: false
+      pitches: false,
+      directions: false
     } as RouteType,
     {
       databaseId: RouteDatabaseId.Waterfall,
@@ -236,7 +248,8 @@ export default {
       mapTag: true,
       imageTag: true,
       currentLocationTag: true,
-      pitches: true
+      pitches: true,
+      directions: false
     } as RouteType,
     {
       databaseId: RouteDatabaseId.Boulder,
@@ -246,13 +259,19 @@ export default {
       mapTag: false,
       imageTag: true,
       currentLocationTag: false,
-      pitches: false
+      pitches: false,
+      directions: false
     } as RouteType
   ],
 
   hasOrientation (type: ItemType, id: AreaDatabaseId|RouteDatabaseId) {
     const itemType = this.find(type, id)
     return itemType.orientation
+  },
+
+  canGetDirections (type: ItemType, item: Area|Route) {
+    const itemType = this.find(type, item.type_id)
+    return item.map_tag !== null && itemType.directions
   },
 
   getChildTypes (item: Area|undefined) {
