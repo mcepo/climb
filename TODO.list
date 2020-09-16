@@ -10,6 +10,8 @@ TODO: replace images from the database that have bounds set in old manner
  TODO: add open on google maps coordinates
  http://www.google.com/maps/place/lat,lng
 
+ TODO: password reset button on working properlly FUCK!!
+
 ---- NOT pressing ----
 
 TODO: cms for adding external links
@@ -39,6 +41,7 @@ TODO: add gradeService, typeService as vue plugin
 OFFLINE:
 
 - background sync, so that i can edit stuff offline and it will get updated once online
+  - added: test + add friendly user messages
 
 - FEATURE -
 
@@ -49,3 +52,5 @@ OFFLINE:
   - images - all info
   - map tiles for that area
     - need area borders for map tiles to load + zoom every second zoom starting from most zoomed
+
+  - todo add offline notification

@@ -1,7 +1,5 @@
 
-self.__precacheManifest.push({
-  url: '/', revision: Date.now()
-})
+self.__precacheManifest.push()
 
 self.addEventListener('install', () => self.skipWaiting())
 
@@ -20,6 +18,15 @@ workbox.routing.registerRoute(
   })
 )
 
+// caching app root
+
+workbox.routing.registerRoute(
+  '/',
+  new workbox.strategies.NetworkFirst({
+    cacheName: 'app-root'
+  })
+)
+
 // caching apps images + thumbnails + data
 
 workbox.routing.registerRoute(
@@ -28,3 +35,33 @@ workbox.routing.registerRoute(
     cacheName: 'app-data'
   })
 )
+
+// background sync
+
+const bgSyncPlugin = new workbox.backgroundSync.Plugin('backgroundSyncQueue', {
+  maxRetentionTime: 24 * 60 // Retry for max of 24 Hours (specified in minutes)
+});
+
+const matchCb = /\/api\/.*/
+
+const handleCb =   new workbox.strategies.NetworkOnly({
+  plugins: [bgSyncPlugin]
+})
+
+workbox.routing.registerRoute(
+  matchCb,
+  handleCb,
+  'POST'
+);
+
+workbox.routing.registerRoute(
+  matchCb,
+  handleCb,
+  'PUT'
+);
+
+workbox.routing.registerRoute(
+  matchCb,
+  handleCb,
+  'DELETE'
+);
