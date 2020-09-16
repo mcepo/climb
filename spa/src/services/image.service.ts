@@ -5,6 +5,7 @@ import { baseURL } from '@/store/api'
 
 export class ImageService {
   private _imageOverlay!: ImageOverlay
+  private _imageOverlayThumbnail!: ImageOverlay
   private _map!: LeafletMap
 
   private _unWatchStore!: Function
@@ -58,14 +59,26 @@ export class ImageService {
   open (image: Image) {
     const bounds = image.boundary ? this.getBounds(image.boundary) : this.getBoundsDepricated(image.size)
 
+    if (this._imageOverlayThumbnail) {
+      this._map.removeLayer(this._imageOverlayThumbnail)
+    }
+
     if (this._imageOverlay) {
       this._map.removeLayer(this._imageOverlay)
     }
 
-    this._imageOverlay = imageOverlay(baseURL + 'image/' + image.id, bounds)
+    // thumbnail image gets displayed right away, so that a user has something to see while the
+    // real image gets loaded in the background
+    this._imageOverlayThumbnail = imageOverlay(baseURL + 'image/' + image.id + '/thumbnail', bounds)
+
+    this._imageOverlay = imageOverlay(baseURL + 'image/' + image.id, bounds, { zIndex: 2 })
+
+    this._map.addLayer(this._imageOverlayThumbnail)
 
     this._map.addLayer(this._imageOverlay)
+
     this._map.setMaxBounds(this.getMaxBounds(bounds))
+
     this._map.fitBounds(bounds)
   }
 }
