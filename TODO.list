@@ -38,8 +38,14 @@ TODO: add gradeService, typeService as vue plugin
 
 OFFLINE:
 
-- "install" app on mobile phone
-- static files
-- whole store
-- leaflet tiles for a given area
 - background sync, so that i can edit stuff offline and it will get updated once online
+
+- FEATURE -
+
+  - store for offline use -
+  - only for area types: Climbing site, Mountain, Crag
+  - areas - all info + trails + images
+  - routes - all info + images + pitches
+  - images - all info
+  - map tiles for that area
+    - need area borders for map tiles to load + zoom every second zoom starting from most zoomed
