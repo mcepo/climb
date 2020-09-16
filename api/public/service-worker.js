@@ -1,9 +1,7 @@
-importScripts("/precache-manifest.199e2f2dacdb14a2f1240da85aa43d55.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("/precache-manifest.47cdb8b4f83e392a59838704c8fd13be.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 
-self.__precacheManifest.push({
-  url: '/', revision: Date.now()
-})
+self.__precacheManifest.push()
 
 self.addEventListener('install', () => self.skipWaiting())
 
@@ -22,6 +20,15 @@ workbox.routing.registerRoute(
   })
 )
 
+// caching app root
+
+workbox.routing.registerRoute(
+  '/',
+  new workbox.strategies.NetworkFirst({
+    cacheName: 'app-root'
+  })
+)
+
 // caching apps images + thumbnails + data
 
 workbox.routing.registerRoute(
@@ -31,3 +38,32 @@ workbox.routing.registerRoute(
   })
 )
 
+// background sync
+
+const bgSyncPlugin = new workbox.backgroundSync.Plugin('backgroundSyncQueue', {
+  maxRetentionTime: 24 * 60 // Retry for max of 24 Hours (specified in minutes)
+});
+
+const matchCb = /\/api\/.*/
+
+const handleCb =   new workbox.strategies.NetworkOnly({
+  plugins: [bgSyncPlugin]
+})
+
+workbox.routing.registerRoute(
+  matchCb,
+  handleCb,
+  'POST'
+);
+
+workbox.routing.registerRoute(
+  matchCb,
+  handleCb,
+  'PUT'
+);
+
+workbox.routing.registerRoute(
+  matchCb,
+  handleCb,
+  'DELETE'
+);
