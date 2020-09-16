@@ -22,7 +22,9 @@ module.exports = {
     appleMobileWebAppCache: 'yes',
     manifestOptions: {
       // eslint-disable-next-line @typescript-eslint/camelcase
-      background_color: '#42b983'
+      background_color: '#42b983',
+      name: 'Climbers guide',
+      short_name: 'Guide'
     },
     workboxPluginMode: 'InjectManifest',
     workboxOptions: {
