@@ -6,6 +6,7 @@
     class='image-item'
     contain
     @load='imageLoaded()'
+    eager
   >
 
     <v-skeleton-loader

@@ -37,7 +37,7 @@
             <area-list :areaIds="item.areas" />
           </v-tab-item>
 
-          <v-tab-item v-if="hasRoutes" value="routes">
+          <v-tab-item v-if="hasRoutes" value="routes" eager>
             <route-list />
           </v-tab-item>
 
@@ -53,7 +53,7 @@
             <pitch-list :route="item" />
           </v-tab-item>
 
-          <v-tab-item value="pictures" v-if='hasImages'>
+          <v-tab-item value="pictures" v-if='hasImages' eager>
             <v-btn
               text
               title="Upload photo"
