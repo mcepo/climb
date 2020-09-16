@@ -1,40 +1,51 @@
-import { Map as LeafletMap, FeatureGroup, Marker, Polyline, Layer, LeafletMouseEvent } from 'leaflet'
+import {
+  Map as LeafletMap,
+  FeatureGroup,
+  Marker,
+  Polyline,
+  Layer,
+  LeafletMouseEvent,
+  CircleMarker
+} from 'leaflet'
 import { Tag, MapType, Area, Route, Pitch, Image } from '@/models'
 import store, { RootState } from '@/store'
 import styleService from './style.service'
 import tooltipService from './tooltip.service'
+import { ItemType } from './type.service'
 
 export interface Feature {
   layer: Layer;
-  item: Area|Route|Pitch|Image;
+  item: Area | Route | Pitch | Image;
   tag: Tag;
 }
 
 export class LayerService {
-  private _map!: LeafletMap
+  private _map!: LeafletMap;
 
   // connection between layers and the map
   // used to handle layers as a group
-  private _layerGroup: FeatureGroup
+  private _layerGroup: FeatureGroup;
 
-  private _mapType!: MapType
+  private _mapType!: MapType;
 
   // record of all the layers so that it will be easier to
   // handle them individually
 
-  private _features: Map<string, Feature>
+  private _features: Map<string, Feature>;
+  private _anchors: Map<string, CircleMarker>;
 
-  private _unwatchTags!: Function
+  private _unwatchTags!: Function;
 
   // list of currently selected entites
   // getting them from url when tags change
   // because thats when selected entity changes
-  private _selected: Array<string>
+  private _selected: Array<string>;
 
   constructor () {
     this._layerGroup = new FeatureGroup()
 
     this._features = new Map()
+    this._anchors = new Map()
     this._selected = []
 
     this.registerHighlightWatch()
@@ -63,7 +74,7 @@ export class LayerService {
       (state: RootState) => {
         return state.highlight?.key
       },
-      (highlightedKey: string|undefined|null) => {
+      (highlightedKey: string | undefined | null) => {
         this.highlightFeature(highlightedKey)
       }
     )
@@ -101,7 +112,7 @@ export class LayerService {
     return this._selected.includes(key)
   }
 
-  highlightFeature (highlightedKey: string|undefined|null) {
+  highlightFeature (highlightedKey: string | undefined | null) {
     this._features.forEach((feature, key) => {
       if (highlightedKey === key) {
         this.setStyle('highlight', feature)
@@ -112,17 +123,29 @@ export class LayerService {
   }
 
   removeLayers () {
-    this._features.forEach(feature => {
+    this._features.forEach((feature) => {
       this._layerGroup.removeLayer(feature.layer)
     })
 
     this._features.clear()
+
+    this._anchors.forEach((anchor) => {
+      this._layerGroup.removeLayer(anchor)
+    })
+
+    this._anchors.clear()
   }
 
   hideTag (key: string) {
     const feature = this._features.get(key)
 
     feature && this._layerGroup.removeLayer(feature.layer)
+
+    // if has anchor remove it as well
+
+    const anchor = this._anchors.get(key)
+
+    anchor && this._layerGroup.removeLayer(anchor)
   }
 
   showTag (tag: Tag) {
@@ -143,7 +166,9 @@ export class LayerService {
     this.removeLayers()
 
     tags.forEach((tag: Tag) => {
-      const item = tag.tagged_type && store.getters[tag.tagged_type + '/find'](tag.tagged_id)
+      const item =
+        tag.tagged_type &&
+        store.getters[tag.tagged_type + '/find'](tag.tagged_id)
       if (item) {
         const layer = this.createLayer(tag)
 
@@ -168,15 +193,30 @@ export class LayerService {
 
         // adding layer to map
         this._layerGroup.addLayer(layer)
+
+        if (
+          store.getters.imageOpen &&
+          (tag.tagged_type === ItemType.Route ||
+            tag.tagged_type === ItemType.Pitch)
+        ) {
+          const anchor = this.createAnchor(tag.geometry.coordinates)
+
+          this._anchors.set(key, anchor)
+          this._layerGroup.addLayer(anchor)
+
+          console.log(key)
+        }
       }
     })
 
     if (!store.getters.imageOpen) {
       this._layerGroup.getLayers().length !== 0 &&
-      this._map.fitBounds(this._layerGroup.getBounds(), { padding: [30, 30] })
+        this._map.fitBounds(this._layerGroup.getBounds(), {
+          padding: [30, 30]
+        })
 
       if (this._features.size === 1) {
-        this._features.forEach(feature => {
+        this._features.forEach((feature) => {
           const path = feature.item.path
 
           const zoomOffset = 7
@@ -205,18 +245,44 @@ export class LayerService {
   setStyle (styleType: string, feature: Feature) {
     const type = feature.tag.tagged_type
 
-    styleService[this._mapType][type] && styleService[this._mapType][type][styleType]({ layer: feature.layer, item: feature.item })
+    styleService[this._mapType][type] &&
+      styleService[this._mapType][type][styleType]({
+        layer: feature.layer,
+        item: feature.item
+      })
   }
 
   createLayer (tag: Tag) {
-    let layer: Marker|Polyline
+    let layer: Marker | Polyline
 
     switch (tag.geometry.type) {
-      case 'Point': layer = this.createMarker(tag.geometry.coordinates); break
-      case 'LineString': layer = this.createPolyline(tag.geometry.coordinates); break
+      case 'Point':
+        layer = this.createMarker(tag.geometry.coordinates)
+        break
+      case 'LineString':
+        layer = this.createPolyline(tag.geometry.coordinates)
+        break
     }
 
     return layer
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  createAnchor (coordinates: any) {
+    // making sure i get last point in pitch/route for anchor location
+    // comparing first and last item in array and taking the one with bigger latitude
+    // as the anchor point
+    const first = coordinates[0]
+    const last = coordinates[coordinates.length - 1]
+
+    const coords = last[1] > first[1] ? last : first
+
+    return new CircleMarker([coords[1], coords[0]], {
+      radius: 5,
+      stroke: false,
+      fillOpacity: 1,
+      fillColor: 'white'
+    })
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -230,24 +296,23 @@ export class LayerService {
     // and leaflet layers accept first lat then lng :/
     const latLngSwitchedArray: Array<[number, number]> = []
 
-    coordinates.forEach(
-      (coordinate: [number, number]) => {
-        latLngSwitchedArray.push([coordinate[1], coordinate[0]])
-      }
-    )
+    coordinates.forEach((coordinate: [number, number]) => {
+      latLngSwitchedArray.push([coordinate[1], coordinate[0]])
+    })
 
     return new Polyline(latLngSwitchedArray)
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   registerListeners (key: string, feature: Feature) {
-    feature.layer.on('mouseover', (e) => {
-      // highlight layer
-      store.commit('highlight/set', key)
+    feature.layer
+      .on('mouseover', (e) => {
+        // highlight layer
+        store.commit('highlight/set', key)
 
-      // hide tooltip if open
-      e.target.getTooltip() && e.target.closeTooltip()
-    })
+        // hide tooltip if open
+        e.target.getTooltip() && e.target.closeTooltip()
+      })
       .on('mouseout', (e) => {
         // remove highlight when mouse out
         store.commit('highlight/set', null)
@@ -257,10 +322,11 @@ export class LayerService {
       })
       .on('click', (e: LeafletMouseEvent) => {
         if (e.target.getPopup() === undefined) {
-          import(/* webpackChunkName: "popup.service" */'./popup.service').then(
-            ({ default: popupService }) => {
-              popupService.createPopup(feature, e.latlng)
-            })
+          import(
+            /* webpackChunkName: "popup.service" */ './popup.service'
+          ).then(({ default: popupService }) => {
+            popupService.createPopup(feature, e.latlng)
+          })
         }
       })
   }
