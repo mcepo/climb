@@ -1,7 +1,7 @@
 <template>
   <popup :tag='tag' :item='item' type='pitch' :url='url'>
     <template v-slot:header>
-      <v-chip>Pitch</v-chip>
+      <v-card-subtitle class='pa-0'>Pitch</v-card-subtitle>
     </template>
     <template v-slot:item>
       <h2>{{route.name}}</h2>

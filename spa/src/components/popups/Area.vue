@@ -1,7 +1,7 @@
 <template>
   <popup :tag='tag' :item='item' type='area'>
     <template v-slot:header>
-      <v-chip>{{type}}</v-chip>
+      <v-card-subtitle class='pa-0'>{{type}}</v-card-subtitle>
     </template>
     <template v-slot:item>
       <h2>{{item.name}}</h2>

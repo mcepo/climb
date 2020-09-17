@@ -1,16 +1,19 @@
 <template>
   <v-container fluid flat style='padding: 0px 0px 300px 0px'>
     <v-layout column>
-      <div class='d-flex pa-2'>
+      <v-layout class='pa-2 align-center'>
         <v-btn text icon title="Close sidebar" @click.stop="closeDrawer">
           <v-icon>arrow_back</v-icon>
         </v-btn>
-        <h3 class="headline pa-2">
-          {{item.name}}
-        </h3>
+        <v-layout column class='pl-2'>
+          <v-card-subtitle class='pa-0'>{{itemType}}</v-card-subtitle>
+          <v-card-title class='pa-0'>
+            {{item.name}}
+          </v-card-title>
+        </v-layout>
         <v-spacer></v-spacer>
         <item-menu :item='item' :type='type'></item-menu>
-      </div>
+      </v-layout>
       <v-card text>
         <v-card-text>
           <slot name="item-details" />
@@ -105,6 +108,9 @@ export default {
     },
     hasAreas () {
       return typeService.hasAreas(this.type, this.item)
+    },
+    itemType () {
+      return typeService.getTypeName(this.type, this.item.type_id)
     }
   },
   methods: {
