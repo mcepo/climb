@@ -1,16 +1,26 @@
 <template>
-<div class='map'>
-  <v-btn class='map-button'
-    title="Open map"
-    fab
-    small
-    style='position: fixed'
-    @click='openMap()'
-    >
-    <v-icon>map</v-icon>
-  </v-btn>
-  <div id="image-map" class="map"></div>
-</div>
+  <div class='map'>
+    <v-layout column style='position: fixed; height: 90px' class='map-button justify-space-between'>
+      <v-btn
+        title="Toogle tooltips"
+        fab
+        small
+        @click='toogleAllTooltips()'
+        >
+        <v-icon>chat_bubble_outline</v-icon>
+      </v-btn>
+      <v-btn
+        title="Open map"
+        fab
+        small
+        @click='openMap()'
+        >
+        <v-icon>map</v-icon>
+      </v-btn>
+    </v-layout>
+
+    <div id="image-map" class="map"></div>
+  </div>
 </template>
 
 <script>
@@ -42,6 +52,9 @@ export default {
   methods: {
     openMap () {
       this.$router.push(getUrl('image', null))
+    },
+    toogleAllTooltips () {
+      layerService.toggleAllTooltips()
     }
   },
 

@@ -28,6 +28,8 @@ export class LayerService {
 
   private _mapType!: MapType;
 
+  private _tooltipsClosed: boolean;
+
   // record of all the layers so that it will be easier to
   // handle them individually
 
@@ -47,6 +49,8 @@ export class LayerService {
     this._features = new Map()
     this._anchors = new Map()
     this._selected = []
+
+    this._tooltipsClosed = false
 
     this.registerHighlightWatch()
   }
@@ -288,6 +292,22 @@ export class LayerService {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   createMarker (coordinates: any) {
     return new Marker([coordinates[1], coordinates[0]])
+  }
+
+  toggleAllTooltips () {
+    let methodName: string
+
+    if (this._tooltipsClosed) {
+      methodName = 'openTooltip'
+      this._tooltipsClosed = false
+    } else {
+      methodName = 'closeTooltip'
+      this._tooltipsClosed = true
+    }
+
+    this._features.forEach((feature) => {
+      feature.layer[methodName]()
+    })
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
