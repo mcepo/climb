@@ -22,7 +22,7 @@ const tooltipService = {
     this.set(layer, gradeService.forge(item.grades) + ' ' + lengthString(item.length))
   },
   trail ({ layer, item }) {
-    this.set(layer, item.name)
+    this.set(layer, 'Trail')
   }
 
 }

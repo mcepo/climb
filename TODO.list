@@ -2,6 +2,8 @@ TODO: when a sector/mountain side is open add all parent info to it
 
 TODO: trail tooltip
 
+TODO: offline notifications
+
 ---- NOT pressing ----
 
 TODO: on area get altitude borders from parent
@@ -34,5 +36,3 @@ OFFLINE:
   - images - all info
   - map tiles for that area
     - need area borders for map tiles to load + zoom every second zoom starting from most zoomed
-
-  - todo add offline notification

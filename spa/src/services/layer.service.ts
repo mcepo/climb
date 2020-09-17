@@ -193,7 +193,7 @@ export class LayerService {
         this.registerListeners(key, feature)
 
         // adding tooltip only if on image
-        if (this._mapType === 'image' && tooltipService[tag.tagged_type]) {
+        if ((this._mapType === 'image' && tooltipService[tag.tagged_type]) || tag.tagged_type === ItemType.Trail) {
           tooltipService[tag.tagged_type](feature)
         }
 
