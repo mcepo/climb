@@ -14,7 +14,9 @@ module.exports = {
   // note the "build" script in package.json needs to be modified as well.
   outputDir: '../api/public/assets',
 
-  publicPath: '/assets',
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/assets'
+    : '/',
 
   pwa: {
     themeColor: '#42b983',

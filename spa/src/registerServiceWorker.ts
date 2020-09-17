@@ -9,4 +9,5 @@ if ('serviceWorker' in navigator) {
 } else {
   wb = null
 }
+
 export default wb
