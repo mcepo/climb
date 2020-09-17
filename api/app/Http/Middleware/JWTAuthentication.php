@@ -58,6 +58,16 @@ class JWTAuthentication
 
         }
       }
-        return $next($request);
+
+      $response = $next($request);
+      
+      if(!isset($token) && auth()->user()) {
+
+        $jwtToken = auth()->user()->getToken();
+        
+        $response->headers->set('Authorization', 'Bearer ' . $jwtToken);
+      }
+
+      return $response;
     }
 }

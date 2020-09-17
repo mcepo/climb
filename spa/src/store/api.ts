@@ -22,7 +22,19 @@ api.interceptors.request.use(function (config) {
 })
 
 api.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    // if a response from the server has a authentication header
+    // store that header in the store
+    // effectivly logging the user in
+    const authHeader = response.headers.authorization
+
+    if (authHeader) {
+      const token = authHeader.split(' ')[1]
+
+      store.dispatch('auth/login', token)
+    }
+    return response
+  },
   (error: AxiosError) => {
     if (error.response) {
       const message = error.response.data.message || error.response.data

@@ -144,10 +144,7 @@ class User extends AuthUser  implements MustVerifyEmail
         // so i need to get the key and base64 decode it
         $key = base64_decode(explode(':', config('app.key'))[1]);
 
-        return [
-            'token' => JWT::encode($this, $key),
-            'user' => $this
-        ];
+        return JWT::encode($this, $key);
     }
 
     public function sendEmailVerificationMail()

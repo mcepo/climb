@@ -20,8 +20,8 @@ class LoginController extends Controller
       if (!$user = User::getByProviderId($provider, $providerUser->id)) {
         $user = User::registerFromProvider($provider, $providerUser);
       }
-  
-      return response($user->getToken());
+
+      Auth::login($user);
     }
   
     public function login(Request $request)
@@ -41,7 +41,5 @@ class LoginController extends Controller
 
         return response('Please verify your email before using the aplication.', 422);
       }
-
-      return response(auth()->user()->getToken());
     }
 }
