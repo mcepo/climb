@@ -39,6 +39,8 @@ const store = new Vuex.Store<RootState>({
   getters: {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     tags (state: RootState, getters: any): Tag[] {
+      if (getters.loading) return []
+
       return state.url?.params.imageId ? getters['image/tags'] : getters['area/tags']
     },
     imageOpen (state: RootState) {
@@ -55,7 +57,7 @@ const store = new Vuex.Store<RootState>({
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     loading (state: RootState) {
-      return state.area?.loading || state.route?.loading
+      return state.area?.loading || state.route?.loading || state.image?.loading
     },
     breadcrumbs (state, getters) {
       const area = getters['area/get']
