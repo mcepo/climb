@@ -131,8 +131,6 @@ export default Vue.extend({
       // Stash the event so it can be triggered later.
       this.$options.deferredPrompt = e
 
-      alert('got event')
-
       this.hasDeferrerPrompt = true
     })
 
