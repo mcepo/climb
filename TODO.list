@@ -8,8 +8,6 @@ TODO: trail tooltip
 
 TODO: on area get altitude borders from parent
 
-TODO: calculate area bounds on the backend and return it with area
-
 OPTIMIZATION
 
 TODO: review message system, where will user messages come from
