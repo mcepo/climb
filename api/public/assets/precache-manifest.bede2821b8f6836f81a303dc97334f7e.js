@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/css/admin.panel~area.form~moderator.form~route.filters~route.form.dba841c6.css"
   },
   {
-    "revision": "4f148ebc5eb747309d22",
+    "revision": "b6c90a605b58a4ced95e",
     "url": "/assets/css/app.c4150113.css"
   },
   {
@@ -128,8 +128,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/js/admin.panel~area.form~moderator.form~route.filters~route.form.82421ffc.js"
   },
   {
-    "revision": "4f148ebc5eb747309d22",
-    "url": "/assets/js/app.1fa935a5.js"
+    "revision": "b6c90a605b58a4ced95e",
+    "url": "/assets/js/app.d202386e.js"
   },
   {
     "revision": "0621db8bde01be232c4f",
