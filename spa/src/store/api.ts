@@ -36,6 +36,15 @@ api.interceptors.response.use(
     return response
   },
   (error: AxiosError) => {
+    if (store.state.online === false) {
+      store.commit('snackbar/show', 'No internet connection, changes will be saved when connection returns.')
+
+      if (error.response?.config.method === 'PUT') {
+        return Promise.resolve()
+      }
+      return Promise.reject(error)
+    }
+
     if (error.response) {
       const message = error.response.data.message || error.response.data
 
