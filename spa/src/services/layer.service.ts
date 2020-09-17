@@ -203,8 +203,6 @@ export class LayerService {
 
           this._anchors.set(key, anchor)
           this._layerGroup.addLayer(anchor)
-
-          console.log(key)
         }
       }
     })
