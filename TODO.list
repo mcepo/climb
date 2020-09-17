@@ -2,7 +2,9 @@
 
 TODO: when a sector/mountain side is open add all parent info to it
 
-TODO: add install prompt for PWA
+TODO: change menu in top right corner
+  - when logged in stay as is
+  - when logged out add drop down menu with options sign in, register and install app
 
 -- OFFLINE --
 
