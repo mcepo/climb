@@ -1,7 +1,9 @@
-importScripts("/precache-manifest.9787143d7b05080f009e6897ec79f374.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("/assets/precache-manifest.caefbd3ac27367412c00585342017e04.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 
-self.__precacheManifest.push()
+self.__precacheManifest.push({
+  url: '/', revision: Date.now()
+})
 
 self.addEventListener('install', () => self.skipWaiting())
 
@@ -17,15 +19,6 @@ workbox.routing.registerRoute(
   new RegExp('https:\/\/cartodb-basemaps-.*png'),
   new workbox.strategies.StaleWhileRevalidate({
     cacheName: 'cartodb-basemaps'
-  })
-)
-
-// caching app root
-
-workbox.routing.registerRoute(
-  '/',
-  new workbox.strategies.NetworkFirst({
-    cacheName: 'app-root'
   })
 )
 

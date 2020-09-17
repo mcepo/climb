@@ -12,9 +12,9 @@ module.exports = {
 
   // output built static files to Laravel's public dir.
   // note the "build" script in package.json needs to be modified as well.
-  outputDir: '../api/public',
+  outputDir: '../api/public/assets',
 
-  publicPath: '/',
+  publicPath: '/assets',
 
   pwa: {
     themeColor: '#42b983',
@@ -24,18 +24,20 @@ module.exports = {
       // eslint-disable-next-line @typescript-eslint/camelcase
       background_color: '#42b983',
       name: 'Climbers guide',
-      short_name: 'Guide'
+      // eslint-disable-next-line @typescript-eslint/camelcase
+      short_name: 'Climbs'
     },
     workboxPluginMode: 'InjectManifest',
     workboxOptions: {
       swSrc: 'src/service-worker.js',
+      swDest: '../service-worker.js',
       exclude: [/\.html$/]
     }
   },
 
   // modify the location of the generated HTML file.
   indexPath: process.env.NODE_ENV === 'production'
-    ? '../resources/views/index.blade.php'
+    ? '../../resources/views/index.blade.php'
     : 'index.html',
   css: {
     extract: true
