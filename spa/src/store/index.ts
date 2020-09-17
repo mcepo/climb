@@ -50,8 +50,12 @@ const store = new Vuex.Store<RootState>({
     // with key (type+id)
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    hasTag: (state: RootState, getters: any) => (key: string) => {
+    hasTag: (_state: RootState, getters: any) => (key: string) => {
       return getters.tags.some((tag: Tag) => key === (tag.tagged_type + tag.tagged_id))
+    },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    loading (state: RootState) {
+      return state.area?.loading || state.route?.loading
     },
     breadcrumbs (state, getters) {
       const area = getters['area/get']

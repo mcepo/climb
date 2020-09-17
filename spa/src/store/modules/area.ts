@@ -156,6 +156,8 @@ const area: Module<AreaState, RootState> = {
     tags (state: AreaState, getters: any, rootState: RootState, rootGetters: any) {
       const area: Area = getters.get
 
+      if (rootGetters.loading) return []
+
       const tags: Array<Tag> = []
 
       // if area isn't set then get root areas

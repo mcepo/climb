@@ -83,13 +83,15 @@ export class LayerService {
   registerTagsWatch () {
     this._unwatchTags = store.watch(
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (state: RootState, getters: any) => {
+      (_state: RootState, getters: any) => {
         return getters.tags
       },
       (tags: Tag[]) => {
-        this.setSelectedKeys()
+        if (this._map && !store.getters.loading && tags.length !== 0) {
+          this.setSelectedKeys()
 
-        this._map && this.addTagsToView(tags)
+          this.addTagsToView(tags)
+        }
       },
       { immediate: true }
     )
