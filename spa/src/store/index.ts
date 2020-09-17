@@ -25,15 +25,20 @@ export interface RootState {
   drawing: boolean;
   highlight?: HighlightState;
   user?: UserState;
+  online: boolean;
 }
 
 const store = new Vuex.Store<RootState>({
   state: {
-    drawing: false
+    drawing: false,
+    online: navigator.onLine
   },
   mutations: {
     setDrawingMode (state: RootState, drawing: boolean) {
       state.drawing = drawing
+    },
+    updateOnlineStatus (state: RootState, online) {
+      state.online = online
     }
   },
   getters: {
