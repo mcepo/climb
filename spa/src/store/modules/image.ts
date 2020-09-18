@@ -71,13 +71,11 @@ const image: Module<ImageState, RootState> = {
     },
 
     fetch ({ state, commit, dispatch }, id) {
-      if (state.byIds[id]?.fullyLoaded) {
-        return
+      if (!state.byIds[id]?.fullyLoaded) {
+        commit('snackbar/show', 'Loading image...', { root: true })
+
+        commit('loading', true)
       }
-
-      commit('snackbar/show', 'Loading image...', { root: true })
-
-      commit('loading', true)
 
       api
         .get<Image>('image/' + id + '/tags')
@@ -85,9 +83,11 @@ const image: Module<ImageState, RootState> = {
           data.fullyLoaded = true
           dispatch('normalizeData', data)
 
-          commit('snackbar/success', 'Done!', { root: true })
+          state.loading && commit('snackbar/success', 'Done!', { root: true })
+
+          commit('loading', false)
         })
-        .finally(() => {
+        .catch(() => {
           commit('loading', false)
         })
     },

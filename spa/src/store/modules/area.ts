@@ -5,7 +5,7 @@ import api from '../api'
 import { Area, Tag, Route } from '../../models'
 import { normalizeRelations } from '../utils/normalization'
 import entityMutations from './utils/entityMutations'
-import typeService, { AreaDatabaseId } from '@/services/type.service'
+import typeService from '@/services/type.service'
 
 export interface AreaState {
   byIds: Record<string, Area>;
@@ -86,29 +86,26 @@ const area: Module<AreaState, RootState> = {
       area.moderators && dispatch('storeRelation', { items: area.moderators, fun: 'user/add', root: true })
     },
 
-    fetch ({ state, commit, dispatch, rootGetters }, id) {
+    fetch ({ state, commit, dispatch }, id) {
+      // if the area already has all the data loaded then just show the area
+      // and in the background refresh area data
+      // if not show the loading display
       if (state.byIds[id]?.fullyLoaded) {
         commit('loading', false) // just in case, also needed when opening sector
         setTimeout(() => { commit('drawers/setLeft', true, { root: true }) }, 1000)
-        return
+      } else {
+        commit('snackbar/show', 'Loading area...', { root: true })
+        commit('loading', true)
       }
 
-      commit('snackbar/show', 'Loading area...', { root: true })
-
-      commit('loading', true)
-
-      const params = rootGetters['route/filters']
-
       api
-        .get<Area>('area/' + id, {
-          params
-        })
+        .get<Area>('area/' + id)
         .then(({ data }) => {
           data.fullyLoaded = true
 
           dispatch('normalizeData', data)
 
-          commit('snackbar/success', 'Done!', { root: true })
+          state.loading && commit('snackbar/success', 'Done!', { root: true })
 
           commit('drawers/setLeft', true, { root: true })
 

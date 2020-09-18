@@ -44,11 +44,7 @@ api.interceptors.response.use(
         store.commit('snackbar/show', 'No internet connection, changes will be saved when connection returns.')
       }
 
-      if (error.config.method === 'put') {
-        return Promise.resolve()
-      }
-
-      return Promise.reject(error)
+      return Promise.resolve(true)
     }
 
     if (error.response) {

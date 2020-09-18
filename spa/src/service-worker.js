@@ -23,8 +23,15 @@ workbox.routing.registerRoute(
 // caching apps images + thumbnails + data
 
 workbox.routing.registerRoute(
-  new RegExp('\/api\/'),
-  new workbox.strategies.StaleWhileRevalidate({
+  new RegExp('\/api\/image.*'),
+  new workbox.strategies.CacheFirst({
+    cacheName: 'app-images'
+  })
+)
+
+workbox.routing.registerRoute(
+  new RegExp('\/api\/[route|area].*'),
+  new workbox.strategies.NetworkFirst({
     cacheName: 'app-data'
   })
 )
@@ -33,11 +40,11 @@ workbox.routing.registerRoute(
 
 const bgSyncPlugin = new workbox.backgroundSync.Plugin('backgroundSyncQueue', {
   maxRetentionTime: 24 * 60 // Retry for max of 24 Hours (specified in minutes)
-});
+})
 
 const matchCb = /\/api\/.*/
 
-const handleCb =   new workbox.strategies.NetworkOnly({
+const handleCb = new workbox.strategies.NetworkOnly({
   plugins: [bgSyncPlugin]
 })
 
@@ -45,16 +52,16 @@ workbox.routing.registerRoute(
   matchCb,
   handleCb,
   'POST'
-);
+)
 
 workbox.routing.registerRoute(
   matchCb,
   handleCb,
   'PUT'
-);
+)
 
 workbox.routing.registerRoute(
   matchCb,
   handleCb,
   'DELETE'
-);
+)

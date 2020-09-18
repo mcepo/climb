@@ -84,12 +84,11 @@ const route: Module<RouteState, RootState> = {
         setTimeout(() => {
           commit('drawers/setLeft', true, { root: true })
         }, 1000)
-        return
+      } else {
+        commit('snackbar/show', 'Loading route...', { root: true })
+
+        commit('loading', true)
       }
-
-      commit('snackbar/show', 'Loading route...', { root: true })
-
-      commit('loading', true)
 
       api
         .get<Route>('route/' + id)
@@ -100,8 +99,10 @@ const route: Module<RouteState, RootState> = {
           commit('snackbar/success', 'Done!', { root: true })
 
           dispatch('area/fetch', data.area_id, { root: true })
+
+          commit('loading', false)
         })
-        .finally(() => {
+        .catch(() => {
           commit('loading', false)
         })
     },
@@ -128,8 +129,10 @@ const route: Module<RouteState, RootState> = {
           })
 
           commit('snackbar/success', 'Done!', { root: true })
+
+          commit('loading', false)
         })
-        .finally(() => {
+        .catch(() => {
           commit('loading', false)
         })
     }
