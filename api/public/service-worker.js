@@ -1,4 +1,4 @@
-importScripts("/assets/precache-manifest.741ed594e672c12de3e68275c67e3644.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("/assets/precache-manifest.8639955ed1d63daaf86470d132402ad6.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 
 self.__precacheManifest.push({
@@ -25,8 +25,15 @@ workbox.routing.registerRoute(
 // caching apps images + thumbnails + data
 
 workbox.routing.registerRoute(
-  new RegExp('\/api\/'),
-  new workbox.strategies.StaleWhileRevalidate({
+  new RegExp('\/api\/image.*'),
+  new workbox.strategies.CacheFirst({
+    cacheName: 'app-images'
+  })
+)
+
+workbox.routing.registerRoute(
+  new RegExp('\/api\/[route|area].*'),
+  new workbox.strategies.NetworkFirst({
     cacheName: 'app-data'
   })
 )
@@ -35,11 +42,11 @@ workbox.routing.registerRoute(
 
 const bgSyncPlugin = new workbox.backgroundSync.Plugin('backgroundSyncQueue', {
   maxRetentionTime: 24 * 60 // Retry for max of 24 Hours (specified in minutes)
-});
+})
 
 const matchCb = /\/api\/.*/
 
-const handleCb =   new workbox.strategies.NetworkOnly({
+const handleCb = new workbox.strategies.NetworkOnly({
   plugins: [bgSyncPlugin]
 })
 
@@ -47,16 +54,17 @@ workbox.routing.registerRoute(
   matchCb,
   handleCb,
   'POST'
-);
+)
 
 workbox.routing.registerRoute(
   matchCb,
   handleCb,
   'PUT'
-);
+)
 
 workbox.routing.registerRoute(
   matchCb,
   handleCb,
   'DELETE'
-);
+)
+
