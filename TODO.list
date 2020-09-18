@@ -11,8 +11,6 @@ TODO: change menu in top right corner
   - when logged in stay as is
   - when logged out add drop down menu with options sign in, register and install app
 
-TODO: add climbing icons instead of vue icon
-
 -- OFFLINE --
 
 TODO: add store for offline use button, then cache:
