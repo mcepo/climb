@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/css/admin.panel~area.form~moderator.form~route.filters~route.form.dba841c6.css"
   },
   {
-    "revision": "5b0d2c98d57a232249e7",
+    "revision": "4604b206da45486a0085",
     "url": "/assets/css/app.c4150113.css"
   },
   {
@@ -40,10 +40,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/css/route.filters.09316a61.css"
   },
   {
-    "revision": "a60026a4f245e1a7969ca5414f7cff5c",
-    "url": "/assets/favicon.ico"
-  },
-  {
     "revision": "0509ab09c1b0d2200a4135803c91d6ce",
     "url": "/assets/fonts/MaterialIcons-Regular.0509ab09.woff2"
   },
@@ -60,64 +56,44 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/fonts/MaterialIcons-Regular.da4ea5cd.ttf"
   },
   {
-    "revision": "ddb7c5481bfd7b0b195968b7f32183a7",
+    "revision": "7d0700216832383622db3731ed4a013a",
     "url": "/assets/img/icons/android-chrome-192x192.png"
   },
   {
-    "revision": "3423520ddd22b96b64e4c971a037222a",
-    "url": "/assets/img/icons/android-chrome-512x512.png"
+    "revision": "03604990a048ecaf09bcc6656d5a34be",
+    "url": "/assets/img/icons/android-chrome-384x384.png"
   },
   {
-    "revision": "d0fe9adfe02defe8af98dc3916869a21",
-    "url": "/assets/img/icons/android-chrome-maskable-192x192.png"
-  },
-  {
-    "revision": "fcd3d3d32e7527a1480dd112bb78f0b0",
-    "url": "/assets/img/icons/android-chrome-maskable-512x512.png"
-  },
-  {
-    "revision": "e0c5d5ec6914702c1e6bd55c7b6480a9",
-    "url": "/assets/img/icons/apple-touch-icon-120x120.png"
-  },
-  {
-    "revision": "338b704341574f781ccdc948d0e28a9d",
-    "url": "/assets/img/icons/apple-touch-icon-152x152.png"
-  },
-  {
-    "revision": "36bf3b610f1dc742077f4d5232eef3ae",
-    "url": "/assets/img/icons/apple-touch-icon-180x180.png"
-  },
-  {
-    "revision": "0bc3a37def3911004e3d4a9e2e80ff31",
-    "url": "/assets/img/icons/apple-touch-icon-60x60.png"
-  },
-  {
-    "revision": "c6100c214dd8e72ff9c66738544a462b",
-    "url": "/assets/img/icons/apple-touch-icon-76x76.png"
-  },
-  {
-    "revision": "636ffd815a77ecae44ccf9cc9d1ed912",
+    "revision": "b21bdc50fa970e53376f14cb3ae351bf",
     "url": "/assets/img/icons/apple-touch-icon.png"
   },
   {
-    "revision": "cd276763a2ff79653c5eb0add0eda39a",
+    "revision": "78f8df00849bbaa31dae742f0d38c47f",
+    "url": "/assets/img/icons/climbing-icon-13.jpg"
+  },
+  {
+    "revision": "4efc69e96fe9c55fedbf5978badc8207",
     "url": "/assets/img/icons/favicon-16x16.png"
   },
   {
-    "revision": "bd8f99d2ecdb150dff2b1f416acadb29",
+    "revision": "cd2219dc276616b42c29215acfdb428d",
     "url": "/assets/img/icons/favicon-32x32.png"
   },
   {
-    "revision": "8d61edc430de872cacedc3fca63c3034",
-    "url": "/assets/img/icons/msapplication-icon-144x144.png"
+    "revision": "a6c8e3095798c1d718d61f370625261a",
+    "url": "/assets/img/icons/favicon.ico"
   },
   {
-    "revision": "f95429dfc6ab2b11f69c8beb5dcebbeb",
+    "revision": "59e149a0a04671a7fa53be6621aabd79",
     "url": "/assets/img/icons/mstile-150x150.png"
   },
   {
-    "revision": "4e857233cbd3bb2d2db4f78bed62a52f",
+    "revision": "2fcaacbc84831e4b342dca8995886778",
     "url": "/assets/img/icons/safari-pinned-tab.svg"
+  },
+  {
+    "revision": "83f6e378200871a98354532618614ba0",
+    "url": "/assets/img/icons/site.webmanifest"
   },
   {
     "revision": "91dc7a35a8e7d71be21a",
@@ -128,8 +104,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/js/admin.panel~area.form~moderator.form~route.filters~route.form.82421ffc.js"
   },
   {
-    "revision": "5b0d2c98d57a232249e7",
-    "url": "/assets/js/app.9cfd7d61.js"
+    "revision": "4604b206da45486a0085",
+    "url": "/assets/js/app.1a5226dc.js"
   },
   {
     "revision": "0621db8bde01be232c4f",
@@ -180,7 +156,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/js/route.form.2ebb3852.js"
   },
   {
-    "revision": "63ffc1d4d2809d1d5e636526144f3e35",
+    "revision": "3afbc1e9a2d88bdb515742f0cbf727ed",
     "url": "/assets/manifest.json"
   },
   {
