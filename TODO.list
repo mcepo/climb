@@ -1,11 +1,10 @@
 -- FIXES --
 
-TODO: check how app behaves when i post/put in offline mode messaging and 
-apearance in generale
+TODO: add notification when work is syncronized
 
 -- FEATURES --
 
--- OFFLINE --
+-- OFFLINE PRECACHE on button click --
 
 TODO: add store for offline use button, then cache:
   - store for offline use -
