@@ -163,11 +163,6 @@ const area: Module<AreaState, RootState> = {
     tags (state: AreaState, getters: any, rootState: RootState, rootGetters: any) {
       let area: Area = getters.get
 
-      // if an area has to load a parent then show parent tags on the map
-      if (typeService.mustLoadParent(area)) {
-        area = state.byIds[area.parent_id]
-      }
-
       const tags: Array<Tag> = []
 
       // if area isn't set then get root areas
@@ -180,6 +175,11 @@ const area: Module<AreaState, RootState> = {
         })
 
         return tags
+      }
+
+      // if an area has to load a parent then show parent tags on the map
+      if (typeService.mustLoadParent(area)) {
+        area = state.byIds[area.parent_id]
       }
 
       if (area.map_tag) {
