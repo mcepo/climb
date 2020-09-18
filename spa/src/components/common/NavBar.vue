@@ -116,11 +116,8 @@ export default Vue.extend({
         this.$store.commit('drawers/setRight', value)
       }
     },
-    isMobile () {
-      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
-    },
     installable () {
-      return this.isMobile && !this.installed && this.hasDeferrerPrompt
+      return !this.installed && this.hasDeferrerPrompt
     }
   },
 
