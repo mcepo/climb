@@ -162,7 +162,7 @@ export default {
 
       openInGoogle () {
         const coordinates = this.item.map_tag.geometry.coordinates
-        const win = window.open('https://www.google.com/maps/dir/?api=1&destination=' + coordinates[1] + ',' + coordinates[0], '_blank')
+        const win = window.open('https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=' + coordinates[1] + ',' + coordinates[0], '_blank')
         win.focus()
       },
 
