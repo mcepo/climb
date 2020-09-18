@@ -24,7 +24,6 @@
       <v-menu
         left
         bottom
-        v-if='checkAuth()'
         :close-on-click='true'
         :close-on-content-click="true"
         z-index='901'
@@ -35,13 +34,13 @@
             v-bind="attrs"
             v-on="on"
           >
-            <v-icon>perm_identity</v-icon>
+            <v-icon>more_vert</v-icon>
           </v-btn>
         </template>
 
-        <v-list>
+        <v-list v-if='checkAuth()'>
           <v-list-item>
-            <v-list-item-title>{{getUserName()}}</v-list-item-title>
+            <v-list-item-title><v-icon>perm_identity</v-icon>{{getUserName()}}</v-list-item-title>
           </v-list-item>
           <v-divider></v-divider>
           <v-list-item @click="openAuthorizedForm({form: {component: 'change-password-form', params: null}})">
@@ -58,11 +57,17 @@
             <v-list-item-title><v-icon>build</v-icon>Admin area</v-list-item-title>
           </v-list-item>
         </v-list>
-      </v-menu>
 
-      <v-btn v-else text title="Sign in" @click.stop="openForm({component: 'login-form', params: null})">
-        Sign in
-      </v-btn>
+        <v-list v-else>
+          <v-list-item @click="openForm({component: 'login-form', params: null})">
+            <v-list-item-title>Sign in / Register</v-list-item-title>
+          </v-list-item>
+          <v-divider v-if='installable'></v-divider>
+          <v-list-item v-if='installable' @click='installApp()'>
+            <v-list-item-title><v-icon>mobile_friendly</v-icon>Install app</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
 
     </v-app-bar>
       <!-- has to have z-index in style, can't be a class because it get run over -->
