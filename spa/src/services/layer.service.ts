@@ -170,6 +170,7 @@ export class LayerService {
 
   addTagsToView (tags: Tag[]) {
     this.removeLayers()
+    this._tooltipsClosed = false
 
     tags.forEach((tag: Tag) => {
       const item =
