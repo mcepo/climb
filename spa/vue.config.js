@@ -27,7 +27,10 @@ module.exports = {
       background_color: '#42b983',
       name: 'Climbers guide',
       // eslint-disable-next-line @typescript-eslint/camelcase
-      short_name: 'Climbs'
+      short_name: 'Guide',
+      description: 'Community mainteined online climbers guide. Complete with topo images and gps locations',
+      // eslint-disable-next-line @typescript-eslint/camelcase
+      start_url: '/'
     },
     workboxPluginMode: 'InjectManifest',
     workboxOptions: {
