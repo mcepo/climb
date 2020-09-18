@@ -47,6 +47,10 @@ export interface AreaType {
 
   // can have google directions link
   directions: boolean;
+
+  // for some area types to make sense i need to load their parent
+  // such as Sector or a Mountain side, because trails are usually there
+  loadParent: boolean;
 }
 
 export enum RouteDatabaseId {
@@ -119,7 +123,8 @@ export default {
         AreaDatabaseId.Mountain,
         AreaDatabaseId.MountainSide
       ],
-      directions: false
+      directions: false,
+      loadParent: false
     } as AreaType,
     {
       databaseId: AreaDatabaseId.Area,
@@ -139,7 +144,8 @@ export default {
         AreaDatabaseId.Mountain,
         AreaDatabaseId.MountainSide
       ],
-      directions: false
+      directions: false,
+      loadParent: false
     } as AreaType,
     {
       databaseId: AreaDatabaseId.Mountain,
@@ -154,7 +160,8 @@ export default {
       routes: false,
       currentLocationTag: false,
       parenting: [AreaDatabaseId.Crag, AreaDatabaseId.MountainSide],
-      directions: true
+      directions: true,
+      loadParent: false
     } as AreaType,
     {
       databaseId: AreaDatabaseId.MountainSide,
@@ -168,7 +175,8 @@ export default {
       routes: true,
       currentLocationTag: false,
       parenting: [AreaDatabaseId.Crag, AreaDatabaseId.Sector],
-      directions: false
+      directions: false,
+      loadParent: true
     } as AreaType,
     {
       databaseId: AreaDatabaseId.ClimbingSite,
@@ -183,7 +191,8 @@ export default {
       routes: false,
       currentLocationTag: false,
       parenting: [AreaDatabaseId.Crag],
-      directions: false
+      directions: false,
+      loadParent: false
     } as AreaType,
     {
       databaseId: AreaDatabaseId.Crag,
@@ -198,7 +207,8 @@ export default {
       routes: true,
       currentLocationTag: true,
       parenting: [AreaDatabaseId.Sector],
-      directions: true
+      directions: true,
+      loadParent: false
     } as AreaType,
     {
       databaseId: AreaDatabaseId.Sector,
@@ -212,7 +222,8 @@ export default {
       routes: true,
       currentLocationTag: true,
       parenting: [],
-      directions: false
+      directions: false,
+      loadParent: true
     } as AreaType
   ],
   route: [
@@ -288,6 +299,11 @@ export default {
     return this.area.filter(a => {
       return parentType?.parenting.includes(a.databaseId)
     }).map(a => this.shapeTypeForSelect(a))
+  },
+
+  mustLoadParent (item: Area) {
+    const itemType: AreaType = this.find(ItemType.Area, item.type_id)
+    return itemType.loadParent
   },
 
   getTypeName (type: ItemType, id: AreaDatabaseId|RouteDatabaseId) {

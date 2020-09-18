@@ -18,7 +18,7 @@ export default {
     areas () {
       const areas = []
 
-      this.areaIds.forEach((id) => {
+      this.areaIds && this.areaIds.forEach((id) => {
         const area = this.$store.state.area.byIds[id]
 
         area && areas.push(area)

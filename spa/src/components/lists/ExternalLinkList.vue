@@ -25,7 +25,7 @@ export default {
   props: ['links'],
   computed: {
     hasAny () {
-      return this.links.length !== 0
+      return this.links && this.links.length !== 0
     }
   }
 }

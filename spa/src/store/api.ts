@@ -37,7 +37,12 @@ api.interceptors.response.use(
   },
   (error: AxiosError) => {
     if (store.state.online === false) {
-      store.commit('snackbar/show', 'No internet connection, changes will be saved when connection returns.')
+      if (error.config.method === 'get') {
+        router.back()
+        store.commit('snackbar/error', 'Resource unavailable, working offline.')
+      } else {
+        store.commit('snackbar/show', 'No internet connection, changes will be saved when connection returns.')
+      }
 
       if (error.config.method === 'put') {
         return Promise.resolve()

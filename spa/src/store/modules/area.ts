@@ -5,6 +5,7 @@ import api from '../api'
 import { Area, Tag, Route } from '../../models'
 import { normalizeRelations } from '../utils/normalization'
 import entityMutations from './utils/entityMutations'
+import typeService, { AreaDatabaseId } from '@/services/type.service'
 
 export interface AreaState {
   byIds: Record<string, Area>;
@@ -87,6 +88,7 @@ const area: Module<AreaState, RootState> = {
 
     fetch ({ state, commit, dispatch, rootGetters }, id) {
       if (state.byIds[id]?.fullyLoaded) {
+        commit('loading', false) // just in case, also needed when opening sector
         setTimeout(() => { commit('drawers/setLeft', true, { root: true }) }, 1000)
         return
       }
@@ -109,8 +111,13 @@ const area: Module<AreaState, RootState> = {
           commit('snackbar/success', 'Done!', { root: true })
 
           commit('drawers/setLeft', true, { root: true })
-        })
-        .finally(() => {
+
+          if (typeService.mustLoadParent(data)) {
+            dispatch('fetch', data.parent_id)
+          } else {
+            commit('loading', false)
+          }
+        }).catch(() => {
           commit('loading', false)
         })
     },
@@ -154,7 +161,12 @@ const area: Module<AreaState, RootState> = {
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     tags (state: AreaState, getters: any, rootState: RootState, rootGetters: any) {
-      const area: Area = getters.get
+      let area: Area = getters.get
+
+      // if an area has to load a parent then show parent tags on the map
+      if (typeService.mustLoadParent(area)) {
+        area = state.byIds[area.parent_id]
+      }
 
       const tags: Array<Tag> = []
 
