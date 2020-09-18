@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/css/admin.panel~area.form~moderator.form~route.filters~route.form.dba841c6.css"
   },
   {
-    "revision": "4604b206da45486a0085",
+    "revision": "4f8dc3bca556223ac33f",
     "url": "/assets/css/app.c4150113.css"
   },
   {
@@ -92,10 +92,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/img/icons/safari-pinned-tab.svg"
   },
   {
-    "revision": "83f6e378200871a98354532618614ba0",
-    "url": "/assets/img/icons/site.webmanifest"
-  },
-  {
     "revision": "91dc7a35a8e7d71be21a",
     "url": "/assets/js/admin.panel.4ff267f4.js"
   },
@@ -104,8 +100,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/js/admin.panel~area.form~moderator.form~route.filters~route.form.82421ffc.js"
   },
   {
-    "revision": "4604b206da45486a0085",
-    "url": "/assets/js/app.1a5226dc.js"
+    "revision": "4f8dc3bca556223ac33f",
+    "url": "/assets/js/app.2a9a7fa4.js"
   },
   {
     "revision": "0621db8bde01be232c4f",
