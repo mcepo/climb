@@ -27,10 +27,22 @@ module.exports = {
       background_color: '#42b983',
       name: 'Climbers guide',
       // eslint-disable-next-line @typescript-eslint/camelcase
-      short_name: 'Guide',
+      short_name: 'Climbers guide',
       description: 'Community mainteined online climbers guide. Complete with topo images and gps locations',
       // eslint-disable-next-line @typescript-eslint/camelcase
-      start_url: '/'
+      start_url: '/',
+      icons: [
+        {
+          src: '/assets/img/icons/android-chrome-192x192.png?v=dLXnEKLwoR',
+          sizes: '192x192',
+          type: 'image/png'
+        },
+        {
+          src: '/assets/img/icons/android-chrome-384x384.png?v=dLXnEKLwoR',
+          sizes: '384x384',
+          type: 'image/png'
+        }
+      ]
     },
     workboxPluginMode: 'InjectManifest',
     workboxOptions: {
