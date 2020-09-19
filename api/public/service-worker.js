@@ -1,4 +1,4 @@
-importScripts("/assets/precache-manifest.8639955ed1d63daaf86470d132402ad6.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("/assets/precache-manifest.868b174ad52edbb2a1ba5ac61ed94345.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 
 self.__precacheManifest.push({
@@ -22,19 +22,30 @@ workbox.routing.registerRoute(
   })
 )
 
-// caching apps images + thumbnails + data
+// all application data
 
 workbox.routing.registerRoute(
-  new RegExp('\/api\/image.*'),
-  new workbox.strategies.CacheFirst({
-    cacheName: 'app-images'
+  new RegExp('\/api\/(route|area).*'),
+  new workbox.strategies.NetworkFirst({
+    cacheName: 'app-data'
   })
 )
 
+// image tags data
+
 workbox.routing.registerRoute(
-  new RegExp('\/api\/[route|area].*'),
+  new RegExp('\/api\/image\/\\d+\/tags'),
   new workbox.strategies.NetworkFirst({
     cacheName: 'app-data'
+  })
+)
+
+// caching apps images + thumbnails
+
+workbox.routing.registerRoute(
+  new RegExp('\/api\/image\/\\d+($|\/thumbnail)'),
+  new workbox.strategies.CacheFirst({
+    cacheName: 'app-images'
   })
 )
 
