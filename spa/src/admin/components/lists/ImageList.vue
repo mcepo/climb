@@ -42,13 +42,13 @@ export default {
   },
   methods: {
     verifyImage (image) {
-      this.$store.commit('snackbar/show', 'Updating image ... ', { root: true })
+      this.$store.dispatch('snackbar/show', 'Updating image ... ', { root: true })
 
       api
         .get('admin/imageReviewed/' + image.id)
         .then(() => {
           this.$store.commit('image/add', image, { root: true })
-          this.$store.commit('snackbar/success', 'Image approved!', { root: true })
+          this.$store.dispatch('snackbar/success', 'Image approved!', { root: true })
         })
 
       // update image reviewer_id in image object

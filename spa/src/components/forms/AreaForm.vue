@@ -124,7 +124,7 @@ export default {
     },
     submit () {
       if (this.area && this.area.id) {
-        this.$store.commit('snackbar/show', 'Updating area ... ')
+        this.$store.dispatch('snackbar/show', 'Updating area ... ')
         api.put('area/' + this.area.id, this.formData)
           .then(
             () => {
@@ -135,7 +135,7 @@ export default {
             }
           )
       } else {
-        this.$store.commit('snackbar/show', 'Adding area ... ')
+        this.$store.dispatch('snackbar/show', 'Adding area ... ')
         // eslint-disable-next-line @typescript-eslint/camelcase
         this.formData.parent_id = this.parent?.id || null
         api.post(ItemType.Area, this.formData)
@@ -155,7 +155,7 @@ export default {
     },
     afterSubmit (area) {
       this.$store.commit('area/add', area)
-      this.$store.commit('snackbar/success', 'Changes stored!')
+      this.$store.dispatch('snackbar/success', 'Changes stored!')
       if (this.$vuetify.breakpoint.xs) {
         this.$store.commit('drawers/setRight', false)
       }

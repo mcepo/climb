@@ -60,7 +60,7 @@ export default {
   methods: {
 
     showLocation () {
-      this.$store.commit('snackbar/show', 'Getting location,<br>this may take some time ...')
+      this.$store.dispatch('snackbar/show', 'Getting location,<br>this may take some time ...')
 
       geolocationService.registerWatch(this.moveMarker)
 

@@ -58,7 +58,7 @@ export default {
       api.post('/change_password/', this.formData)
         .then(() => {
           this.$store.dispatch('form/close')
-          this.$store.commit('snackbar/success', 'Password succesfully changed')
+          this.$store.dispatch('snackbar/success', 'Password succesfully changed')
         })
     }
   }

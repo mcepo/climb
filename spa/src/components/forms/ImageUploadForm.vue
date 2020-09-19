@@ -166,23 +166,23 @@ export default {
 
         // Filter system files or hide files
         if (/(\/|^)(Thumbs\.db|desktop\.ini|\..+)$/.test(newFile.name)) {
-          this.$store.commit('snackbar/error', 'Forbidden file type.')
+          this.$store.dispatch('snackbar/error', 'Forbidden file type.')
           return prevent()
         }
 
         // Filter php html js file
         if (/\.(php5?|html?|jsx?)$/i.test(newFile.name)) {
-          this.$store.commit('snackbar/error', 'Forbidden file type.')
+          this.$store.dispatch('snackbar/error', 'Forbidden file type.')
           return prevent()
         }
 
         if (newFile.size < this.minSize) {
-          this.$store.commit('snackbar/error', 'Image low quality.')
+          this.$store.dispatch('snackbar/error', 'Image low quality.')
           return prevent()
         }
 
         if (newFile.size > this.maxSize) {
-          this.$store.commit('snackbar/error', 'Image too big, max 30MB.')
+          this.$store.dispatch('snackbar/error', 'Image too big, max 30MB.')
           return prevent()
         }
       }
@@ -210,7 +210,7 @@ export default {
 
         if (newFile.error && !oldFile.error) {
           // don't think this will ever run, because i'm not setting any errors anywhere
-          this.$store.commit('snackbar/error', 'Error occurred while uploading one of the images')
+          this.$store.dispatch('snackbar/error', 'Error occurred while uploading one of the images')
         }
 
         if (newFile.success && !oldFile.success) {
@@ -218,7 +218,7 @@ export default {
 
           this.$store.commit(this.type + '/appendImage', { id: this.id, imageId: newFile.response.id })
 
-          this.$store.commit('snackbar/success', 'Image uploaded.')
+          this.$store.dispatch('snackbar/success', 'Image uploaded.')
 
           this.$refs.upload.remove(newFile)
         }
@@ -231,7 +231,7 @@ export default {
 
     onEditorFile () {
       if (!this.$refs.upload.features.html5) {
-        this.$store.commit('snackbar/error', 'Your browser does not support this feature')
+        this.$store.dispatch('snackbar/error', 'Your browser does not support this feature')
         this.editFile.show = false
         return
       }

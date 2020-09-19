@@ -55,7 +55,7 @@ class DrawingService {
       // if there is no map stop drawing
       if (!this.setMapAndType(type)) return
 
-      store.commit('snackbar/show', 'Adding tag for ' + (item?.name || type))
+      store.dispatch('snackbar/show', 'Adding tag for ' + (item?.name || type))
 
       store.commit('setDrawingMode', true)
 
@@ -78,7 +78,7 @@ class DrawingService {
     const key = type + item.id
 
     if (!layerService.hasTag(key)) {
-      store.commit('snackbar/show', "Tag doesn't exist!")
+      store.dispatch('snackbar/show', "Tag doesn't exist!")
       return
     }
 
@@ -94,7 +94,7 @@ class DrawingService {
 
         this._item = item
 
-        store.commit('snackbar/show', 'Editing tag for ' + (item.name || type))
+        store.dispatch('snackbar/show', 'Editing tag for ' + (item.name || type))
 
         store.commit('setDrawingMode', true)
 
@@ -110,7 +110,7 @@ class DrawingService {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setTagAtCurrentLocation (type: TaggedType, item: any) {
-    store.commit('snackbar/show', "Tagging '" + item.name + "' at your current location<br/>Depending on your device/browser, this may take some time ...")
+    store.dispatch('snackbar/show', "Tagging '" + item.name + "' at your current location<br/>Depending on your device/browser, this may take some time ...")
 
     const key = type + item.id
 
@@ -136,7 +136,7 @@ class DrawingService {
             if (!position) return
 
             if (position.coords.accuracy > 100) {
-              store.commit('snackbar/error', 'Location accuracy too low (' + position.coords.accuracy + ' m)')
+              store.dispatch('snackbar/error', 'Location accuracy too low (' + position.coords.accuracy + ' m)')
               return
             }
 
@@ -212,7 +212,7 @@ class DrawingService {
       ({ data }) => {
         store.commit('trail/add', data)
         store.commit('area/appendTrail', { id: data.area_id, trailId: data.id })
-        store.commit('snackbar/success', 'Tag stored')
+        store.dispatch('snackbar/success', 'Tag stored')
       })
       .catch(() => {
         this.discardLayer()
@@ -223,7 +223,7 @@ class DrawingService {
   }
 
   storeTag (tag?: Tag) {
-    store.commit('snackbar/show', 'Storing tag')
+    store.dispatch('snackbar/show', 'Storing tag')
 
     const request = tag || this.createRequest()
 
@@ -238,7 +238,7 @@ class DrawingService {
 
     apiCall
       .then(({ data }) => {
-        store.commit('snackbar/success', 'Tag stored')
+        store.dispatch('snackbar/success', 'Tag stored')
 
         if (data && request.id == null) request.id = data
 
@@ -281,7 +281,7 @@ class DrawingService {
 
     store.commit('setDrawingMode', false)
 
-    store.commit('snackbar/error', 'Changes discarded!')
+    store.dispatch('snackbar/error', 'Changes discarded!')
   }
 }
 

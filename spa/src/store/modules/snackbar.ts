@@ -1,10 +1,13 @@
 import { Module } from 'vuex'
 import { RootState } from '..'
 
-interface SnackbarState {
+interface SnackbarMessage {
   text: string;
   status: 'show' | 'error' | 'success';
-  show: boolean;
+}
+
+interface SnackbarState {
+  queue: Array<SnackbarMessage>;
 }
 
 interface ErrorMessage {
@@ -17,62 +20,70 @@ const namespaced = true
 const snackbar: Module<SnackbarState, RootState> = {
   namespaced,
   state: {
-    text: '',
-    status: 'show',
-    show: false
+    queue: []
+  },
+  getters: {
+    get (state: SnackbarState) {
+      return state.queue.length !== 0 ? state.queue[0] : null
+    }
   },
   mutations: {
-    show (state: SnackbarState, text: string) {
-      state.text = text
-      state.status = 'show'
-      state.show = true
-    },
-    error (state: SnackbarState, text: string) {
-      state.text = text
-      state.status = 'error'
-      state.show = true
-    },
-    success (state: SnackbarState, text: string) {
-      state.text = text
-      state.status = 'success'
-      state.show = true
-    },
-    close (state: SnackbarState) {
-      state.show = false
+
+    push (state, snackbarMessage: SnackbarMessage) {
+      state.queue.push(snackbarMessage)
     },
 
-    throwError (state: SnackbarState, status: ErrorMessage) {
-      state.status = 'error'
-      state.show = true
+    pop (state) {
+      state.queue.shift()
+    }
+  },
+  actions: {
+    show ({ commit }, message: string) {
+      commit('push', { message, status: 'show' })
+    },
+    error ({ commit }, message: string) {
+      commit('push', { message, status: 'error' })
+    },
+    success ({ commit }, message: string) {
+      commit('push', { message, status: 'success' })
+    },
+
+    throwError ({ commit }, status: ErrorMessage) {
+      const snackbarMessage = {
+        status: 'error',
+        message: ''
+      }
 
       if (status.message && status.message !== '') {
-        state.text = status.message
+        snackbarMessage.message = status.message
         return
       }
 
       switch (status.code) {
         case 400:
-          state.text = 'Failed login attempt.'
+          snackbarMessage.message = 'Failed login attempt.'
           break
         case 401:
-          state.text =
+          snackbarMessage.message =
             'You have to have an active account<br>and be logged in to perform this action.'
           break
         case 403:
-          state.text = "You don't have permissions to perform this action."
+          snackbarMessage.message = "You don't have permissions to perform this action."
           break
         case 404:
-          state.text = "Requested resource wasn't found."
+          snackbarMessage.message = "Requested resource wasn't found."
           break
         case 500:
-          state.text = 'Internal server error! Will look into it :).'
+          snackbarMessage.message = 'Internal server error! Will look into it :).'
           break
         case 409:
-          state.text = 'Seems this email is already taken.'
+          snackbarMessage.message = 'Seems this email is already taken.'
           break
         default:
-          state.text = 'Well this is awkward :/'
+          snackbarMessage.message = 'Well this is awkward :/'
       }
+
+      commit('push', snackbarMessage)
     }
   }
 }

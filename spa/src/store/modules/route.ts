@@ -85,7 +85,7 @@ const route: Module<RouteState, RootState> = {
           commit('drawers/setLeft', true, { root: true })
         }, 1000)
       } else {
-        commit('snackbar/show', 'Loading route...', { root: true })
+        dispatch('snackbar/show', 'Loading route...', { root: true })
 
         commit('loading', true)
       }
@@ -96,7 +96,7 @@ const route: Module<RouteState, RootState> = {
           data.fullyLoaded = true
           dispatch('normalizeData', data)
 
-          commit('snackbar/success', 'Done!', { root: true })
+          dispatch('snackbar/success', 'Done!', { root: true })
 
           dispatch('area/fetch', data.area_id, { root: true })
 
@@ -106,7 +106,7 @@ const route: Module<RouteState, RootState> = {
           commit('loading', false)
         })
     },
-    loadFiltered ({ commit, getters }, filters = null) {
+    loadFiltered ({ commit, getters, dispatch }, filters = null) {
       commit('loading', true)
 
       filters && commit('setFilters', filters)
@@ -115,7 +115,7 @@ const route: Module<RouteState, RootState> = {
 
       params.offset = getters.getFiltered.length
 
-      commit('snackbar/show', 'Loading routes ...', { root: true })
+      dispatch('snackbar/show', 'Loading routes ...', { root: true })
 
       api
         .get<Route[]>('route', {
@@ -128,7 +128,7 @@ const route: Module<RouteState, RootState> = {
             commit('add', route)
           })
 
-          commit('snackbar/success', 'Done!', { root: true })
+          dispatch('snackbar/success', 'Done!', { root: true })
 
           commit('loading', false)
         })

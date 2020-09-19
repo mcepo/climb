@@ -55,7 +55,7 @@ const auth: Module<AuthState, RootState> = {
 
       commit('login', auth)
       setAuthToStorage(auth)
-      commit('snackbar/success', 'Successfully logged in!', { root: true })
+      dispatch('snackbar/success', 'Successfully logged in!', { root: true })
       dispatch('form/close', null, { root: true })
     },
     logout ({ commit }) {
@@ -98,7 +98,7 @@ const auth: Module<AuthState, RootState> = {
     unauthorized (store, error) {
       const code = parseInt(error.message)
 
-      store.commit('snackbar/throwError', { code }, { root: true })
+      store.dispatch('snackbar/throwError', { code }, { root: true })
 
       if (code === 401) {
         store.dispatch(

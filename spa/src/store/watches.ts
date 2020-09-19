@@ -29,12 +29,12 @@ function registerRouteWatch (store: Store<RootState>) {
 function registerOnlineWatch (store: Store<RootState>) {
   window.addEventListener('online', () => {
     store.commit('updateOnlineStatus', true)
-    store.commit('snackbar/success', 'Online!')
+    store.dispatch('snackbar/success', 'Online!')
   })
 
   window.addEventListener('offline', () => {
     store.commit('updateOnlineStatus', false)
-    store.commit('snackbar/error', 'Working offline!')
+    store.dispatch('snackbar/error', 'Working offline!')
   })
 }
 

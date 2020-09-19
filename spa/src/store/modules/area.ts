@@ -94,7 +94,7 @@ const area: Module<AreaState, RootState> = {
         commit('loading', false) // just in case, also needed when opening sector
         setTimeout(() => { commit('drawers/setLeft', true, { root: true }) }, 1000)
       } else {
-        commit('snackbar/show', 'Loading area...', { root: true })
+        dispatch('snackbar/show', 'Loading area...', { root: true })
         commit('loading', true)
       }
 
@@ -105,7 +105,7 @@ const area: Module<AreaState, RootState> = {
 
           dispatch('normalizeData', data)
 
-          state.loading && commit('snackbar/success', 'Done!', { root: true })
+          state.loading && dispatch('snackbar/success', 'Done!', { root: true })
 
           commit('drawers/setLeft', true, { root: true })
 
@@ -118,14 +118,12 @@ const area: Module<AreaState, RootState> = {
           commit('loading', false)
         })
     },
-    fetchRootAreas ({ state, commit }) {
+    fetchRootAreas ({ state, commit, dispatch }) {
       if (state.rootIds.length !== 0) {
         return
       }
 
       commit('loading', true)
-
-      commit('snackbar/show', 'Loading countries!', { root: true })
 
       api
         .get('area')
@@ -139,7 +137,7 @@ const area: Module<AreaState, RootState> = {
             commit('route/add', route, { root: true })
           })
 
-          commit('snackbar/success', 'Done!', { root: true })
+          dispatch('snackbar/success', 'Done!', { root: true })
 
           commit('drawers/setLeft', true, { root: true })
         }).finally(() => {

@@ -89,7 +89,7 @@ export default Vue.extend({
           this.$store.commit(this.type + '/remove', this.item)
         }
 
-        this.$store.commit('snackbar/success', 'Deleted!')
+        this.$store.dispatch('snackbar/success', 'Deleted!')
       })
       this.dialog = false
     }

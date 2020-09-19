@@ -72,7 +72,7 @@ const image: Module<ImageState, RootState> = {
 
     fetch ({ state, commit, dispatch }, id) {
       if (!state.byIds[id]?.fullyLoaded) {
-        commit('snackbar/show', 'Loading image...', { root: true })
+        dispatch('snackbar/show', 'Loading image...', { root: true })
 
         commit('loading', true)
       }
@@ -83,7 +83,7 @@ const image: Module<ImageState, RootState> = {
           data.fullyLoaded = true
           dispatch('normalizeData', data)
 
-          state.loading && commit('snackbar/success', 'Done!', { root: true })
+          state.loading && dispatch('snackbar/success', 'Done!', { root: true })
 
           commit('loading', false)
         })
@@ -91,10 +91,10 @@ const image: Module<ImageState, RootState> = {
           commit('loading', false)
         })
     },
-    fetchAll ({ commit }) {
+    fetchAll ({ commit, dispatch }) {
       commit('loading', true)
 
-      commit('snackbar/show', 'Loading images!', { root: true })
+      dispatch('snackbar/show', 'Loading images!', { root: true })
 
       api
         .get('admin/getImages')
@@ -103,7 +103,7 @@ const image: Module<ImageState, RootState> = {
             commit('add', image)
           })
 
-          commit('snackbar/success', 'Done!', { root: true })
+          dispatch('snackbar/success', 'Done!', { root: true })
         }).finally(() => {
           commit('loading', false)
         })

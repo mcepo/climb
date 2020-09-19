@@ -109,7 +109,7 @@ export default {
     },
     submit () {
       if (this.route && this.route.id) {
-        this.$store.commit('snackbar/show', 'Updating route ... ')
+        this.$store.dispatch('snackbar/show', 'Updating route ... ')
         api.put('route/' + this.route.id, this.formData)
           .then(
             () => {
@@ -120,7 +120,7 @@ export default {
             }
           )
       } else {
-        this.$store.commit('snackbar/show', 'Adding route ... ')
+        this.$store.dispatch('snackbar/show', 'Adding route ... ')
         // eslint-disable-next-line @typescript-eslint/camelcase
         this.formData.area_id = this.area.id
         api.post('route', this.formData)
@@ -139,7 +139,7 @@ export default {
     },
     afterSubmit (route) {
       this.$store.commit('route/add', route)
-      this.$store.commit('snackbar/success', 'Done!')
+      this.$store.dispatch('snackbar/success', 'Done!')
       if (this.$vuetify.breakpoint.xs) {
         this.$store.commit('drawers/setRight', false)
       }

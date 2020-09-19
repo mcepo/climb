@@ -28,10 +28,10 @@ const user: Module<UserState, RootState> = {
     normalizeData ({ commit }, user: User) {
       commit('add', user)
     },
-    fetchAll ({ commit }) {
+    fetchAll ({ commit, dispatch }) {
       commit('loading', true)
 
-      commit('snackbar/show', 'Loading users!', { root: true })
+      dispatch('snackbar/show', 'Loading users!', { root: true })
 
       api
         .get('admin/user')
@@ -40,7 +40,7 @@ const user: Module<UserState, RootState> = {
             commit('add', user)
           })
 
-          commit('snackbar/success', 'Done!', { root: true })
+          dispatch('snackbar/success', 'Done!', { root: true })
         }).finally(() => {
           commit('loading', false)
         })

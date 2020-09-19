@@ -68,12 +68,12 @@ export default {
 
     sendPasswordResetMail () {
       api.post('/forgot_password/', this.formData).then(response => {
-        this.$store.commit('snackbar/success', response.data)
+        this.$store.dispatch('snackbar/success', response.data)
       })
     },
     resendVerificationMail () {
       api.post('/resend_verification/', this.formData).then(response => {
-        this.$store.commit('snackbar/success', response.data)
+        this.$store.dispatch('snackbar/success', response.data)
       })
     },
     submit () {

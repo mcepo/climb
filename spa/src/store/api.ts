@@ -39,9 +39,9 @@ api.interceptors.response.use(
     if (store.state.online === false) {
       if (error.config.method === 'get') {
         router.back()
-        store.commit('snackbar/error', 'Resource unavailable, working offline.')
+        store.dispatch('snackbar/error', 'Resource unavailable, working offline.')
       } else {
-        store.commit('snackbar/show', 'No internet connection, changes will be saved when connection returns.')
+        store.dispatch('snackbar/show', 'No internet connection, changes will be saved when connection returns.')
       }
 
       return Promise.resolve(true)
@@ -50,7 +50,7 @@ api.interceptors.response.use(
     if (error.response) {
       const message = error.response.data.message || error.response.data
 
-      store.commit('snackbar/throwError', { code: error.response.status, message })
+      store.dispatch('snackbar/throwError', { code: error.response.status, message })
       if (error.response.status === 404) {
         router.push('/')
       }

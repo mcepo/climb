@@ -46,7 +46,7 @@ const activity: Module<ActivityState, RootState> = {
     fetchNotApproved ({ commit, dispatch }) {
       commit('loading', true)
 
-      commit('snackbar/show', 'Loading activities!', { root: true })
+      dispatch('snackbar/show', 'Loading activities!', { root: true })
 
       api
         .get(BASE_URL + 'getNotApprovedActivities')
@@ -55,35 +55,35 @@ const activity: Module<ActivityState, RootState> = {
             dispatch('normalizeData', activity)
           })
 
-          commit('snackbar/success', 'Done!', { root: true })
+          dispatch('snackbar/success', 'Done!', { root: true })
         })
         .finally(() => {
           commit('loading', false)
         })
     },
-    approveActivity ({ commit }, activityId) {
-      commit('snackbar/show', 'Approving activity ...', { root: true })
+    approveActivity ({ commit, dispatch }, activityId) {
+      dispatch('snackbar/show', 'Approving activity ...', { root: true })
 
       api
         .get(BASE_URL + 'approveActivity/' + activityId)
         .then(() => {
           commit('resolveActivity', activityId)
 
-          commit('snackbar/success', 'Activity approved', { root: true })
+          dispatch('snackbar/success', 'Activity approved', { root: true })
         })
         .finally(() => {
           commit('loading', false)
         })
     },
-    revertActivity ({ commit }, activityId) {
-      commit('snackbar/show', 'Reverting activity ...', { root: true })
+    revertActivity ({ commit, dispatch }, activityId) {
+      dispatch('snackbar/show', 'Reverting activity ...', { root: true })
 
       api
         .get(BASE_URL + 'revertActivity/' + activityId)
         .then(() => {
           commit('resolveActivity', activityId)
 
-          commit('snackbar/success', 'Activity reverted', { root: true })
+          dispatch('snackbar/success', 'Activity reverted', { root: true })
         })
         .finally(() => {
           commit('loading', false)

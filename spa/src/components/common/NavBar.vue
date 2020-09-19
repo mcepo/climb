@@ -137,7 +137,7 @@ export default Vue.extend({
     })
 
     window.addEventListener('appinstalled', () => {
-      this.$store.commit('snackbar/success', 'Succesfully installed, enjoy!')
+      this.$store.dispatch('snackbar/success', 'Succesfully installed, enjoy!')
     })
 
     window.addEventListener('DOMContentLoaded', () => {
@@ -163,9 +163,9 @@ export default Vue.extend({
       // Wait for the user to respond to the prompt
       this.$options.deferredPrompt.userChoice.then((choiceResult) => {
         if (choiceResult.outcome === 'accepted') {
-          this.$store.commit('snackbar/success', 'Instaling on home screen')
+          this.$store.dispatch('snackbar/success', 'Instaling on home screen')
         } else {
-          this.$store.commit('snackbar/error', 'Not installing :(')
+          this.$store.dispatch('snackbar/error', 'Not installing :(')
         }
       })
     }

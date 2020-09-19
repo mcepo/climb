@@ -45,7 +45,7 @@ const parent: Module<AdoptionState, RootState> = {
         )
       }).catch(() => { /* so the error won't get dumped in the console */ })
     },
-    setParent ({ state, commit }, parentId) {
+    setParent ({ state, commit, dispatch }, parentId) {
       state.item &&
         api
           .put(state.type + '/' + state.item.id + '/move', { id: parentId })
@@ -89,7 +89,7 @@ const parent: Module<AdoptionState, RootState> = {
 
             commit('remove')
 
-            commit('snackbar/success', 'Item was moved to the new area', {
+            dispatch('snackbar/success', 'Item was moved to the new area', {
               root: true
             })
           })

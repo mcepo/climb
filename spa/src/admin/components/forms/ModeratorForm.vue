@@ -60,7 +60,7 @@ export default {
           this.$store.commit('user/add', this.selectedUser)
           this.$store.commit('area/addModerator', { area: this.area, moderator: this.selectedUser })
           this.selectedUser = null
-          this.$store.commit('snackbar/success', this.selectedUser.name + ' added as moderator to' + this.area.name)
+          this.$store.dispatch('snackbar/success', this.selectedUser.name + ' added as moderator to' + this.area.name)
         })
         .finally(() => (this.isLoading = false))
     }

@@ -188,7 +188,7 @@ export default {
             area: parent
           }
         } else {
-          this.$store.commit('snackbar/throwError', 500)
+          this.$store.dispatch('snackbar/throwError', 500)
           return
         }
 

@@ -1,6 +1,6 @@
 <template>
-    <v-snackbar :color='state.status' v-model='show' :timeout='timeout' bottom style='z-index: 3000'>
-        <div v-html='state.text'></div>
+    <v-snackbar v-if='state' :color='state.status' v-model='show' :timeout='timeout' bottom style='z-index: 3000'>
+        <div v-html='state.message'></div>
         <v-btn icon text @click="show = false"><v-icon>close</v-icon></v-btn>
     </v-snackbar>
 </template>
@@ -9,19 +9,30 @@
 import Vue from 'vue'
 
 export default Vue.extend({
+  data () {
+    return {
+      show: false
+    }
+  },
   computed: {
     state () {
-      return this.$store.state.snackbar
+      return this.$store.getters['snackbar/get']
     },
     timeout () {
-      return 1000 + 100 * this.state.text.length
+      return 1000 + 100 * this.state.message.length
+    }
+  },
+  watch: {
+    state (newState) {
+      if (newState !== null) {
+        Vue.nextTick(() => {
+          this.show = true
+        })
+      }
     },
-    show: {
-      get () {
-        return this.$store.state.snackbar.show
-      },
-      set () {
-        return this.$store.commit('snackbar/close')
+    show (newShow) {
+      if (newShow === false) {
+        this.$store.commit('snackbar/pop')
       }
     }
   }

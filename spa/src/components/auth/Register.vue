@@ -72,7 +72,7 @@ export default {
       api.post('/register/', this.formData)
         .then(() => {
           this.$store.dispatch('form/close')
-          this.$store.commit('snackbar/show', 'A link was send to your email account.<br>Please verify your email by <br> following the link.')
+          this.$store.dispatch('snackbar/show', 'A link was send to your email account.<br>Please verify your email by <br> following the link.')
         })
     }
   }
