@@ -1,7 +1,7 @@
 
   <template>
   <popup :tag='tag' :item='item' type='image'>
-    <template v-slot:header>
+    <template v-slot:item>
         <img :src="imageLink(item.id)" onerror="this.style.display='none'" width="100%" />
     </template>
   </popup>
