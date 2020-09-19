@@ -20,19 +20,30 @@ workbox.routing.registerRoute(
   })
 )
 
-// caching apps images + thumbnails + data
+// all application data
 
 workbox.routing.registerRoute(
-  new RegExp('\/api\/image.*'),
-  new workbox.strategies.CacheFirst({
-    cacheName: 'app-images'
+  new RegExp('\/api\/(route|area).*'),
+  new workbox.strategies.NetworkFirst({
+    cacheName: 'app-data'
   })
 )
 
+// image tags data
+
 workbox.routing.registerRoute(
-  new RegExp('\/api\/[route|area].*'),
+  new RegExp('\/api\/image\/\\d+\/tags'),
   new workbox.strategies.NetworkFirst({
     cacheName: 'app-data'
+  })
+)
+
+// caching apps images + thumbnails
+
+workbox.routing.registerRoute(
+  new RegExp('\/api\/image\/\\d+($|\/thumbnail)'),
+  new workbox.strategies.CacheFirst({
+    cacheName: 'app-images'
   })
 )
 
