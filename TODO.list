@@ -3,8 +3,6 @@
 TODO: success message are showed after the post/put/delete request are added to queueu
 when no internet conntection is present
 
-TODO: tag at my location needs to check accuracy before tagging
-
 -- FEATURES --
 
 TODO: add notification when work is syncronized
@@ -41,3 +39,7 @@ TODO: remove debugbar
 -- REFACTORING --
 
 TODO: add gradeService, typeService as vue plugin
+
+-- TESTING --
+
+TODO: test set at my location tag, then location isn't required before tagging
