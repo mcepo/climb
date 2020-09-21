@@ -27,6 +27,8 @@ TODO: right now app data is being stored by the service worker per request
 this produces a lot of over lapping data in the storage, a better solution would be
 to store the vuex store to cache on mutations and remove the service worker cache for app data
 
+TODO: add backend cache for area index, area get, route index?, route get, image tags 
+
 -- REFACTORING --
 
 TODO: add gradeService, typeService as vue plugin
