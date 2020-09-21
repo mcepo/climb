@@ -136,7 +136,7 @@ class DrawingService {
             if (!position) return
 
             if (position.coords.accuracy > 50) {
-              store.dispatch('snackbar/error', 'Location accuracy too low (' + position.coords.accuracy + ' m)')
+              store.dispatch('snackbar/error', 'Location accuracy too low (' + position.coords.accuracy + ' m), try later!')
               return
             }
 
