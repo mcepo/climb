@@ -1,13 +1,19 @@
 -- FIXES --
 
-TODO: add notification when work is syncronized
-
 TODO: success message are showed after the post/put/delete request are added to queueu
 when no internet conntection is present
 
 TODO: tag at my location needs to check accuracy before tagging
 
 -- FEATURES --
+
+TODO: add notification when work is syncronized
+
+TODO: add install button when service worker updates
+
+TODO: crawler for plave gore
+
+TODO: buy domain
 
 -- OFFLINE PRECACHE on button click --
 
@@ -27,6 +33,10 @@ TODO: add store for offline use button, then cache:
 TODO: right now app data is being stored by the service worker per request
 this produces a lot of over lapping data in the storage, a better solution would be
 to store the vuex store to cache on mutations and remove the service worker cache for app data
+
+TODO: add backend cache for area index, area get, route index?, route get, image tags 
+
+TODO: remove debugbar
 
 -- REFACTORING --
 
