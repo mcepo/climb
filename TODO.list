@@ -2,6 +2,11 @@
 
 TODO: add notification when work is syncronized
 
+TODO: success message are showed after the post/put/delete request are added to queueu
+when no internet conntection is present
+
+TODO: tag at my location needs to check accuracy before tagging
+
 -- FEATURES --
 
 -- OFFLINE PRECACHE on button click --
