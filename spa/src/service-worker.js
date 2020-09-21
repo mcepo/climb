@@ -64,11 +64,3 @@ workbox.routing.registerRoute(matchCb, handleCb, 'POST')
 workbox.routing.registerRoute(matchCb, handleCb, 'PUT')
 
 workbox.routing.registerRoute(matchCb, handleCb, 'DELETE')
-
-self.addEventListener('install', () => {
-  self.skipWaiting()
-})
-
-self.addEventListener('activate', () => {
-  clients.claim()
-})
