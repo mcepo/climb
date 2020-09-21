@@ -1,12 +1,12 @@
-
-self.__precacheManifest.push({
-  url: '/', revision: Date.now()
-})
-
-self.addEventListener('install', () => self.skipWaiting())
-
-self.addEventListener('activate', () => {
-  clients.claim()
+// this is an ugly solution but i needed it so the service worker will
+// detect the change in the root url '/', but also serve it once offline
+// because i am serving index.html throu laravel, and the actual file is
+// in /resources/views/
+self.__precacheManifest = self.__precacheManifest.map(cache => {
+  if (cache.url === '/assets/index.html') {
+    cache.url = '/'
+  }
+  return cache
 })
 
 workbox.precaching.precacheAndRoute(self.__precacheManifest)
@@ -14,7 +14,7 @@ workbox.precaching.precacheAndRoute(self.__precacheManifest)
 // caching map tiles, only for default tiles
 
 workbox.routing.registerRoute(
-  new RegExp('https:\/\/cartodb-basemaps-.*png'),
+  new RegExp('https://cartodb-basemaps-.*png'),
   new workbox.strategies.StaleWhileRevalidate({
     cacheName: 'cartodb-basemaps'
   })
@@ -23,7 +23,7 @@ workbox.routing.registerRoute(
 // all application data
 
 workbox.routing.registerRoute(
-  new RegExp('\/api\/(route|area).*'),
+  new RegExp('/api/(route|area).*'),
   new workbox.strategies.NetworkFirst({
     cacheName: 'app-data'
   })
@@ -32,7 +32,7 @@ workbox.routing.registerRoute(
 // image tags data
 
 workbox.routing.registerRoute(
-  new RegExp('\/api\/image\/\\d+\/tags'),
+  new RegExp('/api/image/\\d+/tags'),
   new workbox.strategies.NetworkFirst({
     cacheName: 'app-data'
   })
@@ -41,7 +41,7 @@ workbox.routing.registerRoute(
 // caching apps images + thumbnails
 
 workbox.routing.registerRoute(
-  new RegExp('\/api\/image\/\\d+($|\/thumbnail)'),
+  new RegExp('/api/image/\\d+($|/thumbnail)'),
   new workbox.strategies.CacheFirst({
     cacheName: 'app-images'
   })
@@ -59,20 +59,16 @@ const handleCb = new workbox.strategies.NetworkOnly({
   plugins: [bgSyncPlugin]
 })
 
-workbox.routing.registerRoute(
-  matchCb,
-  handleCb,
-  'POST'
-)
+workbox.routing.registerRoute(matchCb, handleCb, 'POST')
 
-workbox.routing.registerRoute(
-  matchCb,
-  handleCb,
-  'PUT'
-)
+workbox.routing.registerRoute(matchCb, handleCb, 'PUT')
 
-workbox.routing.registerRoute(
-  matchCb,
-  handleCb,
-  'DELETE'
-)
+workbox.routing.registerRoute(matchCb, handleCb, 'DELETE')
+
+self.addEventListener('install', () => {
+  self.skipWaiting()
+})
+
+self.addEventListener('activate', () => {
+  clients.claim()
+})

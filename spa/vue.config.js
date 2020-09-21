@@ -47,8 +47,7 @@ module.exports = {
     workboxPluginMode: 'InjectManifest',
     workboxOptions: {
       swSrc: 'src/service-worker.js',
-      swDest: '../service-worker.js',
-      exclude: [/\.html$/]
+      swDest: '../service-worker.js'
     }
   },
 
