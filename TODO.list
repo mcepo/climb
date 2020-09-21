@@ -8,6 +8,8 @@ TODO: add install button when service worker updates
 
 TODO: crawler for plave gore
 
+TODO: buy domain
+
 -- OFFLINE PRECACHE on button click --
 
 TODO: add store for offline use button, then cache:
@@ -28,6 +30,8 @@ this produces a lot of over lapping data in the storage, a better solution would
 to store the vuex store to cache on mutations and remove the service worker cache for app data
 
 TODO: add backend cache for area index, area get, route index?, route get, image tags 
+
+TODO: remove debugbar
 
 -- REFACTORING --
 
