@@ -23,7 +23,6 @@
         "spatie/laravel-activitylog": "^3.14"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.5",
         "facade/ignition": "^2.0",
         "fzaninotto/faker": "^1.9.1",
         "itsgoingd/clockwork": "^4.1.4",
