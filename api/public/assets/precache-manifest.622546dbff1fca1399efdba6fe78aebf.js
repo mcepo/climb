@@ -56,40 +56,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/fonts/MaterialIcons-Regular.da4ea5cd.ttf"
   },
   {
-    "revision": "7d0700216832383622db3731ed4a013a",
-    "url": "/assets/img/icons/android-chrome-192x192.png"
-  },
-  {
-    "revision": "03604990a048ecaf09bcc6656d5a34be",
-    "url": "/assets/img/icons/android-chrome-384x384.png"
-  },
-  {
-    "revision": "b21bdc50fa970e53376f14cb3ae351bf",
-    "url": "/assets/img/icons/apple-touch-icon.png"
-  },
-  {
-    "revision": "78f8df00849bbaa31dae742f0d38c47f",
-    "url": "/assets/img/icons/climbing-icon-13.jpg"
-  },
-  {
-    "revision": "4efc69e96fe9c55fedbf5978badc8207",
-    "url": "/assets/img/icons/favicon-16x16.png"
-  },
-  {
-    "revision": "cd2219dc276616b42c29215acfdb428d",
-    "url": "/assets/img/icons/favicon-32x32.png"
-  },
-  {
-    "revision": "a6c8e3095798c1d718d61f370625261a",
-    "url": "/assets/img/icons/favicon.ico"
-  },
-  {
-    "revision": "59e149a0a04671a7fa53be6621aabd79",
-    "url": "/assets/img/icons/mstile-150x150.png"
-  },
-  {
-    "revision": "2fcaacbc84831e4b342dca8995886778",
-    "url": "/assets/img/icons/safari-pinned-tab.svg"
+    "revision": "2fae20a32e280bad9fb2e674ad7e07c2",
+    "url": "/assets/index.html"
   },
   {
     "revision": "91dc7a35a8e7d71be21a",
