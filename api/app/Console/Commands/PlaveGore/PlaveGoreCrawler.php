@@ -28,17 +28,6 @@ class PlaveGoreCrawler extends Command
      */
     protected $description = 'Crawler for http://plave-gore.com';
 
-    protected static $orientations = [
-        'North face' => 0,
-        'Northeast face' => 45,
-        'East face' => 90,
-        'Southeast face' => 135,
-        'South face' => 180,
-        'Southwest face' => 225,
-        'West face' => 270,
-        'Northwest face' => 315,
-    ];
-
     /**
     * The console command description.
     *
@@ -88,23 +77,25 @@ class PlaveGoreCrawler extends Command
 
         /// mountains 
 
-        for($i=1;$i <= self::$MOUNTAIN_COUNT; $i++) {
+        // for($i=1;$i <= self::$MOUNTAIN_COUNT; $i++) {
 
-            $link = 'http://plave-gore.com/mt?id='.$i;
+        //     $link = 'http://plave-gore.com/mt?id='.$i;
 
-            $page = $this->_getPage($link);
+        //     $page = $this->_getPage($link);
 
-            if ($page == null) {
-                echo ' **** '. $link . ' is null';
-                exit;
-            }
+        //     if ($page == null) {
+        //         echo ' **** '. $link . ' is null';
+        //         exit;
+        //     }
 
-            $this->parseMountain($page);
+        //     $area = $this->_parseMountain($page);
 
-            break;
-        }
+        //     $this->_storeLink($area, $link);
 
-        return;
+        //     break;
+        // }
+
+        // return;
 
         for($i=1;$i <= self::$CRAG_COUNT; $i++) {
 
@@ -116,6 +107,14 @@ class PlaveGoreCrawler extends Command
                 echo ' **** '.$link. ' is null';
                 exit;
             }
+
+            $crag = $this->_parseSportClimbingSite($this->_country, $page);
+
+            return;
+
+            $this->_storeLink($crag, $link);
+
+            return;
         }
 
         $this->_runtime = microtime(true) - $this->_runtime;
@@ -123,7 +122,7 @@ class PlaveGoreCrawler extends Command
         echo 'DONE IN ' . $this->_runtime . ' - SENT REQUESTS ' . $this->_requestCount . "\n";
     }
 
-    private function parseMountain($page) {
+    private function _parseMountain($page) {
 
         $areaName = $page->filter('div#page-title-content > h2')->eq(0)->text();
 
@@ -141,9 +140,13 @@ class PlaveGoreCrawler extends Command
                 exit;
             }
 
-            $this->_parseCrag($area, $page);
+            $crag = $this->_parseCrag($area, $page);
+
+            // TODO store link to this crag
 
         });
+
+        return $area;
     }
 
     private function _getArea($parent, $name, $typeId) 
@@ -160,7 +163,7 @@ class PlaveGoreCrawler extends Command
                 'type_id' => $typeId
             ]);
 
-       //     $area->save();
+            // TODO store area
 
         } else if ($areas->count() >  1) {
             echo $name . " -> multiple results\n";
@@ -169,6 +172,8 @@ class PlaveGoreCrawler extends Command
         if(!isset($area)) {
             $area = $areas[0];
         }
+
+        // TODO store link to this area
 
         return $area;
     }
@@ -197,6 +202,61 @@ class PlaveGoreCrawler extends Command
         return $page;
     }
 
+    private function _parseSportClimbingSite($parent, $page) {
+
+        $name = $page->filter('div.full-width > h2')->eq(0)->text();
+
+        // type_id for crag => 6
+        $crag = $this->_getArea($parent, $name, 6);
+
+        // location
+
+        $coordinates = $this->_getMapLocations($page);
+
+        $routeTableRows = $page->filter('table.datatable > tbody > tr');
+
+        $sector = null;
+
+        $routeTableRows->each(function($tr) use ($crag, &$sector){
+
+            $tds = $tr->children();
+
+            $sectorName = $tds->eq(2)->text();
+
+            if(!isset($sector) || $sector->name != $sectorName) {
+                // novi sektor
+                // type_id = 7
+                $sector = $this->_getArea($crag, $sectorName, 7);
+
+                // TODO store map tag for sector
+            }
+
+            $link = $tds->eq(2)->filter('a')->first()->attr('href');
+
+            $route = $this->_storeRoute([
+                'name' => $tds->eq(1)->text(),
+                'grade' => $tds->eq(3)->text(),
+                'length' => $tds->eq(4)->text(),
+                'area_id' => $sector->id
+
+            ]);
+
+            $this->_storeLink($route, $link);
+        });
+
+        exit;
+
+        return $crag;
+    }
+
+    private function _storeRoute( $route) {
+
+        $route['type_id'] = $route['length'] > 50 ? 0 : 1;
+
+        // todo store link to this route
+
+    }
+
     private function _parseCrag($parent, $page)
     {
 
@@ -205,7 +265,11 @@ class PlaveGoreCrawler extends Command
         // type_id for crag => 6
         $crag = $this->_getArea($parent, $name, 6);
 
-        // get location, store in database
+        // location
+
+        $coordinates = $this->_getMapLocations($page);
+
+        $this->_storeMapTags($crag, $coordinates);
 
         $routeTableRows = $page->filter('table.datatable > tbody > tr');
 
@@ -215,15 +279,52 @@ class PlaveGoreCrawler extends Command
 
             $name = $tds->eq(1)->text();
             $grade = $tds->eq(2)->text();
+
+            // todo grade parser
+
             $length = $tds->eq(3)->text();
 
             // multipitch 0 ; singlepitch 1
             $type_id = $length > 50 ? 0 : 1;
 
-             dump($name, $grade, $length, $type_id);
+            $link = $tds->eq(1)->filter('a')->first()->attr('href');
+
+            dump($link);
+
+            // todo store route
+
+            // todo store link to this route
         });
 
         exit;
+
+        return $crag;
+    }
+
+    private function _getMapLocations($page) {
+
+        $mapScriptTag = $page->filter('script')->last();
+
+        $matches = [];
+
+        preg_match_all('/L\.marker\(\[\d{2}\.\d{3,9}\,\d{2}\.\d{3,9}\]\,\s\{title:\s\"Penjanje\"\s\}\);/', $mapScriptTag->text(), $matches);
+
+        $coordinates = [];
+
+        foreach($matches[0] as $match) {
+            $tmp = preg_split('/[\[|\]|\,]/', $match);
+            // [lat, lng]
+            array_push($coordinates, [$tmp[1],$tmp[2]]);
+        }
+
+        return $coordinates;
+    }
+
+    private function _storeMapTags($area, $coordinates) {
+
+        foreach($coordinates as $coordinate) {
+            // todo store map tags
+        }
     }
 
     private function _storeLink($model, $href)
