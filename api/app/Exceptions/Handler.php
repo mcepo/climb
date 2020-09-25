@@ -46,7 +46,8 @@ class Handler extends ExceptionHandler
         {
             Mail::to('marko.cepo.vk@gmail.com')->send(new ErrorNotification($exception));
         }
-        // parent::report($exception);
+        
+        parent::report($exception);
     }
 
     /**
