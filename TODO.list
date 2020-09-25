@@ -3,6 +3,10 @@
 TODO: success message are showed after the post/put/delete request are added to queueu
 when no internet conntection is present
 
+TODO: password reset not working
+
+TODO: check email verification
+
 -- FEATURES --
 
 TODO: add notification when work is syncronized
