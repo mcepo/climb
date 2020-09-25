@@ -53,7 +53,9 @@ const bgSyncPlugin = new workbox.backgroundSync.Plugin('backgroundSyncQueue', {
   maxRetentionTime: 24 * 60 // Retry for max of 24 Hours (specified in minutes)
 })
 
-const matchCb = /\/api\/.*/
+// cache all request except image requests
+// because i can't upload image while offline anyways
+const matchCb = /\/api\/(?!image).*/
 
 const handleCb = new workbox.strategies.NetworkOnly({
   plugins: [bgSyncPlugin]

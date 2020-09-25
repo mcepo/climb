@@ -48,8 +48,10 @@
             name="image"
             ref="upload"
           >
-          <!-- TODO: add div with drag and drop message -->
-            <v-btn color="info">Select photos</v-btn>
+            <v-card-text v-if='!online' style='color:red'>
+              Can't upload images while offline,<br> please try again later!
+            </v-card-text>
+            <v-btn v-else color="info">Select photos</v-btn>
           </file-upload>
         </v-layout>
       </v-container>
@@ -123,11 +125,14 @@ export default {
     postAction () {
       return '/api/' + this.type + '/' + this.id + '/image'
     },
-    headers() {
+    headers () {
       return {
         Accept: 'application/json, text/plain, */*',
         Authorization: 'Bearer ' + this.$store.state.auth.token
       }
+    },
+    online () {
+      return this.$store.state.online
     }
   },
 
