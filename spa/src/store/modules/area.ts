@@ -72,11 +72,6 @@ const area: Module<AreaState, RootState> = {
     normalizeData ({ commit, dispatch }, area: Area) {
       area.routes && dispatch('storeRelation', { items: area.routes, fun: 'route/add', root: true })
 
-      // with the area i only send routes that are directly under it, so there are no more rutes of that area
-      if (area.routes.length !== 0) {
-        commit('route/setHasMore', false, { root: true })
-      }
-
       commit('add', normalizeRelations(area, normalizationAtributes))
 
       area.areas && dispatch('storeRelation', { items: area.areas, fun: 'add' })
