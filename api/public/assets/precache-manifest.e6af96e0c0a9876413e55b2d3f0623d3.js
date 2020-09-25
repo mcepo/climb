@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "91dc7a35a8e7d71be21a",
+    "revision": "f61a8560b3886e91082c",
     "url": "/assets/css/admin.panel.f0bc1e12.css"
   },
   {
@@ -8,11 +8,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/css/admin.panel~area.form~moderator.form~route.filters~route.form.dba841c6.css"
   },
   {
-    "revision": "d9a664a66111f5796860",
+    "revision": "3208c1e8084e8143739a",
     "url": "/assets/css/app.c4150113.css"
   },
   {
-    "revision": "0621db8bde01be232c4f",
+    "revision": "5e892c7033b90d048b57",
     "url": "/assets/css/area.form.09316a61.css"
   },
   {
@@ -24,15 +24,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/css/chunk-vendors.a516751e.css"
   },
   {
-    "revision": "4098516a32e8022ec726",
+    "revision": "b09f9510c160082121b3",
     "url": "/assets/css/image.upload.6669a1ca.css"
   },
   {
-    "revision": "7038dbc22a2d73fcf9ea",
+    "revision": "fb1866c8d0015b517bad",
     "url": "/assets/css/moderator.form.076ea886.css"
   },
   {
-    "revision": "63691992e027f5b9ec76",
+    "revision": "d2cad882074317bfdbfc",
     "url": "/assets/css/pitch.form.207437e9.css"
   },
   {
@@ -56,68 +56,68 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/fonts/MaterialIcons-Regular.da4ea5cd.ttf"
   },
   {
-    "revision": "2fae20a32e280bad9fb2e674ad7e07c2",
+    "revision": "3f16570e18cfdc08db6676d05052f5a3",
     "url": "/assets/index.html"
   },
   {
-    "revision": "91dc7a35a8e7d71be21a",
-    "url": "/assets/js/admin.panel.4ff267f4.js"
+    "revision": "f61a8560b3886e91082c",
+    "url": "/assets/js/admin.panel.5679c30f.js"
   },
   {
     "revision": "3b40aac4e6343d751615",
     "url": "/assets/js/admin.panel~area.form~moderator.form~route.filters~route.form.82421ffc.js"
   },
   {
-    "revision": "d9a664a66111f5796860",
-    "url": "/assets/js/app.626b3aa2.js"
+    "revision": "3208c1e8084e8143739a",
+    "url": "/assets/js/app.324b8188.js"
   },
   {
-    "revision": "0621db8bde01be232c4f",
-    "url": "/assets/js/area.form.ae5c9757.js"
+    "revision": "5e892c7033b90d048b57",
+    "url": "/assets/js/area.form.5f256fce.js"
   },
   {
     "revision": "456a7371479b00c558d9",
     "url": "/assets/js/area.form~pitch.form~route.filters~route.form.cac5949c.js"
   },
   {
-    "revision": "68fd4e48c03d3d521911",
-    "url": "/assets/js/change-password.form.3fb2923e.js"
+    "revision": "ee32cb8aa8c1dfe5abbe",
+    "url": "/assets/js/change-password.form.e0efc380.js"
   },
   {
     "revision": "b85f43d64ceda2c2b5f2",
     "url": "/assets/js/chunk-vendors.af7547d6.js"
   },
   {
-    "revision": "4098516a32e8022ec726",
-    "url": "/assets/js/image.upload.7cbfae58.js"
+    "revision": "b09f9510c160082121b3",
+    "url": "/assets/js/image.upload.8acfdf14.js"
   },
   {
-    "revision": "3d14a867d1d5de4518a0",
-    "url": "/assets/js/login.form.b82f5be9.js"
+    "revision": "6df54276f959fab843e2",
+    "url": "/assets/js/login.form.eb7222b8.js"
   },
   {
-    "revision": "7038dbc22a2d73fcf9ea",
-    "url": "/assets/js/moderator.form.204db67e.js"
+    "revision": "fb1866c8d0015b517bad",
+    "url": "/assets/js/moderator.form.15709e52.js"
   },
   {
-    "revision": "63691992e027f5b9ec76",
-    "url": "/assets/js/pitch.form.40fb8a98.js"
+    "revision": "d2cad882074317bfdbfc",
+    "url": "/assets/js/pitch.form.d945a9bf.js"
   },
   {
     "revision": "38055faaf13f6f7e4d50",
     "url": "/assets/js/popup.service.72725eb7.js"
   },
   {
-    "revision": "b318531976f94a8c8791",
-    "url": "/assets/js/register.form.7e3df63a.js"
+    "revision": "a1756f9d48f0b275e647",
+    "url": "/assets/js/register.form.07e0bb65.js"
   },
   {
     "revision": "d52c69d4627ec9ee68c8",
     "url": "/assets/js/route.filters.7037ec3c.js"
   },
   {
-    "revision": "1009dac054b34ada2c4f",
-    "url": "/assets/js/route.form.2ebb3852.js"
+    "revision": "b2970347cbaedacca143",
+    "url": "/assets/js/route.form.62c0bb0a.js"
   },
   {
     "revision": "3afbc1e9a2d88bdb515742f0cbf727ed",
