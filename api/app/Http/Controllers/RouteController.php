@@ -21,7 +21,10 @@ class RouteController extends Controller
     public function store(Request $request)
     {
         $route = new Route($request->all());
+        
         $route->save();
+
+        $this->updateAreaStats($route->area_id);
 
         return $route->id;
     }
@@ -33,6 +36,7 @@ class RouteController extends Controller
             'pitches.grades',
             'links'
         ])->append(['ancestors']);
+
         $route->loadImages();
 
         return response()->json($route);
@@ -42,8 +46,15 @@ class RouteController extends Controller
     {
         $this->isAdmin();
 
+        $oldParentId = $route->area_id;
+
         $route->area_id = $request->get('id');
+
         $route->save();
+
+        $this->updateAreaStats($route->area_id);
+
+        $this->updateAreaStats($oldParentId);
 
         return $route->path;
     }
@@ -53,6 +64,8 @@ class RouteController extends Controller
         $this->canUserModify($route);
 
         $route->fill($request->all())->save();
+
+        $this->updateAreaStats($route->area_id);
     }
 
     public function destroy(Route $route)
@@ -62,6 +75,9 @@ class RouteController extends Controller
         if($route->canBeDeleted()) {
         
             $route->delete();
+
+            $this->updateAreaStats($route->area_id);
+
         } else {
             return response("Can't delete route while it is tagged or has pitches!", 403);
         }

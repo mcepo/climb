@@ -43,6 +43,9 @@ class ImageController extends Controller
         if($image->canBeDeleted()) {
         
             $image->delete();
+
+            $this->updateAreaStats($image->path);
+
         } else {
             return response()->json("Can't delete image while it is tagged or has tags!", 409);
         }

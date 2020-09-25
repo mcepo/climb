@@ -31,20 +31,15 @@ class TrailController extends Controller
 
         $tag->save();
 
+        $this->updateAreaStats($tag->path);
+
         $trail->load('mapTag');
 
         return response()->json($trail);
     }
 
-    public function update(Request $request, Trail $trail)
-    {
-        $this->canUserModify($trail);
 
-        $trail->fill($request->all());
-        $trail->save();
-
-        return response()->json($trail);
-    }
+    // TODO: trails never get deleted right now
 
     public function destroy(Trail $trail)
     {
@@ -53,6 +48,8 @@ class TrailController extends Controller
         if (Tag::where(['tagged_type' => 'trail', 'tagged_id' => $trail->id])->count() == 0) {
 
             $trail->delete();
+
+            $this->updateAreaStats($trail->path);
         } else {
             return response("Can't delete trail while it is tagged somewhere!", 403);
         }

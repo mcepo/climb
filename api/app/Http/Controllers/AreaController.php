@@ -31,11 +31,15 @@ class AreaController extends Controller
 
         $area->save();
 
+        $this->updateAreaStats($area->id);
+
         return $area;
     }
 
     public function show(Area $area)
     {
+        $this->updateAreaStats($area->id);
+
         $area->load([
             'mapTag',
             'links',
@@ -55,6 +59,8 @@ class AreaController extends Controller
         $this->canUserModify($area);
 
         $area->fill($request->all())->save();
+
+        $this->updateAreaStats($area->id);
     }
 
     public function destroy(Area $area)
@@ -62,7 +68,11 @@ class AreaController extends Controller
         $this->canUserModify($area);
 
         if ( $area->canBeDeleted() ) {
+
             $area->delete();
+
+            $this->updateAreaStats($area->parent_id);
+
         } else {
             return response("Can't delete area while it has content, or is tagged!", 403);
         }
@@ -72,14 +82,24 @@ class AreaController extends Controller
     {
         $this->isAdmin();
 
+        $oldParentId = $area->parent_id;
+
         $area->parent_id = $request->get('id');
         $area->save();
+
+        $this->updateAreaStats($area->id);
+        
+        $this->updateAreaStats($oldParentId);
 
         return $area->path;
     }
 
     public function addImage(Area $area, ImageUploadRequest $request)
     {
-        return $area->addImage($request);
+        $image = $area->addImage($request);
+
+        $this->updateAreaStats($area->id);
+
+        return $image;
     }
 }
