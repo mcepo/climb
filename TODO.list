@@ -38,7 +38,15 @@ to store the vuex store to cache on mutations and remove the service worker cach
 
 TODO: add backend cache for area index, area get, route index?, route get, image tags 
 
-TODO: add to area table as a computed value with a cron job some statistics
+TODO: use pregenerated stats in frontend
+
+TODO: remove calls to grade and route length
+
+TODO: run migrations on production server
+
+TODO: create a cron job or a deamon
+
+TODO: run update all areas on server
 
 -- REFACTORING --
 
