@@ -91,7 +91,12 @@ export class LayerService {
         return getters.tags
       },
       (tags: Tag[]) => {
-        if (this._map && !store.getters.loading && tags.length !== 0) {
+        console.log(tags)
+        if ((this._map &&
+            !store.getters.loading &&
+            tags.length !== 0) ||
+            store.getters.imageOpen
+        ) {
           this.setSelectedKeys()
 
           this.addTagsToView(tags)
