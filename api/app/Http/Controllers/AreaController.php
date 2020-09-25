@@ -10,6 +10,12 @@ use App\User;
 
 class AreaController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('jwt-auth', ['except' => ['index', 'show']]);
+    }
+
     public function index()
     {
         return [

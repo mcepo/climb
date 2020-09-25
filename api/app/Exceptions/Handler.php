@@ -38,16 +38,9 @@ class Handler extends ExceptionHandler
      */
     public function report(Throwable $exception)
     {
-        // if ($this->shouldntReport($exception)) {
-        //     return;
-        // }
-
-        if (!config('app.debug')) 
-        {
-            Mail::to('marko.cepo.vk@gmail.com')->send(new ErrorNotification($exception));
-        }
-        
         parent::report($exception);
+
+        Mail::to('marko.cepo.vk@gmail.com')->send(new ErrorNotification($exception));
     }
 
     /**

@@ -9,6 +9,11 @@ use Intervention\Image\ImageManager;
 class ImageController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('jwt-auth', ['only' => ['destroy']]);
+    }
+
     public function show(Image $image)
     {
         $manager = new ImageManager();

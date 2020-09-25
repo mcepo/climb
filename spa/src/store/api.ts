@@ -47,10 +47,8 @@ api.interceptors.response.use(
       return Promise.resolve(true)
     }
 
-    if (error.response) {
-      const message = error.response.data.message || error.response.data
-
-      store.dispatch('snackbar/throwError', { code: error.response.status, message })
+    if (!!error.response) {
+      store.dispatch('snackbar/throwError', { code: error.response.status })
       if (error.response.status === 404) {
         router.push('/')
       }

@@ -12,24 +12,7 @@ Route::namespace('Auth')->group(function() {
 
 });
 
-Route::post('area/{area}/image', 'AreaController@addImage');
-Route::put('area/{area}/move', 'AreaController@move');
-Route::resource('area', 'AreaController');
-
-Route::resource('route', 'RouteController');
-Route::put('route/{route}/move', 'RouteController@move');
-
-Route::resource('pitch', 'PitchController');
-
-Route::resource('tag', 'TagController');
-
-Route::get('image/{image}/tags', 'ImageController@tags');
-Route::get('image/{image}/thumbnail', 'ImageController@thumbnail');
-Route::resource('image', 'ImageController');
-
-Route::resource('trail', 'TrailController');
-
-Route::middleware('admin')->prefix('admin')->group(function() {
+Route::middleware(['jwt-auth', 'admin'])->prefix('admin')->group(function() {
 
   Route::get('user/search', 'UserController@search');
   Route::get('user/{user}/addArea/{areaId}', 'UserController@addArea');
@@ -43,4 +26,25 @@ Route::middleware('admin')->prefix('admin')->group(function() {
   
   Route::get('getImages', 'AdminController@getImages');
   Route::get('imageReviewed/{id}', 'AdminController@imageReviewed');
+
+  Route::put('area/{area}/move', 'AreaController@move');
+  Route::put('route/{route}/move', 'RouteController@move');
 });
+
+Route::get('image/{image}/tags', 'ImageController@tags');
+
+Route::get('image/{image}/thumbnail', 'ImageController@thumbnail');
+  
+Route::post('area/{area}/image', 'AreaController@addImage');
+
+Route::resource('area', 'AreaController');
+  
+Route::resource('route', 'RouteController');
+  
+Route::resource('pitch', 'PitchController');
+  
+Route::resource('tag', 'TagController');
+
+Route::resource('trail', 'TrailController');
+
+Route::resource('image', 'ImageController');

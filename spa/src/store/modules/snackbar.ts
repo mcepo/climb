@@ -2,7 +2,7 @@ import { Module } from 'vuex'
 import { RootState } from '..'
 
 interface SnackbarMessage {
-  text: string;
+  message: string;
   status: 'show' | 'error' | 'success';
 }
 
@@ -49,14 +49,9 @@ const snackbar: Module<SnackbarState, RootState> = {
     },
 
     throwError ({ commit }, status: ErrorMessage) {
-      const snackbarMessage = {
+      const snackbarMessage: SnackbarMessage = {
         status: 'error',
         message: ''
-      }
-
-      if (status.message && status.message !== '') {
-        snackbarMessage.message = status.message
-        return
       }
 
       switch (status.code) {

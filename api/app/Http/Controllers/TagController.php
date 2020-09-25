@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('jwt-auth');
+    }
+
     public function store(Request $request)
     {
         // the item being tagged doesn't exist in the database

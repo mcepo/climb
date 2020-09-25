@@ -8,6 +8,11 @@ use App\Models\Tag;
 
 class TrailController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('jwt-auth');
+    }
+
     public function store(Request $request)
     {
         $trail = new Trail();
@@ -29,15 +34,6 @@ class TrailController extends Controller
         $trail->load('mapTag');
 
         return response()->json($trail);
-    }
-
-    public function show(Trail $trail)
-    {
-        return response()->json(
-            [
-                'trail' => $trail
-            ]
-        );
     }
 
     public function update(Request $request, Trail $trail)

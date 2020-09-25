@@ -19,10 +19,12 @@
       <pre>{{request()->headers->__toString()}}</pre>
     </p>
 
-    <span>USER</span>
-    <p>
-      <pre>{{print_r(auth()->user()->toArray())}}</pre>
-    </p>
+    @if(auth()->user())
+      <span>USER</span>
+      <p>
+        <pre>{{print_r(auth()->user()->toArray())}}</pre>
+      </p>
+    @endif
 
     <span>ERROR</span>
     <p>

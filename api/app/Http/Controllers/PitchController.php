@@ -9,6 +9,12 @@ use App\Models\Tag;
 
 class PitchController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('jwt-auth');
+    }
+    
     public function store(Request $request)
     {
         $pitch = new Pitch($request->all());

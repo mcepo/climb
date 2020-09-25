@@ -56,6 +56,8 @@ class JWTAuthentication
             Auth::login($user);
           }
 
+        } else {
+          return abort(401);
         }
       }
 
