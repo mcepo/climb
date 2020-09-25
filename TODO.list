@@ -48,6 +48,11 @@ TODO: create a cron job or a deamon
 
 TODO: run update all areas on server
 
+TODO: reduce payload sizes -> created_at and updated_at can be hidden
+
+TODO: make a mapper so that i can send a plain array no need for a full json
+  frontend, and backend mapper, pretty big job
+
 -- REFACTORING --
 
 TODO: add gradeService, typeService as vue plugin
