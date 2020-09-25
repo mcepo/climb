@@ -13,8 +13,6 @@ export interface RouteState {
   allIds: Array<number>;
   loading: boolean;
   filters: RouteFilters;
-  // if there are more routes on server side to be loaded
-  hasMore: boolean;
 }
 
 const namespaced = true
@@ -25,8 +23,7 @@ const route: Module<RouteState, RootState> = {
     byIds: {},
     allIds: [],
     loading: false,
-    filters: {},
-    hasMore: true
+    filters: {}
   },
   mutations: {
     ...entityMutations,
@@ -41,9 +38,6 @@ const route: Module<RouteState, RootState> = {
         ...state.filters,
         query
       }
-    },
-    setHasMore (state: RouteState, has) {
-      state.hasMore = has
     },
     appendPitch (state: RouteState, payload) {
       state.byIds[payload.routeId].pitches.push(payload.pitchId)
@@ -122,8 +116,6 @@ const route: Module<RouteState, RootState> = {
           params
         })
         .then(({ data }) => {
-          commit('setHasMore', data.length === 10)
-
           data.forEach((route) => {
             commit('add', route)
           })

@@ -19,7 +19,7 @@
     <route-list-item v-for="route in routes" :key="route.id" :route='route'/>
     <v-list-item>
       <v-list-item-content>
-        <v-btn text @click.stop="loadRoutes()" v-if="hasMoreRoutes">Load more ...</v-btn>
+        <div v-intersect='loadOnIntersect'></div>
       </v-list-item-content>
   </v-list-item>
   </v-list>
@@ -28,7 +28,7 @@
 
 <script>
 import RouteListItem from '../listItems/RouteListItem'
-import { mapGetters, mapActions, mapState, mapMutations } from 'vuex'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 
 export default {
   cancelToken: null,
@@ -46,17 +46,13 @@ export default {
       filters: 'route/filters',
       item: 'area/get'
     }),
-    ...mapState({
-      hasMoreRoutes: s => s.route.hasMore
-    }),
     routeQueryString: {
       get () {
         return this.filters.query
       },
       set (value) {
         this.setQueryString(value)
-        this.$options.cancelToken && clearTimeout(this.$options.cancelToken)
-        this.$options.cancelToken = setTimeout(() => this.loadRoutes(), 1000)
+        this.loadRoutesOnce()
       }
     }
   },
@@ -67,7 +63,14 @@ export default {
     }),
     ...mapMutations({
       setQueryString: 'route/setQueryString'
-    })
+    }),
+    loadOnIntersect (entries) {
+      entries[0].isIntersecting && this.loadRoutesOnce()
+    },
+    loadRoutesOnce () {
+      this.$options.cancelToken && clearTimeout(this.$options.cancelToken)
+      this.$options.cancelToken = setTimeout(() => this.loadRoutes(), 1000)
+    }
   }
 }
 </script>
