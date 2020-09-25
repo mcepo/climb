@@ -47,7 +47,7 @@ const auth: Module<AuthState, RootState> = {
     }
   },
   actions: {
-    login ({ commit, dispatch }, token: string) {
+    login ({ commit, dispatch, state }, token: string) {
       const auth = {
         token,
         user: JSON.parse(atob(token.split('.')[1]))
@@ -55,7 +55,7 @@ const auth: Module<AuthState, RootState> = {
 
       commit('login', auth)
       setAuthToStorage(auth)
-      dispatch('snackbar/success', 'Successfully logged in!', { root: true })
+      dispatch('snackbar/success', 'Successfully logged in<br> Welcome, ' + state.user?.name, { root: true })
       dispatch('form/close', null, { root: true })
     },
     logout ({ commit }) {

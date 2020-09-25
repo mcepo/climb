@@ -79,11 +79,11 @@ export default {
     submit () {
       api
         .post('/login/', this.formData)
-        .then(response => {
-          this.afterSuccessLogin(response.data)
+        .then(() => {
+          this.afterSuccessLogin()
         })
         .catch(error => {
-          this.statusCode = error.response.status
+          this.statusCode = error.response?.status
         })
     },
     authProvider (provider, providerName) {
@@ -98,16 +98,11 @@ export default {
       })
     },
     socialLogin (provider, response) {
-      api.post('/social_login/' + provider, response).then(response => {
-        this.afterSuccessLogin(response.data)
+      api.post('/social_login/' + provider, response).then(() => {
+        this.afterSuccessLogin()
       })
     },
-    afterSuccessLogin (responseData) {
-      this.$store.dispatch('auth/login', responseData)
-      this.$store.commit(
-        'snackbar/success',
-        'Successfully logged in <br> Welcome, ' + responseData.user.name
-      )
+    afterSuccessLogin () {
       this.closeForm()
     }
   }

@@ -11,7 +11,7 @@ class ImageController extends Controller
 
     public function __construct()
     {
-        $this->middleware('jwt-auth', ['only' => ['destroy']]);
+        $this->middleware('auth', ['only' => ['destroy']]);
     }
 
     public function show(Image $image)

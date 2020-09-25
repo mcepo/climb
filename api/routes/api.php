@@ -12,7 +12,7 @@ Route::namespace('Auth')->group(function() {
 
 });
 
-Route::middleware(['jwt-auth', 'admin'])->prefix('admin')->group(function() {
+Route::middleware(['admin'])->prefix('admin')->group(function() {
 
   Route::get('user/search', 'UserController@search');
   Route::get('user/{user}/addArea/{areaId}', 'UserController@addArea');

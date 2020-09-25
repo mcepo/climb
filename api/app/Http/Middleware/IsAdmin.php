@@ -19,10 +19,14 @@ class IsAdmin
     {
       $user = auth()->user();
 
-      if(isset($user) && $user->isAdmin()) {
-        return $next($request);
+      if(isset($user)) {
+        if($user->isAdmin()) {
+          return $next($request);
+        } else {
+          return abort(403);
+        }
       } else {
-        return abort(403);
+        return abort(401);
       }
     }
 }
