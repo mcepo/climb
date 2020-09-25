@@ -114,9 +114,6 @@ export default {
       multiple: true,
       addIndex: false,
       thread: 3,
-      headers: {
-        Accept: 'application/json, text/plain, */*'
-      },
       editFile: {
         show: false
       }
@@ -125,6 +122,12 @@ export default {
   computed: {
     postAction () {
       return '/api/' + this.type + '/' + this.id + '/image'
+    },
+    headers() {
+      return {
+        Accept: 'application/json, text/plain, */*',
+        Authorization: 'Bearer ' + this.$store.state.auth.token
+      }
     }
   },
 
