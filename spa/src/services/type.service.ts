@@ -191,7 +191,7 @@ export default {
       routes: false,
       currentLocationTag: false,
       parenting: [AreaDatabaseId.Crag],
-      directions: false,
+      directions: true,
       loadParent: false
     } as AreaType,
     {
