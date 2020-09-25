@@ -91,7 +91,6 @@ export class LayerService {
         return getters.tags
       },
       (tags: Tag[]) => {
-        console.log(tags)
         if ((this._map &&
             !store.getters.loading &&
             tags.length !== 0) ||
