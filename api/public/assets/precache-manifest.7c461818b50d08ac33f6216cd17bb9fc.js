@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/css/admin.panel~area.form~moderator.form~route.filters~route.form.dba841c6.css"
   },
   {
-    "revision": "b91b30bcdc467e4672d7",
+    "revision": "f2967b28a6c918a63b73",
     "url": "/assets/css/app.c4150113.css"
   },
   {
@@ -56,7 +56,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/fonts/MaterialIcons-Regular.da4ea5cd.ttf"
   },
   {
-    "revision": "863ee9e5032d5709932a00cd31eeb8f2",
+    "revision": "a737323b39465460d85e4fb9623ea801",
     "url": "/assets/index.html"
   },
   {
@@ -68,8 +68,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/js/admin.panel~area.form~moderator.form~route.filters~route.form.82421ffc.js"
   },
   {
-    "revision": "b91b30bcdc467e4672d7",
-    "url": "/assets/js/app.3160ad55.js"
+    "revision": "f2967b28a6c918a63b73",
+    "url": "/assets/js/app.9b431432.js"
   },
   {
     "revision": "5e892c7033b90d048b57",
