@@ -134,7 +134,7 @@ class AreaUpdateService
 
     $routeSinglePitchCount = Route::where('type_id', '!=', 0)->descendents($path)->count();
 
-    return $tagsCount / ($areaCount + $routeMultiPitchCount + $routeSinglePitchCount + 1);
+    return round($tagsCount / ($areaCount + $routeMultiPitchCount + $routeSinglePitchCount + 1), 4);
   }
 
   private function _getImageCount($path)
