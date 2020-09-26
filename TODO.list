@@ -7,6 +7,9 @@ TODO: password reset not working
 
 TODO: check email verification
 
+TODO: root areas only get areas, not routes or moderators
+  remove that
+
 -- FEATURES --
 
 TODO: add notification when work is syncronized
