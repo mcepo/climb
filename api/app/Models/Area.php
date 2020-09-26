@@ -30,7 +30,12 @@ class Area extends Model
         LogsActivity;
 
     protected $casts = [
-        'path' => 'text'
+        'path' => 'text',
+        'length_stats' => 'array',
+        'grade_stats' => 'array',
+        'orientations' => 'array',
+        'route_stats' => 'array',
+        'coverage' => 'float'
     ];
 
     protected static $logAttributes = ['*'];
