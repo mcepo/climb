@@ -38,8 +38,6 @@ class AreaController extends Controller
 
     public function show(Area $area)
     {
-        $this->updateAreaStats($area->id);
-
         $area->load([
             'mapTag',
             'links',

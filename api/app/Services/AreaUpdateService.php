@@ -108,14 +108,14 @@ class AreaUpdateService
   private function _getRoutesByType($path)
   {
 
-    $typeCountClean = [0,0,0,0];
+    $typeCountClean = [0, 0, 0, 0];
 
     Route::select(DB::raw('count(type_id) as count, type_id'))
       ->descendents($path)
       ->groupBy(['type_id'])
       ->get()
       ->keyBy('type_id')
-      ->each(function($type, $key) use (&$typeCountClean){
+      ->each(function ($type, $key) use (&$typeCountClean) {
         $typeCountClean[$key] = $type['count'];
       });
 
@@ -132,7 +132,7 @@ class AreaUpdateService
     // to every single route because some route entrances are close together
     $routeMultiPitchCount = Route::where('type_id', 0)->descendents($path)->count() / 2;
 
-    $routeSinglePitchCount = Route::where('type_id','!=', 0)->descendents($path)->count();
+    $routeSinglePitchCount = Route::where('type_id', '!=', 0)->descendents($path)->count();
 
     return $tagsCount / ($areaCount + $routeMultiPitchCount + $routeSinglePitchCount + 1);
   }
