@@ -103,15 +103,6 @@ class Area extends Model
         return $this->path ? implode('.', [$this->path, $this->id]) : $this->id;
     }
 
-    // setting statistics of the grades and route length in this area
-    public function setStatistics()
-    {
-        $path = $this->getPathWithSelf();
-
-        $this->setAttribute('statistics', Grade::statistics($path));
-        $this->setAttribute('lengthStatistics', Route::lengthStatistics($path));
-    }
-
     public static function scopeRoots($query)
     {
         return $query->whereNull('parent_id');

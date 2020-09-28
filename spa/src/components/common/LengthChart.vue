@@ -1,5 +1,5 @@
 <template>
-  <canvas :id="divId" height='250'></canvas>
+  <canvas v-if='show' :id="divId" height='250'></canvas>
 </template>
 
 <script>
@@ -20,9 +20,15 @@ export default {
         lengths.push(length + 'm')
       }
       return lengths
+    },
+    show () {
+      return this.stats && (!Array.isArray(this.stats))
     }
   },
   mounted () {
+
+    if(!this.show) return;
+
     const ctx = document.getElementById(this.divId)
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const myChart = new Chart(ctx, {

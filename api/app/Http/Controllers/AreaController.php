@@ -46,7 +46,6 @@ class AreaController extends Controller
             'altitude',
             'ancestors'
         ]);
-        $area->setStatistics();
         $area->loadAreaAssets(request()->all());
 
         return response()->json($area);

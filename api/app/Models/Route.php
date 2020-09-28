@@ -14,7 +14,6 @@ use App\Models\Traits\IsDescendent;
 use App\Models\Traits\HasAncestors;
 use App\Models\Traits\HasOwner;
 use Spatie\Activitylog\Traits\LogsActivity;
-use Illuminate\Support\Facades\DB;
 
 class Route extends Model
 {
@@ -88,26 +87,6 @@ class Route extends Model
 
     public static function loadChunk($filters) {
         return self::filter($filters)->with(['mapTag', 'grades'])->orderBy('id')->limit(10)->get();
-    }
-
-    public static function lengthStatistics($path)
-    {
-
-        // some grade types are just rediculous to report
-        // like required grade
-        return Route::select(DB::raw('count(length) as count, length'))
-            ->descendents($path)
-            ->groupBy(['length'])
-            ->orderBy('length', 'asc')
-            ->whereNotNull('length')
-            ->get()
-            ->keyBy('length')
-            ->transform(
-                function ($item) {
-                    return $item->count;
-                }
-            )
-            ->toArray();
     }
 
     public function canBeDeleted() {

@@ -15,8 +15,8 @@
         </v-flex>
         <v-flex>{{orientation}}</v-flex>
       </v-layout>
-      <statistics-chart :type='type' :stats='stats' v-for="(stats, type) in area.statistics" :key="type + area.id"></statistics-chart>
-      <length-chart v-if='lengthStatistics !== 0' :stats='area.lengthStatistics' :key="'length' + area.id"></length-chart>
+      <statistics-chart :type='type' :stats='stats' v-for="(stats, type) in area.grade_stats" :key="type + area.id"></statistics-chart>
+      <length-chart v-if='area.length_stats' :stats='area.length_stats' :key="'length' + area.id"></length-chart>
       <moderator-list :moderators='moderators' :area='area'></moderator-list>
     </template>
   </details-layout>
@@ -58,9 +58,6 @@ export default {
       })
 
       return moderators
-    },
-    lengthStatistics () {
-      return (this.area && this.area.lengthStatistics) ? this.area.lengthStatistics.length : 0
     },
     orientation () {
       return typeService.orientation.getLabel(this.area.orientation)
