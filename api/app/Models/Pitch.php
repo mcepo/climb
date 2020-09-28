@@ -20,6 +20,11 @@ class Pitch extends Model
         'route_id',
         'length'
     ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at'
+    ];
     
     protected $with = ['grades'];
 

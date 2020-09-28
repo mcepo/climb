@@ -51,7 +51,9 @@ class Area extends Model
 
     protected $hidden = [
         'min_altitude',
-        'max_altitude'
+        'max_altitude',
+        'created_at',
+        'updated_at'
     ];
 
     protected $appends = [

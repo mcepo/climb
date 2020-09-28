@@ -19,7 +19,9 @@ class Tag extends Model
 
     // need image_id as well because of admin panel tag view
     protected $hidden = [
-        'binary_coordinates'
+        'binary_coordinates',
+        'created_at',
+        'updated_at'
     ];
 
     protected $casts = [
