@@ -40,6 +40,8 @@ class Route extends Model
 
     protected $hidden = [
         'ts_vector',
+        'created_at',
+        'updated_at'
     ];
 
     protected $with = ['grades'];

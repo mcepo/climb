@@ -6,18 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\Taggable;
 use App\Models\Traits\IsDescendent;
 use App\Models\Traits\HasOwner;
-use Spatie\Activitylog\Traits\LogsActivity;
 
 class Trail extends Model
 {
     use Taggable,
         IsDescendent,
-        HasOwner,
-        LogsActivity;
+        HasOwner;
 
-    protected static $logAttributes = ['*'];
-
-    protected $fillable = [
-        'name'
+    protected $hidden = [
+        'created_at',
+        'updated_at'
     ];
 }

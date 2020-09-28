@@ -28,7 +28,9 @@ class Image extends Model
     ];
 
     protected $hidden = [
-        'file_path'
+        'file_path',
+        'created_at',
+        'updated_at'
     ];
 
     // whose image is this
