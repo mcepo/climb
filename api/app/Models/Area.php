@@ -67,7 +67,7 @@ class Area extends Model
 
     public function areas()
     {
-        return $this->hasMany(self::class, 'parent_id');
+        return $this->hasMany(self::class, 'parent_id')->orderBy('name');
     }
 
     public function setAltitudeAttribute($value)
