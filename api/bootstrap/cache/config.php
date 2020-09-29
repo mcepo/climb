@@ -30,11 +30,10 @@
       15 => 'Illuminate\\Session\\SessionServiceProvider',
       16 => 'Illuminate\\Validation\\ValidationServiceProvider',
       17 => 'Illuminate\\View\\ViewServiceProvider',
-      18 => 'Clockwork\\Support\\Laravel\\ClockworkServiceProvider',
-      19 => 'App\\Providers\\AppServiceProvider',
-      20 => 'App\\Providers\\AuthServiceProvider',
-      21 => 'App\\Providers\\EventServiceProvider',
-      22 => 'App\\Providers\\RouteServiceProvider',
+      18 => 'App\\Providers\\AppServiceProvider',
+      19 => 'App\\Providers\\AuthServiceProvider',
+      20 => 'App\\Providers\\EventServiceProvider',
+      21 => 'App\\Providers\\RouteServiceProvider',
     ),
     'aliases' => 
     array (
@@ -71,7 +70,6 @@
       'URL' => 'Illuminate\\Support\\Facades\\URL',
       'Validator' => 'Illuminate\\Support\\Facades\\Validator',
       'View' => 'Illuminate\\Support\\Facades\\View',
-      'Clockwork' => 'Clockwork\\Support\\Laravel\\Facade',
     ),
   ),
   'auth' => 
@@ -303,10 +301,6 @@
     array (
       0 => '/horizon/.*',
       1 => '/telescope/.*',
-    ),
-    'filter_methods' => 
-    array (
-      0 => 'options',
     ),
     'stack_traces' => 
     array (
