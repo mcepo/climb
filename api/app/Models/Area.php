@@ -35,7 +35,7 @@ class Area extends Model
         'grade_stats' => 'array',
         'orientations' => 'array',
         'route_stats' => 'array',
-        'coverage' => 'float'
+        'tag_coverage' => 'float'
     ];
 
     protected static $logAttributes = ['*'];
