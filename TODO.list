@@ -18,8 +18,6 @@ TODO: add install button when service worker updates
 
 TODO: crawler for plave gore
 
-TODO: add tag coverage for areas
-
 -- OFFLINE PRECACHE on button click --
 
 TODO: add store for offline use button, then cache:
@@ -40,18 +38,6 @@ this produces a lot of over lapping data in the storage, a better solution would
 to store the vuex store to cache on mutations and remove the service worker cache for app data
 
 TODO: add backend cache for area index, area get, route index?, route get, image tags 
-
-TODO: use pregenerated stats in frontend
-
-TODO: remove calls to grade and route length
-
-TODO: run migrations on production server
-
-TODO: create a cron job or a deamon
-
-TODO: run update all areas on server
-
-TODO: reduce payload sizes -> created_at and updated_at can be hidden
 
 TODO: make a mapper so that i can send a plain array no need for a full json
   frontend, and backend mapper, pretty big job
