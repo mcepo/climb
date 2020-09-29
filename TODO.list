@@ -7,7 +7,7 @@ TODO: password reset not working
 
 TODO: check email verification
 
-TODO: root areas only get areas, not routes or moderators
+TODO: add recently viewed areas feature
   remove that
 
 -- FEATURES --
@@ -17,6 +17,8 @@ TODO: add notification when work is syncronized
 TODO: add install button when service worker updates
 
 TODO: crawler for plave gore
+
+TODO: add area stats to area details component
 
 -- OFFLINE PRECACHE on button click --
 
