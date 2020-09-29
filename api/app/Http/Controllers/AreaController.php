@@ -19,9 +19,7 @@ class AreaController extends Controller
     public function index()
     {
         return [
-            'areas' => Area::roots()->with('mapTag')->get(),
-            'routes' => Route::loadChunk(request()->all()),
-            'moderators' => User::admins()->get()
+            'areas' => Area::roots()->with('mapTag')->get()
         ];
     }
 
