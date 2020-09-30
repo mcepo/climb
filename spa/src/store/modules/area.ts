@@ -208,7 +208,7 @@ const area: Module<AreaState, RootState> = {
       // if an area has to load a parent then show parent tags on the map
       if (typeService.mustLoadParent(area)) {
         area = state.byIds[area.parent_id]
-        tags.concat(getters.tagsFor(area))
+        tags = tags.concat(getters.tagsFor(area))
       }
 
       if (area.map_tag) {
