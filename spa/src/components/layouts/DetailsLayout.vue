@@ -25,7 +25,7 @@
         <v-tab v-if="hasAreas" href="#areas">Areas</v-tab>
         <v-tab v-if="hasRoutes" href="#routes">Routes</v-tab>
         <v-tab v-if="hasPitches" href="#pitches">Pitches</v-tab>
-        <v-tab v-if="hasImages" href="#pictures" >Pictures</v-tab>
+        <v-tab v-if="hasImages" href="#pictures" >Photos</v-tab>
         <v-tabs-items v-model="tabs" class="mt-2">
 
           <v-tab-item v-if="hasAreas" value="areas">

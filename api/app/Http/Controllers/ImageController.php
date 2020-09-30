@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Image;
-use App\Models\Tag;
 use Intervention\Image\ImageManager;
 
 class ImageController extends Controller

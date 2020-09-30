@@ -4,10 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Area;
-use App\Models\Route;
 use Illuminate\Http\Request;
-use App\User;
-
 class AreaController extends Controller
 {
 
@@ -19,9 +16,7 @@ class AreaController extends Controller
     public function index()
     {
         return [
-            'areas' => Area::roots()->with('mapTag')->get(),
-            'routes' => Route::loadChunk(request()->all()),
-            'moderators' => User::admins()->get()
+            'areas' => Area::roots()->with('mapTag')->get()
         ];
     }
 
