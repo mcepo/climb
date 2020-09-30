@@ -4,10 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Area;
-use App\Models\Route;
 use Illuminate\Http\Request;
-use App\User;
-
 class AreaController extends Controller
 {
 
