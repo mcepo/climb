@@ -16,7 +16,7 @@
       <div class="stat_name">
         <strong>Tag coverage:</strong>
       </div>
-      <div>{{ item.tag_coverage * 100 }} %</div>
+      <div>{{ (item.tag_coverage * 100).toFixed(2) }} %</div>
     </v-layout>
     <v-layout row>
       <div class="stat_name">
