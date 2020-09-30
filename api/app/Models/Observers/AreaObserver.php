@@ -10,7 +10,13 @@ class AreaObserver
 
     public function saving(Area $area)
     {
-        $area->owner_id = auth()->user()->id;
+        // this has to stay, because i don't login when updating area stats
+        // because then all areas can only be changed by me
+        $user = auth()->user();
+
+        if($user) {
+            $area->owner_id = $user->id;
+        }
 
         if (isset($area->parent_id)) {
             $parent = Area::findOrFail($area->parent_id);
