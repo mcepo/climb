@@ -2,11 +2,11 @@
 <div>
   <v-toolbar flat>
     <v-btn
-      v-if="item.id"
+      v-if="area.id"
       text
       title="Add route"
       icon
-      @click.stop="openAuthorizedForm({form: {component: 'route-form', params: {area: item}}})"
+      @click.stop="openAuthorizedForm({form: {component: 'route-form', params: {area}}})"
     >
       <v-icon>add</v-icon>
     </v-btn>
@@ -44,7 +44,7 @@ export default {
     ...mapGetters({
       routes: 'route/getFiltered',
       filters: 'route/filters',
-      item: 'area/get'
+      area: 'area/get'
     }),
     routeQueryString: {
       get () {
