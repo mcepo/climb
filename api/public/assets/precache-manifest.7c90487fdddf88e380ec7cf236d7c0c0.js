@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "3957dbbe6f4308ccaa9d",
+    "revision": "606bfef883058be06818",
     "url": "/assets/css/admin.panel.f0bc1e12.css"
   },
   {
@@ -8,11 +8,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/css/admin.panel~area.form~moderator.form~route.filters~route.form.dba841c6.css"
   },
   {
-    "revision": "961fd48147c603745813",
-    "url": "/assets/css/app.da2ff21e.css"
+    "revision": "4dd95c33204d7ee2f786",
+    "url": "/assets/css/app.c87fd956.css"
   },
   {
-    "revision": "4200698c25638bf29d8a",
+    "revision": "4165db6857d32bd5b9bb",
     "url": "/assets/css/area.form.09316a61.css"
   },
   {
@@ -20,23 +20,23 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/css/area.form~pitch.form~route.filters~route.form.57be4a9e.css"
   },
   {
-    "revision": "f7d28137747a5ffc687c",
+    "revision": "792b482606c757cd9026",
     "url": "/assets/css/chunk-vendors.a516751e.css"
   },
   {
-    "revision": "76675e2ff4b9ab733ef0",
+    "revision": "bc4f33a90659efc9caa7",
     "url": "/assets/css/image.upload.6669a1ca.css"
   },
   {
-    "revision": "cfd2aae6e9e06d6bdc8d",
+    "revision": "4b4852be6b98f408a750",
     "url": "/assets/css/moderator.form.076ea886.css"
   },
   {
-    "revision": "368b72176ecd341b6a97",
+    "revision": "bfce253ef3a7cc7cad1a",
     "url": "/assets/css/pitch.form.207437e9.css"
   },
   {
-    "revision": "a52b1dc0807dbe2f6b80",
+    "revision": "b1fd3ecb2c581da0a9c2",
     "url": "/assets/css/route.filters.09316a61.css"
   },
   {
@@ -56,68 +56,68 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/fonts/MaterialIcons-Regular.da4ea5cd.ttf"
   },
   {
-    "revision": "10194245f7c5ee4dd769ff60c40c4812",
+    "revision": "a35d3312d4d6dadf0251cc257778bc2a",
     "url": "/assets/index.html"
   },
   {
-    "revision": "3957dbbe6f4308ccaa9d",
-    "url": "/assets/js/admin.panel.3effbb3e.js"
+    "revision": "606bfef883058be06818",
+    "url": "/assets/js/admin.panel.33cc1e7f.js"
   },
   {
     "revision": "3b40aac4e6343d751615",
     "url": "/assets/js/admin.panel~area.form~moderator.form~route.filters~route.form.82421ffc.js"
   },
   {
-    "revision": "961fd48147c603745813",
-    "url": "/assets/js/app.8aa7b34c.js"
+    "revision": "4dd95c33204d7ee2f786",
+    "url": "/assets/js/app.d961fc57.js"
   },
   {
-    "revision": "4200698c25638bf29d8a",
-    "url": "/assets/js/area.form.64d8b345.js"
+    "revision": "4165db6857d32bd5b9bb",
+    "url": "/assets/js/area.form.dc6b5ef6.js"
   },
   {
     "revision": "6165ce39b555cd83573b",
     "url": "/assets/js/area.form~pitch.form~route.filters~route.form.c0046772.js"
   },
   {
-    "revision": "029a1de7c28f511c79cc",
-    "url": "/assets/js/change-password.form.8d0c22a0.js"
+    "revision": "878551b3e50ef182db04",
+    "url": "/assets/js/change-password.form.0f93a315.js"
   },
   {
-    "revision": "f7d28137747a5ffc687c",
-    "url": "/assets/js/chunk-vendors.ee03d3a1.js"
+    "revision": "792b482606c757cd9026",
+    "url": "/assets/js/chunk-vendors.9178e0ed.js"
   },
   {
-    "revision": "76675e2ff4b9ab733ef0",
-    "url": "/assets/js/image.upload.29bd0538.js"
+    "revision": "bc4f33a90659efc9caa7",
+    "url": "/assets/js/image.upload.77f013af.js"
   },
   {
-    "revision": "5d6bfd98b5ee478bc329",
-    "url": "/assets/js/login.form.9684de50.js"
+    "revision": "69616d69fb139053c7f1",
+    "url": "/assets/js/login.form.7fb693b4.js"
   },
   {
-    "revision": "cfd2aae6e9e06d6bdc8d",
-    "url": "/assets/js/moderator.form.23a3525d.js"
+    "revision": "4b4852be6b98f408a750",
+    "url": "/assets/js/moderator.form.71e098c6.js"
   },
   {
-    "revision": "368b72176ecd341b6a97",
-    "url": "/assets/js/pitch.form.6ad2f207.js"
+    "revision": "bfce253ef3a7cc7cad1a",
+    "url": "/assets/js/pitch.form.c229ea1e.js"
   },
   {
-    "revision": "6a3d7c989f46d7f4a806",
-    "url": "/assets/js/popup.service.2630f560.js"
+    "revision": "6787d805357694f19ad8",
+    "url": "/assets/js/popup.service.053e36f6.js"
   },
   {
-    "revision": "f4b1142a3cdfd38f3f00",
-    "url": "/assets/js/register.form.c094b1b2.js"
+    "revision": "43a382a7ff4454a6e204",
+    "url": "/assets/js/register.form.35e4ac03.js"
   },
   {
-    "revision": "a52b1dc0807dbe2f6b80",
-    "url": "/assets/js/route.filters.fb05eec8.js"
+    "revision": "b1fd3ecb2c581da0a9c2",
+    "url": "/assets/js/route.filters.395b0c28.js"
   },
   {
-    "revision": "a67006b043e0a499055b",
-    "url": "/assets/js/route.form.8f42e362.js"
+    "revision": "8c7d74cc3a46bcf4bd19",
+    "url": "/assets/js/route.form.838653c1.js"
   },
   {
     "revision": "3afbc1e9a2d88bdb515742f0cbf727ed",
