@@ -19,6 +19,11 @@ TODO: add install button when service worker updates
 
 TODO: crawler for plave gore
 
+TODO: loading display for route list
+
+TODO: loading logic change, don't cancle a pending request, just don't send another one
+and no need for delay
+
 TODO: add orientation count in stats, project orientation on routes
 when adding sector orientation get route count for that area
 
