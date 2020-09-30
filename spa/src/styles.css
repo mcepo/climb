@@ -3,10 +3,8 @@ html {
 }
 
 .climb-area {
-  font-size: large;
-  font: message-box;
   background-color: lightgray;
-  padding: 5px;
+  padding: 3px;
   display:table;
   -webkit-border-radius: 9px;/*Safari, Chrome*/
   -moz-border-radius: 9px;/*Firefox*/
@@ -70,6 +68,6 @@ html {
 }
 
 .popup-box {
-  width: 150px;
+  width: 200px;
   height: auto;
 }

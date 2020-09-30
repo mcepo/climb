@@ -8,7 +8,6 @@ TODO: password reset not working
 TODO: check email verification
 
 TODO: add recently viewed areas feature
-  remove that
 
 TODO: add rest pregenerated stats in frontend
 
@@ -20,7 +19,8 @@ TODO: add install button when service worker updates
 
 TODO: crawler for plave gore
 
-TODO: add area stats to area details component
+TODO: add orientation count in stats, project orientation on routes
+when adding sector orientation get route count for that area
 
 -- OFFLINE PRECACHE on button click --
 
