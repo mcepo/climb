@@ -1,15 +1,19 @@
+-- TEST --
+
+TODO: trail tag delete, trail gets deleted from database
+
+TODO: email verification
+
+TODO: password reset
+
+TODO: review data crawled from plave gore
+
+TODO: test set at my location tag, then location isn't required before tagging
+
 -- FIXES --
 
 TODO: success message are showed after the post/put/delete request are added to queueu
 when no internet conntection is present
-
-TODO: password reset not working
-
-TODO: check email verification
-
-TODO: add recently viewed areas feature
-
-TODO: add rest pregenerated stats in frontend
 
 -- FEATURES --
 
@@ -17,15 +21,10 @@ TODO: add notification when work is syncronized
 
 TODO: add install button when service worker updates
 
-TODO: crawler for plave gore
-
-TODO: loading display for route list
-
-TODO: loading logic change, don't cancle a pending request, just don't send another one
-and no need for delay
-
 TODO: add orientation count in stats, project orientation on routes
 when adding sector orientation get route count for that area
+
+TODO: add recently viewed areas feature
 
 -- OFFLINE PRECACHE on button click --
 
@@ -43,19 +42,25 @@ TODO: add store for offline use button, then cache:
 -- OPTIMIZATION --
 
 TODO: right now app data is being stored by the service worker per request
-this produces a lot of over lapping data in the storage, a better solution would be
-to store the vuex store to cache on mutations and remove the service worker cache for app data
+  this produces a lot of over lapping data in the storage, a better solution would be
+  to store the vuex store to cache on mutations and remove the service worker cache for app data
+  use localForge
 
 TODO: add backend cache for area index, area get, route index?, route get, image tags 
   add static files and serve them directly from nginx without calling php at all
 
-TODO: make a mapper so that i can send a plain array no need for a full json
-  frontend, and backend mapper, pretty big job
+TODO: mapper for network data transfer, lower payload size
 
--- REFACTORING --
+ -- ADDING LOCALFORGE FOR STORING OFFLINE DATA --
 
-TODO: add gradeService, typeService as vue plugin
+TODO: add storage service with localForge installed
 
--- TESTING --
+TODO: store data to storage when it is added to store
+  items to add
+   - area, route, image(tags), pitches, trails
 
-TODO: test set at my location tag, then location isn't required before tagging
+TODO: add persist action to entityMutation vuex mixin that will add item to store, and store it in indexDB
+
+  PROBLEM ADDING/EDITING/DELETING AREA/ROUTE/PITCH/TAG SHOULD CHANGE THERE VALUE IN INDEXDB
+
+  looks like i will have to create a vuex plugin for this one to work properly
