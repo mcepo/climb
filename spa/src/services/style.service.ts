@@ -22,6 +22,10 @@ function getCircleSvg (color: string) {
   return '<circle cx="12" cy="12" r="6" fill="' + color + '"/>'
 }
 
+function getPhotoSvg (color: string) {
+  return '<path d="M0 0h24v24H0z" fill="none"/><circle cx="12" cy="12" r="3.2" fill="' + color + '"/><path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z" fill="' + color + '"/>'
+}
+
 function setPolylineStyle (layer: Polyline, color: string, dashArray?: string) {
   layer.setStyle(
     {
@@ -75,7 +79,7 @@ const areaLayerStyle = {
 const routeLeafletLayerStyle = {
 
   default (obj: StylingMarker) {
-    setMarkerStyle(obj.layer, getStarSvg('red'))
+    setMarkerStyle(obj.layer, getStarSvg('black'))
   },
   highlight (obj: StylingMarker) {
     setMarkerStyle(obj.layer, getStarSvg(highlighColor))
@@ -101,13 +105,13 @@ const routeImageLayerStyle = {
 const imageLayerStyle = {
 
   default (obj: StylingMarker) {
-    setMarkerStyle(obj.layer, getCircleSvg('red'))
+    setMarkerStyle(obj.layer, getPhotoSvg('black'))
   },
   highlight (obj: StylingMarker) {
-    setMarkerStyle(obj.layer, getCircleSvg(highlighColor))
+    setMarkerStyle(obj.layer, getPhotoSvg(highlighColor))
   },
   selected (obj: StylingMarker) {
-    setMarkerStyle(obj.layer, getCircleSvg('orangered'))
+    setMarkerStyle(obj.layer, getPhotoSvg('orangered'))
   }
 }
 
