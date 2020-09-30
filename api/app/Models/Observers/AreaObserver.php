@@ -10,11 +10,7 @@ class AreaObserver
 
     public function saving(Area $area)
     {
-        $user = auth()->user();
-
-        if($user) {
-            $area->owner_id = $user->id;
-        }
+        $area->owner_id = auth()->user()->id;
 
         if (isset($area->parent_id)) {
             $parent = Area::findOrFail($area->parent_id);
