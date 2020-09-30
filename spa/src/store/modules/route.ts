@@ -100,10 +100,14 @@ const route: Module<RouteState, RootState> = {
           commit('loading', false)
         })
     },
-    loadFiltered ({ state, commit, getters, dispatch }, filters = null) {
+    loadFiltered ({ state, commit, getters, dispatch, rootGetters }, filters = null) {
       if (state.loading) {
         return
       }
+
+      const area = rootGetters['area/get']
+
+      if (area && area.routes.length) return
 
       commit('loading', true)
 
@@ -160,12 +164,16 @@ const route: Module<RouteState, RootState> = {
       return filters
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    getFiltered (state: RouteState, getters: any): Route[] {
+    getFiltered (state: RouteState, getters: any, rootGetters: any): Route[] {
+      const area = rootGetters['area/get']
+
       const filters = getters.filters
 
       const filtered: Route[] = []
 
-      for (const id in state.byIds) {
+      const routeIds = (area && area.routes.length !== 0) ? area.routes.length : state.byIds
+
+      for (const id in routeIds) {
         const route = state.byIds[id]
 
         // filtering by area
