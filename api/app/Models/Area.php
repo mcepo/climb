@@ -35,7 +35,7 @@ class Area extends Model
         'grade_stats' => 'array',
         'orientations' => 'array',
         'route_stats' => 'array',
-        'coverage' => 'float'
+        'tag_coverage' => 'float'
     ];
 
     protected static $logAttributes = ['*'];
@@ -67,7 +67,7 @@ class Area extends Model
 
     public function areas()
     {
-        return $this->hasMany(self::class, 'parent_id');
+        return $this->hasMany(self::class, 'parent_id')->orderBy('name');
     }
 
     public function setAltitudeAttribute($value)

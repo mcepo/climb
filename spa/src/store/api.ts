@@ -47,7 +47,7 @@ api.interceptors.response.use(
       return Promise.resolve(true)
     }
 
-    if (!!error.response) {
+    if (error.response) {
       store.dispatch('snackbar/throwError', { code: error.response.status })
       if (error.response.status === 404) {
         router.push('/')

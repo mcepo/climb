@@ -7,7 +7,7 @@ TODO: password reset not working
 
 TODO: check email verification
 
-TODO: root areas only get areas, not routes or moderators
+TODO: add recently viewed areas feature
   remove that
 
 TODO: add rest pregenerated stats in frontend
@@ -20,7 +20,7 @@ TODO: add install button when service worker updates
 
 TODO: crawler for plave gore
 
-TODO: add tag coverage for areas
+TODO: add area stats to area details component
 
 -- OFFLINE PRECACHE on button click --
 
@@ -43,14 +43,6 @@ to store the vuex store to cache on mutations and remove the service worker cach
 
 TODO: add backend cache for area index, area get, route index?, route get, image tags 
   add static files and serve them directly from nginx without calling php at all
-
-TODO: use pregenerated stats in frontend
-
-TODO: create a cron job or a deamon
-
-TODO: run update all areas on server
-
-TODO: reduce payload sizes -> created_at and updated_at can be hidden
 
 TODO: make a mapper so that i can send a plain array no need for a full json
   frontend, and backend mapper, pretty big job

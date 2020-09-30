@@ -26,8 +26,7 @@ export default {
     }
   },
   mounted () {
-
-    if(!this.show) return;
+    if (!this.show) return
 
     const ctx = document.getElementById(this.divId)
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

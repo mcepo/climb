@@ -128,10 +128,6 @@ const area: Module<AreaState, RootState> = {
             commit('appendArea', { areaId: area.id, parentId: null })
           })
 
-          data.routes.forEach(route => {
-            commit('route/add', route, { root: true })
-          })
-
           dispatch('snackbar/success', 'Done!', { root: true })
 
           commit('drawers/setLeft', true, { root: true })
