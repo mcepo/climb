@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "f61a8560b3886e91082c",
+    "revision": "3957dbbe6f4308ccaa9d",
     "url": "/assets/css/admin.panel.f0bc1e12.css"
   },
   {
@@ -8,11 +8,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/css/admin.panel~area.form~moderator.form~route.filters~route.form.dba841c6.css"
   },
   {
-    "revision": "d3239d008faab64199eb",
+    "revision": "d366c01ed0954acad229",
     "url": "/assets/css/app.da2ff21e.css"
   },
   {
-    "revision": "5e892c7033b90d048b57",
+    "revision": "4200698c25638bf29d8a",
     "url": "/assets/css/area.form.09316a61.css"
   },
   {
@@ -24,19 +24,19 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/css/chunk-vendors.a516751e.css"
   },
   {
-    "revision": "5845ead43e41dee862df",
+    "revision": "76675e2ff4b9ab733ef0",
     "url": "/assets/css/image.upload.6669a1ca.css"
   },
   {
-    "revision": "fb1866c8d0015b517bad",
+    "revision": "cfd2aae6e9e06d6bdc8d",
     "url": "/assets/css/moderator.form.076ea886.css"
   },
   {
-    "revision": "d2cad882074317bfdbfc",
+    "revision": "368b72176ecd341b6a97",
     "url": "/assets/css/pitch.form.207437e9.css"
   },
   {
-    "revision": "d52c69d4627ec9ee68c8",
+    "revision": "a52b1dc0807dbe2f6b80",
     "url": "/assets/css/route.filters.09316a61.css"
   },
   {
@@ -56,68 +56,68 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/fonts/MaterialIcons-Regular.da4ea5cd.ttf"
   },
   {
-    "revision": "f8aaa22d03673aeb4947f51c7ac679ec",
+    "revision": "b84d80da4c5c1e3a0ef00c3ffc711cfe",
     "url": "/assets/index.html"
   },
   {
-    "revision": "f61a8560b3886e91082c",
-    "url": "/assets/js/admin.panel.5679c30f.js"
+    "revision": "3957dbbe6f4308ccaa9d",
+    "url": "/assets/js/admin.panel.3effbb3e.js"
   },
   {
     "revision": "3b40aac4e6343d751615",
     "url": "/assets/js/admin.panel~area.form~moderator.form~route.filters~route.form.82421ffc.js"
   },
   {
-    "revision": "d3239d008faab64199eb",
-    "url": "/assets/js/app.672ea140.js"
+    "revision": "d366c01ed0954acad229",
+    "url": "/assets/js/app.3538f115.js"
   },
   {
-    "revision": "5e892c7033b90d048b57",
-    "url": "/assets/js/area.form.5f256fce.js"
+    "revision": "4200698c25638bf29d8a",
+    "url": "/assets/js/area.form.64d8b345.js"
   },
   {
     "revision": "6165ce39b555cd83573b",
     "url": "/assets/js/area.form~pitch.form~route.filters~route.form.c0046772.js"
   },
   {
-    "revision": "ee32cb8aa8c1dfe5abbe",
-    "url": "/assets/js/change-password.form.e0efc380.js"
+    "revision": "029a1de7c28f511c79cc",
+    "url": "/assets/js/change-password.form.8d0c22a0.js"
   },
   {
     "revision": "f7d28137747a5ffc687c",
     "url": "/assets/js/chunk-vendors.ee03d3a1.js"
   },
   {
-    "revision": "5845ead43e41dee862df",
-    "url": "/assets/js/image.upload.df6b28ca.js"
+    "revision": "76675e2ff4b9ab733ef0",
+    "url": "/assets/js/image.upload.29bd0538.js"
   },
   {
-    "revision": "c42b8f1cda806aed1154",
-    "url": "/assets/js/login.form.b16aa69e.js"
+    "revision": "5d6bfd98b5ee478bc329",
+    "url": "/assets/js/login.form.9684de50.js"
   },
   {
-    "revision": "fb1866c8d0015b517bad",
-    "url": "/assets/js/moderator.form.15709e52.js"
+    "revision": "cfd2aae6e9e06d6bdc8d",
+    "url": "/assets/js/moderator.form.23a3525d.js"
   },
   {
-    "revision": "d2cad882074317bfdbfc",
-    "url": "/assets/js/pitch.form.d945a9bf.js"
+    "revision": "368b72176ecd341b6a97",
+    "url": "/assets/js/pitch.form.6ad2f207.js"
   },
   {
-    "revision": "a0da3d0dba5ce46bfef1",
-    "url": "/assets/js/popup.service.6ad8d199.js"
+    "revision": "6a3d7c989f46d7f4a806",
+    "url": "/assets/js/popup.service.2630f560.js"
   },
   {
-    "revision": "a1756f9d48f0b275e647",
-    "url": "/assets/js/register.form.07e0bb65.js"
+    "revision": "f4b1142a3cdfd38f3f00",
+    "url": "/assets/js/register.form.c094b1b2.js"
   },
   {
-    "revision": "d52c69d4627ec9ee68c8",
-    "url": "/assets/js/route.filters.7037ec3c.js"
+    "revision": "a52b1dc0807dbe2f6b80",
+    "url": "/assets/js/route.filters.fb05eec8.js"
   },
   {
-    "revision": "b2970347cbaedacca143",
-    "url": "/assets/js/route.form.62c0bb0a.js"
+    "revision": "a67006b043e0a499055b",
+    "url": "/assets/js/route.form.8f42e362.js"
   },
   {
     "revision": "3afbc1e9a2d88bdb515742f0cbf727ed",
