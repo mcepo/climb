@@ -15,7 +15,7 @@ workbox.precaching.precacheAndRoute(self.__precacheManifest)
 
 workbox.routing.registerRoute(
   new RegExp('https://cartodb-basemaps-.*png'),
-  new workbox.strategies.StaleWhileRevalidate({
+  new workbox.strategies.CacheFirst({
     cacheName: 'cartodb-basemaps'
   })
 )
@@ -24,7 +24,7 @@ workbox.routing.registerRoute(
 
 workbox.routing.registerRoute(
   new RegExp('/api/(route|area).*'),
-  new workbox.strategies.NetworkFirst({
+  new workbox.strategies.StaleWhileRevalidate({
     cacheName: 'app-data'
   })
 )
@@ -33,7 +33,7 @@ workbox.routing.registerRoute(
 
 workbox.routing.registerRoute(
   new RegExp('/api/image/\\d+/tags'),
-  new workbox.strategies.NetworkFirst({
+  new workbox.strategies.StaleWhileRevalidate({
     cacheName: 'app-data'
   })
 )
