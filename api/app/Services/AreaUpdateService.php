@@ -128,13 +128,17 @@ class AreaUpdateService
 
     $areaCount = Area::descendents($path)->count();
 
+    $trailCount = Trail::descendents($path)->count();
+
+    $imageCount = Image::descendents($path)->count();
+
     // dividing multipitch count by 2 because usually there is no need to tag entrance 
     // to every single route because some route entrances are close together
     $routeMultiPitchCount = Route::where('type_id', 0)->descendents($path)->count() / 2;
 
     $routeSinglePitchCount = Route::where('type_id', '!=', 0)->descendents($path)->count();
 
-    return round($tagsCount / ($areaCount + $routeMultiPitchCount + $routeSinglePitchCount + 1), 4);
+    return round($tagsCount / ($areaCount + $trailCount + $routeMultiPitchCount + $routeSinglePitchCount + $imageCount + 1), 4);
   }
 
   private function _getImageCount($path)
