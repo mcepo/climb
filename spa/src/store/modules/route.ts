@@ -100,7 +100,11 @@ const route: Module<RouteState, RootState> = {
           commit('loading', false)
         })
     },
-    loadFiltered ({ commit, getters, dispatch }, filters = null) {
+    loadFiltered ({ state, commit, getters, dispatch }, filters = null) {
+      if (state.loading) {
+        return
+      }
+
       commit('loading', true)
 
       filters && commit('setFilters', filters)

@@ -17,18 +17,25 @@
   </v-toolbar>
   <v-list two-line>
     <route-list-item v-for="route in routes" :key="route.id" :route='route'/>
+    <v-list-item v-if='loading'>
+      <v-list-item-content>
+        <v-progress-circular
+          indeterminate
+        ></v-progress-circular>
+      </v-list-item-content>
+    </v-list-item>
     <v-list-item>
       <v-list-item-content>
         <div v-intersect='loadOnIntersect'></div>
       </v-list-item-content>
-  </v-list-item>
+    </v-list-item>
   </v-list>
   </div>
 </template>
 
 <script>
 import RouteListItem from '../listItems/RouteListItem'
-import { mapGetters, mapActions, mapMutations } from 'vuex'
+import { mapGetters, mapActions, mapMutations, mapState } from 'vuex'
 
 export default {
   cancelToken: null,
@@ -45,6 +52,9 @@ export default {
       routes: 'route/getFiltered',
       filters: 'route/filters',
       area: 'area/get'
+    }),
+    ...mapState({
+      loading: s => s.route.loading
     }),
     routeQueryString: {
       get () {
@@ -65,7 +75,7 @@ export default {
       setQueryString: 'route/setQueryString'
     }),
     loadOnIntersect (entries) {
-      entries[0].isIntersecting && this.loadRoutesOnce()
+      entries[0].isIntersecting && this.loadRoutes()
     },
     loadRoutesOnce () {
       this.$options.cancelToken && clearTimeout(this.$options.cancelToken)
