@@ -5,12 +5,14 @@ namespace App\Console\Commands\PlaveGore;
 use Illuminate\Console\Command;
 
 use App\Models\Link;
+use App\User;
 use App\Models\Area;
 use App\Models\Route;
 use Goutte\Client;
 use Symfony\Component\HttpClient\HttpClient;
 
 use App\Console\Commands\Plezanje\GradeParser;
+use Illuminate\Support\Facades\Artisan;
 
 class PlaveGoreCrawler extends Command
 {
@@ -39,7 +41,7 @@ class PlaveGoreCrawler extends Command
     private $_requestCount;
 
     public $patterns = [
-        'tehnical' => "#A\d#",
+        'tehnical' => "#Ae*\d#",
         'mix' => "#M\d\d?[\+-]?#",
         'alpine' => "#AI\d[\+-]?#",
         'ice' => "#WI\d[\+-]?#",
@@ -52,8 +54,6 @@ class PlaveGoreCrawler extends Command
 
     private static $MOUNTAIN_COUNT = 7;
     private static $CRAG_COUNT = 11;
-
-    private $gradeParser;
 
     private $_country;
 
@@ -97,17 +97,13 @@ class PlaveGoreCrawler extends Command
 
             if ($page == null) {
                 echo ' **** ' . $link . ' is null';
-                exit;
+                continue;
             }
 
             $area = $this->_parseMountain($page);
 
             $this->_storeLink($area, $link);
-
-            break;
         }
-
-        return;
 
         for ($i = 1; $i <= self::$CRAG_COUNT; $i++) {
 
@@ -117,15 +113,15 @@ class PlaveGoreCrawler extends Command
 
             if ($page == null) {
                 echo ' **** ' . $link . ' is null';
-                exit;
+                continue;
             }
 
             $crag = $this->_parseSportClimbingSite($this->_country, $page);
 
             $this->_storeLink($crag, $link);
-
-            return;
         }
+
+        Artisan::call('area:update-all');
 
         $this->_runtime = microtime(true) - $this->_runtime;
 
@@ -152,14 +148,12 @@ class PlaveGoreCrawler extends Command
 
             if ($page == null) {
                 echo ' **** ' . $link . ' is null';
-                exit;
+                return;
             }
 
             $crag = $this->_parseCrag($area, $page);
 
             $this->_storeLink($crag, $link);
-
-            return $area;
         });
 
         return $area;
@@ -167,26 +161,25 @@ class PlaveGoreCrawler extends Command
 
     private function _getArea($parent, $name, $typeId)
     {
-        $areas = Area::where('name', 'ilike', $name)->get();
+        $area = Area::where('name', 'ilike', $name)->where('parent_id', $parent->id)->first();
 
-        if ($areas->count() ==  0) {
+        if (!$area) {
 
             echo $name . " -> new area\n";
 
             $area = new Area([
-                'name' => $name,
+                'name' => ucfirst(strtolower($name)),
                 'parent_id' => $parent->id,
                 'type_id' => $typeId
             ]);
 
-            //$area->save();
+            $area->save();
 
-        } else if ($areas->count() >  1) {
-            echo $name . " -> multiple results\n";
-        }
-
-        if (!isset($area)) {
-            $area = $areas[0];
+        } else {
+            $area->fill([
+                'name' => ucfirst(strtolower($name))
+            ]);
+            $area->save();
         }
 
         return $area;
@@ -195,12 +188,6 @@ class PlaveGoreCrawler extends Command
     private function _getPage($link)
     {
         echo 'Crawling -> ' . $link . "\n";
-
-        if (Link::where('href', $link)->first()) {
-            echo "SKIPPING (link exists - DIDN'T OPEN LINK) : $link \n";
-
-            return null;
-        }
 
         $client = new Client(HttpClient::create(['headers' => [
             'User-Agent' => 'Googlebot',
@@ -227,6 +214,10 @@ class PlaveGoreCrawler extends Command
         // location
 
         $coordinates = $this->_getMapLocations($page);
+
+        if(count($coordinates) == 1) {
+            $this->_storeMapTag($crag, array_shift($coordinates));
+        }
 
         $routeTableRows = $page->filter('table.datatable > tbody > tr');
 
@@ -259,22 +250,35 @@ class PlaveGoreCrawler extends Command
             $this->_storeLink($route, $link);
         });
 
-        exit;
-
         return $crag;
     }
 
     private function _storeRoute($routeArray)
     {
+
+        $routeArray['name'] = ucfirst(strtolower($routeArray['name']));
+        $routeArray['length'] = $routeArray['length'] == '' ? null : $routeArray['length'];
+
         $routeArray['type_id'] = $routeArray['length'] > 50 ? 0 : 1;
 
         $grades = $this->_parseGrade($routeArray['grade']);
 
         unset($routeArray['grade']);
 
-        //  $route = Route::create($routeArray);
+        $route = Route::where('area_id', $routeArray['area_id'])
+            ->where('name', $routeArray['name'])
+            ->first();
 
-        // $route->saveGrades($grades);
+        if($route) {
+            $route->fill($routeArray);
+            $route->save();
+        } else {
+            $route = Route::create($routeArray);
+        }
+
+        $route->saveGrades($grades);
+
+        return $route;
     }
 
     private function _parseCrag($parent, $page)
@@ -330,7 +334,7 @@ class PlaveGoreCrawler extends Command
         foreach ($matches[0] as $match) {
             $tmp = preg_split('/[\[|\]|\,]/', $match);
             // [lat, lng]
-            array_push($coordinates, [$tmp[1], $tmp[2]]);
+            array_push($coordinates, [$tmp[2], $tmp[1]]);
         }
 
         return $coordinates;
@@ -338,7 +342,6 @@ class PlaveGoreCrawler extends Command
 
     private function _storeMapTags($area, $coordinates)
     {
-
         foreach ($coordinates as $coordinate) {
             $this->_storeMapTag($area, $coordinate);
         }
@@ -346,33 +349,45 @@ class PlaveGoreCrawler extends Command
 
     private function _storeMapTag($area, $coordinate)
     {
-        // $area->mapTag()
-        // ->create(
-        //     [
-        //         'geometry' => [
-        //             'type' => 'Point',
-        //             'coordinates' => $coordinate
-        //         ]
-        //     ]
-        // );
+        $area->mapTag()->delete();
+
+        if($coordinate == null) return;
+
+        $area->mapTag()
+        ->create(
+            [
+                'geometry' => [
+                    'type' => 'Point',
+                    'coordinates' => $coordinate
+                ]
+            ]
+        );
     }
 
     private function _storeLink($model, $href)
     {
-        // $link = $model->links()
-        //         ->create(
-        //             [
-        //                 'name' => 'Plave gore',
-        //                 'href' => $href
-        //             ]
-        //         );
+
+        if (Link::where('href', $href)->first()) {
+            echo "SKIPPING ( link exists ) : $href \n";
+
+            return;
+        }
+
+        $link = $model->links()
+                ->create(
+                    [
+                        'name' => 'Plave gore',
+                        'href' => $href
+                    ]
+                );
 
         echo '** LINK: ' . $href . "\n";
     }
 
     private function _loginMe()
     {
-        auth()->loginUsingId(1);
+        $user = User::where('email', 'marko.cepo.vk@gmail.com')->first();
+        auth()->login($user);
     }
 
     private function _setGradeWeight(&$gradeWeights, $type, $grade)
@@ -413,32 +428,26 @@ class PlaveGoreCrawler extends Command
 
         $gradeWeights = [];
 
-        dump($grade);
-
         // tehnical climbing grade
         if (preg_match($this->patterns['tehnical'], $grade, $tehnicalGrade)) {
             $grade = preg_replace($this->patterns['tehnical'], '', $grade);
             $this->_setGradeWeight($gradeWeights, 'tehnical', $tehnicalGrade[0]);
-            dump('tehnical', $tehnicalGrade );
         }
 
         // french climbing grade
         if (preg_match($this->patterns['fr'], $grade, $frenchGrade)) {
             $grade = preg_replace($this->patterns['fr'], '', $grade);
             $this->_setGradeWeight($gradeWeights, 'max', $frenchGrade[0]);
-            dump('french', $frenchGrade);
 
+            return $gradeWeights;
         }
 
         // uiaa climbing grade
         if (preg_match($this->patterns['uiaa'], $grade, $uiaaGrade)) {
             $grade = preg_replace($this->patterns['uiaa'], '', $grade);
             $this->_setGradeWeight($gradeWeights, 'max', $uiaaGrade[0]);
-            dump('uiaa', $uiaaGrade);
-
         }
 
-        dump($gradeWeights);
-
+        return $gradeWeights;
     }
 }
