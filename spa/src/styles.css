@@ -4,7 +4,7 @@ html {
 
 .climb-area {
   background-color: lightgray;
-  padding: 5px;
+  padding: 3px;
   display:table;
   -webkit-border-radius: 9px;/*Safari, Chrome*/
   -moz-border-radius: 9px;/*Firefox*/

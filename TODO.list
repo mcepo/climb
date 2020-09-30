@@ -19,6 +19,9 @@ TODO: add install button when service worker updates
 
 TODO: crawler for plave gore
 
+TODO: add orientation count in stats, project orientation on routes
+when adding sector orientation get route count for that area
+
 -- OFFLINE PRECACHE on button click --
 
 TODO: add store for offline use button, then cache:

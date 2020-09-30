@@ -22,7 +22,7 @@ import { mapGetters } from 'vuex'
 
 import gradeService from '../../services/grade.service'
 
-import typeService, { ItemType } from '../../services/type.service'
+import { ItemType } from '../../services/type.service'
 
 export default {
   computed: {
