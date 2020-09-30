@@ -36,6 +36,12 @@ class TagController extends Controller
     {
         $this->canUserModify($tag);
         
+        // right now trail is only defined throu
+        // a tag so if a tag is deleted no need for a trail to remain in the database
+        if($tag->tagged_type == 'trail') {
+            $tag->tagged()->delete();
+        }
+
         $tag->delete();
 
         $this->updateAreaStats($tag->path);
