@@ -1,7 +1,5 @@
 -- TEST --
 
-TODO: review data crawled from plave gore
-
 TODO: test set at my location tag, then location isn't required before tagging
 
 -- FIXES --
@@ -10,6 +8,8 @@ TODO: success message are showed after the post/put/delete request are added to 
 when no internet conntection is present
 
 -- FEATURES --
+
+TODO: pull data from plave gore to production
 
 TODO: add notification when work is syncronized
 
