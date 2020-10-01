@@ -456,7 +456,9 @@ class PlezanjeCrawler extends Command
         return array_search($type, config('types.areas'));
     }
 
-    private function _loginMe() {
-        auth()->loginUsingId(1);
+    private function _loginMe()
+    {
+        $user = User::where('email', 'marko.cepo.vk@gmail.com')->first();
+        auth()->login($user);
     }
 }

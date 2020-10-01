@@ -168,16 +168,15 @@ class PlaveGoreCrawler extends Command
             echo $name . " -> new area\n";
 
             $area = new Area([
-                'name' => ucfirst(strtolower($name)),
+                'name' => $this->_santizeName($name),
                 'parent_id' => $parent->id,
                 'type_id' => $typeId
             ]);
 
             $area->save();
-
         } else {
             $area->fill([
-                'name' => ucfirst(strtolower($name))
+                'name' => $this->_santizeName($name)
             ]);
             $area->save();
         }
@@ -215,7 +214,7 @@ class PlaveGoreCrawler extends Command
 
         $coordinates = $this->_getMapLocations($page);
 
-        if(count($coordinates) == 1) {
+        if (count($coordinates) == 1) {
             $this->_storeMapTag($crag, array_shift($coordinates));
         }
 
@@ -256,7 +255,7 @@ class PlaveGoreCrawler extends Command
     private function _storeRoute($routeArray)
     {
 
-        $routeArray['name'] = ucfirst(strtolower($routeArray['name']));
+        $routeArray['name'] = $this->_santizeName($routeArray['name']);
         $routeArray['length'] = $routeArray['length'] == '' ? null : $routeArray['length'];
 
         $routeArray['type_id'] = $routeArray['length'] > 50 ? 0 : 1;
@@ -269,7 +268,7 @@ class PlaveGoreCrawler extends Command
             ->where('name', $routeArray['name'])
             ->first();
 
-        if($route) {
+        if ($route) {
             $route->fill($routeArray);
             $route->save();
         } else {
@@ -351,17 +350,17 @@ class PlaveGoreCrawler extends Command
     {
         $area->mapTag()->delete();
 
-        if($coordinate == null) return;
+        if ($coordinate == null) return;
 
         $area->mapTag()
-        ->create(
-            [
-                'geometry' => [
-                    'type' => 'Point',
-                    'coordinates' => $coordinate
+            ->create(
+                [
+                    'geometry' => [
+                        'type' => 'Point',
+                        'coordinates' => $coordinate
+                    ]
                 ]
-            ]
-        );
+            );
     }
 
     private function _storeLink($model, $href)
@@ -374,12 +373,12 @@ class PlaveGoreCrawler extends Command
         }
 
         $link = $model->links()
-                ->create(
-                    [
-                        'name' => 'Plave gore',
-                        'href' => $href
-                    ]
-                );
+            ->create(
+                [
+                    'name' => 'Plave gore',
+                    'href' => $href
+                ]
+            );
 
         echo '** LINK: ' . $href . "\n";
     }
@@ -449,5 +448,14 @@ class PlaveGoreCrawler extends Command
         }
 
         return $gradeWeights;
+    }
+
+    private function _santizeName($name)
+    {
+        $lower = mb_strtolower($name);
+        $lowerArray = explode(' ', $lower);
+        $lowerArray[0] = mb_convert_case($lowerArray[0], MB_CASE_TITLE_SIMPLE);
+        $lower = implode(' ', $lowerArray);
+        return $lower;
     }
 }

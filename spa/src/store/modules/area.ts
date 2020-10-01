@@ -16,7 +16,13 @@ export interface AreaState {
 
 const namespaced = true
 
-const normalizationAtributes = ['ancestors', 'areas', 'images', 'trails', 'moderators']
+const normalizationAtributes = [
+  'ancestors',
+  'areas',
+  'images',
+  'trails',
+  'moderators'
+]
 
 const area: Module<AreaState, RootState> = {
   namespaced,
@@ -44,7 +50,7 @@ const area: Module<AreaState, RootState> = {
     removeArea (state: AreaState, { parentId, areaId }) {
       const item = state.byIds[parentId]
 
-      const index = item && item.areas?.findIndex(id => id === areaId)
+      const index = item && item.areas?.findIndex((id) => id === areaId)
       index && item.areas.splice(index, 1)
     },
 
@@ -57,12 +63,11 @@ const area: Module<AreaState, RootState> = {
     removeModerator (state: AreaState, { area, moderator }) {
       const item = state.byIds[area.id]
 
-      const index = item.moderators.findIndex(id => id === moderator.id)
+      const index = item.moderators.findIndex((id) => id === moderator.id)
       item.moderators.splice(index, 1)
     }
   },
   actions: {
-
     storeRelation ({ commit }, { items, fun, root = false }) {
       for (const id in items) {
         commit(fun, items[id], { root })
@@ -70,15 +75,37 @@ const area: Module<AreaState, RootState> = {
     },
 
     normalizeData ({ commit, dispatch }, area: Area) {
-      area.routes && dispatch('storeRelation', { items: area.routes, fun: 'route/add', root: true })
+      area.routes &&
+        dispatch('storeRelation', {
+          items: area.routes,
+          fun: 'route/add',
+          root: true
+        })
 
       commit('add', normalizeRelations(area, normalizationAtributes))
 
-      area.areas && dispatch('storeRelation', { items: area.areas, fun: 'add' })
-      area.ancestors && dispatch('storeRelation', { items: area.ancestors, fun: 'add' })
-      area.trails && dispatch('storeRelation', { items: area.trails, fun: 'trail/add', root: true })
-      area.images && dispatch('storeRelation', { items: area.images, fun: 'image/add', root: true })
-      area.moderators && dispatch('storeRelation', { items: area.moderators, fun: 'user/add', root: true })
+      area.areas &&
+        dispatch('storeRelation', { items: area.areas, fun: 'add' })
+      area.ancestors &&
+        dispatch('storeRelation', { items: area.ancestors, fun: 'add' })
+      area.trails &&
+        dispatch('storeRelation', {
+          items: area.trails,
+          fun: 'trail/add',
+          root: true
+        })
+      area.images &&
+        dispatch('storeRelation', {
+          items: area.images,
+          fun: 'image/add',
+          root: true
+        })
+      area.moderators &&
+        dispatch('storeRelation', {
+          items: area.moderators,
+          fun: 'user/add',
+          root: true
+        })
     },
 
     fetch ({ state, commit, dispatch }, id) {
@@ -87,7 +114,9 @@ const area: Module<AreaState, RootState> = {
       // if not show the loading display
       if (state.byIds[id]?.fullyLoaded) {
         commit('loading', false) // just in case, also needed when opening sector
-        setTimeout(() => { commit('drawers/setLeft', true, { root: true }) }, 1000)
+        setTimeout(() => {
+          commit('drawers/setLeft', true, { root: true })
+        }, 1000)
       } else {
         dispatch('snackbar/show', 'Loading area...', { root: true })
         commit('loading', true)
@@ -100,7 +129,8 @@ const area: Module<AreaState, RootState> = {
 
           dispatch('normalizeData', data)
 
-          state.loading && dispatch('snackbar/success', 'Done!', { root: true })
+          state.loading &&
+            dispatch('snackbar/success', 'Done!', { root: true })
 
           commit('drawers/setLeft', true, { root: true })
 
@@ -109,7 +139,8 @@ const area: Module<AreaState, RootState> = {
           } else {
             commit('loading', false)
           }
-        }).catch(() => {
+        })
+        .catch(() => {
           commit('loading', false)
         })
     },
@@ -123,7 +154,7 @@ const area: Module<AreaState, RootState> = {
       api
         .get('area')
         .then(({ data }) => {
-          data.areas.forEach(area => {
+          data.areas.forEach((area) => {
             commit('add', area)
             commit('appendArea', { areaId: area.id, parentId: null })
           })
@@ -131,7 +162,8 @@ const area: Module<AreaState, RootState> = {
           dispatch('snackbar/success', 'Done!', { root: true })
 
           commit('drawers/setLeft', true, { root: true })
-        }).finally(() => {
+        })
+        .finally(() => {
           commit('loading', false)
         })
     }
@@ -139,17 +171,25 @@ const area: Module<AreaState, RootState> = {
   getters: {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     get (state: AreaState, _: any, rootState: RootState, rootGetters: any) {
-      const areaId = rootState.url?.params.areaId || rootGetters['route/get']?.area_id
+      const areaId =
+        rootState.url?.params.areaId || rootGetters['route/get']?.area_id
       return areaId && state.byIds[areaId]
     },
     find: (state: AreaState) => (id: number) => {
       return state.byIds[id]
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    tags (state: AreaState, getters: any, rootState: RootState, rootGetters: any) {
+    tags (
+      state: AreaState,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      getters: any,
+      _: RootState,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      rootGetters: any
+    ) {
       let area: Area = getters.get
 
-      const tags: Array<Tag> = []
+      let tags: Array<Tag> = []
 
       // if area isn't set then get root areas
       // that is areas where parent is null
@@ -163,46 +203,64 @@ const area: Module<AreaState, RootState> = {
         return tags
       }
 
+      tags = tags.concat(getters.tagsFor(area))
+
       // if an area has to load a parent then show parent tags on the map
       if (typeService.mustLoadParent(area)) {
         area = state.byIds[area.parent_id]
+        tags = tags.concat(getters.tagsFor(area))
       }
 
       if (area.map_tag) {
         tags.push(area.map_tag)
       } else {
-        area.ancestors && area.ancestors.slice()
-          .reverse()
-          .some((ancestorId: number) => {
-            if (state.byIds[ancestorId]?.map_tag) {
-              tags.push(state.byIds[ancestorId].map_tag)
-              return true
-            }
-            return false
-          })
+        area.ancestors &&
+          area.ancestors
+            .slice()
+            .reverse()
+            .some((ancestorId: number) => {
+              if (state.byIds[ancestorId]?.map_tag) {
+                tags.push(state.byIds[ancestorId].map_tag)
+                return true
+              }
+              return false
+            })
       }
-
-      area.areas && area.areas.forEach((id: number) => {
-        if (state.byIds[id]?.map_tag) {
-          tags.push(state.byIds[id].map_tag)
-        }
-      })
 
       rootGetters['route/getFiltered'].forEach((route: Route) => {
         route.map_tag && tags.push(route.map_tag)
       })
 
-      area.trails && area.trails.forEach((id: number) => {
-        if (rootState.trail?.byIds[id]?.map_tag) {
-          tags.push(rootState.trail.byIds[id].map_tag)
+      area.areas &&
+      area.areas.forEach((id: number) => {
+        if (state.byIds[id]?.map_tag) {
+          tags.push(state.byIds[id].map_tag)
         }
       })
 
-      area.images && area.images.forEach((id: number) => {
-        if (rootState.image?.byIds[id]?.map_tag) {
-          tags.push(rootState.image.byIds[id].map_tag)
-        }
-      })
+      return tags
+    },
+    tagsFor: (
+      state: AreaState,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      _: any,
+      rootState: RootState
+    ) => (area: Area) => {
+      const tags: Array<Tag> = []
+
+      area.trails &&
+        area.trails.forEach((id: number) => {
+          if (rootState.trail?.byIds[id]?.map_tag) {
+            tags.push(rootState.trail.byIds[id].map_tag)
+          }
+        })
+
+      area.images &&
+        area.images.forEach((id: number) => {
+          if (rootState.image?.byIds[id]?.map_tag) {
+            tags.push(rootState.image.byIds[id].map_tag)
+          }
+        })
 
       return tags
     }
