@@ -60,7 +60,7 @@ class JWTAuthentication
 
       $response = $next($request);
       
-      if(!isset($token) && auth()->user()) {
+      if(!isset($token) && auth()->user() && $response->status() === 200) {
 
         $jwtToken = auth()->user()->getToken();
         

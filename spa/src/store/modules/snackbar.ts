@@ -74,6 +74,9 @@ const snackbar: Module<SnackbarState, RootState> = {
         case 409:
           snackbarMessage.message = 'Seems this email is already taken.'
           break
+        case 422:
+          snackbarMessage.message = 'Please verify your email before using the application.'
+          break
         default:
           snackbarMessage.message = 'Well this is awkward :/'
       }
