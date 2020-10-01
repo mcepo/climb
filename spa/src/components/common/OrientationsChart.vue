@@ -25,6 +25,14 @@ export default {
             data: Object.values(this.orientations)
           }
         ]
+      },
+      options: {
+        scale: {
+          ticks: {
+            suggestedMin: 0,
+            suggestedMax: 50
+          }
+        }
       }
     })
   }
