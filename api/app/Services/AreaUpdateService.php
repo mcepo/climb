@@ -89,20 +89,42 @@ class AreaUpdateService
 
   private function _getOrientations($path)
   {
-    $areaOrientations = Area::distinct()
-      ->select('orientation')
-      ->descendents($path)
-      ->whereNotNull('orientation')
-      ->get()
-      ->pluck('orientation');
-    $routeOrientations = Route::distinct()
-      ->select('orientation')
-      ->descendents($path)
-      ->whereNotNull('orientation')
-      ->get()
-      ->pluck('orientation');
 
-    return $areaOrientations->merge($routeOrientations)->sort()->toArray();
+    $orientations = [];
+
+    Area::select(['orientation', 'route_stats'])
+      ->descendents('1')
+      ->whereNotNull('orientation')
+      ->orderBy('orientation')
+      ->get()
+      ->each(function ($area) use (&$orientations) {
+        if (!isset($orientations[$area->orientation])) {
+          $orientations[$area->orientation] = array_sum($area->route_stats);
+        } else {
+          $orientations[$area->orientation] += array_sum($area->route_stats);
+        }
+      });
+
+    Route::select('orientation')
+      ->descendents('1')
+      ->whereNotNull('orientation')
+      ->orderBy('orientation')
+      ->get()
+      ->each(function ($route) use (&$orientations) {
+        if (!isset($orientations[$route->orientation])) {
+          $orientations[$route->orientation] = 1;
+        } else {
+          $orientations[$route->orientation] += 1;
+        }
+      });
+
+    $orientationCount = array_sum($orientations);
+
+    $orientationsPercentage = array_map(function ($item) use ($orientationCount) {
+      return $item / $orientationCount;
+    }, $orientations);
+
+    return $orientationsPercentage;
   }
 
   private function _getRoutesByType($path)
