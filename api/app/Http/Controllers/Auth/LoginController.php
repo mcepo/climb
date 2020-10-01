@@ -37,9 +37,14 @@ class LoginController extends Controller
         return response('Invalid credentials.', 400);
       }
 
+      // at this point user is succesfully logged in
+
+      // now i am checking if his email is verified
+      // if not send an error response
+
       if(!auth()->user()->hasVerifiedEmail()) {
 
-        return response('Please verify your email before using the aplication.', 422);
+        return response('Please verify your email before using the application.', 422);
       }
     }
 }
