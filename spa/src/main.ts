@@ -21,5 +21,30 @@ new Vue({
   router,
   store,
   vuetify,
-  render: h => h(App)
+  render: h => h(App),
+  created () {
+
+    // login if a token is in url
+    // used for "forgotten password" and "verify email" features
+
+    // check only if a user isn't logged in
+    if(!this.$store.getters['auth/check']){
+      // get query from url
+      const urlParams = new URLSearchParams(window.location.search)
+
+      // get token from query
+      const token = urlParams.get('token')
+      
+      // if there is a token in url login user
+      if(token) {
+        // login user to application
+        this.$store.dispatch('auth/login', urlParams.get('token'))
+
+        // remove token from url
+        const uri = window.location.toString()
+        const cleanUri = uri.substring(0, uri.indexOf('?'))
+        window.history.replaceState({}, document.title, cleanUri)
+      }
+    }
+  }
 }).$mount('#app')
