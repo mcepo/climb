@@ -15,7 +15,6 @@ class VerificationController extends Controller
 
     private function _generateVerificationHash($user): string
     {
-
         return sha1($user->getEmailForVerification());
     }
 
@@ -26,10 +25,10 @@ class VerificationController extends Controller
 
     public function verify(Request $request)
     {
+        $user = User::findOrFail($request->route('id'));
 
-        $user = User::find($request->route('id'));
-
-        if (!$this->_checkVerificationHash($user, $request->get('hash'))) {
+        if (!$this->_checkVerificationHash($user, $request->get('hash'))) 
+        {
             throw new AuthorizationException;
         }
 
@@ -37,23 +36,20 @@ class VerificationController extends Controller
 
         Auth::login($user);
 
-        return redirect('/');
+        return redirect('/?token=' . auth()->user()->getToken());
     }
 
     public function resend(Request $request)
     {
-
-        if(!$request->has('email')) {
+        if(!$request->has('email')) 
+        {
             return abort(400);
         }
 
-        $user = User::where('email', $request->get('email'))->first();
+        $user = User::where('email', $request->get('email'))->firstOrFail();
 
-        if(!isset($user)) {
-            return abort(400);
-        }
-
-        if ($user->hasVerifiedEmail()) {
+        if ($user->hasVerifiedEmail()) 
+        {
             return response('Email already verified', 204);
         }
 
