@@ -90,12 +90,20 @@ class AreaUpdateService
   private function _getOrientations($path)
   {
 
-    $orientations = [];
+    $orientations = [
+      0 => 0,
+      45 => 0,
+      90 => 0,
+      135 => 0,
+      180 => 0,
+      225 => 0,
+      270 => 0,
+      315 => 0
+    ];
 
     Area::select(['orientation', 'route_stats'])
       ->descendents('1')
       ->whereNotNull('orientation')
-      ->orderBy('orientation')
       ->get()
       ->each(function ($area) use (&$orientations) {
         if (!isset($orientations[$area->orientation])) {
@@ -108,7 +116,6 @@ class AreaUpdateService
     Route::select('orientation')
       ->descendents('1')
       ->whereNotNull('orientation')
-      ->orderBy('orientation')
       ->get()
       ->each(function ($route) use (&$orientations) {
         if (!isset($orientations[$route->orientation])) {
@@ -121,7 +128,7 @@ class AreaUpdateService
     $orientationCount = array_sum($orientations);
 
     $orientationsPercentage = array_map(function ($item) use ($orientationCount) {
-      return $item / $orientationCount;
+      return round(($item / $orientationCount) * 100, 2);
     }, $orientations);
 
     return $orientationsPercentage;

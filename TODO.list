@@ -15,9 +15,6 @@ TODO: add notification when work is syncronized
 
 TODO: add install button when service worker updates
 
-TODO: add orientation count in stats, project orientation on routes
-when adding sector orientation get route count for that area
-
 TODO: add recently viewed areas feature
 
 -- OFFLINE PRECACHE on button click --
