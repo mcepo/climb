@@ -89,20 +89,49 @@ class AreaUpdateService
 
   private function _getOrientations($path)
   {
-    $areaOrientations = Area::distinct()
-      ->select('orientation')
-      ->descendents($path)
-      ->whereNotNull('orientation')
-      ->get()
-      ->pluck('orientation');
-    $routeOrientations = Route::distinct()
-      ->select('orientation')
-      ->descendents($path)
-      ->whereNotNull('orientation')
-      ->get()
-      ->pluck('orientation');
 
-    return $areaOrientations->merge($routeOrientations)->sort()->toArray();
+    $orientations = [
+      0 => 0,
+      45 => 0,
+      90 => 0,
+      135 => 0,
+      180 => 0,
+      225 => 0,
+      270 => 0,
+      315 => 0
+    ];
+
+    Area::select(['orientation', 'route_stats'])
+      ->descendents('1')
+      ->whereNotNull('orientation')
+      ->get()
+      ->each(function ($area) use (&$orientations) {
+        if (!isset($orientations[$area->orientation])) {
+          $orientations[$area->orientation] = array_sum($area->route_stats);
+        } else {
+          $orientations[$area->orientation] += array_sum($area->route_stats);
+        }
+      });
+
+    Route::select('orientation')
+      ->descendents('1')
+      ->whereNotNull('orientation')
+      ->get()
+      ->each(function ($route) use (&$orientations) {
+        if (!isset($orientations[$route->orientation])) {
+          $orientations[$route->orientation] = 1;
+        } else {
+          $orientations[$route->orientation] += 1;
+        }
+      });
+
+    $orientationCount = array_sum($orientations);
+
+    $orientationsPercentage = array_map(function ($item) use ($orientationCount) {
+      return round(($item / $orientationCount) * 100, 2);
+    }, $orientations);
+
+    return $orientationsPercentage;
   }
 
   private function _getRoutesByType($path)

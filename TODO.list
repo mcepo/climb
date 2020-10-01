@@ -1,7 +1,5 @@
 -- TEST --
 
-TODO: trail tag delete, trail gets deleted from database
-
 TODO: review data crawled from plave gore
 
 TODO: test set at my location tag, then location isn't required before tagging
@@ -11,16 +9,11 @@ TODO: test set at my location tag, then location isn't required before tagging
 TODO: success message are showed after the post/put/delete request are added to queueu
 when no internet conntection is present
 
-TODO: tag coverage keeps comming up a bit too high
-
 -- FEATURES --
 
 TODO: add notification when work is syncronized
 
 TODO: add install button when service worker updates
-
-TODO: add orientation count in stats, project orientation on routes
-when adding sector orientation get route count for that area
 
 TODO: add recently viewed areas feature
 
