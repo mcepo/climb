@@ -13,8 +13,6 @@ TODO: add notification when work is syncronized
 
 TODO: add install button when service worker updates
 
-TODO: add recently viewed areas feature
-
 -- OFFLINE PRECACHE on button click --
 
 TODO: add store for offline use button, then cache:
@@ -30,24 +28,9 @@ TODO: add store for offline use button, then cache:
 
 -- OPTIMIZATION --
 
-TODO: right now app data is being stored by the service worker per request
-  this produces a lot of over lapping data in the storage, a better solution would be
-  to store the vuex store to cache on mutations and remove the service worker cache for app data
-  use localForge
+TODO: maybe move from localStorage to indexDB
 
- -- ADDING LOCALFORGE FOR STORING OFFLINE DATA --
-
-TODO: add storage service with localForge installed
-
-TODO: store data to storage when it is added to store
-  items to add
-   - area, route, image(tags), pitches, trails
-
-TODO: add persist action to entityMutation vuex mixin that will add item to store, and store it in indexDB
-
-  PROBLEM ADDING/EDITING/DELETING AREA/ROUTE/PITCH/TAG SHOULD CHANGE THERE VALUE IN INDEXDB
-
-  looks like i will have to create a vuex plugin for this one to work properly
+TODO: check if exists indexDB and/or localStorage in ClientDB, maybe if doesn't exist enable service worker cache
 
 
 -- BIG MAYBE -- 
