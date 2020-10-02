@@ -20,24 +20,6 @@ workbox.routing.registerRoute(
   })
 )
 
-// all application data
-
-workbox.routing.registerRoute(
-  new RegExp('/api/(route|area).*'),
-  new workbox.strategies.StaleWhileRevalidate({
-    cacheName: 'app-data'
-  })
-)
-
-// image tags data
-
-workbox.routing.registerRoute(
-  new RegExp('/api/image/\\d+/tags'),
-  new workbox.strategies.StaleWhileRevalidate({
-    cacheName: 'app-data'
-  })
-)
-
 // caching apps images + thumbnails
 
 workbox.routing.registerRoute(
