@@ -21,7 +21,8 @@ const normalizationAtributes = [
   'areas',
   'images',
   'trails',
-  'moderators'
+  'moderators',
+  'routes'
 ]
 
 const area: Module<AreaState, RootState> = {
