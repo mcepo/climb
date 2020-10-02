@@ -35,7 +35,7 @@
           class='justify-start'
         >
           <v-icon>pin_drop</v-icon>
-          Drop {{this.type}} here
+          Drop item here
         </v-btn>
 
         <v-btn
