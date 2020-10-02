@@ -20,6 +20,14 @@
       </div>
       <area-list :areaIds="areaIds" />
     </v-layout>
+    <v-layout column v-if='recentlyViewedIds.length !== 0'>
+      <div class='d-flex pa-2'>
+        <h3 class="headline pa-2">
+          Recently viewed
+        </h3>
+      </div>
+      <area-list :areaIds="recentlyViewedIds" />
+    </v-layout>
   </v-container>
 </template>
 
@@ -30,7 +38,8 @@ export default {
 
   computed: {
     ...mapState({
-      areaIds: s => s.area.rootIds
+      areaIds: s => s.area.rootIds,
+      recentlyViewedIds: s => s.area.recentlyViewedIds
     })
   },
 

@@ -12,6 +12,7 @@ export interface AreaState {
   allIds: Array<number>;
   loading: boolean;
   rootIds: Array<number>;
+  recentlyViewedIds: Array<number>;
 }
 
 const namespaced = true
@@ -31,7 +32,8 @@ const area: Module<AreaState, RootState> = {
     byIds: {},
     allIds: [],
     loading: true,
-    rootIds: []
+    rootIds: [],
+    recentlyViewedIds: []
   },
   mutations: {
     ...entityMutations,
@@ -66,6 +68,15 @@ const area: Module<AreaState, RootState> = {
 
       const index = item.moderators.findIndex((id) => id === moderator.id)
       item.moderators.splice(index, 1)
+    },
+    addRecentlyViewed (state: AreaState, areaId) {
+      const recentlyViewedIds = state.recentlyViewedIds
+
+      recentlyViewedIds.unshift(areaId)
+
+      if (recentlyViewedIds.length > 8) {
+        recentlyViewedIds.pop()
+      }
     }
   },
   actions: {
@@ -128,6 +139,8 @@ const area: Module<AreaState, RootState> = {
           data.fullyLoaded = true
 
           dispatch('normalizeData', data)
+
+          commit('addRecentlyViewed', data.id)
 
           commit('drawers/setLeft', true, { root: true })
 
