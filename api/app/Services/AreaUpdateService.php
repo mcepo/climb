@@ -102,7 +102,7 @@ class AreaUpdateService
     ];
 
     Area::select(['orientation', 'route_stats'])
-      ->descendents('1')
+      ->descendents($path)
       ->whereNotNull('orientation')
       ->get()
       ->each(function ($area) use (&$orientations) {
@@ -114,7 +114,7 @@ class AreaUpdateService
       });
 
     Route::select('orientation')
-      ->descendents('1')
+      ->descendents($path)
       ->whereNotNull('orientation')
       ->get()
       ->each(function ($route) use (&$orientations) {
@@ -127,11 +127,15 @@ class AreaUpdateService
 
     $orientationCount = array_sum($orientations);
 
-    $orientationsPercentage = array_map(function ($item) use ($orientationCount) {
-      return round(($item / $orientationCount) * 100, 2);
-    }, $orientations);
+    if($orientationCount !== 0) {
+      $orientationsPercentage = array_map(function ($item) use ($orientationCount) {
+        return round(($item / $orientationCount) * 100, 2);
+      }, $orientations);
+  
+      return $orientationsPercentage;
+    }
 
-    return $orientationsPercentage;
+    return null;
   }
 
   private function _getRoutesByType($path)
