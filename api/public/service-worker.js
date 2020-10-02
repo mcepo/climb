@@ -1,4 +1,4 @@
-importScripts("/assets/precache-manifest.bbdb188b6263b1186f0a1262cf1711cd.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("/assets/precache-manifest.0114b130779b69d040acd484f2717f9f.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 // this is an ugly solution but i needed it so the service worker will
 // detect the change in the root url '/', but also serve it once offline
@@ -19,24 +19,6 @@ workbox.routing.registerRoute(
   new RegExp('https://cartodb-basemaps-.*png'),
   new workbox.strategies.CacheFirst({
     cacheName: 'cartodb-basemaps'
-  })
-)
-
-// all application data
-
-workbox.routing.registerRoute(
-  new RegExp('/api/(route|area).*'),
-  new workbox.strategies.StaleWhileRevalidate({
-    cacheName: 'app-data'
-  })
-)
-
-// image tags data
-
-workbox.routing.registerRoute(
-  new RegExp('/api/image/\\d+/tags'),
-  new workbox.strategies.StaleWhileRevalidate({
-    cacheName: 'app-data'
   })
 )
 
