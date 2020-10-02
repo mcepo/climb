@@ -9,8 +9,6 @@ when no internet conntection is present
 
 -- FEATURES --
 
-TODO: pull data from plave gore to production
-
 TODO: add notification when work is syncronized
 
 TODO: add install button when service worker updates
