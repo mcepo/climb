@@ -4,7 +4,7 @@
     <template slot="item-details">
       <area-stats :item='area'></area-stats>
       <v-divider></v-divider>
-      <orientations-chart :orientations='area.orientations'></orientations-chart>
+      <orientations-chart v-if='area.orientations' :orientations='area.orientations'></orientations-chart>
       <statistics-chart :type='type' :stats='stats' v-for="(stats, type) in area.grade_stats" :key="type + area.id"></statistics-chart>
       <length-chart v-if='area.length_stats' :stats='area.length_stats' :key="'length' + area.id"></length-chart>
       <moderator-list :moderators='moderators' :area='area'></moderator-list>

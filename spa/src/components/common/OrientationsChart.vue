@@ -1,5 +1,5 @@
 <template>
-  <canvas :id="divId" height="250"></canvas>
+  <canvas v-if='orientations' :id="divId" height="250"></canvas>
 </template>
 
 <script>
@@ -13,6 +13,8 @@ export default {
     }
   },
   mounted () {
+    if (!this.orientations) return
+
     const ctx = document.getElementById(this.divId)
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const myChart = new Chart(ctx, {

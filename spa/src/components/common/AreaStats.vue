@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-layout row v-if="item.altitude[0] || item.altitude[1]">
+    <v-layout row v-if="item.altitude[0] && item.altitude[1]">
       <div class="stat_name">
         <strong>Altitude:</strong>
       </div>
