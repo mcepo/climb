@@ -79,8 +79,6 @@ const route: Module<RouteState, RootState> = {
           commit('drawers/setLeft', true, { root: true })
         }, 1000)
       } else {
-        dispatch('snackbar/show', 'Loading route...', { root: true })
-
         commit('loading', true)
       }
 
@@ -89,8 +87,6 @@ const route: Module<RouteState, RootState> = {
         .then(({ data }) => {
           data.fullyLoaded = true
           dispatch('normalizeData', data)
-
-          dispatch('snackbar/success', 'Done!', { root: true })
 
           dispatch('area/fetch', data.area_id, { root: true })
 

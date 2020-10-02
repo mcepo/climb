@@ -119,7 +119,6 @@ const area: Module<AreaState, RootState> = {
           commit('drawers/setLeft', true, { root: true })
         }, 1000)
       } else {
-        dispatch('snackbar/show', 'Loading area...', { root: true })
         commit('loading', true)
       }
 
@@ -129,9 +128,6 @@ const area: Module<AreaState, RootState> = {
           data.fullyLoaded = true
 
           dispatch('normalizeData', data)
-
-          state.loading &&
-            dispatch('snackbar/success', 'Done!', { root: true })
 
           commit('drawers/setLeft', true, { root: true })
 
@@ -145,7 +141,7 @@ const area: Module<AreaState, RootState> = {
           commit('loading', false)
         })
     },
-    fetchRootAreas ({ state, commit, dispatch }) {
+    fetchRootAreas ({ state, commit }) {
       if (state.rootIds.length !== 0) {
         return
       }
@@ -159,8 +155,6 @@ const area: Module<AreaState, RootState> = {
             commit('add', area)
             commit('appendArea', { areaId: area.id, parentId: null })
           })
-
-          dispatch('snackbar/success', 'Done!', { root: true })
 
           commit('drawers/setLeft', true, { root: true })
         })
