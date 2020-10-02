@@ -17,21 +17,22 @@
     13 => 'Illuminate\\Pipeline\\PipelineServiceProvider',
     14 => 'Illuminate\\Queue\\QueueServiceProvider',
     15 => 'Illuminate\\Session\\SessionServiceProvider',
-    16 => 'Illuminate\\Validation\\ValidationServiceProvider',
-    17 => 'Illuminate\\View\\ViewServiceProvider',
-    18 => 'Facade\\Ignition\\IgnitionServiceProvider',
-    19 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
-    20 => 'Fruitcake\\Cors\\CorsServiceProvider',
-    21 => 'Intervention\\Image\\ImageServiceProvider',
-    22 => 'Laravel\\Socialite\\SocialiteServiceProvider',
-    23 => 'Laravel\\Tinker\\TinkerServiceProvider',
-    24 => 'Carbon\\Laravel\\ServiceProvider',
-    25 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
-    26 => 'Spatie\\Activitylog\\ActivitylogServiceProvider',
-    27 => 'App\\Providers\\AppServiceProvider',
-    28 => 'App\\Providers\\AuthServiceProvider',
-    29 => 'App\\Providers\\EventServiceProvider',
-    30 => 'App\\Providers\\RouteServiceProvider',
+    16 => 'Illuminate\\Translation\\TranslationServiceProvider',
+    17 => 'Illuminate\\Validation\\ValidationServiceProvider',
+    18 => 'Illuminate\\View\\ViewServiceProvider',
+    19 => 'Facade\\Ignition\\IgnitionServiceProvider',
+    20 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
+    21 => 'Fruitcake\\Cors\\CorsServiceProvider',
+    22 => 'Intervention\\Image\\ImageServiceProvider',
+    23 => 'Laravel\\Socialite\\SocialiteServiceProvider',
+    24 => 'Laravel\\Tinker\\TinkerServiceProvider',
+    25 => 'Carbon\\Laravel\\ServiceProvider',
+    26 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    27 => 'Spatie\\Activitylog\\ActivitylogServiceProvider',
+    28 => 'App\\Providers\\AppServiceProvider',
+    29 => 'App\\Providers\\AuthServiceProvider',
+    30 => 'App\\Providers\\EventServiceProvider',
+    31 => 'App\\Providers\\RouteServiceProvider',
   ),
   'eager' => 
   array (
@@ -155,6 +156,8 @@
     'queue.listener' => 'Illuminate\\Queue\\QueueServiceProvider',
     'queue.failer' => 'Illuminate\\Queue\\QueueServiceProvider',
     'queue.connection' => 'Illuminate\\Queue\\QueueServiceProvider',
+    'translator' => 'Illuminate\\Translation\\TranslationServiceProvider',
+    'translation.loader' => 'Illuminate\\Translation\\TranslationServiceProvider',
     'validator' => 'Illuminate\\Validation\\ValidationServiceProvider',
     'validation.presence' => 'Illuminate\\Validation\\ValidationServiceProvider',
     'Laravel\\Socialite\\Contracts\\Factory' => 'Laravel\\Socialite\\SocialiteServiceProvider',
@@ -184,6 +187,9 @@
     array (
     ),
     'Illuminate\\Queue\\QueueServiceProvider' => 
+    array (
+    ),
+    'Illuminate\\Translation\\TranslationServiceProvider' => 
     array (
     ),
     'Illuminate\\Validation\\ValidationServiceProvider' => 

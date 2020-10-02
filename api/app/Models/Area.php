@@ -72,6 +72,8 @@ class Area extends Model
 
     public function setAltitudeAttribute($value)
     {
+
+	dump($value);
         $this->attributes['min_altitude'] = $value[0];
         $this->attributes['max_altitude'] = $value[1];
     }
