@@ -36,7 +36,7 @@ const parent: Module<AdoptionState, RootState> = {
       // authorization - parent changing, only admin can change parent
       dispatch('auth/authorizeOnlyAdmin', null, { root: true }).then(() => {
         commit('set', payload)
-        commit(
+        dispatch(
           'snackbar/show',
           'Moving ' +
             payload.type +

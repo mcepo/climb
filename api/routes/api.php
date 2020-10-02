@@ -26,6 +26,9 @@ Route::middleware(['admin'])->prefix('admin')->group(function() {
   
   Route::get('getImages', 'AdminController@getImages');
   Route::get('imageReviewed/{id}', 'AdminController@imageReviewed');
+});
+
+Route::middleware(['admin'])->group(function() {
 
   Route::put('area/{area}/move', 'AreaController@move');
   Route::put('route/{route}/move', 'RouteController@move');
