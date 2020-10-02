@@ -37,11 +37,6 @@ TODO: right now app data is being stored by the service worker per request
   to store the vuex store to cache on mutations and remove the service worker cache for app data
   use localForge
 
-TODO: add backend cache for area index, area get, route index?, route get, image tags 
-  add static files and serve them directly from nginx without calling php at all
-
-TODO: mapper for network data transfer, lower payload size
-
  -- ADDING LOCALFORGE FOR STORING OFFLINE DATA --
 
 TODO: add storage service with localForge installed
@@ -55,3 +50,11 @@ TODO: add persist action to entityMutation vuex mixin that will add item to stor
   PROBLEM ADDING/EDITING/DELETING AREA/ROUTE/PITCH/TAG SHOULD CHANGE THERE VALUE IN INDEXDB
 
   looks like i will have to create a vuex plugin for this one to work properly
+
+
+-- BIG MAYBE -- 
+
+TODO: add backend cache for area index, area get, route index?, route get, image tags 
+  add static files and serve them directly from nginx without calling php at all
+
+TODO: mapper for network data transfer, lower payload size
