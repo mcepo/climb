@@ -5,7 +5,7 @@ import api from '../api'
 import { Area, Tag, Route } from '../../models'
 import { normalizeRelations } from '../utils/normalization'
 import entityMutations from './utils/entityMutations'
-import typeService from '@/services/type.service'
+import typeService, { AreaDatabaseId } from '@/services/type.service'
 
 export interface AreaState {
   byIds: Record<string, Area>;
@@ -142,7 +142,8 @@ const area: Module<AreaState, RootState> = {
 
           dispatch('normalizeData', data)
 
-          commit('addRecentlyViewed', data.id)
+          // will not add countries to recently viewed because its in the same component
+          data.type_id !== AreaDatabaseId.Country && commit('addRecentlyViewed', data.id)
 
           commit('drawers/setLeft', true, { root: true })
 

@@ -7,11 +7,7 @@ TODO: test set at my location tag, then location isn't required before tagging
 TODO: success message are showed after the post/put/delete request are added to queueu
 when no internet conntection is present
 
-TODO: no tagging on recently viewed areas + remove counteries
-
 TODO: zero altitude not showing
-
-TODO: duplicate areas in recently viewed, maybe change to object with hit counter
 
 -- FEATURES --
 
