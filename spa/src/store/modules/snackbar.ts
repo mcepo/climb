@@ -78,7 +78,7 @@ const snackbar: Module<SnackbarState, RootState> = {
           snackbarMessage.message = 'Please verify your email before using the application.'
           break
         default:
-          snackbarMessage.message = 'Well this is awkward :/'
+          snackbarMessage.message = status.message || 'Well this is awkward :/'
       }
 
       commit('push', snackbarMessage)

@@ -79,7 +79,7 @@ class RouteController extends Controller
             $this->updateAreaStats($route->area_id);
 
         } else {
-            return response("Can't delete route while it is tagged or has pitches!", 403);
+            return response("Can't delete route while it is tagged or has pitches!", 408);
         }
     }
 }
