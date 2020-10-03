@@ -111,10 +111,11 @@ export default {
       }
     },
     formDefaultValues () {
+      console.log(this.types)
       this.formData = {
         name: '',
         // eslint-disable-next-line @typescript-eslint/camelcase
-        type_id: null,
+        type_id: this.types.length === 1 ? this.types[0].value : null,
         altitude: this.altitudeLimits,
         orientation: null
       }
