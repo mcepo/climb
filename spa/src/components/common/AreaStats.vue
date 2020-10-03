@@ -54,7 +54,7 @@ export default Vue.extend({
     routeStats () {
       const routeStats = {}
 
-      this.item &&
+      this.item && this.item.route_stats &&
         this.item.route_stats.forEach((count, index) => {
           if (count !== 0) routeStats[index] = count
         })

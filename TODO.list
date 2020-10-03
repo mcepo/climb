@@ -7,6 +7,9 @@ TODO: test set at my location tag, then location isn't required before tagging
 TODO: success message are showed after the post/put/delete request are added to queueu
 when no internet conntection is present
 
+TODO: zoom in on mobile phone on drawer will remove nav bar from view and on map 
+you can't see nav bar
+
 -- FEATURES --
 
 TODO: add notification when work is syncronized

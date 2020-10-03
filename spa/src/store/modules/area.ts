@@ -147,7 +147,10 @@ const area: Module<AreaState, RootState> = {
 
           commit('drawers/setLeft', true, { root: true })
 
-          if (typeService.mustLoadParent(data)) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const parent: any = data.parent_id && data.ancestors.pop()
+
+          if (parent && typeService.mustLoadAsParent(parent)) {
             dispatch('fetch', data.parent_id)
           } else {
             commit('loading', false)
@@ -216,10 +219,12 @@ const area: Module<AreaState, RootState> = {
 
       tags = tags.concat(getters.tagsFor(area))
 
+      const parent = state.byIds[area.parent_id]
+
       // if an area has to load a parent then show parent tags on the map
-      if (typeService.mustLoadParent(area)) {
-        area = state.byIds[area.parent_id]
-        tags = tags.concat(getters.tagsFor(area))
+      if (parent && typeService.mustLoadAsParent(parent)) {
+        tags = tags.concat(getters.tagsFor(parent))
+        area = parent
       }
 
       if (area.map_tag) {
@@ -242,13 +247,6 @@ const area: Module<AreaState, RootState> = {
         route.map_tag && tags.push(route.map_tag)
       })
 
-      area.areas &&
-      area.areas.forEach((id: number) => {
-        if (state.byIds[id]?.map_tag) {
-          tags.push(state.byIds[id].map_tag)
-        }
-      })
-
       return tags
     },
     tagsFor: (
@@ -258,6 +256,13 @@ const area: Module<AreaState, RootState> = {
       rootState: RootState
     ) => (area: Area) => {
       const tags: Array<Tag> = []
+
+      area.areas &&
+      area.areas.forEach((id: number) => {
+        if (state.byIds[id]?.map_tag) {
+          tags.push(state.byIds[id].map_tag)
+        }
+      })
 
       area.trails &&
         area.trails.forEach((id: number) => {
