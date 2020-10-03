@@ -26,7 +26,7 @@
           Recently viewed
         </h3>
       </div>
-      <area-list :areaIds="recentlyViewedIds" />
+      <area-list :areaIds="recentlyViewedIds" :taggable='false'/>
     </v-layout>
   </v-container>
 </template>

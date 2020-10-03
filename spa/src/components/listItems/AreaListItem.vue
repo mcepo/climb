@@ -11,7 +11,7 @@
     <v-list-item-content>
       <v-list-item-title>{{area.name}}</v-list-item-title>
     </v-list-item-content>
-    <v-list-item-action>
+    <v-list-item-action v-if='taggable'>
       <tag-control :type="type" :item="area"></tag-control>
     </v-list-item-action>
   </v-list-item>
@@ -23,7 +23,13 @@ import TagControl from '../buttons/TagControl'
 import { getUrl } from '../../router'
 
 export default {
-  props: ['area'],
+  props: {
+    area: Object,
+    taggable: {
+      type: Boolean,
+      default: true
+    }
+  },
   computed: {
     key () {
       return this.type + this.area.id

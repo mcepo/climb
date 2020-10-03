@@ -70,13 +70,15 @@ const area: Module<AreaState, RootState> = {
       item.moderators.splice(index, 1)
     },
     addRecentlyViewed (state: AreaState, areaId) {
-      const recentlyViewedIds = state.recentlyViewedIds
+      const recentlyViewedIds = state.recentlyViewedIds.filter((id) => id !== areaId)
 
       recentlyViewedIds.unshift(areaId)
 
       if (recentlyViewedIds.length > 8) {
         recentlyViewedIds.pop()
       }
+
+      state.recentlyViewedIds = recentlyViewedIds
     }
   },
   actions: {
