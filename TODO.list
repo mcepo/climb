@@ -7,8 +7,6 @@ TODO: test set at my location tag, then location isn't required before tagging
 TODO: success message are showed after the post/put/delete request are added to queueu
 when no internet conntection is present
 
-TODO: zero altitude not showing
-
 -- FEATURES --
 
 TODO: add notification when work is syncronized
