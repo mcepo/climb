@@ -10,7 +10,18 @@ when no internet conntection is present
 TODO: zoom in on mobile phone on drawer will remove nav bar from view and on map 
 you can't see nav bar
 
+TODO: seem like service worker is sill controlling image upload, check that
+
 -- FEATURES --
+
+TODO: or if an image is tagged at all then don't show that image in image list
+
+TODO: move add image/pitch/area/route to the menu so tabs don't have to show unless it has items
+
+TODO: add click me overlay to all images everywhere
+
+TODO: add recursive loading from climbing site all the way to sector regardless of what is open
+  same from mountain to sector ?
 
 TODO: add notification when work is syncronized
 
@@ -31,14 +42,11 @@ TODO: add store for offline use button, then cache:
 
 -- OPTIMIZATION --
 
-TODO: maybe move from localStorage to indexDB
-
-TODO: check if exists indexDB and/or localStorage in ClientDB, maybe if doesn't exist enable service worker cache
-
-
 -- BIG MAYBE -- 
 
 TODO: add backend cache for area index, area get, route index?, route get, image tags 
   add static files and serve them directly from nginx without calling php at all
 
 TODO: mapper for network data transfer, lower payload size
+
+TODO: move from localStorage to indexDB
