@@ -5,13 +5,14 @@ import api from '../api'
 import { Area, Tag, Route } from '../../models'
 import { normalizeRelations } from '../utils/normalization'
 import entityMutations from './utils/entityMutations'
-import typeService from '@/services/type.service'
+import typeService, { AreaDatabaseId } from '@/services/type.service'
 
 export interface AreaState {
   byIds: Record<string, Area>;
   allIds: Array<number>;
   loading: boolean;
   rootIds: Array<number>;
+  recentlyViewedIds: Array<number>;
 }
 
 const namespaced = true
@@ -31,7 +32,8 @@ const area: Module<AreaState, RootState> = {
     byIds: {},
     allIds: [],
     loading: true,
-    rootIds: []
+    rootIds: [],
+    recentlyViewedIds: []
   },
   mutations: {
     ...entityMutations,
@@ -66,6 +68,17 @@ const area: Module<AreaState, RootState> = {
 
       const index = item.moderators.findIndex((id) => id === moderator.id)
       item.moderators.splice(index, 1)
+    },
+    addRecentlyViewed (state: AreaState, areaId) {
+      const recentlyViewedIds = state.recentlyViewedIds.filter((id) => id !== areaId)
+
+      recentlyViewedIds.unshift(areaId)
+
+      if (recentlyViewedIds.length > 8) {
+        recentlyViewedIds.pop()
+      }
+
+      state.recentlyViewedIds = recentlyViewedIds
     }
   },
   actions: {
@@ -119,7 +132,6 @@ const area: Module<AreaState, RootState> = {
           commit('drawers/setLeft', true, { root: true })
         }, 1000)
       } else {
-        dispatch('snackbar/show', 'Loading area...', { root: true })
         commit('loading', true)
       }
 
@@ -130,12 +142,15 @@ const area: Module<AreaState, RootState> = {
 
           dispatch('normalizeData', data)
 
-          state.loading &&
-            dispatch('snackbar/success', 'Done!', { root: true })
+          // will not add countries to recently viewed because its in the same component
+          data.type_id !== AreaDatabaseId.Country && commit('addRecentlyViewed', data.id)
 
           commit('drawers/setLeft', true, { root: true })
 
-          if (typeService.mustLoadParent(data)) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const parent: any = data.parent_id && data.ancestors.pop()
+
+          if (parent && typeService.mustLoadAsParent(parent)) {
             dispatch('fetch', data.parent_id)
           } else {
             commit('loading', false)
@@ -145,7 +160,7 @@ const area: Module<AreaState, RootState> = {
           commit('loading', false)
         })
     },
-    fetchRootAreas ({ state, commit, dispatch }) {
+    fetchRootAreas ({ state, commit }) {
       if (state.rootIds.length !== 0) {
         return
       }
@@ -159,8 +174,6 @@ const area: Module<AreaState, RootState> = {
             commit('add', area)
             commit('appendArea', { areaId: area.id, parentId: null })
           })
-
-          dispatch('snackbar/success', 'Done!', { root: true })
 
           commit('drawers/setLeft', true, { root: true })
         })
@@ -206,10 +219,12 @@ const area: Module<AreaState, RootState> = {
 
       tags = tags.concat(getters.tagsFor(area))
 
+      const parent = state.byIds[area.parent_id]
+
       // if an area has to load a parent then show parent tags on the map
-      if (typeService.mustLoadParent(area)) {
-        area = state.byIds[area.parent_id]
-        tags = tags.concat(getters.tagsFor(area))
+      if (parent && typeService.mustLoadAsParent(parent)) {
+        tags = tags.concat(getters.tagsFor(parent))
+        area = parent
       }
 
       if (area.map_tag) {
@@ -232,13 +247,6 @@ const area: Module<AreaState, RootState> = {
         route.map_tag && tags.push(route.map_tag)
       })
 
-      area.areas &&
-      area.areas.forEach((id: number) => {
-        if (state.byIds[id]?.map_tag) {
-          tags.push(state.byIds[id].map_tag)
-        }
-      })
-
       return tags
     },
     tagsFor: (
@@ -248,6 +256,13 @@ const area: Module<AreaState, RootState> = {
       rootState: RootState
     ) => (area: Area) => {
       const tags: Array<Tag> = []
+
+      area.areas &&
+      area.areas.forEach((id: number) => {
+        if (state.byIds[id]?.map_tag) {
+          tags.push(state.byIds[id].map_tag)
+        }
+      })
 
       area.trails &&
         area.trails.forEach((id: number) => {

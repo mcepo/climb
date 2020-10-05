@@ -13,6 +13,8 @@ import { Tag } from '@/models'
 import { HighlightState } from './modules/highlight'
 import { UserState } from './modules/user'
 
+import localStorage from './plugins/localStorage'
+
 Vue.use(Vuex)
 
 export interface RootState {
@@ -33,6 +35,7 @@ const store = new Vuex.Store<RootState>({
     drawing: false,
     online: navigator.onLine
   },
+  plugins: [localStorage],
   mutations: {
     setDrawingMode (state: RootState, drawing: boolean) {
       state.drawing = drawing

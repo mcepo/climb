@@ -49,8 +49,10 @@ class AreaController extends Controller
     public function update(Request $request, Area $area)
     {
         $this->canUserModify($area);
+        
+        $area->fill($request->all());
 
-        $area->fill($request->all())->save();
+        $area->save();
 
         $this->updateAreaStats($area->id);
     }
@@ -66,7 +68,7 @@ class AreaController extends Controller
             $this->updateAreaStats($area->parent_id);
 
         } else {
-            return response("Can't delete area while it has content, or is tagged!", 403);
+            return response("Can't delete area while it has content, or is tagged!", 408);
         }
     }
 

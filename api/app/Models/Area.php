@@ -30,7 +30,6 @@ class Area extends Model
         LogsActivity;
 
     protected $casts = [
-        'path' => 'text',
         'length_stats' => 'array',
         'grade_stats' => 'array',
         'orientations' => 'array',
@@ -40,8 +39,8 @@ class Area extends Model
 
     protected static $logAttributes = ['*'];
 
-    protected $guarded = [
-        'id',
+    protected $fillable = [
+        'name', 'orientation', 'altitude', 'type_id', 'parent_id', 'path', 'owner_id'
     ];
 
     protected $attributes = [
@@ -78,11 +77,7 @@ class Area extends Model
 
     public function getAltitudeAttribute()
     {
-
-        $altitude = [];
-        $altitude[0] = isset($this->min_altitude) ? $this->min_altitude : null;
-        $altitude[1] = isset($this->max_altitude) ? $this->max_altitude : null;
-        return $altitude;
+        return [$this->min_altitude, $this->max_altitude];
     }
 
     public function routes()

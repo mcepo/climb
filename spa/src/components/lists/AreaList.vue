@@ -1,6 +1,6 @@
 <template>
   <v-list>
-    <area-list-item v-for="area in areas" :key="area.id" :area='area' />
+    <area-list-item v-for="area in areas" :key="area.id" :area='area' :taggable='taggable' />
   </v-list>
 </template>
 
@@ -9,7 +9,11 @@ import AreaListItem from '../listItems/AreaListItem'
 
 export default {
   props: {
-    areaIds: Array
+    areaIds: Array,
+    taggable: {
+      type: Boolean,
+      default: true
+    }
   },
   components: {
     AreaListItem

@@ -192,7 +192,7 @@ export default {
       currentLocationTag: false,
       parenting: [AreaDatabaseId.Crag],
       directions: true,
-      loadParent: false
+      loadParent: true
     } as AreaType,
     {
       databaseId: AreaDatabaseId.Crag,
@@ -208,7 +208,7 @@ export default {
       currentLocationTag: true,
       parenting: [AreaDatabaseId.Sector],
       directions: true,
-      loadParent: false
+      loadParent: true
     } as AreaType,
     {
       databaseId: AreaDatabaseId.Sector,
@@ -301,7 +301,7 @@ export default {
     }).map(a => this.shapeTypeForSelect(a))
   },
 
-  mustLoadParent (item: Area) {
+  mustLoadAsParent (item: Area) {
     const itemType: AreaType = this.find(ItemType.Area, item.type_id)
     return itemType.loadParent
   },
