@@ -21,7 +21,7 @@
       :absolute="true"
       :value="true"
     >
-      Click me to view routes.
+      Click me
     </v-overlay>
   <div class='image-controls' v-if='!loading'>
     <tag-control type="image" :item="image"></tag-control>
