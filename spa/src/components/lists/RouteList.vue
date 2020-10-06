@@ -1,15 +1,6 @@
 <template>
 <div>
   <v-toolbar flat>
-    <v-btn
-      v-if="area.id"
-      text
-      title="Add route"
-      icon
-      @click.stop="openAuthorizedForm({form: {component: 'route-form', params: {area}}})"
-    >
-      <v-icon>add</v-icon>
-    </v-btn>
     <v-btn text title="Filters" icon @click.stop="openAuthorizedForm({form: {component: 'route-filters-form'}})">
       <v-icon>filter_list</v-icon>
     </v-btn>

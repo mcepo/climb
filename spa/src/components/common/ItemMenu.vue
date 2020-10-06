@@ -49,6 +49,25 @@
           Move {{this.type}}
         </v-btn>
 
+        <tag-control v-if='canTag' :type="type" :item="item" show-text :stop='false'/>
+
+        <current-location-tagger v-if='canTagCurrentLocation' :type='type' :item='item'  show-text/>
+
+        <v-btn
+          text
+          v-if='canGetDirections'
+          title="Get directions for this area"
+          @click="openInGoogle()"
+          class='justify-start'
+        >
+          <v-icon>directions_car</v-icon>
+          Get directions
+        </v-btn>
+
+        <delete-button :type='type' :item="item" return-back show-text />
+
+        <add-trail v-if='hasTrails' :area='item' show-text/>
+
         <v-btn
           text
           v-if='isArea'
@@ -60,23 +79,48 @@
           Add moderator
         </v-btn>
 
-        <add-trail v-if='hasTrails' :area='item' show-text/>
+        <v-btn
+          v-if='canHaveArea'
+          title="Add area"
+          text
+          class='justify-start'
+          @click.stop="openAuthorizedForm({form: {component: 'area-form', params: {parent: item}}})"
+        >
+          <v-icon>add</v-icon>
+          Add subarea
+        </v-btn>
 
-        <tag-control v-if='canTag' :type="type" :item="item" show-text />
+        <v-btn
+          v-if="canAddRoute"
+          text
+          title="Add route"
+          class='justify-start'
+          @click.stop="openAuthorizedForm({form: {component: 'route-form', params: {area}}})"
+        >
+          <v-icon>add</v-icon>
+          Add route
+        </v-btn>
 
-        <current-location-tagger v-if='canTagCurrentLocation' :type='type' :item='item'  show-text/>
-
-        <delete-button :type='type' :item="item" return-back show-text />
+        <v-btn
+          v-if="canHavePitch"
+          text
+          title="Add pitch"
+          class='justify-start'
+          @click.stop="openAuthorizedForm({form: {component: 'pitch-form', params: {route: item }}})"
+        >
+          <v-icon>add</v-icon>
+          Add pitch
+        </v-btn>
 
         <v-btn
           text
-          v-if='canGetDirections'
-          title="Get directions for this area"
-          @click="openInGoogle()"
+          title="Upload photo"
+          v-if='canAddImage'
           class='justify-start'
+          @click.stop="openAuthorizedForm({form: {component: 'image-upload-form', params: {type, id: item.id}}})"
         >
-          <v-icon>directions_car</v-icon>
-          Get directions
+          <v-icon>add_photo_alternate</v-icon>
+          Upload photo
         </v-btn>
       </div>
 
@@ -134,11 +178,23 @@ export default {
     canGetDirections () {
       return typeService.canGetDirections(this.type, this.item)
     },
+    canHaveArea () {
+      return typeService.hasAreas(this.type, this.item)
+    },
     isArea () {
       return this.type === ItemType.Area
     },
     isRoute () {
       return this.type === ItemType.Route
+    },
+    canAddImage () {
+      return typeService.canAddImage(this.type, this.item.type_id)
+    },
+    canAddRoute () {
+      return typeService.canAddRoute(this.type, this.item.type_id)
+    },
+    canHavePitch () {
+      return typeService.hasPitches(this.type, this.item.type_id)
     }
   },
 

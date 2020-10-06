@@ -1,10 +1,10 @@
 <template>
   <div v-if="canTag" style="display: inline;">
-    <v-btn v-if="edit" text :icon='!showText' @click.stop="editTag" title="Edit tag"  :block='showText' :class="{'menu-button': showText}">
+    <v-btn v-if="edit" text :icon='!showText' @click="editTag($event)" title="Edit tag"  :block='showText' :class="{'menu-button': showText}">
       <v-icon>edit_location</v-icon>
       <div v-if="showText">Edit {{type}} tag</div>
     </v-btn>
-    <v-btn v-else text :icon='!showText' @click.stop="createTag" title="Add tag"  :block='showText' :class="{'menu-button': showText}">
+    <v-btn v-else text :icon='!showText' @click="createTag($event)" title="Add tag"  :block='showText' :class="{'menu-button': showText}">
       <v-icon>add_location</v-icon>
       <div v-if="showText">Add {{type}} tag</div>
     </v-btn>
@@ -19,7 +19,11 @@ export default Vue.extend({
   props: {
     type: String,
     item: Object,
-    showText: Boolean
+    showText: Boolean,
+    stop: {
+      type: Boolean,
+      default: true
+    }
   },
   computed: {
     canTag () {
@@ -30,11 +34,13 @@ export default Vue.extend({
     }
   },
   methods: {
-    createTag () {
+    createTag (e) {
+      this.stop && e.stopPropagation()
       this.closeDrawerIfMobile()
       drawingService.createTag(this.type, this.item)
     },
-    editTag () {
+    editTag (e) {
+      this.stop && e.stopPropagation()
       this.closeDrawerIfMobile()
       drawingService.editTag(this.type, this.item)
     },

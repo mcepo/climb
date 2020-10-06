@@ -1,6 +1,6 @@
 <template>
   <div v-if="!drawing" style="display: inline;">
-    <v-btn text :icon='!showText' @click.stop="createTag" title="Add trail" :block='showText' :class="{'menu-button': showText}">
+    <v-btn text :icon='!showText' @click="createTag" title="Add trail" :block='showText' :class="{'menu-button': showText}">
       <v-icon>timeline</v-icon>
       <span v-if='showText'>Add trail</span>
     </v-btn>

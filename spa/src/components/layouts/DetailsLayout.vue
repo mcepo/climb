@@ -29,14 +29,6 @@
         <v-tabs-items v-model="tabs" class="mt-2">
 
           <v-tab-item v-if="hasAreas" value="areas">
-            <v-btn
-              title="Add area"
-              text
-              icon
-              @click.stop="openAuthorizedForm({form: {component: 'area-form', params: {parent: item}}})"
-            >
-              <v-icon>add</v-icon>
-            </v-btn>
             <area-list :areaIds="item.areas" />
           </v-tab-item>
 
@@ -45,27 +37,10 @@
           </v-tab-item>
 
           <v-tab-item v-if="hasPitches" value="pitches">
-            <v-btn
-              text
-              title="Add pitch"
-              icon
-              @click.stop="openAuthorizedForm({form: {component: 'pitch-form', params: {route: item }}})"
-            >
-              <v-icon>add</v-icon>
-            </v-btn>
             <pitch-list :route="item" />
           </v-tab-item>
 
           <v-tab-item value="pictures" v-if='hasImages' eager>
-            <v-btn
-              text
-              title="Upload photo"
-              icon
-              v-if='canAddImage'
-              @click.stop="openAuthorizedForm({form: {component: 'image-upload-form', params: {type, id: item.id}}})"
-            >
-              <v-icon>add_photo_alternate</v-icon>
-            </v-btn>
             <image-list v-if="item.images" :imageIds="item.images" />
           </v-tab-item>
 
@@ -92,22 +67,16 @@ export default {
   }),
   computed: {
     hasImages () {
-      return typeService.hasImages(this.type, this.item.type_id)
-    },
-    canAddImage () {
-      return typeService.canAddImage(this.type, this.item.type_id)
+      return this.item.images && this.item.images.length
     },
     hasRoutes () {
       return typeService.hasRoutes(this.type, this.item.type_id)
     },
-    canAddRoute () {
-      return typeService.canAddRoute(this.type, this.item.type_id)
-    },
     hasPitches () {
-      return typeService.hasPitches(this.type, this.item.type_id)
+      return this.item.pitches && this.item.pitches.length
     },
     hasAreas () {
-      return typeService.hasAreas(this.type, this.item)
+      return this.item.areas && this.item.areas.length !== 0
     },
     itemType () {
       return typeService.getTypeName(this.type, this.item.type_id)

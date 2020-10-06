@@ -3,7 +3,7 @@
     text
     :icon='!showText'
     :title="'Tag ' + type + ' at my current location'"
-    @click.stop="setTag()"
+    @click="setTag()"
     :block='showText'
     :class="{'menu-button': showText}"
   >
