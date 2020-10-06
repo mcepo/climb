@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/css/admin.panel~area.form~moderator.form~route.filters~route.form.dba841c6.css"
   },
   {
-    "revision": "0114a5e9c1d195abfdaf",
+    "revision": "dc1de4a35171ef12f300",
     "url": "/assets/css/app.c87fd956.css"
   },
   {
@@ -20,7 +20,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/css/area.form~pitch.form~route.filters~route.form.57be4a9e.css"
   },
   {
-    "revision": "47d043fd92d6b09f7ad9",
+    "revision": "72740b678148b49f9729",
     "url": "/assets/css/chunk-vendors.a516751e.css"
   },
   {
@@ -56,7 +56,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/fonts/MaterialIcons-Regular.da4ea5cd.ttf"
   },
   {
-    "revision": "47262d8bee4663a75ea17ed0279519d4",
+    "revision": "87c057be763695c91b9baa804b0f0a84",
     "url": "/assets/index.html"
   },
   {
@@ -68,8 +68,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/js/admin.panel~area.form~moderator.form~route.filters~route.form.82421ffc.js"
   },
   {
-    "revision": "0114a5e9c1d195abfdaf",
-    "url": "/assets/js/app.083bc30f.js"
+    "revision": "dc1de4a35171ef12f300",
+    "url": "/assets/js/app.afcc63b3.js"
   },
   {
     "revision": "703c7c991159ee299331",
@@ -84,8 +84,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/js/change-password.form.0f93a315.js"
   },
   {
-    "revision": "47d043fd92d6b09f7ad9",
-    "url": "/assets/js/chunk-vendors.6a1f9283.js"
+    "revision": "72740b678148b49f9729",
+    "url": "/assets/js/chunk-vendors.1ee76cda.js"
   },
   {
     "revision": "fa8419f2c97c9cd553cf",
@@ -104,8 +104,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/js/pitch.form.c229ea1e.js"
   },
   {
-    "revision": "473d01c89bd55bedbc3b",
-    "url": "/assets/js/popup.service.24426ead.js"
+    "revision": "287276d52312e36427ba",
+    "url": "/assets/js/popup.service.80e75ac2.js"
   },
   {
     "revision": "43a382a7ff4454a6e204",
