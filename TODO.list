@@ -12,6 +12,8 @@ you can't see nav bar
 
 -- FEATURES --
 
+TODO: set most of the grades in expand panel and only the most common ones leave outside
+
 TODO: or if an image is tagged at all then don't show that image in image list
 
 TODO: add recursive loading from climbing site all the way to sector regardless of what is open
