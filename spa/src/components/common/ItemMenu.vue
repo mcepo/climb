@@ -95,7 +95,7 @@
           text
           title="Add route"
           class='justify-start'
-          @click.stop="openAuthorizedForm({form: {component: 'route-form', params: {area}}})"
+          @click.stop="openAuthorizedForm({form: {component: 'route-form', params: {area: item}}})"
         >
           <v-icon>add</v-icon>
           Add route
