@@ -29,7 +29,7 @@
       <v-card-text class="pt-0">
         <v-layout row>
           <v-flex class="px-3">
-            <v-slider v-model="formData.length" max="3000" min="0"/>
+            <v-slider v-model="formData.length" :max="maxLength" min="0"/>
           </v-flex>
           <v-flex shrink style="width: 50px">
             <v-text-field
@@ -77,6 +77,9 @@ export default {
   computed: {
     types () {
       return typeService.getRouteTypes()
+    },
+    maxLength () {
+      return (this.area.altitude[1] - this.area.altitude[0]) * 2
     }
   },
   created () {
