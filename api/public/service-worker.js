@@ -1,4 +1,4 @@
-importScripts("/assets/precache-manifest.a66747614e2c1049d1f67631de7fa280.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("/assets/precache-manifest.3cd9ef9280ac09417d9e55aa215a3810.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 // this is an ugly solution but i needed it so the service worker will
 // detect the change in the root url '/', but also serve it once offline
@@ -39,7 +39,7 @@ const bgSyncPlugin = new workbox.backgroundSync.Plugin('backgroundSyncQueue', {
 
 // cache all request except image requests
 // because i can't upload image while offline anyways
-const matchCb = /\/api\/(?!image).*/
+const matchCb = /\/api\/(((?!image).)*$)/
 
 const handleCb = new workbox.strategies.NetworkOnly({
   plugins: [bgSyncPlugin]
