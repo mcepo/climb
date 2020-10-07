@@ -12,8 +12,6 @@ you can't see nav bar
 
 TODO: seem like service worker is sill controlling image upload, check that
 
-TODO: add skeleton loader to image popup as well
-
 -- FEATURES --
 
 TODO: or if an image is tagged at all then don't show that image in image list
