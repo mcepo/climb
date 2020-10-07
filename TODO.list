@@ -10,8 +10,6 @@ when no internet conntection is present
 TODO: zoom in on mobile phone on drawer will remove nav bar from view and on map 
 you can't see nav bar
 
-TODO: seem like service worker is sill controlling image upload, check that
-
 -- FEATURES --
 
 TODO: or if an image is tagged at all then don't show that image in image list
