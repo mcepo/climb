@@ -37,7 +37,7 @@ const bgSyncPlugin = new workbox.backgroundSync.Plugin('backgroundSyncQueue', {
 
 // cache all request except image requests
 // because i can't upload image while offline anyways
-const matchCb = /\/api\/(?!image).*/
+const matchCb = /\/api\/(((?!image).)*$)/
 
 const handleCb = new workbox.strategies.NetworkOnly({
   plugins: [bgSyncPlugin]
