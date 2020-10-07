@@ -35,12 +35,12 @@ export default Vue.extend({
   },
   data () {
     return {
-      loading: true,
+      loading: true
     }
   },
   computed: {
     height () {
-      const aspect = this.item.size[1]/this.item.size[0]
+      const aspect = this.item.size[1] / this.item.size[0]
       return (200 * aspect) + 'px'
     }
   },
