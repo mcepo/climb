@@ -13,6 +13,7 @@ you can't see nav bar
 -- FEATURES --
 
 TODO: set most of the grades in expand panel and only the most common ones leave outside
+refactor gradeInput to service
 
 TODO: or if an image is tagged at all then don't show that image in image list
 
