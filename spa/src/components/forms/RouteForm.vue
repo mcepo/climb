@@ -79,7 +79,13 @@ export default {
       return typeService.getRouteTypes()
     },
     maxLength () {
-      return (this.area.altitude[1] - this.area.altitude[0]) * 2
+      const minAltitude = this.area.altitude[0] || 0
+      const maxAltitude = this.area.altitude[1] || 1500
+
+      const calcLength = (maxAltitude - minAltitude) * 3
+      const maxLength = typeService.getMaxLength(this.formData.type_id)
+
+      return maxLength && (maxLength < calcLength) ? maxLength : calcLength
     }
   },
   created () {

@@ -80,6 +80,9 @@ export interface RouteType {
   currentLocationTag: boolean;
   // can it have pitches, multipitch and waterfall can
   pitches: boolean;
+
+  // whats the maximum length of this type of route
+  maxLength: number;
 }
 
 export default {
@@ -236,7 +239,8 @@ export default {
       imageTag: false,
       currentLocationTag: true,
       pitches: true,
-      directions: true
+      directions: true,
+      maxLength: 2000
     } as RouteType,
     {
       databaseId: RouteDatabaseId.Singlepitch,
@@ -248,7 +252,8 @@ export default {
       imageTag: true,
       currentLocationTag: false,
       pitches: false,
-      directions: false
+      directions: false,
+      maxLength: 60
     } as RouteType,
     {
       databaseId: RouteDatabaseId.Waterfall,
@@ -260,7 +265,8 @@ export default {
       imageTag: true,
       currentLocationTag: true,
       pitches: true,
-      directions: false
+      directions: false,
+      maxLength: 1000
     } as RouteType,
     {
       databaseId: RouteDatabaseId.Boulder,
@@ -271,7 +277,8 @@ export default {
       imageTag: true,
       currentLocationTag: false,
       pitches: false,
-      directions: false
+      directions: false,
+      maxLength: 20
     } as RouteType
   ],
 
@@ -310,6 +317,12 @@ export default {
     const itemType = this.find(type, id)
 
     return itemType ? itemType.value : ''
+  },
+
+  getMaxLength (id: RouteDatabaseId) {
+    const itemType: RouteType = this.find(ItemType.Route, id)
+
+    return itemType && itemType.maxLength
   },
 
   getRouteTypes () {
