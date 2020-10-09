@@ -28,6 +28,8 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::before(function (User $user) {
             if($user->isAdmin()){
+                // if a user is admin don't log activity for that user
+                activity()->disableLogging();
                 return true;
             }
         });
