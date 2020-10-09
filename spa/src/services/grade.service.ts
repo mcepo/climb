@@ -147,8 +147,7 @@ class GradeService {
       const grades = {}
 
       this.types.forEach(gradeType => {
-
-        if(!multipitch && gradeType.multipitchOnly ) {
+        if (!multipitch && gradeType.multipitchOnly) {
           return
         }
 
@@ -160,7 +159,7 @@ class GradeService {
         grades[gradeType.id].maxGrades = this.charts[gradeType.charts[0]].length - 1
         grades[gradeType.id].tickLabels = this.charts[gradeType.charts[0]]
       })
-      
+
       return grades
     }
 

@@ -14,6 +14,7 @@ import { HighlightState } from './modules/highlight'
 import { UserState } from './modules/user'
 
 import localStorage from './plugins/localStorage'
+import { PitchState } from './modules/pitch'
 
 Vue.use(Vuex)
 
@@ -24,6 +25,7 @@ export interface RootState {
   area?: AreaState;
   route?: RouteState;
   trail?: TrailState;
+  pitch?: PitchState;
   drawing: boolean;
   highlight?: HighlightState;
   user?: UserState;
