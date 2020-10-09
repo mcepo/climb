@@ -8,11 +8,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/css/admin.panel~area.form~moderator.form~route.filters~route.form.dba841c6.css"
   },
   {
-    "revision": "907ad2c2bf0c6abe29d1",
+    "revision": "dc6b2cba495dfaf02959",
     "url": "/assets/css/app.c87fd956.css"
   },
   {
-    "revision": "703c7c991159ee299331",
+    "revision": "f659ffc0b938d1ce17a8",
     "url": "/assets/css/area.form.09316a61.css"
   },
   {
@@ -32,11 +32,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/css/moderator.form.076ea886.css"
   },
   {
-    "revision": "bfce253ef3a7cc7cad1a",
+    "revision": "9b936fb6b9775ed3b1e4",
     "url": "/assets/css/pitch.form.207437e9.css"
   },
   {
-    "revision": "e160121acfa8e958a0b8",
+    "revision": "998768de8c6e10e15658",
     "url": "/assets/css/route.filters.09316a61.css"
   },
   {
@@ -56,7 +56,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/fonts/MaterialIcons-Regular.da4ea5cd.ttf"
   },
   {
-    "revision": "7d70b402502368227fae53de22e69415",
+    "revision": "1ebb12b01ff42aeca5f9b02ba753f38d",
     "url": "/assets/index.html"
   },
   {
@@ -68,12 +68,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/js/admin.panel~area.form~moderator.form~route.filters~route.form.82421ffc.js"
   },
   {
-    "revision": "907ad2c2bf0c6abe29d1",
-    "url": "/assets/js/app.0f6bf075.js"
+    "revision": "dc6b2cba495dfaf02959",
+    "url": "/assets/js/app.6e1012d3.js"
   },
   {
-    "revision": "703c7c991159ee299331",
-    "url": "/assets/js/area.form.b5bf30cc.js"
+    "revision": "f659ffc0b938d1ce17a8",
+    "url": "/assets/js/area.form.85babd7b.js"
   },
   {
     "revision": "6165ce39b555cd83573b",
@@ -100,24 +100,24 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/js/moderator.form.71e098c6.js"
   },
   {
-    "revision": "bfce253ef3a7cc7cad1a",
-    "url": "/assets/js/pitch.form.c229ea1e.js"
+    "revision": "9b936fb6b9775ed3b1e4",
+    "url": "/assets/js/pitch.form.401537f1.js"
   },
   {
-    "revision": "7dd60e5f94f86c025c99",
-    "url": "/assets/js/popup.service.a3fb66a8.js"
+    "revision": "e2233770e9d87ec0821b",
+    "url": "/assets/js/popup.service.5baf78ac.js"
   },
   {
     "revision": "43a382a7ff4454a6e204",
     "url": "/assets/js/register.form.35e4ac03.js"
   },
   {
-    "revision": "e160121acfa8e958a0b8",
-    "url": "/assets/js/route.filters.35385335.js"
+    "revision": "998768de8c6e10e15658",
+    "url": "/assets/js/route.filters.bafc9fd4.js"
   },
   {
-    "revision": "c6289fa7df2af69ccc42",
-    "url": "/assets/js/route.form.19d99999.js"
+    "revision": "4c07875e5954d784132e",
+    "url": "/assets/js/route.form.1ed6ee3d.js"
   },
   {
     "revision": "3afbc1e9a2d88bdb515742f0cbf727ed",
