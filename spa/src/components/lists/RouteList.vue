@@ -35,7 +35,7 @@ export default {
   },
   created () {
     if (this.routes.length === 0) {
-      this.loadRoutes()
+      this.loadRoutesOnce(100)
     }
   },
   computed: {
@@ -53,7 +53,7 @@ export default {
       },
       set (value) {
         this.setQueryString(value)
-        this.loadRoutesOnce()
+        this.loadRoutesOnce(1000)
       }
     }
   },
@@ -66,11 +66,11 @@ export default {
       setQueryString: 'route/setQueryString'
     }),
     loadOnIntersect (entries) {
-      entries[0].isIntersecting && this.loadRoutes()
+      entries[0].isIntersecting && this.loadRoutesOnce(100)
     },
-    loadRoutesOnce () {
+    loadRoutesOnce (timeout) {
       this.$options.cancelToken && clearTimeout(this.$options.cancelToken)
-      this.$options.cancelToken = setTimeout(() => this.loadRoutes(), 1000)
+      this.$options.cancelToken = setTimeout(() => this.loadRoutes(), timeout)
     }
   }
 }
