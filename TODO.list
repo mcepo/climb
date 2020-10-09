@@ -38,6 +38,11 @@ TODO: add store for offline use button, then cache:
 
 -- OPTIMIZATION --
 
+TODO: add timestamp to each area, route, image, and then if resource is older then lets say a day 
+request a new one, else don't, add a force update button
+
+TODO: disable tag update while loading area/route/image
+
 -- BIG MAYBE -- 
 
 TODO: add backend cache for area index, area get, route index?, route get, image tags 
