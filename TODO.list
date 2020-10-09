@@ -4,8 +4,6 @@ TODO: test set at my location tag, then location isn't required before tagging
 
 -- FIXES --
 
-TODO: a lot of map blinking on route open when there isn't tags there
-
 TODO: success message are showed after the post/put/delete request are added to queueu
 when no internet conntection is present
 
@@ -37,11 +35,6 @@ TODO: add store for offline use button, then cache:
   now i am storing everything as the user is surfing
 
 -- OPTIMIZATION --
-
-TODO: add timestamp to each area, route, image, and then if resource is older then lets say a day 
-request a new one, else don't, add a force update button
-
-TODO: disable tag update while loading area/route/image
 
 -- BIG MAYBE -- 
 
