@@ -3,6 +3,8 @@ interface GradeType {
     type: string;
     name: string;
     charts: Array<string>;
+    primary: boolean;
+    multipitchOnly: boolean;
 }
 
 class GradeService {
@@ -15,73 +17,97 @@ class GradeService {
           id: 0,
           type: 'combined',
           name: 'Combined climbing',
-          charts: ['fr_combined', 'uiaa']
+          charts: ['fr_combined', 'uiaa'],
+          primary: false,
+          multipitchOnly: true
         },
         {
           id: 1,
           type: 'mix',
           name: 'Mix climbing',
-          charts: ['mix']
+          charts: ['mix'],
+          primary: false,
+          multipitchOnly: false
         },
         {
           id: 2,
           type: 'alpine',
           name: 'Alpine climbing',
-          charts: ['alpine']
+          charts: ['alpine'],
+          primary: false,
+          multipitchOnly: false
         },
         {
           id: 3,
           type: 'tehnical',
           name: 'Tehnical climbing',
-          charts: ['tehnical']
+          charts: ['tehnical'],
+          primary: false,
+          multipitchOnly: false
         },
         {
           id: 4,
           type: 'required',
           name: 'Required grade',
-          charts: ['fr', 'uiaa', 'ydr']
+          charts: ['fr', 'uiaa', 'ydr'],
+          primary: false,
+          multipitchOnly: false
         },
         {
           id: 5,
           type: 'ice',
           name: 'Ice climbing',
-          charts: ['ice']
+          charts: ['ice'],
+          primary: false,
+          multipitchOnly: false
         },
         {
           id: 6,
           type: 'incline',
           name: 'Incline',
-          charts: ['incline']
+          charts: ['incline'],
+          primary: false,
+          multipitchOnly: false
         },
         {
           id: 7,
           type: 'avg_incline',
           name: 'Average incline',
-          charts: ['incline']
+          charts: ['incline'],
+          primary: false,
+          multipitchOnly: true
         },
         {
           id: 8,
           type: 'rng_from_incline',
           name: 'Minimum incline',
-          charts: ['incline']
+          charts: ['incline'],
+          primary: false,
+          multipitchOnly: false
         },
         {
           id: 9,
           type: 'rng_to_incline',
           name: 'Maximum incline',
-          charts: ['incline']
+          charts: ['incline'],
+          primary: false,
+          multipitchOnly: false
         },
         {
           id: 10,
           type: 'max',
           name: 'Free climbing grade',
-          charts: ['fr', 'uiaa', 'ydr']
+          charts: ['fr', 'uiaa', 'ydr'],
+          primary: true,
+          multipitchOnly: false
         },
         {
           id: 11,
           type: 'avg',
           name: ' Average route grade',
-          charts: ['fr', 'uiaa', 'ydr']
+          charts: ['fr', 'uiaa', 'ydr'],
+          primary: true,
+          multipitchOnly: true
         }
       ]
       this.charts = {
@@ -115,6 +141,27 @@ class GradeService {
         })
       }
       return this.types
+    }
+
+    getGradesForSliders (multipitch: boolean, primary: boolean) {
+      const grades = {}
+
+      this.types.forEach(gradeType => {
+
+        if(!multipitch && gradeType.multipitchOnly ) {
+          return
+        }
+
+        if (gradeType.primary !== primary) {
+          return
+        }
+        grades[gradeType.id] = {}
+        grades[gradeType.id].grade = gradeType
+        grades[gradeType.id].maxGrades = this.charts[gradeType.charts[0]].length - 1
+        grades[gradeType.id].tickLabels = this.charts[gradeType.charts[0]]
+      })
+      
+      return grades
     }
 
     forge (grades: Array<Array<number>>) {

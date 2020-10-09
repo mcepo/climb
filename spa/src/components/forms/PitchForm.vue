@@ -7,7 +7,7 @@
       </v-card-title>
 
       <v-card-text class='pa-0'>
-        <grade-input v-model="formData.grades" :key='1'></grade-input>
+        <grade-input v-model="formData.grades" :multipitch="false"></grade-input>
       </v-card-text>
 
       <v-subheader>Length (m)</v-subheader>

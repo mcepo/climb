@@ -21,7 +21,7 @@
       <orientation v-model='formData.orientation'/>
 
       <v-card-text class='pa-0'>
-        <grade-input v-model="formData.grades" :type='formData.type_id' :key='formData.type_id'></grade-input>
+        <grade-input v-model="formData.grades" :multipitch='multipitch'></grade-input>
       </v-card-text>
 
       <v-subheader>Length (m)</v-subheader>
@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import typeService from '../../services/type.service'
+import typeService, { RouteDatabaseId } from '../../services/type.service'
 
 import Orientation from '../common/Orientation'
 
@@ -86,6 +86,9 @@ export default {
       const maxLength = typeService.getMaxLength(this.formData.type_id)
 
       return maxLength && (maxLength < calcLength) ? maxLength : calcLength
+    },
+    multipitch () {
+      return this.formData.type_id === RouteDatabaseId.Multipitch || this.formData.type_id === RouteDatabaseId.Waterfall
     }
   },
   created () {
