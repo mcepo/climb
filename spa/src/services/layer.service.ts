@@ -221,7 +221,7 @@ export class LayerService {
     if (!store.getters.imageOpen) {
       this._layerGroup.getLayers().length !== 0 &&
         this._map.fitBounds(this._layerGroup.getBounds(), {
-          padding: [30, 30]
+          padding: [100, 100]
         })
 
       if (this._features.size === 1) {
