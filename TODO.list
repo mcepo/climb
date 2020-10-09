@@ -4,6 +4,8 @@ TODO: test set at my location tag, then location isn't required before tagging
 
 -- FIXES --
 
+TODO: a lot of map blinking on route open when there isn't tags there
+
 TODO: success message are showed after the post/put/delete request are added to queueu
 when no internet conntection is present
 
