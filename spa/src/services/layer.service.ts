@@ -236,7 +236,11 @@ export class LayerService {
             zoom += path.split('.').length * 2
           }
 
-          this._map.setZoom(zoom)
+          const currentZoom = this._map.getZoom()
+
+          if (currentZoom !== zoom) {
+            this._map.setZoom(zoom)
+          }
         })
       }
     }
