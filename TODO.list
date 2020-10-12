@@ -10,6 +10,10 @@ when no internet conntection is present
 TODO: zoom in on mobile phone on drawer will remove nav bar from view and on map 
 you can't see nav bar
 
+TODO: remove console.log in area form
+
+TODO: in route list move v-intersect on item that is above loading component so i don't get glitches
+
 -- FEATURES --
 
 TODO: or if an image is tagged at all then don't show that image in image list
@@ -20,6 +24,11 @@ TODO: add recursive loading from climbing site all the way to sector regardless 
 TODO: add notification when work is syncronized
 
 TODO: add install button when service worker updates
+
+TODO: filter the areas based on route filters i can use the grade_stats field to do so
+  so i don't display areas that don't have routes after filtering
+
+  TODO: hide options that you can't use if offline ?
 
 -- OFFLINE PRECACHE on button click --
 
