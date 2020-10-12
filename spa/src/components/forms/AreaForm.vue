@@ -111,7 +111,6 @@ export default {
       }
     },
     formDefaultValues () {
-      console.log(this.types)
       this.formData = {
         name: '',
         // eslint-disable-next-line @typescript-eslint/camelcase

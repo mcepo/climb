@@ -10,8 +10,6 @@ when no internet conntection is present
 TODO: zoom in on mobile phone on drawer will remove nav bar from view and on map 
 you can't see nav bar
 
-TODO: remove console.log in area form
-
 TODO: in route list move v-intersect on item that is above loading component so i don't get glitches
 
 -- FEATURES --
