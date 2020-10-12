@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-layout column>
       <v-subheader>Grade</v-subheader>
-      <v-flex v-for="(primaryGrade, index) in primaryGrades" :key="index">
+      <v-flex v-for="(primaryGrade, index) in primaryGrades" :key="primaryGrade.id">
         <v-card text class="pa-1" flat>
           <v-subheader class="pa-0 justify-center">{{
             primaryGrade.grade.name
@@ -33,7 +33,7 @@
       </v-expansion-panel-header>
       <v-expansion-panel-content>
 
-      <v-flex v-for="(moreGrade, index) in moreGrades" :key="index">
+      <v-flex v-for="(moreGrade, index) in moreGrades" :key="moreGrade.id">
         <v-card text class="pa-1" flat>
           <v-subheader class="pa-0 justify-center">{{
             moreGrade.grade.name

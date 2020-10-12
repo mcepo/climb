@@ -97,6 +97,7 @@ export default {
           gradeService.charts[type.charts[0]].length - 1
         ]
       }
+      // TODO: refactor this so it doesn't use index in the v-for in html, and so its more like the grade input component
 
       this.filters.push(range)
 
