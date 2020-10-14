@@ -12,6 +12,9 @@ you can't see nav bar
 
 TODO: in route list move v-intersect on item that is above loading component so i don't get glitches
 
+TODO: map i flashing because when i load items i update map tags and map bounds, todo compare map bounds so
+they don't get updated if the don change
+
 -- FEATURES --
 
 TODO: or if an image is tagged at all then don't show that image in image list
