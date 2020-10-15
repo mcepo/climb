@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/css/admin.panel~area.form~moderator.form~route.filters~route.form.dba841c6.css"
   },
   {
-    "revision": "d1123705f4c0c26eda96",
+    "revision": "317dcd45c17b2269d5ff",
     "url": "/assets/css/app.c87fd956.css"
   },
   {
@@ -20,7 +20,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/css/area.form~pitch.form~route.filters~route.form.57be4a9e.css"
   },
   {
-    "revision": "47d043fd92d6b09f7ad9",
+    "revision": "544ae5e552ab3a38158c",
     "url": "/assets/css/chunk-vendors.a516751e.css"
   },
   {
@@ -56,7 +56,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/fonts/MaterialIcons-Regular.da4ea5cd.ttf"
   },
   {
-    "revision": "bc0bb77ed2562ac85588544c68f65831",
+    "revision": "b85d625dae4efc1472a5a60c64988302",
     "url": "/assets/index.html"
   },
   {
@@ -68,8 +68,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/js/admin.panel~area.form~moderator.form~route.filters~route.form.82421ffc.js"
   },
   {
-    "revision": "d1123705f4c0c26eda96",
-    "url": "/assets/js/app.59953c0f.js"
+    "revision": "317dcd45c17b2269d5ff",
+    "url": "/assets/js/app.7e64a3f4.js"
   },
   {
     "revision": "0a93877057570cfaec6f",
@@ -84,8 +84,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/js/change-password.form.0f93a315.js"
   },
   {
-    "revision": "47d043fd92d6b09f7ad9",
-    "url": "/assets/js/chunk-vendors.6a1f9283.js"
+    "revision": "544ae5e552ab3a38158c",
+    "url": "/assets/js/chunk-vendors.729a34a9.js"
   },
   {
     "revision": "fa8419f2c97c9cd553cf",
