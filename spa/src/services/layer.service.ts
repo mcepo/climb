@@ -5,7 +5,8 @@ import {
   Polyline,
   Layer,
   LeafletMouseEvent,
-  CircleMarker
+  CircleMarker,
+  LatLngBounds
 } from 'leaflet'
 import { Tag, MapType, Area, Route, Pitch, Image } from '@/models'
 import store, { RootState } from '@/store'
@@ -43,6 +44,8 @@ export class LayerService {
   // because thats when selected entity changes
   private _selected: Array<string>
 
+  private _lastBounds: LatLngBounds | undefined
+
   constructor () {
     this._layerGroup = new FeatureGroup()
 
@@ -51,6 +54,8 @@ export class LayerService {
     this._selected = []
 
     this._tooltipsClosed = false
+
+    this._lastBounds = undefined
 
     this.registerHighlightWatch()
   }
@@ -223,8 +228,6 @@ export class LayerService {
     }
 
     // setting map view point on the layers
-
-    const mapBounds = this._map.getBounds()
     const layerGroupBounds = this._layerGroup.getBounds()
 
     let zoom = 18
@@ -237,11 +240,13 @@ export class LayerService {
       })
     }
 
-    if(!mapBounds.equals(layerGroupBounds)) {
+    if(!this._lastBounds || (!this._lastBounds.equals(layerGroupBounds))) {
       this._map.fitBounds(layerGroupBounds, {
         padding: [100, 100],
         maxZoom: zoom
       })
+
+      this._lastBounds = layerGroupBounds;
     }
   }
 
