@@ -123,14 +123,19 @@ const area: Module<AreaState, RootState> = {
     },
 
     fetch ({ state, commit, dispatch }, id) {
-      // if the area already has all the data loaded then just show the area
-      // and in the background refresh area data
-      // if not show the loading display
-      if (state.byIds[id]?.fullyLoaded) {
-        commit('loading', false) // just in case, also needed when opening sector
-        setTimeout(() => {
-          commit('drawers/setLeft', true, { root: true })
-        }, 1000)
+      const fullyLoaded = state.byIds[id]?.fullyLoaded
+
+      if (fullyLoaded && Number.isInteger(fullyLoaded)) {
+        const miliSecSincLastRefresh = Date.now() - fullyLoaded
+
+        // don't refresh if less then an hour has passed
+        if (miliSecSincLastRefresh < 3600000) {
+          commit('loading', false) // just in case, also needed when opening sector
+          setTimeout(() => {
+            commit('drawers/setLeft', true, { root: true })
+          }, 1000)
+          return
+        }
       } else {
         commit('loading', true)
       }
@@ -138,7 +143,7 @@ const area: Module<AreaState, RootState> = {
       api
         .get<Area>('area/' + id)
         .then(({ data }) => {
-          data.fullyLoaded = true
+          data.fullyLoaded = Date.now()
 
           dispatch('normalizeData', data)
 

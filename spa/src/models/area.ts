@@ -18,5 +18,5 @@ export interface Area {
   owner_id: number;
 
   // when all info on the area is loaded in the frontend
-  fullyLoaded: boolean;
+  fullyLoaded: number;
 }
