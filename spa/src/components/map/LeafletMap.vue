@@ -11,6 +11,9 @@
     <v-icon>gps_fixed</v-icon>
   </v-btn>
   <div id="leaflet-map" class="map"></div>
+  <v-overlay :absolute='true' :opacity='0.5' :z-index='199' :value='loading'>
+    <v-progress-circular indeterminate :size='64'></v-progress-circular>
+  </v-overlay>
 </div>
 </template>
 
@@ -29,6 +32,12 @@ export default {
     trail: null
   },
   goToRequest: false,
+
+  computed: {
+    loading () {
+      return this.$store.getters['loading']
+    }
+  },
 
   mounted () {
     const bounds = new LatLngBounds(
