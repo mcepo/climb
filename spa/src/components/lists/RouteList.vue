@@ -8,16 +8,16 @@
   </v-toolbar>
   <v-list two-line>
     <route-list-item v-for="route in routes" :key="route.id" :route='route'/>
+    <v-list-item>
+      <v-list-item-content>
+        <div v-intersect='loadOnIntersect'></div>
+      </v-list-item-content>
+    </v-list-item>
     <v-list-item v-if='loading'>
       <v-list-item-content>
         <v-progress-circular
           indeterminate
         ></v-progress-circular>
-      </v-list-item-content>
-    </v-list-item>
-    <v-list-item>
-      <v-list-item-content>
-        <div v-intersect='loadOnIntersect'></div>
       </v-list-item-content>
     </v-list-item>
   </v-list>
