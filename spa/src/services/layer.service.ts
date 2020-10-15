@@ -222,6 +222,8 @@ export class LayerService {
       return
     }
 
+    // setting map view point on the layers
+
     const mapBounds = this._map.getBounds()
     const layerGroupBounds = this._layerGroup.getBounds()
 
