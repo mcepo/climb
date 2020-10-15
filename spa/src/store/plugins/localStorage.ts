@@ -11,8 +11,10 @@ export default function (store: Store<RootState>) {
 
     store.replaceState(savedState)
   }
-  const mutationsForStorage = [
-    'area/loading', 'route/loading', 'image/loading'
+  const skipMutations = [
+    'highlight/set',
+    'drawers/setLeft',
+    'drawers/setRight'
   ]
 
   const storageTimeout = 5000
@@ -32,9 +34,10 @@ export default function (store: Store<RootState>) {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   store.subscribe((mutation: any, state: RootState) => {
-    if (mutationsForStorage.includes(mutation.type)) {
-      cancelToken && clearTimeout(cancelToken)
-      cancelToken = setTimeout(() => update(state), storageTimeout)
+    if (skipMutations.includes(mutation.type)) {
+      return
     }
+    cancelToken && clearTimeout(cancelToken)
+    cancelToken = setTimeout(() => update(state), storageTimeout)
   })
 }
