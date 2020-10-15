@@ -227,7 +227,7 @@ export class LayerService {
     const mapBounds = this._map.getBounds()
     const layerGroupBounds = this._layerGroup.getBounds()
 
-    let zoom = 13
+    let zoom = 18
 
     if (this._features.size === 1) {
       this._features.forEach((feature) => {
