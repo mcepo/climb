@@ -99,7 +99,7 @@ export class LayerService {
         const url = store.state.url?.path
 
         // only update tags when route changes and/or tag count changes
-        if (tags.length === oldTags.length && url === this._lastUrl) {
+        if (oldTags && tags.length === oldTags.length && url === this._lastUrl) {
           return
         }
 
