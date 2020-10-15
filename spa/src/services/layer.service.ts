@@ -43,9 +43,6 @@ export class LayerService {
   // because thats when selected entity changes
   private _selected: Array<string>;
 
-  // used to detect when to redraw the tags on map/image
-  private _lastUrl: string | undefined;
-
   constructor () {
     this._layerGroup = new FeatureGroup()
 
@@ -54,8 +51,6 @@ export class LayerService {
     this._selected = []
 
     this._tooltipsClosed = false
-
-    this._lastUrl = undefined
 
     this.registerHighlightWatch()
   }
@@ -95,25 +90,9 @@ export class LayerService {
       (_state: RootState, getters: any) => {
         return getters.tags
       },
-      (tags: Tag[], oldTags: Tag[]) => {
-        const url = store.state.url?.path
-
-        // only update tags when route changes and/or tag count changes
-        if (oldTags && tags.length === oldTags.length && url === this._lastUrl) {
-          return
-        }
-
-        this._lastUrl = url
-
-        if ((this._map &&
-            !store.getters.loading &&
-            tags.length !== 0) ||
-            store.getters.imageOpen
-        ) {
-          this.setSelectedKeys()
-
-          this.addTagsToView(tags)
-        }
+      (tags: Tag[]) => {
+        this.setSelectedKeys()
+        this.addTagsToView(tags)
       },
       { immediate: true }
     )
