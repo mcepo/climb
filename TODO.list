@@ -12,19 +12,17 @@ you can't see nav bar
 
 -- FEATURES --
 
-TODO: or if an image is tagged at all then don't show that image in image list
+TODO: if an image is tagged somewhere then don't show that image in image list on areas
 
 TODO: add recursive loading from climbing site all the way to sector regardless of what is open
   same from mountain to sector ?
 
 TODO: add notification when work is syncronized
 
-TODO: add install button when service worker updates
-
 TODO: filter the areas based on route filters i can use the grade_stats field to do so
   so i don't display areas that don't have routes after filtering
 
-  TODO: hide options that you can't use if offline ?
+TODO: hide options that you can't use if offline ?
 
 -- OFFLINE PRECACHE on button click --
 
@@ -47,5 +45,3 @@ TODO: add backend cache for area index, area get, route index?, route get, image
   add static files and serve them directly from nginx without calling php at all
 
 TODO: mapper for network data transfer, lower payload size
-
-TODO: move from localStorage to indexDB
