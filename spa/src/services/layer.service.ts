@@ -225,28 +225,20 @@ export class LayerService {
     const mapBounds = this._map.getBounds()
     const layerGroupBounds = this._layerGroup.getBounds()
 
-    !mapBounds.equals(layerGroupBounds) &&
-    this._map.fitBounds(layerGroupBounds, {
-      padding: [100, 100]
-    })
+    let zoom = 13
 
     if (this._features.size === 1) {
       this._features.forEach((feature) => {
         const path = feature.item.path
-
         const zoomOffset = 7
+        zoom = path ? (zoomOffset + path.split('.').length * 2) : zoomOffset
+      })
+    }
 
-        let zoom = zoomOffset
-
-        if (path) {
-          zoom += path.split('.').length * 2
-        }
-
-        const currentZoom = this._map.getZoom()
-
-        if (currentZoom !== zoom) {
-          this._map.setZoom(zoom)
-        }
+    if(!mapBounds.equals(layerGroupBounds)) {
+      this._map.fitBounds(layerGroupBounds, {
+        padding: [100, 100],
+        maxZoom: zoom
       })
     }
   }
