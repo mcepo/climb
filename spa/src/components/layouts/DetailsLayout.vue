@@ -32,7 +32,7 @@
             <area-list :areaIds="item.areas" />
           </v-tab-item>
 
-          <v-tab-item v-if="hasRoutes" value="routes" eager>
+          <v-tab-item v-if="hasRoutes" value="routes">
             <route-list />
           </v-tab-item>
 

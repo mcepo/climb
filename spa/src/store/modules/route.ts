@@ -168,23 +168,20 @@ const route: Module<RouteState, RootState> = {
       return filters
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    getFiltered (state: RouteState, getters: any, rootGetters: any): Route[] {
+    getFiltered (state: RouteState, getters: any, _: RootState, rootGetters: any): Route[] {
       const area = rootGetters['area/get']
 
       const filters = getters.filters
 
       const filtered: Route[] = []
 
-      const routeIds = (area && area.routes.length !== 0) ? area.routes.length : state.byIds
+      const routeIds: Array<string> = (area && area.routes.length !== 0) ? area.routes : state.allIds
 
-      for (const id in routeIds) {
+      routeIds.forEach(id => {
         const route = state.byIds[id]
-
-        // filtering by area
-        if (routePassesFilter(route, filters)) {
-          filtered.push(route)
-        }
-      }
+        
+        routePassesFilter(route, filters) && filtered.push(route)
+      })
 
       return filtered
     },
