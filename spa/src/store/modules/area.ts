@@ -6,6 +6,7 @@ import { Area, Tag, Route } from '../../models'
 import { normalizeRelations } from '../utils/normalization'
 import entityMutations from './utils/entityMutations'
 import typeService, { AreaDatabaseId } from '@/services/type.service'
+import { areaPassesFilter } from '../utils/areaFilters'
 
 export interface AreaState {
   byIds: Record<string, Area>;
@@ -197,6 +198,25 @@ const area: Module<AreaState, RootState> = {
     find: (state: AreaState) => (id: number) => {
       return state.byIds[id]
     },
+    getFiltered: (state: AreaState, _: any, __: RootState, rootGetters: any) => (id: number) => {
+      const currentArea = state.byIds[id]
+
+      if(!currentArea) {
+        return []
+      }
+
+      const routeFilters = rootGetters['route/filters']
+
+      const areas: Array<Area> = []
+
+      currentArea.areas.forEach((id) => {
+        const area = state.byIds[id]
+
+        area && areaPassesFilter(area, routeFilters) && areas.push(area)
+      })
+
+      return areas
+    },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     tags (
       state: AreaState,
@@ -255,29 +275,26 @@ const area: Module<AreaState, RootState> = {
       return tags
     },
     tagsFor: (
-      state: AreaState,
+      _: AreaState,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      _: any,
+      getters: any,
       rootState: RootState
-    ) => (area: Area) => {
+    ) => (currentArea: Area) => {
       const tags: Array<Tag> = []
 
-      area.areas &&
-      area.areas.forEach((id: number) => {
-        if (state.byIds[id]?.map_tag) {
-          tags.push(state.byIds[id].map_tag)
-        }
+      getters.getFiltered(currentArea.id).forEach((area: Area) => {
+        area.map_tag && tags.push(area.map_tag)
       })
 
-      area.trails &&
-        area.trails.forEach((id: number) => {
+      currentArea.trails &&
+      currentArea.trails.forEach((id: number) => {
           if (rootState.trail?.byIds[id]?.map_tag) {
             tags.push(rootState.trail.byIds[id].map_tag)
           }
         })
 
-      area.images &&
-        area.images.forEach((id: number) => {
+        currentArea.images &&
+        currentArea.images.forEach((id: number) => {
           if (rootState.image?.byIds[id]?.map_tag) {
             tags.push(rootState.image.byIds[id].map_tag)
           }
