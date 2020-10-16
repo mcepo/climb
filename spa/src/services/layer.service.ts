@@ -96,6 +96,8 @@ export class LayerService {
         return getters.tags
       },
       (tags: Tag[]) => {
+        if (store.getters.loading) return
+
         this.setSelectedKeys()
         this.addTagsToView(tags)
       },
@@ -240,13 +242,13 @@ export class LayerService {
       })
     }
 
-    if(!this._lastBounds || (!this._lastBounds.equals(layerGroupBounds))) {
+    if (!this._lastBounds || (!this._lastBounds.equals(layerGroupBounds))) {
       this._map.fitBounds(layerGroupBounds, {
         padding: [100, 100],
         maxZoom: zoom
       })
 
-      this._lastBounds = layerGroupBounds;
+      this._lastBounds = layerGroupBounds
     }
   }
 
