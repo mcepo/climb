@@ -19,9 +19,6 @@ TODO: add recursive loading from climbing site all the way to sector regardless 
 
 TODO: add notification when work is syncronized
 
-TODO: filter the areas based on route filters i can use the grade_stats field to do so
-  so i don't display areas that don't have routes after filtering
-
 TODO: hide options that you can't use if offline ?
 
 -- OFFLINE PRECACHE on button click --
