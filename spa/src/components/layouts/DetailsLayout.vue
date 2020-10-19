@@ -29,10 +29,10 @@
         <v-tabs-items v-model="tabs" class="mt-2">
 
           <v-tab-item v-if="hasAreas" value="areas">
-            <area-list :areaIds="item.areas" />
+            <area-list :area="item" />
           </v-tab-item>
 
-          <v-tab-item v-if="hasRoutes" value="routes" eager>
+          <v-tab-item v-if="hasRoutes" value="routes">
             <route-list />
           </v-tab-item>
 

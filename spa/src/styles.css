@@ -11,25 +11,6 @@ html {
   border-radius: 9px;
 }
 
-/* .climb-area:after {
-	right: 100%;
-	top: 10px;
-	border: solid transparent;
-	content: " ";
-	height: 0;
-	width: 0;
-	position: absolute;
-	pointer-events: none;
-	border-color: rgba(136, 183, 213, 0);
-	border-right-color: grey;
-	border-width: 5px;
-	margin-top: 0px;
-} */
-
-/* .climb-area-none {
-} */
-
-
 .menu-button {
   justify-content: start;
   width:100%;

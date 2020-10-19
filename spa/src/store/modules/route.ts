@@ -74,10 +74,18 @@ const route: Module<RouteState, RootState> = {
         })
     },
     fetch ({ state, commit, dispatch }, id) {
-      if (state.byIds[id]?.fullyLoaded) {
-        setTimeout(() => {
-          commit('drawers/setLeft', true, { root: true })
-        }, 1000)
+      const fullyLoaded = state.byIds[id]?.fullyLoaded
+
+      if (fullyLoaded && Number.isInteger(fullyLoaded)) {
+        const miliSecSincLastRefresh = Date.now() - fullyLoaded
+
+        // don't refresh if less then an hour has passed
+        if (miliSecSincLastRefresh < 3600000) {
+          setTimeout(() => {
+            commit('drawers/setLeft', true, { root: true })
+          }, 1000)
+          return
+        }
       } else {
         commit('loading', true)
       }
@@ -85,7 +93,7 @@ const route: Module<RouteState, RootState> = {
       api
         .get<Route>('route/' + id)
         .then(({ data }) => {
-          data.fullyLoaded = true
+          data.fullyLoaded = Date.now()
           dispatch('normalizeData', data)
 
           dispatch('area/fetch', data.area_id, { root: true })
@@ -160,23 +168,19 @@ const route: Module<RouteState, RootState> = {
       return filters
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    getFiltered (state: RouteState, getters: any, rootGetters: any): Route[] {
+    getFiltered (state: RouteState, getters: any, _: RootState, rootGetters: any): Route[] {
       const area = rootGetters['area/get']
 
       const filters = getters.filters
 
       const filtered: Route[] = []
 
-      const routeIds = (area && area.routes.length !== 0) ? area.routes.length : state.byIds
+      const routeIds: Array<string> = (area && area.routes.length !== 0) ? area.routes : state.allIds
 
-      for (const id in routeIds) {
+      routeIds.forEach(id => {
         const route = state.byIds[id]
-
-        // filtering by area
-        if (routePassesFilter(route, filters)) {
-          filtered.push(route)
-        }
-      }
+        routePassesFilter(route, filters) && filtered.push(route)
+      })
 
       return filtered
     },

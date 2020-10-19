@@ -5,7 +5,8 @@ import {
   Polyline,
   Layer,
   LeafletMouseEvent,
-  CircleMarker
+  CircleMarker,
+  LatLngBounds
 } from 'leaflet'
 import { Tag, MapType, Area, Route, Pitch, Image } from '@/models'
 import store, { RootState } from '@/store'
@@ -20,28 +21,30 @@ export interface Feature {
 }
 
 export class LayerService {
-  private _map!: LeafletMap;
+  private _map!: LeafletMap
 
   // connection between layers and the map
   // used to handle layers as a group
-  private _layerGroup: FeatureGroup;
+  private _layerGroup: FeatureGroup
 
-  private _mapType!: MapType;
+  private _mapType!: MapType
 
-  private _tooltipsClosed: boolean;
+  private _tooltipsClosed: boolean
 
   // record of all the layers so that it will be easier to
   // handle them individually
 
-  private _features: Map<string, Feature>;
-  private _anchors: Map<string, CircleMarker>;
+  private _features: Map<string, Feature>
+  private _anchors: Map<string, CircleMarker>
 
-  private _unwatchTags!: Function;
+  private _unwatchTags!: Function
 
   // list of currently selected entites
   // getting them from url when tags change
   // because thats when selected entity changes
-  private _selected: Array<string>;
+  private _selected: Array<string>
+
+  private _lastBounds: LatLngBounds | undefined
 
   constructor () {
     this._layerGroup = new FeatureGroup()
@@ -51,6 +54,8 @@ export class LayerService {
     this._selected = []
 
     this._tooltipsClosed = false
+
+    this._lastBounds = undefined
 
     this.registerHighlightWatch()
   }
@@ -91,15 +96,10 @@ export class LayerService {
         return getters.tags
       },
       (tags: Tag[]) => {
-        if ((this._map &&
-            !store.getters.loading &&
-            tags.length !== 0) ||
-            store.getters.imageOpen
-        ) {
-          this.setSelectedKeys()
+        if (store.getters.loading) return
 
-          this.addTagsToView(tags)
-        }
+        this.setSelectedKeys()
+        this.addTagsToView(tags)
       },
       { immediate: true }
     )
@@ -198,7 +198,10 @@ export class LayerService {
         this.registerListeners(key, feature)
 
         // adding tooltip only if on image
-        if ((this._mapType === 'image' && tooltipService[tag.tagged_type]) || tag.tagged_type === ItemType.Trail) {
+        if (
+          (this._mapType === 'image' && tooltipService[tag.tagged_type]) ||
+          tag.tagged_type === ItemType.Trail
+        ) {
           tooltipService[tag.tagged_type](feature)
         }
 
@@ -218,31 +221,34 @@ export class LayerService {
       }
     })
 
-    if (!store.getters.imageOpen) {
-      this._layerGroup.getLayers().length !== 0 &&
-        this._map.fitBounds(this._layerGroup.getBounds(), {
-          padding: [100, 100]
-        })
+    if (store.getters.imageOpen) {
+      return
+    }
 
-      if (this._features.size === 1) {
-        this._features.forEach((feature) => {
-          const path = feature.item.path
+    if (this._layerGroup.getLayers().length === 0) {
+      return
+    }
 
-          const zoomOffset = 7
+    // setting map view point on the layers
+    const layerGroupBounds = this._layerGroup.getBounds()
 
-          let zoom = zoomOffset
+    let zoom = 18
 
-          if (path) {
-            zoom += path.split('.').length * 2
-          }
+    if (this._features.size === 1) {
+      this._features.forEach((feature) => {
+        const path = feature.item.path
+        const zoomOffset = 7
+        zoom = path ? (zoomOffset + path.split('.').length * 2) : zoomOffset
+      })
+    }
 
-          const currentZoom = this._map.getZoom()
+    if (!this._lastBounds || (!this._lastBounds.equals(layerGroupBounds))) {
+      this._map.fitBounds(layerGroupBounds, {
+        padding: [100, 100],
+        maxZoom: zoom
+      })
 
-          if (currentZoom !== zoom) {
-            this._map.setZoom(zoom)
-          }
-        })
-      }
+      this._lastBounds = layerGroupBounds
     }
   }
 

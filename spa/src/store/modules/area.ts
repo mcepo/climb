@@ -6,6 +6,7 @@ import { Area, Tag, Route } from '../../models'
 import { normalizeRelations } from '../utils/normalization'
 import entityMutations from './utils/entityMutations'
 import typeService, { AreaDatabaseId } from '@/services/type.service'
+import { areaPassesFilter } from '../utils/areaFilters'
 
 export interface AreaState {
   byIds: Record<string, Area>;
@@ -123,14 +124,19 @@ const area: Module<AreaState, RootState> = {
     },
 
     fetch ({ state, commit, dispatch }, id) {
-      // if the area already has all the data loaded then just show the area
-      // and in the background refresh area data
-      // if not show the loading display
-      if (state.byIds[id]?.fullyLoaded) {
-        commit('loading', false) // just in case, also needed when opening sector
-        setTimeout(() => {
-          commit('drawers/setLeft', true, { root: true })
-        }, 1000)
+      const fullyLoaded = state.byIds[id]?.fullyLoaded
+
+      if (fullyLoaded && Number.isInteger(fullyLoaded)) {
+        const miliSecSincLastRefresh = Date.now() - fullyLoaded
+
+        // don't refresh if less then an hour has passed
+        if (miliSecSincLastRefresh < 3600000) {
+          commit('loading', false) // just in case, also needed when opening sector
+          setTimeout(() => {
+            commit('drawers/setLeft', true, { root: true })
+          }, 1000)
+          return
+        }
       } else {
         commit('loading', true)
       }
@@ -138,7 +144,7 @@ const area: Module<AreaState, RootState> = {
       api
         .get<Area>('area/' + id)
         .then(({ data }) => {
-          data.fullyLoaded = true
+          data.fullyLoaded = Date.now()
 
           dispatch('normalizeData', data)
 
@@ -191,6 +197,25 @@ const area: Module<AreaState, RootState> = {
     },
     find: (state: AreaState) => (id: number) => {
       return state.byIds[id]
+    },
+    getFiltered: (state: AreaState, _: any, __: RootState, rootGetters: any) => (id: number) => {
+      const currentArea = state.byIds[id]
+
+      if(!currentArea) {
+        return []
+      }
+
+      const routeFilters = rootGetters['route/filters']
+
+      const areas: Array<Area> = []
+
+      currentArea.areas.forEach((id) => {
+        const area = state.byIds[id]
+
+        area && areaPassesFilter(area, routeFilters) && areas.push(area)
+      })
+
+      return areas
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     tags (
@@ -250,29 +275,26 @@ const area: Module<AreaState, RootState> = {
       return tags
     },
     tagsFor: (
-      state: AreaState,
+      _: AreaState,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      _: any,
+      getters: any,
       rootState: RootState
-    ) => (area: Area) => {
+    ) => (currentArea: Area) => {
       const tags: Array<Tag> = []
 
-      area.areas &&
-      area.areas.forEach((id: number) => {
-        if (state.byIds[id]?.map_tag) {
-          tags.push(state.byIds[id].map_tag)
-        }
+      getters.getFiltered(currentArea.id).forEach((area: Area) => {
+        area.map_tag && tags.push(area.map_tag)
       })
 
-      area.trails &&
-        area.trails.forEach((id: number) => {
+      currentArea.trails &&
+      currentArea.trails.forEach((id: number) => {
           if (rootState.trail?.byIds[id]?.map_tag) {
             tags.push(rootState.trail.byIds[id].map_tag)
           }
         })
 
-      area.images &&
-        area.images.forEach((id: number) => {
+        currentArea.images &&
+        currentArea.images.forEach((id: number) => {
           if (rootState.image?.byIds[id]?.map_tag) {
             tags.push(rootState.image.byIds[id].map_tag)
           }

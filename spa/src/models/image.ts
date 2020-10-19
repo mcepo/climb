@@ -22,5 +22,5 @@ export interface Image {
   // image is an entity by it self
   // if all parts of the image are loaded like tags, map_tag ...
   // then the image is fullyLoaded
-  fullyLoaded: boolean;
+  fullyLoaded: number;
 }

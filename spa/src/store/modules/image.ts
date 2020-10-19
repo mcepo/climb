@@ -71,16 +71,24 @@ const image: Module<ImageState, RootState> = {
     },
 
     fetch ({ state, commit, dispatch }, id) {
-      if (!state.byIds[id]?.fullyLoaded) {
-        dispatch('snackbar/show', 'Loading image...', { root: true })
+      const fullyLoaded = state.byIds[id]?.fullyLoaded
 
+      if (fullyLoaded && Number.isInteger(fullyLoaded)) {
+        const miliSecSincLastRefresh = Date.now() - fullyLoaded
+
+        // don't refresh if less then an hour has passed
+        if (miliSecSincLastRefresh < 3600000) {
+          return
+        }
+      } else {
+        dispatch('snackbar/show', 'Loading image...', { root: true })
         commit('loading', true)
       }
 
       api
         .get<Image>('image/' + id + '/tags')
         .then(({ data }) => {
-          data.fullyLoaded = true
+          data.fullyLoaded = Date.now()
           dispatch('normalizeData', data)
 
           state.loading && dispatch('snackbar/success', 'Done!', { root: true })

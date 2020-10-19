@@ -18,5 +18,12 @@ export interface Area {
   owner_id: number;
 
   // when all info on the area is loaded in the frontend
-  fullyLoaded: boolean;
+  fullyLoaded: number;
+
+  // statistics
+
+  length_stats: Map<number, number>;
+  grade_stats: Map<number, Map<number, number>>;
+  orientations: Map<number, number>;
+  orientation: number;
 }
