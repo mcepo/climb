@@ -26,7 +26,20 @@ export default {
   },
   computed: {
     wasFiltered () {
-      return this.area && this.area.areas.length !== this.areas.length
+      const filters = this.$store.state.route.filters
+
+      return this.area &&
+        this.area.areas.length !== this.areas.length &&
+        filters &&
+        (
+          filters.gradeTypes ||
+          filters.gradeWeights ||
+          (
+            filters.orientation && filters.orientation.length !== 0
+          ) ||
+          filters.query ||
+          filters.length
+        )
     },
     areas () {
       if (this.area) {
