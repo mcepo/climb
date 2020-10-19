@@ -145,6 +145,7 @@ export default {
               // this could be a problem in the future
               this.formData.path = (this.area.path != null ? this.area.path + '.' : '') + this.area.id
               this.afterSubmit(this.formData)
+              this.$store.commit('area/appendRoute', { id: this.area.id, routeId: data })
             }
           )
       }

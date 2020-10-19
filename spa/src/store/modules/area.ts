@@ -51,6 +51,9 @@ const area: Module<AreaState, RootState> = {
     appendTrail (state: AreaState, payload) {
       state.byIds[payload.id].trails.push(payload.trailId)
     },
+    appendRoute (state: AreaState, payload) {
+      state.byIds[payload.id].routes.push(payload.routeId)
+    },
     removeArea (state: AreaState, { parentId, areaId }) {
       const item = state.byIds[parentId]
 
