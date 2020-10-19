@@ -26,7 +26,7 @@ export default {
   },
   computed: {
     wasFiltered () {
-      return this.area.areas.length !== this.areas.length
+      return this.area && this.area.areas.length !== this.areas.length
     },
     areas () {
       if (this.area) {
