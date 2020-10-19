@@ -7,34 +7,15 @@ export interface AuthState {
   user?: User;
 }
 
-const storageKey = 'auth'
-
-function getAuthFromStorage<AuthState> () {
-  const auth = window.localStorage.getItem(storageKey)
-
-  if (auth) {
-    return JSON.parse(auth)
-  }
-  return {
-    token: '',
-    user: null
-  }
-}
-
-function setAuthToStorage (auth: AuthState) {
-  window.localStorage.setItem(storageKey, JSON.stringify(auth))
-}
-
-function clearAuthFromStorage () {
-  window.localStorage.removeItem(storageKey)
-}
-
 const namespaced = true
 
 const auth: Module<AuthState, RootState> = {
   namespaced,
 
-  state: getAuthFromStorage(),
+  state: {
+    token: '',
+    user: undefined
+  },
 
   mutations: {
     login (state, auth) {
@@ -54,12 +35,10 @@ const auth: Module<AuthState, RootState> = {
       }
 
       commit('login', auth)
-      setAuthToStorage(auth)
       dispatch('snackbar/success', 'Successfully logged in<br> Welcome, ' + state.user?.name, { root: true })
       dispatch('form/close', null, { root: true })
     },
     logout ({ commit }) {
-      clearAuthFromStorage()
       commit('logout')
     },
     authorize ({ getters, dispatch }, item) {

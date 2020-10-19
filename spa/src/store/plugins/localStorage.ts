@@ -1,13 +1,14 @@
 import { Store } from 'vuex'
 import { RootState } from '..'
+import { set, get } from 'idb-keyval'
 
 export default function (store: Store<RootState>) {
   const storeKey = 'state'
 
-  const state = localStorage.getItem(storeKey)
+  const state = get(storeKey)
 
   if (state) {
-    const savedState = { ...store.state, ...JSON.parse(state) }
+    const savedState = { ...store.state, ...state }
 
     store.replaceState(savedState)
   }
@@ -23,13 +24,14 @@ export default function (store: Store<RootState>) {
 
   function update (state: RootState) {
     const saveState = {
+      auth: state.auth,
       area: state.area,
       route: state.route,
       image: state.image,
       trail: state.trail
     }
 
-    localStorage.setItem(storeKey, JSON.stringify(saveState))
+    set(storeKey, saveState)
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
