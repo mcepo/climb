@@ -98,7 +98,7 @@ const routeImageLayerStyle = {
     setPolylineStyle(obj.layer, highlighColor)
   },
   selected (obj: StylingPolyline) {
-    setPolylineStyle(obj.layer, 'orangered')
+    setPolylineStyle(obj.layer, 'yellow')
   }
 }
 
@@ -124,7 +124,7 @@ const pitchLayerStyle = {
     setPolylineStyle(obj.layer, highlighColor)
   },
   selected (obj: StylingPolyline) {
-    setPolylineStyle(obj.layer, 'orangered')
+    setPolylineStyle(obj.layer, 'yellow')
   }
 }
 
