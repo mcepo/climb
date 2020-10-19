@@ -87,7 +87,7 @@ export default {
         })
     },
     authProvider (provider, providerName) {
-      this.$store.commit(
+      this.$store.dispatch(
         'snackbar/show',
         'Logging in using ' +
           providerName +
