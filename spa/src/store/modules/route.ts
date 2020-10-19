@@ -179,7 +179,7 @@ const route: Module<RouteState, RootState> = {
 
       routeIds.forEach(id => {
         const route = state.byIds[id]
-        routePassesFilter(route, filters) && filtered.push(route)
+        route && routePassesFilter(route, filters) && filtered.push(route)
       })
 
       return filtered
