@@ -10,6 +10,10 @@ when no internet conntection is present
 TODO: zoom in on mobile phone on drawer will remove nav bar from view and on map 
 you can't see nav bar
 
+TODO: when i close an image i get zoomed all the way out
+  + refactor layer service so tag drawing gets called as a function
+  + how and when a zoom and map location should change
+
 -- FEATURES --
 
 TODO: if an image is tagged somewhere then don't show that image in image list on areas
