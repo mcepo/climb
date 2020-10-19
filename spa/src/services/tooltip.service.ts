@@ -20,9 +20,6 @@ const tooltipService = {
   },
   pitch ({ layer, item }) {
     this.set(layer, gradeService.forge(item.grades) + ' ' + lengthString(item.length))
-  },
-  trail ({ layer }) {
-    this.set(layer, 'Trail')
   }
 
 }
