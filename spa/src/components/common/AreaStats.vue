@@ -62,7 +62,9 @@ export default Vue.extend({
       return routeStats
     },
     hasOrientation () {
-      return this.item && typeService.hasOrientation(ItemType.Area, this.item.type_id)
+      return this.item &&
+        this.item.orientation !== null &&
+        typeService.hasOrientation(ItemType.Area, this.item.type_id)
     },
     orientation () {
       return typeService.orientation.getLabel(this.item.orientation)
