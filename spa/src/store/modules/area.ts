@@ -42,7 +42,7 @@ const area: Module<AreaState, RootState> = {
       if (parentId) {
         state.byIds[parentId].areas.push(areaId)
       } else {
-        state.rootIds.push(areaId)
+        if (!state.rootIds.includes(areaId)) { state.rootIds.push(areaId) }
       }
     },
     appendImage (state: AreaState, payload) {

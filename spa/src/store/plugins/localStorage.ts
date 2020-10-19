@@ -5,13 +5,12 @@ import { set, get } from 'idb-keyval'
 export default function (store: Store<RootState>) {
   const storeKey = 'state'
 
-  const state = get(storeKey)
+  get(storeKey).then(state => {
+    typeof state === 'object' &&
+    state !== null &&
+    store.replaceState({ ...store.state, ...state })
+  })
 
-  if (state) {
-    const savedState = { ...store.state, ...state }
-
-    store.replaceState(savedState)
-  }
   const skipMutations = [
     'highlight/set',
     'drawers/setLeft',
