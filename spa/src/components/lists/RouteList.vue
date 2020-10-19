@@ -50,8 +50,7 @@ export default {
       area: 'area/get'
     }),
     wasFiltered () {
-
-    const filters = this.$store.state.route.filters
+      const filters = this.$store.state.route.filters
 
       return filters &&
         (

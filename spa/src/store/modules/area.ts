@@ -198,10 +198,11 @@ const area: Module<AreaState, RootState> = {
     find: (state: AreaState) => (id: number) => {
       return state.byIds[id]
     },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     getFiltered: (state: AreaState, _: any, __: RootState, rootGetters: any) => (id: number) => {
       const currentArea = state.byIds[id]
 
-      if(!currentArea) {
+      if (!currentArea) {
         return []
       }
 
@@ -288,12 +289,12 @@ const area: Module<AreaState, RootState> = {
 
       currentArea.trails &&
       currentArea.trails.forEach((id: number) => {
-          if (rootState.trail?.byIds[id]?.map_tag) {
-            tags.push(rootState.trail.byIds[id].map_tag)
-          }
-        })
+        if (rootState.trail?.byIds[id]?.map_tag) {
+          tags.push(rootState.trail.byIds[id].map_tag)
+        }
+      })
 
-        currentArea.images &&
+      currentArea.images &&
         currentArea.images.forEach((id: number) => {
           if (rootState.image?.byIds[id]?.map_tag) {
             tags.push(rootState.image.byIds[id].map_tag)
