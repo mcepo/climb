@@ -144,6 +144,8 @@ export class LayerService {
     })
 
     this._anchors.clear()
+
+    this._lastBounds = undefined
   }
 
   hideTag (key: string) {
