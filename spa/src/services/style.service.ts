@@ -12,6 +12,14 @@ interface StylingPolyline {
   item: Area|Route;
 }
 
+// #ff0000 - crvena
+// #ff9900 - narančasta
+// #ffff00 - žuta
+// #00ff00 - zelena
+// #00ffff - plava
+// #6600ff - ljubičasta
+// #ff00ff - ružičasta
+
 const highlighColor = '#3490dc'
 
 function getStarSvg (color: string) {
