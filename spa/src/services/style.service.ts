@@ -92,7 +92,6 @@ const routeLeafletLayerStyle = {
 const routeImageLayerStyle = {
 
   default (obj: StylingPolyline) {
-    console.log(obj)
     setPolylineStyle(obj.layer, 'red')
   },
   highlight (obj: StylingPolyline) {
