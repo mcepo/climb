@@ -1,5 +1,5 @@
 import { DivIcon, Marker, Icon, Polyline } from 'leaflet'
-import { Area, TaggedType } from '@/models'
+import { Area, TaggedType, Route } from '@/models'
 import { svgIconUrl } from '../utils/svg'
 
 interface StylingMarker {
@@ -9,7 +9,7 @@ interface StylingMarker {
 
 interface StylingPolyline {
   layer: Polyline;
-  item: Area;
+  item: Area|Route;
 }
 
 const highlighColor = '#3490dc'
@@ -92,6 +92,7 @@ const routeLeafletLayerStyle = {
 const routeImageLayerStyle = {
 
   default (obj: StylingPolyline) {
+    console.log(obj)
     setPolylineStyle(obj.layer, 'red')
   },
   highlight (obj: StylingPolyline) {

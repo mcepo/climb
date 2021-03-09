@@ -28,7 +28,7 @@ export default function (store: Store<RootState>) {
       route: state.route,
       image: state.image,
       trail: state.trail,
-      pitch: state.pitch,
+      pitch: state.pitch
     }
 
     set(storeKey, saveState)
