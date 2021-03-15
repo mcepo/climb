@@ -1,11 +1,13 @@
--- TEST --
-
-TODO: test set at my location tag, then location isn't required before tagging
 
 -- FIXES --
 
-TODO: success message are showed after the post/put/delete request are added to queueu
-when no internet conntection is present
+TODO HOT: filtriranje po ocjenama mi ne radi
+
+TODO HOT: when viewing different areas/routes tabs get messed up
+
+TODO HOT: route/pitch ordering
+
+TODO HOT: map buttun should close image and drawer
 
 TODO: zoom in on mobile phone on drawer will remove nav bar from view and on map 
 you can't see nav bar
@@ -15,6 +17,11 @@ TODO: when i close an image i get zoomed all the way out
   + how and when a zoom and map location should change
 
 -- FEATURES --
+
+TODO HOT: area search box
+
+TODO: color coding route and area tags
+TODO: add scale with grades to display
 
 TODO: if an image is tagged somewhere then don't show that image in image list on areas
 
@@ -37,6 +44,12 @@ TODO: add store for offline use button, then cache:
     - need area borders for map tiles to load + zoom every second zoom starting from most zoomed
   
   now i am storing everything as the user is surfing
+
+-- UPGRADING --
+
+TODO: upgrade frontend packages
+TODO: upgrade backend packages
+TODO: investigate substituding store for composition api
 
 -- OPTIMIZATION --
 
