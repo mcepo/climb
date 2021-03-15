@@ -105,7 +105,7 @@ class Area extends Model
         return $query->whereNull('parent_id');
     }
 
-    public function loadAreaAssets($filters)
+    public function loadAreaAssets()
     {
         // with area i only send the routes that are directly under that area
         // and when an area has those routes then i don't show the area tab at all
