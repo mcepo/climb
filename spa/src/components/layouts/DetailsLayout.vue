@@ -61,6 +61,7 @@ import ItemMenu from '../common/ItemMenu'
 import { mapActions, mapGetters } from 'vuex'
 import typeService from '../../services/type.service'
 import GetDirections from '../buttons/GetDirections'
+import { getUrl } from '../../router'
 
 export default {
   props: ['item', 'type'],
@@ -92,6 +93,7 @@ export default {
       openAuthorizedForm: 'form/authorizeAndOpen'
     }),
     closeDrawer () {
+      this.$router.push(getUrl('image', null))
       this.$store.commit('drawers/setLeft', false)
     }
   },
