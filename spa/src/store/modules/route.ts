@@ -109,13 +109,13 @@ const route: Module<RouteState, RootState> = {
         return
       }
 
+      filters && commit('setFilters', filters)
+
       const area = rootGetters['area/get']
 
       if (area && area.routes.length) return
 
       commit('loading', true)
-
-      filters && commit('setFilters', filters)
 
       const params = getters.filters
 
