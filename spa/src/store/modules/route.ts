@@ -104,7 +104,7 @@ const route: Module<RouteState, RootState> = {
           commit('loading', false)
         })
     },
-    loadFiltered ({ state, commit, getters, dispatch, rootGetters }, filters = null) {
+    loadFiltered ({ state, commit, getters, rootGetters }, filters = null) {
       if (state.loading) {
         return
       }
@@ -121,7 +121,7 @@ const route: Module<RouteState, RootState> = {
 
       params.offset = getters.getFiltered.length
 
-    //  dispatch('snackbar/show', 'Loading routes ...', { root: true })
+      // dispatch('snackbar/show', 'Loading routes ...', { root: true })
 
       api
         .get<Route[]>('route', {
@@ -132,7 +132,7 @@ const route: Module<RouteState, RootState> = {
             commit('add', route)
           })
 
-       //   dispatch('snackbar/success', 'Done!', { root: true })
+          // dispatch('snackbar/success', 'Done!', { root: true })
 
           commit('loading', false)
         })
