@@ -18,16 +18,16 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class Route extends Model
 {
     use Taggable,
-    Linkable,
-    Filterable,
-    QueryFilter,
-    RouteFilters,
-    HasGrades,
-    HasTsVector,
-    HasAncestors,
-    IsDescendent,
-    HasOwner,
-    LogsActivity;
+        Linkable,
+        Filterable,
+        QueryFilter,
+        RouteFilters,
+        HasGrades,
+        HasTsVector,
+        HasAncestors,
+        IsDescendent,
+        HasOwner,
+        LogsActivity;
 
     protected static $logAttributes = ['*'];
 
@@ -59,6 +59,12 @@ class Route extends Model
     public function grades()
     {
         return $this->hasMany(Grade::class)->orderBy('type_id', 'asc');
+    }
+
+    // this is used only when updating route ordering
+    public static function scopeWhereParent($query, $area_id)
+    {
+        return $query->where('area_id', $area_id);
     }
 
     public function loadImages()

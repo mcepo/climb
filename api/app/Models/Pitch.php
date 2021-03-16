@@ -11,8 +11,11 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class Pitch extends Model
 {
-    use Taggable, HasGrades, IsDescendent, HasOwner,
-    LogsActivity;
+    use Taggable,
+        HasGrades,
+        IsDescendent,
+        HasOwner,
+        LogsActivity;
 
     protected static $logAttributes = ['*'];
 
@@ -36,5 +39,11 @@ class Pitch extends Model
     public function grades()
     {
         return $this->hasMany(PitchGrade::class)->orderBy('type_id', 'asc');
+    }
+
+    // this is used only when updating pitch ordering
+    public static function scopeWhereParent($query, $route_id)
+    {
+        return $query->where('route_id', $route_id);
     }
 }
