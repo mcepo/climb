@@ -97,11 +97,13 @@ export default {
       this.$store.commit('drawers/setLeft', false)
     }
   },
-  // watch: {
-  //   item (newItem) {
-  //     this.tabs = newItem && newItem.children ? 'areas' : 'pitches'
-  //   }
-  // },
+  watch: {
+      // fix for messed up tabs when switching between areas that have 
+      // pictures and those that dont have
+    item (newItem) {
+      this.tabs = newItem && newItem.children ? 'areas' : 'pitches'
+    }
+  },
   components: {
     ImageList,
     AreaList,
