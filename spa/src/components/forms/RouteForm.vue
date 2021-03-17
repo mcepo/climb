@@ -18,6 +18,17 @@
         ></v-select>
       </v-card-text>
 
+      <v-card-text>
+        <v-select
+          v-model="formData.order"
+          :items="routes"
+          label="Place route after"
+          item-value='order'
+          item-text='name'
+          required
+        ></v-select>
+      </v-card-text>
+
       <orientation v-model='formData.orientation'/>
 
       <v-card-text class='pa-0'>
@@ -89,6 +100,22 @@ export default {
     },
     multipitch () {
       return this.formData.type_id === RouteDatabaseId.Multipitch || this.formData.type_id === RouteDatabaseId.Waterfall
+    },
+    routes () {
+      const routeIds = this.area.routes
+      const routes = [
+        {
+          order: 0,
+          name: 'Beginning'
+        }
+      ]
+
+      routeIds.forEach(id => {
+        const route = this.$store.state.route.byIds[id]
+        routes.push(route)
+      })
+
+      return routes
     }
   },
   created () {

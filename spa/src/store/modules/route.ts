@@ -182,6 +182,10 @@ const route: Module<RouteState, RootState> = {
         route && routePassesFilter(route, filters) && filtered.push(route)
       })
 
+      filtered.sort((a, b) => {
+        return a.order > b.order ? 1 : -1
+      })
+
       return filtered
     },
     find: (state: RouteState) => (id: number) => {
