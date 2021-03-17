@@ -1,5 +1,5 @@
 import { DivIcon, Marker, Icon, Polyline } from 'leaflet'
-import { Area, TaggedType } from '@/models'
+import { Area, TaggedType, Route } from '@/models'
 import { svgIconUrl } from '../utils/svg'
 
 interface StylingMarker {
@@ -9,8 +9,16 @@ interface StylingMarker {
 
 interface StylingPolyline {
   layer: Polyline;
-  item: Area;
+  item: Area|Route;
 }
+
+// #ff0000 - crvena
+// #ff9900 - narančasta
+// #ffff00 - žuta
+// #00ff00 - zelena
+// #00ffff - plava
+// #6600ff - ljubičasta
+// #ff00ff - ružičasta
 
 const highlighColor = '#3490dc'
 

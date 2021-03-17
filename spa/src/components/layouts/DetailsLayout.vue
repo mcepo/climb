@@ -2,9 +2,6 @@
   <v-container fluid flat style='padding: 0px 0px 300px 0px'>
     <v-layout column>
       <v-layout class='pa-2 align-center'>
-        <v-btn text icon title="Close sidebar" @click.stop="closeDrawer">
-          <v-icon>arrow_back</v-icon>
-        </v-btn>
         <v-layout column class='pl-2'>
           <v-card-subtitle class='pa-0'>{{itemType}}</v-card-subtitle>
           <v-card-title class='pa-0'>
@@ -12,7 +9,11 @@
           </v-card-title>
         </v-layout>
         <v-spacer></v-spacer>
-        <item-menu :item='item' :type='type'></item-menu>
+        <get-directions :item='item' :type='type'></get-directions>
+        <v-btn icon title="Close drawer" @click.stop="closeDrawer">
+          <v-icon>map</v-icon>
+        </v-btn>
+        <item-menu v-if='checkAuth' :item='item' :type='type'></item-menu>
       </v-layout>
       <v-card text>
         <v-card-text>
@@ -57,8 +58,10 @@ import RouteList from '../lists/RouteList'
 import PitchList from '../lists/PitchList'
 import ExternalLinkList from '../lists/ExternalLinkList'
 import ItemMenu from '../common/ItemMenu'
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import typeService from '../../services/type.service'
+import GetDirections from '../buttons/GetDirections'
+import { getUrl } from '../../router'
 
 export default {
   props: ['item', 'type'],
@@ -80,28 +83,35 @@ export default {
     },
     itemType () {
       return typeService.getTypeName(this.type, this.item.type_id)
-    }
+    },
+    ...mapGetters({
+      checkAuth: 'auth/check'
+    })
   },
   methods: {
     ...mapActions({
       openAuthorizedForm: 'form/authorizeAndOpen'
     }),
     closeDrawer () {
+      this.$router.push(getUrl('image', null))
       this.$store.commit('drawers/setLeft', false)
     }
   },
-  // watch: {
-  //   item (newItem) {
-  //     this.tabs = newItem && newItem.children ? 'areas' : 'pitches'
-  //   }
-  // },
+  watch: {
+    // fix for messed up tabs when switching between areas that have
+    // pictures and those that dont have
+    item (newItem) {
+      this.tabs = newItem && newItem.children ? 'areas' : 'pitches'
+    }
+  },
   components: {
     ImageList,
     AreaList,
     RouteList,
     ExternalLinkList,
     PitchList,
-    ItemMenu
+    ItemMenu,
+    GetDirections
   }
 }
 </script>

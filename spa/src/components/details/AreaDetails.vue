@@ -43,7 +43,11 @@ export default {
       const moderators = []
 
       this.area.moderators.forEach(moderatorId => {
-        moderators.push(this.$store.getters['user/find'](moderatorId))
+        const user = this.$store.getters['user/find'](moderatorId)
+
+        if (user) {
+          moderators.push(user)
+        }
       })
 
       return moderators

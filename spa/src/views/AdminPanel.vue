@@ -2,9 +2,9 @@
   <v-app>
     <nav-bar></nav-bar>
 
-    <v-content>
+    <v-main>
       <router-view name='content'></router-view>
-    </v-content>
+    </v-main>
 
     <notification-snackbar></notification-snackbar>
   </v-app>

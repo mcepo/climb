@@ -107,9 +107,9 @@ class AreaUpdateService
       ->get()
       ->each(function ($area) use (&$orientations) {
         if (!isset($orientations[$area->orientation])) {
-          $orientations[$area->orientation] = array_sum($area->route_stats);
+          $orientations[$area->orientation] = array_sum($area->route_stats ?? []);
         } else {
-          $orientations[$area->orientation] += array_sum($area->route_stats);
+          $orientations[$area->orientation] += array_sum($area->route_stats ?? []);
         }
       });
 

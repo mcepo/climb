@@ -2,10 +2,10 @@
   <v-app>
     <nav-bar></nav-bar>
 
-    <v-content style='padding:0px'>
+    <v-main style='padding:0px'>
       <drawing-actionbar></drawing-actionbar>
       <router-view name='map'></router-view>
-    </v-content>
+    </v-main>
 
     <notification-snackbar></notification-snackbar>
 

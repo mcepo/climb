@@ -53,17 +53,6 @@
 
         <current-location-tagger v-if='canTagCurrentLocation' :type='type' :item='item'  show-text/>
 
-        <v-btn
-          text
-          v-if='canGetDirections'
-          title="Get directions for this area"
-          @click="openInGoogle()"
-          class='justify-start'
-        >
-          <v-icon>directions_car</v-icon>
-          Get directions
-        </v-btn>
-
         <delete-button :type='type' :item="item" return-back show-text />
 
         <add-trail v-if='hasTrails' :area='item' show-text/>
@@ -123,12 +112,10 @@
           Upload photo
         </v-btn>
       </div>
-
     </v-menu>
 </template>
 
 <script>
-
 import DeleteButton from '../buttons/DeleteButton'
 import TagControl from '../buttons/TagControl'
 import CurrentLocationTagger from '../buttons/CurrentLocationTagger'
@@ -138,11 +125,7 @@ import { mapActions } from 'vuex'
 import typeService, { ItemType } from '../../services/type.service'
 
 export default {
-
-  props: [
-    'type',
-    'item'
-  ],
+  props: ['type', 'item'],
 
   computed: {
     canAdopt () {
@@ -150,11 +133,12 @@ export default {
       if (this.isRoute) return false
 
       const adoption = this.$store.state.adoption
-      return adoption.item && // has item for moving
-      !(adoption.type === ItemType.Area &&
-        (
-          adoption.item.id === this.item.id || // can't adopt myself
-          this.item.ancestors.includes(adoption.item.id) // my child can't adopt me
+      return (
+        adoption.item && // has item for moving
+        !(
+          adoption.type === ItemType.Area &&
+          (adoption.item.id === this.item.id || // can't adopt myself
+            this.item.ancestors.includes(adoption.item.id)) // my child can't adopt me
         )
       )
     },
@@ -174,9 +158,6 @@ export default {
     },
     hasTrails () {
       return typeService.hasTrails(this.type, this.item.type_id)
-    },
-    canGetDirections () {
-      return typeService.canGetDirections(this.type, this.item)
     },
     canHaveArea () {
       return typeService.hasAreas(this.type, this.item)
@@ -210,47 +191,41 @@ export default {
       openAuthorizedForm: 'form/authorizeAndOpen',
       openOnlyAdminForm: 'form/onlyAdminOpen',
       setChildForAdoption: 'adoption/setChild',
-      setAdoptingParent: 'adoption/setParent',
+      setAdoptingParent: 'adoption/setParent'
+    }),
 
-      getParent () {
-        return this.parentId ? this.$store.state.area.byIds[this.parentId] : null
-      },
+    getParent () {
+      return this.parentId ? this.$store.state.area.byIds[this.parentId] : null
+    },
 
-      openInGoogle () {
-        const coordinates = this.item.map_tag.geometry.coordinates
-        const win = window.open('https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=' + coordinates[1] + ',' + coordinates[0], '_blank')
-        win.focus()
-      },
+    openEditForm () {
+      const parent = this.getParent()
 
-      openEditForm () {
-        const parent = this.getParent()
-
-        const actionPayload = {
-          form: {
-            component: this.type + '-form',
-            params: {}
-          },
-          item: this.item
-        }
-
-        if (this.isArea) {
-          actionPayload.form.params = {
-            area: this.item,
-            parent
-          }
-        } else if (this.isRoute) {
-          actionPayload.form.params = {
-            route: this.item,
-            area: parent
-          }
-        } else {
-          this.$store.dispatch('snackbar/throwError', 500)
-          return
-        }
-
-        this.openAuthorizedForm(actionPayload)
+      const actionPayload = {
+        form: {
+          component: this.type + '-form',
+          params: {}
+        },
+        item: this.item
       }
-    })
+
+      if (this.isArea) {
+        actionPayload.form.params = {
+          area: this.item,
+          parent
+        }
+      } else if (this.isRoute) {
+        actionPayload.form.params = {
+          route: this.item,
+          area: parent
+        }
+      } else {
+        this.$store.dispatch('snackbar/throwError', 500)
+        return
+      }
+
+      this.openAuthorizedForm(actionPayload)
+    }
   }
 }
 </script>

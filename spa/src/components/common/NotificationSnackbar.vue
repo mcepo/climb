@@ -1,7 +1,9 @@
 <template>
     <v-snackbar v-if='state' :color='state.status' v-model='show' :timeout='timeout' bottom style='z-index: 3000'>
-        <div v-html='state.message'></div>
-        <v-btn icon text @click="show = false"><v-icon>close</v-icon></v-btn>
+        <div class='d-flex flex-row justify-space-between'>
+            <div v-html='state.message'></div>
+            <v-btn icon text @click="show = false"><v-icon>close</v-icon></v-btn>
+        </div>
     </v-snackbar>
 </template>
 
