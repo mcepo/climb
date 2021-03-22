@@ -1,9 +1,9 @@
 
 -- FIXES --
 
-TODO seperate form for route ordering
+TODO: optimization, route list specially 
 
-TODO HOT: route/pitch ordering
+TODO: lokacije ruta se pokazuju na karti samo kad je ruta direktno ispod otvorenog područja
 
 TODO: zoom in on mobile phone on drawer will remove nav bar from view and on map 
 you can't see nav bar
