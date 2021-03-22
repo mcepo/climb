@@ -22,6 +22,8 @@
 import { getUrl } from '../../router'
 import { ItemType } from '../../services/type.service'
 
+import drawers from '../../services/drawer.service'
+
 export default {
   props: {
     trim: Number
@@ -35,6 +37,11 @@ export default {
         trimIndex = 0
       }
       return this.trim ? breadcrumbs.slice(trimIndex, breadcrumbs.length) : breadcrumbs
+    }
+  },
+  setup () {
+    return {
+      drawers
     }
   },
   methods: {
@@ -53,8 +60,8 @@ export default {
           this.$router.push(getUrl(ItemType.Area, null))
         }
       }
-      this.$store.commit('drawers/setRight', false)
-      this.$store.commit('drawers/setLeft', true)
+      this.drawers.left = true
+      this.drawers.right = false
     }
   }
 }

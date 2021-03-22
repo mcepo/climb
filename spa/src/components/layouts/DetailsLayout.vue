@@ -63,6 +63,9 @@ import typeService from '../../services/type.service'
 import GetDirections from '../buttons/GetDirections'
 import { getUrl } from '../../router'
 
+import drawers from '../../services/drawer.service'
+
+
 export default {
   props: ['item', 'type'],
   data: () => ({
@@ -88,13 +91,18 @@ export default {
       checkAuth: 'auth/check'
     })
   },
+  setup () {
+    return {
+      drawers
+    }
+  },
   methods: {
     ...mapActions({
       openAuthorizedForm: 'form/authorizeAndOpen'
     }),
     closeDrawer () {
       this.$router.push(getUrl('image', null))
-      this.$store.commit('drawers/setLeft', false)
+      this.drawers.left = false
     }
   },
   watch: {

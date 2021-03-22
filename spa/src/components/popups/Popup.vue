@@ -21,6 +21,8 @@ import store from '../../store'
 import vuetify from '../../plugins/vuetify'
 import router, { getUrl } from '../../router'
 
+import drawers from '../../services/drawer.service'
+
 export default Vue.extend({
   store,
   vuetify,
@@ -35,14 +37,15 @@ export default Vue.extend({
       return this.url || getUrl(this.type, this.item.id)
     }
   },
+  setup () {
+    return {
+      drawers
+    }
+  },
   methods: {
     openItem () {
       this.$router.push(this.link)
-      if (this.type !== 'image') {
-        this.$store.commit('drawers/setLeft', true)
-      } else {
-        this.$store.commit('drawers/setLeft', false)
-      }
+      this.drawers.left = this.type !== 'image'
     }
   }
 })

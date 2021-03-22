@@ -15,6 +15,8 @@
 import Vue from 'vue'
 import drawingService from '../../services/drawing.service'
 
+import drawers from '../../services/drawer.service'
+
 export default Vue.extend({
   props: {
     type: String,
@@ -33,6 +35,11 @@ export default Vue.extend({
       return this.$store.getters.hasTag(this.type + this.item.id)
     }
   },
+  setup () {
+    return {
+      drawers
+    }
+  },
   methods: {
     createTag (e) {
       this.stop && e.stopPropagation()
@@ -46,7 +53,7 @@ export default Vue.extend({
     },
     closeDrawerIfMobile () {
       if (this.$vuetify.breakpoint.xs) {
-        this.$store.commit('drawers/setLeft', false)
+        this.drawers.left = false
       }
     }
   }

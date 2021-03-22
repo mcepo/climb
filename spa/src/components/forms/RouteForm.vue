@@ -73,6 +73,8 @@ import Orientation from '../common/Orientation'
 import api from '../../store/api'
 import GradeInput from '../common/GradeInput'
 
+import drawers from '../../services/drawer.service'
+
 export default {
   props: ['route', 'area'],
   components: {
@@ -122,6 +124,13 @@ export default {
     this.formDefaultValues()
     this.route && this.assignPropToFormData(this.route)
   },
+
+  setup () {
+    return {
+      drawers
+    }
+  },
+
   watch: {
     route (newRoute) {
       newRoute && this.assignPropToFormData(newRoute)
@@ -181,9 +190,9 @@ export default {
       this.$store.commit('route/add', route)
       this.$store.dispatch('snackbar/success', 'Done!')
       if (this.$vuetify.breakpoint.xs) {
-        this.$store.commit('drawers/setRight', false)
+        this.drawers.right = false
       }
-      this.$store.commit('drawers/setLeft', true)
+      this.drawers.left = true
       this.close()
     }
   }

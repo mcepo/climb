@@ -2,7 +2,7 @@
   <div>
     <!-- has to have z-index in style, can't be a class because it get run over -->
     <v-navigation-drawer
-      v-model="drawerLeft"
+      v-model="drawers.left"
       app
       clipped
       width="400"
@@ -18,7 +18,7 @@
     </v-navigation-drawer>
 
     <v-app-bar app clipped-right clipped-left style='z-index:900'>
-      <v-app-bar-nav-icon @click.stop="drawerLeft = !drawerLeft"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click.stop="drawers.left = !drawers.left"></v-app-bar-nav-icon>
       <ancestor-breadcrumbs :trim=3></ancestor-breadcrumbs>
       <v-spacer></v-spacer>
       <v-menu
@@ -72,7 +72,7 @@
     </v-app-bar>
       <!-- has to have z-index in style, can't be a class because it get run over -->
     <v-navigation-drawer
-      v-model="drawerRight"
+      v-model="drawers.right"
       right
       clipped
       app
@@ -95,6 +95,8 @@ import FormLayout from '../layouts/FormLayout'
 import { mapActions, mapGetters } from 'vuex'
 import AncestorBreadcrumbs from '../common/AncestorBreadcrumbs'
 
+import drawers from '../../services/drawer.service'
+
 export default Vue.extend({
 
   deferredPrompt: null,
@@ -104,23 +106,14 @@ export default Vue.extend({
       hasDeferrerPrompt: false
     }
   },
+
+  setup () {
+    return {
+      drawers
+    }
+  },
+
   computed: {
-    drawerLeft: {
-      get () {
-        return this.$store.state.drawers.left
-      },
-      set (value) {
-        this.$store.commit('drawers/setLeft', value)
-      }
-    },
-    drawerRight: {
-      get () {
-        return this.$store.state.drawers.right
-      },
-      set (value) {
-        this.$store.commit('drawers/setRight', value)
-      }
-    },
     installable () {
       return !this.installed && this.hasDeferrerPrompt
     }
@@ -155,7 +148,7 @@ export default Vue.extend({
       getUserName: 'auth/username'
     }),
     swipeLeft () {
-      this.drawerLeft = false
+      this.drawers.left = false
     },
     installApp () {
       // Show the install prompt

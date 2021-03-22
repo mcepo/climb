@@ -8,6 +8,8 @@ import entityMutations from './utils/entityMutations'
 import typeService, { AreaDatabaseId } from '@/services/type.service'
 import { areaPassesFilter } from '../utils/areaFilters'
 
+import drawers from '../../services/drawer.service'
+
 export interface AreaState {
   byIds: Record<string, Area>;
   allIds: Array<number>;
@@ -136,7 +138,7 @@ const area: Module<AreaState, RootState> = {
         if (miliSecSincLastRefresh < 3600000) {
           commit('loading', false) // just in case, also needed when opening sector
           setTimeout(() => {
-            commit('drawers/setLeft', true, { root: true })
+            drawers.left = true
           }, 1000)
           return
         }
@@ -154,7 +156,7 @@ const area: Module<AreaState, RootState> = {
           // will not add countries to recently viewed because its in the same component
           data.type_id !== AreaDatabaseId.Country && commit('addRecentlyViewed', data.id)
 
-          commit('drawers/setLeft', true, { root: true })
+          drawers.left = true
 
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const parent: any = data.parent_id && data.ancestors.pop()
@@ -184,7 +186,7 @@ const area: Module<AreaState, RootState> = {
             commit('appendArea', { areaId: area.id, parentId: null })
           })
 
-          commit('drawers/setLeft', true, { root: true })
+          drawers.left = true
         })
         .finally(() => {
           commit('loading', false)
