@@ -1,13 +1,9 @@
 
 -- FIXES --
 
-TODO HOT: filtriranje po ocjenama mi ne radi
-
-TODO HOT: when viewing different areas/routes tabs get messed up
+TODO seperate form for route ordering
 
 TODO HOT: route/pitch ordering
-
-TODO HOT: map buttun should close image and drawer
 
 TODO: zoom in on mobile phone on drawer will remove nav bar from view and on map 
 you can't see nav bar
