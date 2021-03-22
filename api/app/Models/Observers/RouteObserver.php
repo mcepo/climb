@@ -9,21 +9,6 @@ use App\Services\PathManager;
 class RouteObserver
 {
 
-    public function creating(Route $route)
-    {
-        Route::updateOrder($route->area_id, $route->order);
-    }
-
-    public function updating(Route $route)
-    {
-        if($route->isDirty('order'))
-        {
-            // order change is same as first deleting then adding a route
-            Route::updateOrder($route->area_id, $route->original['order'], false);
-            Route::updateOrder($route->area_id, $route->order);
-        }
-    }
-
     public function saving(Route $route)
     {
         $route->owner_id = auth()->user()->id;
@@ -60,9 +45,6 @@ class RouteObserver
 
     public function deleting(Route $route)
     {
-
-        Route::updateOrder($route->area_id, $route->original['order'], false);
-
         // getting all pitches in route and deleting them
         // can't do a mass delete because all pitches have 
         // relations that need to be deleted by hand
