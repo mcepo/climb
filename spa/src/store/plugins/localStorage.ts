@@ -11,10 +11,6 @@ export default function (store: Store<RootState>) {
     store.replaceState({ ...store.state, ...state })
   })
 
-  const skipMutations = [
-    'highlight/set',
-  ]
-
   const storageTimeout = 5000
 
   let cancelToken: number
@@ -34,9 +30,6 @@ export default function (store: Store<RootState>) {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   store.subscribe((mutation: any, state: RootState) => {
-    if (skipMutations.includes(mutation.type)) {
-      return
-    }
     cancelToken && clearTimeout(cancelToken)
     cancelToken = setTimeout(() => update(state), storageTimeout)
   })

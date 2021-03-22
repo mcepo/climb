@@ -22,6 +22,8 @@ import TagControl from '../buttons/TagControl'
 
 import { getUrl } from '../../router'
 
+import highlight from '../../services/highlight.service'
+
 export default {
   props: {
     area: Object,
@@ -35,7 +37,7 @@ export default {
       return this.type + this.area.id
     },
     highlight () {
-      return this.$store.state.highlight.key === this.key
+      return highlight.key === this.key
     },
     typeName () {
       return typeService.getTypeName(this.type, this.area.type_id)
@@ -51,10 +53,10 @@ export default {
       this.$router.push(getUrl(this.type, this.area.id))
     },
     onMouseOver () {
-      this.$store.commit('highlight/set', this.key)
+      highlight.key = this.key
     },
     onMouseOut () {
-      this.$store.commit('highlight/set', null)
+      highlight.key = null
     }
   },
   components: {

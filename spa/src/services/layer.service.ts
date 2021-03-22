@@ -14,6 +14,8 @@ import styleService from './style.service'
 import tooltipService from './tooltip.service'
 import { ItemType } from './type.service'
 
+import highlight from './highlight.service'
+
 export interface Feature {
   layer: Layer;
   item: Area | Route | Pitch | Image;
@@ -80,8 +82,8 @@ export class LayerService {
 
   registerHighlightWatch () {
     store.watch(
-      (state: RootState) => {
-        return state.highlight?.key
+      () => {
+        return highlight.key
       },
       (highlightedKey: string | undefined | null) => {
         this.highlightFeature(highlightedKey)
@@ -344,14 +346,14 @@ export class LayerService {
     feature.layer
       .on('mouseover', (e) => {
         // highlight layer
-        store.commit('highlight/set', key)
+        highlight.key = key
 
         // hide tooltip if open
         e.target.getTooltip() && e.target.closeTooltip()
       })
       .on('mouseout', (e) => {
         // remove highlight when mouse out
-        store.commit('highlight/set', null)
+        highlight.key = null
 
         // show tooltip if has any
         e.target.getTooltip() && e.target.openTooltip()

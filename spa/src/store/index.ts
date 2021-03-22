@@ -10,7 +10,6 @@ import { AreaState } from './modules/area'
 import { RouteState } from './modules/route'
 import { TrailState } from './modules/trail'
 import { Tag } from '@/models'
-import { HighlightState } from './modules/highlight'
 import { UserState } from './modules/user'
 
 import localStorage from './plugins/localStorage'
@@ -27,7 +26,6 @@ export interface RootState {
   trail?: TrailState;
   pitch?: PitchState;
   drawing: boolean;
-  highlight?: HighlightState;
   user?: UserState;
   online: boolean;
 }

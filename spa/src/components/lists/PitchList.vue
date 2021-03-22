@@ -34,7 +34,9 @@
 import TagControl from '../buttons/TagControl'
 import DeleteButton from '../buttons/DeleteButton'
 import gradeService from '../../services/grade.service'
-import { mapActions, mapMutations } from 'vuex'
+import { mapActions } from 'vuex'
+
+import highlight from '../../services/highlight.service'
 
 export default {
   props: ['route'],
@@ -58,17 +60,17 @@ export default {
     ...mapActions({
       openAuthorizedForm: 'form/authorizeAndOpen'
     }),
-    ...mapMutations({
-      onMouseEnter: 'highlight/set',
-      onMouseLeave: 'highlight/set'
-    }),
+    onMouseEnter (key) {
+      highlight.key = key
+    },
+    onMouseLeave () {
+      highlight.key = null
+    },
     forgeGrade (grades) {
       return grades ? gradeService.forge(grades) : ''
     },
     highlight (item) {
-      return (
-        this.$store.getters['highlight/id'] === 'pitch' + item.id
-      )
+      return highlight.key === 'pitch' + item.id
     }
   },
   components: {
