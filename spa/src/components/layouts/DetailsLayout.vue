@@ -65,7 +65,6 @@ import { getUrl } from '../../router'
 
 import drawers from '../../services/drawer.service'
 
-
 export default {
   props: ['item', 'type'],
   data: () => ({
