@@ -69,6 +69,8 @@ import Orientation from '../common/Orientation'
 
 import api from '../../store/api'
 
+import drawers from '../../services/drawer.service'
+
 export default {
   props: ['area', 'parent'],
   components: {
@@ -97,6 +99,11 @@ export default {
   created () {
     this.formDefaultValues()
     this.area && this.assignPropToFormData(this.area)
+  },
+  setup () {
+    return {
+      drawers
+    }
   },
   watch: {
     area (newArea) {
@@ -157,9 +164,9 @@ export default {
       this.$store.commit('area/add', area)
       this.$store.dispatch('snackbar/success', 'Changes stored!')
       if (this.$vuetify.breakpoint.xs) {
-        this.$store.commit('drawers/setRight', false)
+        this.drawers.right = false
       }
-      this.$store.commit('drawers/setLeft', true)
+      this.drawers.left = true
       this.close()
     }
   }

@@ -11,6 +11,8 @@
 import Vue from 'vue'
 import drawingService from '../../services/drawing.service'
 
+import drawers from '../../services/drawer.service'
+
 export default Vue.extend({
   props: {
     area: Object,
@@ -19,6 +21,11 @@ export default Vue.extend({
   computed: {
     drawing () {
       return this.$store.state.drawing
+    }
+  },
+  setup () {
+    return {
+      drawers
     }
   },
   methods: {
@@ -32,7 +39,7 @@ export default Vue.extend({
     },
     closeDrawerIfMobile () {
       if (this.$vuetify.breakpoint.xs) {
-        this.$store.commit('drawers/setLeft', false)
+        this.drawers.left = false
       }
     }
   }

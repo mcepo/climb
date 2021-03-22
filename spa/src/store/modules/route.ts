@@ -8,6 +8,8 @@ import { RouteFilters } from '@/models/routeFilters'
 import { routePassesFilter } from '../utils/routeFilters'
 import entityMutations from './utils/entityMutations'
 
+import drawers from '../../services/drawer.service'
+
 export interface RouteState {
   byIds: Record<number, Route>;
   allIds: Array<number>;
@@ -82,7 +84,7 @@ const route: Module<RouteState, RootState> = {
         // don't refresh if less then an hour has passed
         if (miliSecSincLastRefresh < 3600000) {
           setTimeout(() => {
-            commit('drawers/setLeft', true, { root: true })
+            drawers.left = true
           }, 1000)
           return
         }

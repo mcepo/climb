@@ -51,11 +51,18 @@ import TagControl from '../buttons/TagControl'
 import DeleteButton from '../buttons/DeleteButton'
 import { getUrl } from '../../router'
 
+import drawers from '../../services/drawer.service'
+
 export default {
   props: ['image'],
   data () {
     return {
       loading: true
+    }
+  },
+  setup () {
+    return {
+      drawers
     }
   },
   methods: {
@@ -64,7 +71,7 @@ export default {
     },
     open (id) {
       this.$router.push(getUrl('image', id))
-      this.$store.commit('drawers/setLeft', false)
+      this.drawers.left = false
     },
     imageLoaded () {
       this.loading = false

@@ -43,6 +43,8 @@
 import GradeInput from '../common/GradeInput.vue'
 import api from '../../store/api'
 
+import drawers from '../../services/drawer.service'
+
 export default {
   props: ['pitch', 'route'],
   components: {
@@ -58,6 +60,13 @@ export default {
       this.assignPropToFormData(this.pitch)
     }
   },
+
+  setup () {
+    return {
+      drawers
+    }
+  },
+
   watch: {
     pitch (newPitch) {
       if (newPitch) {
@@ -116,9 +125,9 @@ export default {
       this.$store.commit('pitch/add', pitch)
       this.$store.dispatch('snackbar/success', 'Done!')
       if (this.$vuetify.breakpoint.xs) {
-        this.$store.commit('drawers/setRight', false)
+        this.drawers.right = false
       }
-      this.$store.commit('drawers/setLeft', true)
+      this.drawers.left = true
       this.close()
     }
   }

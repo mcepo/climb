@@ -13,8 +13,6 @@ export default function (store: Store<RootState>) {
 
   const skipMutations = [
     'highlight/set',
-    'drawers/setLeft',
-    'drawers/setRight'
   ]
 
   const storageTimeout = 5000

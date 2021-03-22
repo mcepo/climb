@@ -1,6 +1,8 @@
 import { Module } from 'vuex'
 import { RootState } from '..'
 
+import drawers from '../../services/drawer.service'
+
 interface FormState {
   component: string | null;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -27,8 +29,8 @@ const form: Module<FormState, RootState> = {
   },
   actions: {
     open ({ commit }, payload) {
-      commit('drawers/setLeft', false, { root: true })
-      commit('drawers/setRight', true, { root: true })
+      drawers.left = false
+      drawers.right = true
       commit('open', payload)
     },
     authorizeAndOpen ({ dispatch }, { form, item }) {
@@ -54,9 +56,9 @@ const form: Module<FormState, RootState> = {
       )
     },
     close ({ commit }) {
-      commit('drawers/setRight', false, { root: true })
+      drawers.right = false
       commit('close')
-      commit('drawers/setLeft', true, { root: true })
+      drawers.left = true
     }
   }
 }
