@@ -7,21 +7,21 @@ use App\Models\Area;
 use App\User;
 use App\Models\Route;
 
-class InitOrdering extends Command
+class InitPositions extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'ordering:refresh';
+    protected $signature = 'position:refresh';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Ordering of routes in area and pitches in route by there id value';
+    protected $description = 'Position of routes in area and pitches in route by there id value';
     /**
      * Execute the console command.
      *
@@ -39,7 +39,7 @@ class InitOrdering extends Command
             ->chunk(500, function($chunk){
                 $chunk->each(function($area){
                     $area->routes->reduce(function($carry, $route){
-                        $route->order = $carry;
+                        $route->position = $carry;
                         $route->save();
                         $carry++;
                         return $carry;
@@ -54,7 +54,7 @@ class InitOrdering extends Command
                 ->chunk(500, function($chunk){
                     $chunk->each(function($route){
                         $route->pitches->reduce(function($carry, $pitch){
-                            $pitch->order = $carry;
+                            $pitch->position = $carry;
                             $pitch->save();
                             $carry++;
                             return $carry;

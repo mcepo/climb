@@ -31,6 +31,10 @@ class RouteObserver
         if (request()->has('grades')) {
             $route->saveGrades(request()->grades);
         }
+
+        if($route->isDirty('position')) {
+            $route->updateSiblingPositions();
+        }
     }
 
     public function updated(Route $route)

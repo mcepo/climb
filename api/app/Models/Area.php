@@ -82,7 +82,7 @@ class Area extends Model
 
     public function routes()
     {
-        return $this->hasMany(Route::class);
+        return $this->hasMany(Route::class)->orderBy('position');
     }
 
     public function trails()
@@ -109,7 +109,7 @@ class Area extends Model
     {
         // with area i only send the routes that are directly under that area
         // and when an area has those routes then i don't show the area tab at all
-        $this->setAttribute('routes', Route::where('area_id', $this->id)->with(['mapTag', 'grades'])->get());
+        $this->setAttribute('routes', Route::where('area_id', $this->id)->with(['mapTag', 'grades'])->orderBy('position')->get());
 
         $this->loadImages();
 

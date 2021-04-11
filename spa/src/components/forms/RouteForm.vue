@@ -20,10 +20,10 @@
 
       <v-card-text>
         <v-select
-          v-model="formData.order"
+          v-model="formData.position"
           :items="routes"
-          label="Place route after"
-          item-value='order'
+          label="Left to right place route before"
+          item-value='position'
           item-text='name'
           required
         ></v-select>
@@ -105,16 +105,23 @@ export default {
     },
     routes () {
       const routeIds = this.area.routes
-      const routes = [
-        {
-          order: 0,
-          name: 'Beginning'
-        }
-      ]
+      const routes = []
 
       routeIds.forEach(id => {
         const route = this.$store.state.route.byIds[id]
+
+        if (!route || this.route?.id === route.id) return
+
         routes.push(route)
+      })
+
+      routes.push({
+        position: routeIds.length + 1,
+        name: 'End of ' + this.area.name
+      })
+
+      routes.forEach(route => {
+        console.log(route.id, route.position)
       })
 
       return routes
@@ -144,6 +151,8 @@ export default {
       for (const prop in this.formData) {
         this.formData[prop] = route[prop]
       }
+
+      this.formData.position = this.formData.position + 1
     },
     formDefaultValues () {
       this.formData = {
@@ -152,19 +161,24 @@ export default {
         grades: [],
         // eslint-disable-next-line @typescript-eslint/camelcase
         type_id: null,
-        orientation: this.area.orientation
+        orientation: this.area.orientation,
+        position: this.routes.length
       }
     },
     submit () {
       if (this.route && this.route.id) {
+        if (this.formData.position > this.area.routes.length) {
+          this.formData.position--
+        }
+
         this.$store.dispatch('snackbar/show', 'Updating route ... ')
         api.put('route/' + this.route.id, this.formData)
           .then(
-            () => {
+            ({ data }) => {
               // there is no id in formData so i need to add one
               // before adding route to the store
               this.formData.id = this.route.id
-              this.afterSubmit(this.formData)
+              this.afterSubmit(this.formData, data.routes)
             }
           )
       } else {
@@ -176,18 +190,18 @@ export default {
             ({ data }) => {
               // api returns id of newly added item
               // appending id to created item
-              this.formData.id = data
+              this.formData.id = data.id
               // path format is being defined all over the place
               // this could be a problem in the future
               this.formData.path = (this.area.path != null ? this.area.path + '.' : '') + this.area.id
-              this.afterSubmit(this.formData)
-              this.$store.commit('area/appendRoute', { id: this.area.id, routeId: data })
+              this.afterSubmit(this.formData, data.routes)
             }
           )
       }
     },
-    afterSubmit (route) {
+    afterSubmit (route, routes) {
       this.$store.commit('route/add', route)
+      this.$store.dispatch('area/updateRoutePositions', { id: this.area.id, routes })
       this.$store.dispatch('snackbar/success', 'Done!')
       if (this.$vuetify.breakpoint.xs) {
         this.drawers.right = false

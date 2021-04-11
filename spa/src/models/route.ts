@@ -13,7 +13,7 @@ export interface Route {
   pitches: number[];
   ancestors: Area[];
   images: Area[];
-  order: number;
+  position: number;
 
   owner_id: number;
 

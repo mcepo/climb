@@ -41,6 +41,9 @@ const route: Module<RouteState, RootState> = {
         query
       }
     },
+    updatePosition (state: RouteState, { id, position }) {
+      state.byIds[id].position = position
+    },
     appendPitch (state: RouteState, payload) {
       state.byIds[payload.routeId].pitches.push(payload.pitchId)
     }
@@ -182,10 +185,6 @@ const route: Module<RouteState, RootState> = {
       routeIds.forEach(id => {
         const route = state.byIds[id]
         route && routePassesFilter(route, filters) && filtered.push(route)
-      })
-
-      filtered.sort((a, b) => {
-        return a.order > b.order ? 1 : -1
       })
 
       return filtered

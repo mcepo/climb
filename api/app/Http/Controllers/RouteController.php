@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Route;
+use App\Models\Area;
 use Illuminate\Http\Request;
 
 class RouteController extends Controller
@@ -26,7 +27,10 @@ class RouteController extends Controller
 
         $this->updateAreaStats($route->area_id);
 
-        return $route->id;
+        return [
+            'id' => $route->id,
+            'routes' => $route->area->routes->pluck('id')
+        ];
     }
 
     public function show(Route $route)
@@ -66,6 +70,10 @@ class RouteController extends Controller
         $route->fill($request->all())->save();
 
         $this->updateAreaStats($route->area_id);
+
+        return [
+            'routes' => $route->area->routes->pluck('id')
+        ];
     }
 
     public function destroy(Route $route)

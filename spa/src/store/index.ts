@@ -35,7 +35,7 @@ const store = new Vuex.Store<RootState>({
     drawing: false,
     online: navigator.onLine
   },
-  plugins: [localStorage],
+  plugins: (process.env.NODE_ENV === 'production' ? [localStorage] : []),
   mutations: {
     setDrawingMode (state: RootState, drawing: boolean) {
       state.drawing = drawing

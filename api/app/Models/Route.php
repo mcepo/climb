@@ -15,6 +15,8 @@ use App\Models\Traits\HasAncestors;
 use App\Models\Traits\HasOwner;
 use Spatie\Activitylog\Traits\LogsActivity;
 
+use Illuminate\Support\Facades\DB;
+
 class Route extends Model
 {
     use Taggable,
@@ -35,7 +37,8 @@ class Route extends Model
         'name',
         'length',
         'area_id',
-        'type_id'
+        'type_id',
+        'position'
     ];
 
     protected $hidden = [
@@ -100,5 +103,27 @@ class Route extends Model
     public function canBeDeleted() {
         return Tag::where(['tagged_type' => 'route', 'tagged_id' => $this->id])->count() == 0 && 
                 Pitch::where(['route_id' => $this->id])->count() == 0 ;
+    }
+
+    public function updateSiblingPositions() 
+    {
+
+        Route::where('area_id',$this->area_id)
+            ->where('id', '<>', $this->id)
+            ->where('position', '>=', $this->position)
+            ->update(['position' => DB::raw('position + 1')]);
+
+        if(!empty($this->original['position'])) {
+            Route::where('area_id',$this->area_id)
+                ->where('id', '<>', $this->id)
+                ->where('position', '>=', $this->original['position'])
+                ->update(['position' => DB::raw('position - 1')]);
+        }
+
+        // if the added route is at the end of list
+        Route::where('area_id',$this->area_id)
+            ->where('id', '<>', $this->id)
+            ->where('position', '=', $this->position)
+            ->update(['position' => DB::raw('position - 1')]);
     }
 }

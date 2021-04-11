@@ -53,8 +53,8 @@ const area: Module<AreaState, RootState> = {
     appendTrail (state: AreaState, payload) {
       state.byIds[payload.id].trails.push(payload.trailId)
     },
-    appendRoute (state: AreaState, payload) {
-      state.byIds[payload.id].routes.push(payload.routeId)
+    updateRouteIds (state: AreaState, payload) {
+      state.byIds[payload.id].routes = payload.routes
     },
     removeArea (state: AreaState, { parentId, areaId }) {
       const item = state.byIds[parentId]
@@ -92,6 +92,14 @@ const area: Module<AreaState, RootState> = {
       for (const id in items) {
         commit(fun, items[id], { root })
       }
+    },
+
+    updateRoutePositions ({ commit }, { id, routes }) {
+      for (let i = 0; i < routes.length; i++) {
+        commit('route/updatePosition', { id: routes[i], position: i + 1 }, { root: true })
+      }
+
+      commit('updateRouteIds', { id, routes })
     },
 
     normalizeData ({ commit, dispatch }, area: Area) {
