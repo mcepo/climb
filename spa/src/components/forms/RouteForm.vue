@@ -167,10 +167,6 @@ export default {
     },
     submit () {
       if (this.route && this.route.id) {
-        if (this.formData.position > this.area.routes.length) {
-          this.formData.position--
-        }
-
         this.$store.dispatch('snackbar/show', 'Updating route ... ')
         api.put('route/' + this.route.id, this.formData)
           .then(

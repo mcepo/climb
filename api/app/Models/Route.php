@@ -107,23 +107,27 @@ class Route extends Model
 
     public function updateSiblingPositions() 
     {
+        if(!empty($this->getOriginal('position'))) {
+            $this->reducePrecedingOriginalPosition();
+        }
+
+        $this->increasePrecedingNewPosition();
+    }
+
+    public function increasePrecedingNewPosition() 
+    {
 
         Route::where('area_id',$this->area_id)
             ->where('id', '<>', $this->id)
             ->where('position', '>=', $this->position)
             ->update(['position' => DB::raw('position + 1')]);
+    }
 
-        if(!empty($this->original['position'])) {
-            Route::where('area_id',$this->area_id)
-                ->where('id', '<>', $this->id)
-                ->where('position', '>=', $this->original['position'])
-                ->update(['position' => DB::raw('position - 1')]);
-        }
-
-        // if the added route is at the end of list
+    public function reducePrecedingOriginalPosition() 
+    {
         Route::where('area_id',$this->area_id)
             ->where('id', '<>', $this->id)
-            ->where('position', '=', $this->position)
+            ->where('position', '>=', $this->getOriginal('position'))
             ->update(['position' => DB::raw('position - 1')]);
     }
 }

@@ -22,6 +22,17 @@ class RouteObserver
         if ($route->isDirty('name')) {
             $route->updateTsVector();
         }
+
+        // if the route is moved to the right i need to reduce the position it moves to
+        // bacause once i take it out from the position the position it needs to go to
+        // will be reduced as well
+        if(!empty($route->getOriginal('position')) && $route->position > $route->getOriginal('position')) {
+            $route->position --;
+        }
+
+        if($route->isDirty('position')) {
+            $route->updateSiblingPositions();
+        }
     }
 
     public function saved(Route $route)
@@ -30,10 +41,6 @@ class RouteObserver
         // save the route grades if any
         if (request()->has('grades')) {
             $route->saveGrades(request()->grades);
-        }
-
-        if($route->isDirty('position')) {
-            $route->updateSiblingPositions();
         }
     }
 
@@ -49,6 +56,10 @@ class RouteObserver
 
     public function deleting(Route $route)
     {
+        // when the route is deleted 
+        // reduce te position value of preceding routes
+        $route->reducePrecedingOriginalPosition();
+
         // getting all pitches in route and deleting them
         // can't do a mass delete because all pitches have 
         // relations that need to be deleted by hand
