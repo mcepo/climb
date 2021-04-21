@@ -23,8 +23,12 @@ class RouteObserver
             $route->updateTsVector();
         }
 
+        if(empty($route->position)) {
+            $route->position = $route->area->routes->count();
+        }
+
         // if the route is moved to the right i need to reduce the position it moves to
-        // bacause once i take it out from the position the position it needs to go to
+        // because once i take it out from the position the position it needs to go to
         // will be reduced as well
         if(!empty($route->getOriginal('position')) && $route->position > $route->getOriginal('position')) {
             $route->position --;
