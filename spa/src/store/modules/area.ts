@@ -191,7 +191,7 @@ const area: Module<AreaState, RootState> = {
         .then(({ data }) => {
           data.areas.forEach((area) => {
             commit('add', area)
-            commit('appendArea', { areaId: area.id, parentId: null })
+            commit('appendArea', { areaId: area.id, parentId: area.parent_id })
           })
 
           drawers.left = true
