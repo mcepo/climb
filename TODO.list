@@ -31,7 +31,7 @@ TODO: packages need upgrade frontend and backend
 
 TODO: serve static files directly from nginx without calling php at all
 
-TODO: list reduce amount of html and css on them
+TODO: list reduce amount of html and css on them (in generale try to reduce amount html on frontend)
 
 TODO: from store remove state variable, like drawer open/closed, highlighting ...
 
