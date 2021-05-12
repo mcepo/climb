@@ -16,6 +16,7 @@ export interface AreaState {
   loading: boolean;
   rootIds: Array<number>;
   recentlyViewedIds: Array<number>;
+  query: string;
 }
 
 const namespaced = true
@@ -36,13 +37,16 @@ const area: Module<AreaState, RootState> = {
     allIds: [],
     loading: true,
     rootIds: [],
-    recentlyViewedIds: []
+    recentlyViewedIds: [],
+    query: ''
   },
   mutations: {
     ...entityMutations,
     appendArea (state: AreaState, { parentId, areaId }) {
       if (parentId) {
-        state.byIds[parentId].areas.push(areaId)
+        if(state.byIds[parentId] && state.byIds[parentId].areas) {
+          state.byIds[parentId].areas.push(areaId)
+        }
       } else {
         if (!state.rootIds.includes(areaId)) { state.rootIds.push(areaId) }
       }
@@ -179,15 +183,18 @@ const area: Module<AreaState, RootState> = {
           commit('loading', false)
         })
     },
-    fetchRootAreas ({ state, commit }) {
-      if (state.rootIds.length !== 0) {
+    fetchMany ({ state, commit }, query) {
+
+      if (!query && state.rootIds.length !== 0) {
         return
       }
 
       commit('loading', true)
 
       api
-        .get('area')
+        .get('area', {
+            params: {query}
+          })
         .then(({ data }) => {
           data.areas.forEach((area) => {
             commit('add', area)
@@ -215,18 +222,17 @@ const area: Module<AreaState, RootState> = {
     getFiltered: (state: AreaState, _: any, __: RootState, rootGetters: any) => (id: number) => {
       const currentArea = state.byIds[id]
 
-      if (!currentArea) {
-        return []
-      }
-
-      const routeFilters = rootGetters['route/filters']
+      const areaIds = currentArea ? currentArea.areas : Object.keys(state.byIds)
 
       const areas: Array<Area> = []
 
-      currentArea.areas.forEach((id) => {
-        const area = state.byIds[id]
+      const routeFilters = rootGetters['route/filters']
 
-        area && areaPassesFilter(area, routeFilters) && areas.push(area)
+      areaIds.forEach((id) => {
+
+          const area = state.byIds[id]
+  
+        areaPassesFilter(area, routeFilters, state.query) && areas.push(area)
       })
 
       return areas

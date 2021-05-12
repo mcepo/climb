@@ -25,7 +25,7 @@ class AreaObserver
     }
 
     public function saved(Area $area) {
-        // if route name changed update ts vector
+        // if area name changed update ts vector
         if ($area->isDirty('name')) {
             $area->updateTsVector();
         }

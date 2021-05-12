@@ -1,6 +1,9 @@
 import { RouteFilters, Area } from '@/models'
 
-export function areaPassesFilter (area: Area, filters: RouteFilters) {
+export function areaPassesFilter (area: Area, filters: RouteFilters, query: string) {
+
+  if (query !== '' && !area.name.toLocaleLowerCase().includes(query.toLocaleLowerCase())) return false
+
   // length filter
   if (filters.length) {
     let lengthPassed = false

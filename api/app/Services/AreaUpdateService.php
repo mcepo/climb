@@ -41,6 +41,8 @@ class AreaUpdateService
     $area->image_count = $this->_getImageCount($path);
     $area->trail_count = $this->_getTrailCount($path);
 
+    $area->updateTsVector();
+
     $area->save();
   }
 

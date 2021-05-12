@@ -1,26 +1,7 @@
 <template>
   <v-container fluid flat style="padding: 0px 0px 300px 0px">
     <v-layout column>
-      <div class="d-flex pa-2 align-center">
-        <v-btn
-          text
-          icon
-          title="Close sidebar"
-          @click.stop="drawers.left = false"
-        >
-          <v-icon>arrow_back</v-icon>
-        </v-btn>
-        <v-text-field
-          label="Search for area"
-          v-model="areaQueryString"
-          @keyup="searchForAreas()"
-        ></v-text-field>
-        <v-btn icon @click="searchForAreas()"><v-icon>search</v-icon></v-btn>
-      </div>
-      <area-list v-if='areaQueryString !== ""' :areaIds="areaIds" />
-    </v-layout>
-
-    <v-layout column v-if='areaQueryString == ""'>
+      <area-list :taggable="false" searchable/>
       <div class="d-flex pa-2">
         <h3 class="headline pa-2">Countries</h3>
         <v-spacer></v-spacer>
@@ -35,13 +16,13 @@
           <v-icon>add</v-icon>
         </v-btn>
       </div>
-      <area-list :areaIds="areaIds" />
+      <area-list :areaIds="areaIds"/>
     </v-layout>
-    <v-layout column v-if='recentlyViewedIds.length !== 0 && areaQueryString == ""'>
+    <v-layout column v-if='recentlyViewedIds.length !== 0'>
       <div class="d-flex pa-2">
         <h3 class="headline pa-2">Recently viewed</h3>
       </div>
-      <area-list :areaIds="recentlyViewedIds" :taggable="false" />
+      <area-list :areaIds="recentlyViewedIds" :taggable="false"/>
     </v-layout>
   </v-container>
 </template>
@@ -73,7 +54,7 @@ export default {
   },
 
   created () {
-    this.$store.dispatch('area/fetchRootAreas')
+    this.$store.dispatch('area/fetchMany')
   },
   methods: {
     ...mapActions({

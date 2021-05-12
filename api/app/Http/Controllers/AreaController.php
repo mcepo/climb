@@ -20,7 +20,7 @@ class AreaController extends Controller
         if($request->has('query')) {
             $query = $query->filter($request->all());
         } else {
-            $query = $query->roots();
+            $query = $query->countries();
         }
 
         return [

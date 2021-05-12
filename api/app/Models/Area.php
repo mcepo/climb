@@ -103,7 +103,7 @@ class Area extends Model
         return $this->path ? implode('.', [$this->path, $this->id]) : $this->id;
     }
 
-    public static function scopeRoots($query)
+    public static function scopeCountries($query)
     {
         return $query->whereNull('parent_id');
     }

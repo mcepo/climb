@@ -1,10 +1,8 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 
-class RenameOrderingColumn extends Migration
+class AddFullTextSearchArea extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +11,12 @@ class RenameOrderingColumn extends Migration
      */
     public function up()
     {
-        \DB::statement('ALTER TABLE routes ADD COLUMN ts_vector tsvector');
-        \DB::statement("CREATE INDEX routestext_gin ON routes USING GIN(ts_vector)");
+        \DB::statement('ALTER TABLE areas ADD COLUMN ts_vector tsvector');
+        \DB::statement("CREATE INDEX areastext_gin ON areas USING GIN(ts_vector)");
     }
 
     public function down()
     {
-        \DB::statement('ALTER TABLE routes DROP COLUMN tsvector');
+        \DB::statement('ALTER TABLE areas DROP COLUMN tsvector');
     }
 }
