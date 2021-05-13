@@ -2,20 +2,20 @@
   <v-list>
     <v-list-item v-if='searchable'>
       <v-list-item-content>
-        <v-text-field label="Search areas" v-model="areaQueryString"></v-text-field>
+        <v-text-field label="Search areas" v-model="areaQueryString" :loading='loading && searchable'></v-text-field>
       </v-list-item-content>
     </v-list-item>
     <v-list-item v-if='wasFiltered'>
       <filtering-alert type='areas'></filtering-alert>
     </v-list-item>
-    <area-list-item v-for="area in areas" :key="area.id" :area='area' :taggable='taggable' />
-    <v-list-item v-if='loading'>
+    <v-list-item v-if='loading && searchable'>
       <v-list-item-content>
         <v-progress-circular
           indeterminate
         ></v-progress-circular>
       </v-list-item-content>
     </v-list-item>
+    <area-list-item v-else v-for="area in areas" :key="area.id" :area='area' :taggable='taggable' />
   </v-list>
 </template>
 
@@ -69,19 +69,19 @@ export default {
         return this.query
       },
       set (query) {
+        query = query !== '' ? query : null
+
         this.$store.commit('area/setQueryString', query)
-        this.loadAreasOnce()
+        // remotely searching areas only if
+        // there is no open area
+        // because if an area is open
+        // all the subareas are already fetched
+        if (!this.area && query) {
+          this.loadAreasOnce()
+        }
       }
     },
     areas () {
-      if (this.area) {
-        return this.$store.getters['area/getFiltered'](this.area.id)
-      }
-
-      if (this.areaQueryString && this.areaQueryString !== '') {
-        return this.$store.getters['area/getFiltered']()
-      }
-
       if (this.areaIds) {
         const areas = []
 
@@ -94,13 +94,14 @@ export default {
         return areas
       }
 
-      return []
+      return this.$store.getters['area/getFiltered']()
     }
   },
   methods: {
     loadAreasOnce () {
+      this.$store.commit('area/loading', true)
       this.$options.cancelToken && clearTimeout(this.$options.cancelToken)
-      this.$options.cancelToken = setTimeout(() => this.$store.dispatch('area/fetchMany'), 1000)
+      this.$options.cancelToken = setTimeout(() => this.$store.dispatch('area/fetchMany'), 500)
     }
   }
 }

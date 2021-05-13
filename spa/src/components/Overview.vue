@@ -16,7 +16,7 @@
           <v-icon>add</v-icon>
         </v-btn>
       </div>
-      <area-list :areaIds="areaIds"/>
+      <area-list :areaIds="rootIds"/>
     </v-layout>
     <v-layout column v-if='recentlyViewedIds.length !== 0'>
       <div class="d-flex pa-2">
@@ -42,7 +42,7 @@ export default {
   },
   computed: {
     ...mapState({
-      areaIds: s => s.area.rootIds,
+      rootIds: s => s.area.rootIds,
       recentlyViewedIds: s => s.area.recentlyViewedIds
     })
   },
@@ -59,17 +59,7 @@ export default {
   methods: {
     ...mapActions({
       openOnlyAdminForm: 'form/onlyAdminOpen'
-    }),
-    searchForAreas () {
-      if (this.areaQueryString.length < 3) {
-        return
-      }
-
-      this.$options.cancelToken && clearTimeout(this.$options.cancelToken)
-      this.$options.cancelToken = setTimeout(() => {
-        console.log(this.areaQueryString)
-      }, 500)
-    }
+    })
   },
   components: {
     AreaList

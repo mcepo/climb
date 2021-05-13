@@ -16,7 +16,7 @@ export interface AreaState {
   loading: boolean;
   rootIds: Array<number>;
   recentlyViewedIds: Array<number>;
-  query: string;
+  query: string|null;
 }
 
 const namespaced = true
@@ -38,7 +38,7 @@ const area: Module<AreaState, RootState> = {
     loading: true,
     rootIds: [],
     recentlyViewedIds: [],
-    query: ''
+    query: null
   },
   mutations: {
     ...entityMutations,
@@ -187,15 +187,13 @@ const area: Module<AreaState, RootState> = {
         })
     },
     fetchMany ({ state, commit }) {
-      if (state.query === '' && state.rootIds.length !== 0) {
-        return
-      }
-
       commit('loading', true)
+
+      const params = state.query ? { query: state.query } : {}
 
       api
         .get('area', {
-          params: { query: state.query }
+          params
         })
         .then(({ data }) => {
           data.areas.forEach((area) => {
@@ -221,10 +219,18 @@ const area: Module<AreaState, RootState> = {
       return state.byIds[id]
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    getFiltered: (state: AreaState, _: any, __: RootState, rootGetters: any) => (id: number) => {
-      const currentArea = state.byIds[id]
+    getFiltered: (state: AreaState, _: any, __: RootState, rootGetters: any) => (id: number|null) => {
+      let areaIds: number[]|string[]
 
-      const areaIds = currentArea ? currentArea.areas : Object.keys(state.byIds)
+      if (id) {
+        areaIds = state.byIds[id].areas
+      } else {
+        if (state.query) {
+          areaIds = Object.keys(state.byIds)
+        } else {
+          return []
+        }
+      }
 
       const areas: Array<Area> = []
 
