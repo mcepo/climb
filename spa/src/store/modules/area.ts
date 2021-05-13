@@ -42,12 +42,18 @@ const area: Module<AreaState, RootState> = {
     ...entityMutations,
     appendArea (state: AreaState, { parentId, areaId }) {
       if (parentId) {
-        if (state.byIds[parentId] && state.byIds[parentId].areas) {
+        const parent = state.byIds[parentId]
+        if (parent && parent.areas && !parent.areas.includes(areaId)) {
           state.byIds[parentId].areas.push(areaId)
         }
-      } else {
-        if (!state.rootIds.includes(areaId)) { state.rootIds.push(areaId) }
       }
+    },
+    appendRootIds (state: AreaState, { areaId }) {
+      const area = state.byIds[areaId]
+
+      if (!area || area.parent_id !== null) return
+
+      if (!state.rootIds.includes(areaId)) { state.rootIds.push(areaId) }
     },
     appendImage (state: AreaState, payload) {
       state.byIds[payload.id].images.push(payload.imageId)
@@ -193,7 +199,9 @@ const area: Module<AreaState, RootState> = {
         .then(({ data }) => {
           data.areas.forEach((area) => {
             commit('add', area)
-            commit('appendArea', { areaId: area.id, parentId: area.parent_id })
+            if (area.parent_id === null) {
+              commit('appendRootIds', { areaId: area.id })
+            }
           })
 
           drawers.left = true
