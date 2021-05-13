@@ -42,11 +42,11 @@ export default {
     AreaListItem,
     FilteringAlert
   },
-
-  beforeMount () {
-    this.areaQueryString = ''
+  data () {
+    return {
+      areaQueryString: null
+    }
   },
-
   computed: {
     wasFiltered () {
       const filters = this.$store.state.route.filters
@@ -65,26 +65,8 @@ export default {
         )
     },
     ...mapState({
-      loading: s => s.area.loading,
-      query: s => s.area.query
+      loading: s => s.area.loading
     }),
-    areaQueryString: {
-      get () {
-        return this.query
-      },
-      set (query) {
-        query = query !== '' ? query : null
-
-        this.$store.commit('area/setQueryString', query)
-        // remotely searching areas only if
-        // there is no open area
-        // because if an area is open
-        // all the subareas are already fetched
-        if (!this.area && query) {
-          this.loadAreasOnce()
-        }
-      }
-    },
     areas () {
       if (this.areaIds) {
         const areas = []
@@ -98,14 +80,22 @@ export default {
         return areas
       }
 
-      return this.$store.getters['area/getFiltered'](this.area?.id)
+      return this.$store.getters['area/getFiltered'](this.area?.id, this.areaQueryString)
+    }
+  },
+  watch: {
+    areaQueryString (newQuery) {
+      newQuery = newQuery === '' ? null : newQuery
+      if (!this.area) {
+        this.loadAreasOnce(newQuery)
+      }
     }
   },
   methods: {
-    loadAreasOnce () {
+    loadAreasOnce (query) {
       this.$store.commit('area/loading', true)
       this.$options.cancelToken && clearTimeout(this.$options.cancelToken)
-      this.$options.cancelToken = setTimeout(() => this.$store.dispatch('area/fetchMany'), 500)
+      this.$options.cancelToken = setTimeout(() => this.$store.dispatch('area/fetchMany', query), 500)
     }
   }
 }

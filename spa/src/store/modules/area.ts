@@ -16,7 +16,6 @@ export interface AreaState {
   loading: boolean;
   rootIds: Array<number>;
   recentlyViewedIds: Array<number>;
-  query: string|null;
 }
 
 const namespaced = true
@@ -37,8 +36,7 @@ const area: Module<AreaState, RootState> = {
     allIds: [],
     loading: true,
     rootIds: [],
-    recentlyViewedIds: [],
-    query: null
+    recentlyViewedIds: []
   },
   mutations: {
     ...entityMutations,
@@ -89,9 +87,6 @@ const area: Module<AreaState, RootState> = {
       }
 
       state.recentlyViewedIds = recentlyViewedIds
-    },
-    setQueryString (state: AreaState, query) {
-      state.query = query
     }
   },
   actions: {
@@ -186,10 +181,10 @@ const area: Module<AreaState, RootState> = {
           commit('loading', false)
         })
     },
-    fetchMany ({ state, commit }) {
+    fetchMany ({ commit }, query: string|null) {
       commit('loading', true)
 
-      const params = state.query ? { query: state.query } : {}
+      const params = query ? { query } : {}
 
       api
         .get('area', {
@@ -219,13 +214,13 @@ const area: Module<AreaState, RootState> = {
       return state.byIds[id]
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    getFiltered: (state: AreaState, _: any, __: RootState, rootGetters: any) => (id: number|null) => {
+    getFiltered: (state: AreaState, _: any, __: RootState, rootGetters: any) => (id: number|null, query: string|null) => {
       let areaIds: number[]|string[]
 
       if (id) {
         areaIds = state.byIds[id].areas
       } else {
-        if (state.query) {
+        if (query) {
           areaIds = Object.keys(state.byIds)
         } else {
           return []
@@ -239,7 +234,7 @@ const area: Module<AreaState, RootState> = {
       areaIds.forEach((id) => {
         const area = state.byIds[id]
 
-        areaPassesFilter(area, routeFilters, state.query) && areas.push(area)
+        areaPassesFilter(area, routeFilters, query) && areas.push(area)
       })
 
       return areas
