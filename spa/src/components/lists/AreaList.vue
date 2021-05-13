@@ -43,6 +43,10 @@ export default {
     FilteringAlert
   },
 
+  beforeMount () {
+    this.areaQueryString = ''
+  },
+
   computed: {
     wasFiltered () {
       const filters = this.$store.state.route.filters
@@ -94,7 +98,7 @@ export default {
         return areas
       }
 
-      return this.$store.getters['area/getFiltered']()
+      return this.$store.getters['area/getFiltered'](this.area?.id)
     }
   },
   methods: {
