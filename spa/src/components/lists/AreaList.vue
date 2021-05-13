@@ -74,7 +74,6 @@ export default {
       }
     },
     areas () {
-
       if (this.area) {
         return this.$store.getters['area/getFiltered'](this.area.id)
       }

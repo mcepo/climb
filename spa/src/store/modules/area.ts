@@ -92,7 +92,7 @@ const area: Module<AreaState, RootState> = {
     },
     setQueryString (state: AreaState, query) {
       state.query = query
-    },
+    }
   },
   actions: {
     storeRelation ({ commit }, { items, fun, root = false }) {
