@@ -44,7 +44,7 @@ const area: Module<AreaState, RootState> = {
     ...entityMutations,
     appendArea (state: AreaState, { parentId, areaId }) {
       if (parentId) {
-        if(state.byIds[parentId] && state.byIds[parentId].areas) {
+        if (state.byIds[parentId] && state.byIds[parentId].areas) {
           state.byIds[parentId].areas.push(areaId)
         }
       } else {
@@ -89,7 +89,10 @@ const area: Module<AreaState, RootState> = {
       }
 
       state.recentlyViewedIds = recentlyViewedIds
-    }
+    },
+    setQueryString (state: AreaState, query) {
+      state.query = query
+    },
   },
   actions: {
     storeRelation ({ commit }, { items, fun, root = false }) {
@@ -183,9 +186,8 @@ const area: Module<AreaState, RootState> = {
           commit('loading', false)
         })
     },
-    fetchMany ({ state, commit }, query) {
-
-      if (!query && state.rootIds.length !== 0) {
+    fetchMany ({ state, commit }) {
+      if (state.query === '' && state.rootIds.length !== 0) {
         return
       }
 
@@ -193,8 +195,8 @@ const area: Module<AreaState, RootState> = {
 
       api
         .get('area', {
-            params: {query}
-          })
+          params: { query: state.query }
+        })
         .then(({ data }) => {
           data.areas.forEach((area) => {
             commit('add', area)
@@ -229,9 +231,8 @@ const area: Module<AreaState, RootState> = {
       const routeFilters = rootGetters['route/filters']
 
       areaIds.forEach((id) => {
+        const area = state.byIds[id]
 
-          const area = state.byIds[id]
-  
         areaPassesFilter(area, routeFilters, state.query) && areas.push(area)
       })
 

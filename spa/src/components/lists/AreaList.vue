@@ -22,9 +22,7 @@
 <script>
 import AreaListItem from '../listItems/AreaListItem'
 import FilteringAlert from '../common/FilteringAlert'
-import RouteFiltersButton from '../buttons/RouteFiltersButton'
 import { mapState } from 'vuex'
-
 
 export default {
   cancelToken: null,
@@ -42,15 +40,9 @@ export default {
   },
   components: {
     AreaListItem,
-    RouteFiltersButton,
     FilteringAlert
   },
 
-  data() {
-    return {
-      query: ''
-    }
-  },
   computed: {
     wasFiltered () {
       const filters = this.$store.state.route.filters
@@ -69,25 +61,26 @@ export default {
         )
     },
     ...mapState({
-      loading: s => s.area.loading
+      loading: s => s.area.loading,
+      query: s => s.area.query
     }),
     areaQueryString: {
       get () {
         return this.query
       },
       set (query) {
-        this.query = query
-        this.loadAreasOnce(query)
+        this.$store.commit('area/setQueryString', query)
+        this.loadAreasOnce()
       }
     },
     areas () {
 
-      if(this.areaQueryString && this.areaQueryString !== '') {
-        return this.$store.getters['area/getFiltered']();
-      }
-
       if (this.area) {
         return this.$store.getters['area/getFiltered'](this.area.id)
+      }
+
+      if (this.areaQueryString && this.areaQueryString !== '') {
+        return this.$store.getters['area/getFiltered']()
       }
 
       if (this.areaIds) {
@@ -106,9 +99,9 @@ export default {
     }
   },
   methods: {
-    loadAreasOnce (query) {
+    loadAreasOnce () {
       this.$options.cancelToken && clearTimeout(this.$options.cancelToken)
-      this.$options.cancelToken = setTimeout(() => this.$store.dispatch('area/fetchMany', query), 1000)
+      this.$options.cancelToken = setTimeout(() => this.$store.dispatch('area/fetchMany'), 1000)
     }
   }
 }
