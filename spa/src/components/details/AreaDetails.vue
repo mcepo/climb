@@ -4,10 +4,19 @@
     <template slot="item-details">
       <area-stats :item='area'></area-stats>
       <v-divider></v-divider>
-      <orientations-chart v-if='area.orientations' :orientations='area.orientations'></orientations-chart>
-      <statistics-chart :type='type' :stats='stats' v-for="(stats, type) in area.grade_stats" :key="type + area.id"></statistics-chart>
-      <length-chart v-if='area.length_stats' :stats='area.length_stats' :key="'length' + area.id"></length-chart>
-      <moderator-list :moderators='moderators' :area='area'></moderator-list>
+      <v-expansion-panels flat>
+        <v-expansion-panel>
+          <v-expansion-panel-header class='pa-0'>
+            <v-card-subtitle class='pa-0'>Statistics</v-card-subtitle>
+          </v-expansion-panel-header>
+          <v-expansion-panel-content>
+            <orientations-chart v-if='area.orientations' :orientations='area.orientations'></orientations-chart>
+            <statistics-chart :type='type' :stats='stats' v-for="(stats, type) in area.grade_stats" :key="type + area.id"></statistics-chart>
+            <length-chart v-if='area.length_stats' :stats='area.length_stats' :key="'length' + area.id"></length-chart>
+            <moderator-list :moderators='moderators' :area='area'></moderator-list>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+    </v-expansion-panels>
     </template>
   </details-layout>
 </template>
