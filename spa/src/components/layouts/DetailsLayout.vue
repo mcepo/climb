@@ -15,7 +15,7 @@
         </v-btn>
         <item-menu v-if='checkAuth' :item='item' :type='type'></item-menu>
       </v-layout>
-      <v-card text>
+      <v-card text flat>
         <v-card-text>
           <slot name="item-details" />
         </v-card-text>

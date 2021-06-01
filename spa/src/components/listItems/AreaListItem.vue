@@ -10,6 +10,14 @@
     </v-list-item-icon>
     <v-list-item-content>
       <v-list-item-title>{{area.name}}</v-list-item-title>
+      <v-list-item-subtitle>
+        <div style='display:inline; margin-right:20px' title='Topos coverage'>
+          <v-icon>timeline</v-icon><b>{{ (area.tag_coverage * 100).toFixed(2) }} %</b>
+        </div>
+        <div style='display:inline; margin-right:20px' title='Number of photos'>
+          <v-icon>photo_library</v-icon><b>{{ area.image_count }}</b>
+        </div>
+      </v-list-item-subtitle>
     </v-list-item-content>
     <v-list-item-action v-if='taggable'>
       <tag-control :type="type" :item="area"></tag-control>
