@@ -10,6 +10,7 @@ use App\Models\Grade;
 use App\Models\Tag;
 use App\Models\Image;
 use App\Models\Trail;
+use App\Models\Pitch;
 
 class AreaUpdateService
 {
@@ -159,21 +160,26 @@ class AreaUpdateService
 
   private function _getTagCoverage($path)
   {
-    $tagsCount = Tag::descendents($path)->count();
+    $imageToposCount = Tag::descendents($path)
+        ->whereNotNull('image_id')
+        ->where(function($query){
+            $query->where('tagged_type', 'route')
+                ->orWhere('tagged_type', 'pitch');
+    })->count();
 
-    $areaCount = Area::descendents($path)->count();
+    $pitchCount = Pitch::descendents($path)->count();
 
-    $trailCount = Trail::descendents($path)->count();
-
-    $imageCount = Image::descendents($path)->count();
-
-    // dividing multipitch count by 2 because usually there is no need to tag entrance 
-    // to every single route because some route entrances are close together
-    $routeMultiPitchCount = Route::where('type_id', 0)->descendents($path)->count() / 2;
+    // multipitch routes without added pitches
+    // summing their lengths and then dividing it by 30 to get a ruff estimate on the number of pitches
+    $routeMultiPitchCount = Route::where('type_id', '=', 0)->descendents($path)->doesntHave('pitches')->sum('length') / 30;
 
     $routeSinglePitchCount = Route::where('type_id', '!=', 0)->descendents($path)->count();
+    
+    if($imageToposCount === 0 || ($pitchCount === 0 && $routeSinglePitchCount === 0 && $routeMultiPitchCount === 0)) {
+        return 0;
+    }
 
-    return round($tagsCount / ($areaCount + $trailCount + $routeMultiPitchCount + $routeSinglePitchCount + $imageCount + 1), 4);
+    return round($imageToposCount / ($pitchCount + $routeSinglePitchCount + $routeMultiPitchCount), 4);
   }
 
   private function _getImageCount($path)
