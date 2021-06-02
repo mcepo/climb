@@ -55,7 +55,7 @@ const auth: Module<AuthState, RootState> = {
       })
     },
     authorizationHandler ({ state, dispatch }, { isAuthorized }) {
-      return new Promise((resolve, reject) => {
+      return new Promise<void>((resolve, reject) => {
         if (!state.user) {
           reject(Error('401'))
           return

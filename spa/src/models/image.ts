@@ -5,7 +5,7 @@ export interface Image {
   size: number[];
   captured_type: 'area'|'route'|'pitch'|'trail';
   captured_id: number;
-  captured: Area|Route|Trail|Pitch;
+  captured?: Area|Route|Trail|Pitch;
   tags: Tag[];
   map_tag: Tag;
   path: string;
@@ -15,7 +15,7 @@ export interface Image {
   boundary: number[];
 
   // routes for the tagged pitches
-  routes: Route[];
+  routes?: Route[];
 
   owner_id: number;
 
