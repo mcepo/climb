@@ -237,6 +237,8 @@ export class LayerService {
 
     const layerGroupBoundsSurface = this.calculateSurface(layerGroupBounds)
 
+    console.log(layerGroupBoundsSurface, this._lastSurface, Math.abs(this._lastSurface - layerGroupBoundsSurface))
+
     let zoom = 18
 
     if (this._features.size === 1) {
@@ -249,7 +251,7 @@ export class LayerService {
 
     if (!this._lastBounds ||
         !this._lastBounds.overlaps(layerGroupBounds) ||
-        Math.abs(this._lastSurface - layerGroupBoundsSurface) > 0.000001
+        Math.abs(this._lastSurface - layerGroupBoundsSurface) > 0.0001
     ) {
       this._map.fitBounds(layerGroupBounds, {
         padding: [100, 100],
