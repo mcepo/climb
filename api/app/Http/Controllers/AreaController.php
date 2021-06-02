@@ -18,7 +18,7 @@ class AreaController extends Controller
         $query = Area::with('mapTag');
 
         if($request->has('query') && $request->get('query') != '') {
-            $query = $query->filter($request->all());
+            $query = $query->filter($request->all())->limit(10);
         } else {
             $query = $query->countries();
         }
