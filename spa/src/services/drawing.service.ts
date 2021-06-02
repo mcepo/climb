@@ -132,7 +132,7 @@ class DrawingService {
       .dispatch('auth/authorize', tag.id ? tag : null)
       .then(() => {
         geolocationService.getCurrentLocation(
-          (position: Position) => {
+          (position: GeolocationPosition) => {
             if (!position) return
 
             if (position.coords.accuracy > 50) {

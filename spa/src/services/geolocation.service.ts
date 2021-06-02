@@ -5,7 +5,7 @@ class GeolocationService {
 
   watchId: number | null;
 
-  lastPosition: Position | undefined;
+  lastPosition: GeolocationPosition | undefined;
 
   positionOptions: PositionOptions = {
     enableHighAccuracy: true,
@@ -32,7 +32,7 @@ class GeolocationService {
     }
 
     navigator.geolocation.getCurrentPosition(
-      (position) => {
+      (position: GeolocationPosition) => {
         this._updatedMessage(position)
         callback(position)
       },
@@ -64,7 +64,7 @@ class GeolocationService {
     )
   }
 
-  resolveResponse (position?: Position) {
+  resolveResponse (position?: GeolocationPosition) {
     this.watchCallbacks.forEach((callback) => {
       callback(position)
     })
@@ -94,7 +94,7 @@ class GeolocationService {
     )
   }
 
-  _updatedMessage (position: Position) {
+  _updatedMessage (position: GeolocationPosition) {
     let accuMsg: string, type: string
 
     if (position.coords.accuracy > 100) {
