@@ -89,6 +89,13 @@ export default {
       if (!this.area) {
         this.loadAreasOnce(newQuery)
       }
+    },
+    $route () {
+      // when going from one area to another vue recycles the component
+      // leaving the value of areaQueryString
+      // which produces a side effect that 
+      // subareas are filtered on newly opened area
+      this.areaQueryString = null
     }
   },
   methods: {
