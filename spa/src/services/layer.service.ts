@@ -210,19 +210,26 @@ export class LayerService {
 
         // adding layer to map
         this._layerGroup.addLayer(layer)
+      }
+    })
 
+    if (store.getters.imageOpen) {
+      // drawing anchors after tags
+      // because in svg the draw order matters
+      // in order for anchors to be on top of routes/pitches
+      // they need to be added after tags
+      this._features.forEach((feature: Feature, key: string) => {
         if (
-          store.getters.imageOpen &&
-          (tag.tagged_type === ItemType.Route ||
-            tag.tagged_type === ItemType.Pitch)
+          (feature.tag.tagged_type === ItemType.Route ||
+            feature.tag.tagged_type === ItemType.Pitch)
         ) {
-          const anchor = this.createAnchor(tag.geometry.coordinates)
+          const anchor = this.createAnchor(feature.tag.geometry.coordinates)
 
           this._anchors.set(key, anchor)
           this._layerGroup.addLayer(anchor)
         }
-      }
-    })
+      })
+    }
 
     if (store.getters.imageOpen) {
       return
@@ -236,8 +243,6 @@ export class LayerService {
     const layerGroupBounds = this._layerGroup.getBounds()
 
     const layerGroupBoundsSurface = this.calculateSurface(layerGroupBounds)
-
-    console.log(layerGroupBoundsSurface, this._lastSurface, Math.abs(this._lastSurface - layerGroupBoundsSurface))
 
     let zoom = 18
 
