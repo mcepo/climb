@@ -6,35 +6,18 @@ TODO: clear state storage on service worker update
 TODO: zoom in on mobile phone on drawer will remove nav bar from view and on map 
 you can't see nav bar
 
-TODO: when i close an image i get zoomed all the way out
-  + refactor layer service so tag drawing gets called as a function
-  + how and when a zoom and map location should change
-
 -- FEATURES --
-
-TODO: lokacije ruta se pokazuju na karti samo kad je ruta direktno ispod otvorenog područja
 
 TODO: color coding route and area tags
 TODO: add scale with grades to display
 
-TODO: if an image is tagged somewhere then don't show that image in image list on areas
-
-TODO: add notification when work is syncronized
-
 TODO: hide options that you can't use if offline ?
-
--- UPGRADING --
-
-TODO: packages need upgrade frontend and backend
 
 -- OPTIMIZATION --
 
 TODO: serve static files directly from nginx without calling php at all
 
 TODO: list reduce amount of html and css on them (in generale try to reduce amount html on frontend)
-
-TODO: from store remove state variable, like drawer open/closed, highlighting ...
-
 
 -- OFFLINE MODE PRECACHE --
 
