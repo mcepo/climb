@@ -93,7 +93,7 @@ export default {
     $route () {
       // when going from one area to another vue recycles the component
       // leaving the value of areaQueryString
-      // which produces a side effect that 
+      // which produces a side effect that
       // subareas are filtered on newly opened area
       this.areaQueryString = null
     }
