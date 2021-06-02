@@ -132,7 +132,8 @@ class DrawingService {
       .dispatch('auth/authorize', tag.id ? tag : null)
       .then(() => {
         geolocationService.getCurrentLocation(
-          (position: GeolocationPosition) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (position: any) => {
             if (!position) return
 
             if (position.coords.accuracy > 50) {

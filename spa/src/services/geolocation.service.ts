@@ -5,7 +5,8 @@ class GeolocationService {
 
   watchId: number | null;
 
-  lastPosition: GeolocationPosition | undefined;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  lastPosition: any | undefined;
 
   positionOptions: PositionOptions = {
     enableHighAccuracy: true,
@@ -32,7 +33,8 @@ class GeolocationService {
     }
 
     navigator.geolocation.getCurrentPosition(
-      (position: GeolocationPosition) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (position: any) => {
         this._updatedMessage(position)
         callback(position)
       },
@@ -50,7 +52,8 @@ class GeolocationService {
     }
 
     this.watchId = navigator.geolocation.watchPosition(
-      (position) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (position: any) => {
         this._updatedMessage(position)
         this.lastPosition = position
         this.resolveResponse(position)
@@ -64,7 +67,8 @@ class GeolocationService {
     )
   }
 
-  resolveResponse (position?: GeolocationPosition) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  resolveResponse (position?: any) {
     this.watchCallbacks.forEach((callback) => {
       callback(position)
     })
@@ -94,7 +98,8 @@ class GeolocationService {
     )
   }
 
-  _updatedMessage (position: GeolocationPosition) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  _updatedMessage (position: any) {
     let accuMsg: string, type: string
 
     if (position.coords.accuracy > 100) {
