@@ -13,6 +13,9 @@ TODO: add scale with grades to display
 
 TODO: hide options that you can't use if offline ?
 
+TODO: in area/route details put image with the most topos 
+    in the header under name
+
 -- OPTIMIZATION --
 
 TODO: serve static files directly from nginx without calling php at all
