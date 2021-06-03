@@ -25,9 +25,9 @@ module.exports = {
     manifestOptions: {
       // eslint-disable-next-line @typescript-eslint/camelcase
       background_color: '#42b983',
-      name: 'Climbers guide',
+      name: 'ClimbLine',
       // eslint-disable-next-line @typescript-eslint/camelcase
-      short_name: 'Climbers guide',
+      short_name: 'ClimbLine',
       description: 'Community mainteined online climbers guide. Complete with topo images and gps locations',
       // eslint-disable-next-line @typescript-eslint/camelcase
       start_url: '/',
