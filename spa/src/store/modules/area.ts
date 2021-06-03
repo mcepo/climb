@@ -42,10 +42,18 @@ const area: Module<AreaState, RootState> = {
     ...entityMutations,
     appendArea (state: AreaState, { parentId, areaId }) {
       if (parentId) {
-        state.byIds[parentId].areas.push(areaId)
-      } else {
-        if (!state.rootIds.includes(areaId)) { state.rootIds.push(areaId) }
+        const parent = state.byIds[parentId]
+        if (parent && parent.areas && !parent.areas.includes(areaId)) {
+          state.byIds[parentId].areas.push(areaId)
+        }
       }
+    },
+    appendRootIds (state: AreaState, { areaId }) {
+      const area = state.byIds[areaId]
+
+      if (!area || area.parent_id !== null) return
+
+      if (!state.rootIds.includes(areaId)) { state.rootIds.push(areaId) }
     },
     appendImage (state: AreaState, payload) {
       state.byIds[payload.id].images.push(payload.imageId)
@@ -179,19 +187,21 @@ const area: Module<AreaState, RootState> = {
           commit('loading', false)
         })
     },
-    fetchRootAreas ({ state, commit }) {
-      if (state.rootIds.length !== 0) {
-        return
-      }
-
+    fetchMany ({ commit }, query: string|null) {
       commit('loading', true)
 
+      const params = query ? { query } : {}
+
       api
-        .get('area')
+        .get('area', {
+          params
+        })
         .then(({ data }) => {
           data.areas.forEach((area) => {
             commit('add', area)
-            commit('appendArea', { areaId: area.id, parentId: null })
+            if (area.parent_id === null) {
+              commit('appendRootIds', { areaId: area.id })
+            }
           })
 
           drawers.left = true
@@ -212,21 +222,27 @@ const area: Module<AreaState, RootState> = {
       return state.byIds[id]
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    getFiltered: (state: AreaState, _: any, __: RootState, rootGetters: any) => (id: number) => {
-      const currentArea = state.byIds[id]
+    getFiltered: (state: AreaState, _: any, __: RootState, rootGetters: any) => (id: number|null, query: string|null) => {
+      let areaIds: number[]|string[]
 
-      if (!currentArea) {
-        return []
+      if (id) {
+        areaIds = state.byIds[id].areas
+      } else {
+        if (query) {
+          areaIds = Object.keys(state.byIds)
+        } else {
+          return []
+        }
       }
-
-      const routeFilters = rootGetters['route/filters']
 
       const areas: Array<Area> = []
 
-      currentArea.areas.forEach((id) => {
+      const routeFilters = rootGetters['route/filters']
+
+      areaIds.forEach((id) => {
         const area = state.byIds[id]
 
-        area && areaPassesFilter(area, routeFilters) && areas.push(area)
+        areaPassesFilter(area, routeFilters, query) && areas.push(area)
       })
 
       return areas

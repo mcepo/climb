@@ -24,6 +24,13 @@ class AreaObserver
         }
     }
 
+    public function saved(Area $area) {
+        // if area name changed update ts vector
+        if ($area->isDirty('name')) {
+            $area->updateTsVector();
+        }
+    }
+
     public function updated(Area $area)
     {
         if ($area->isDirty('parent_id')) {

@@ -1,57 +1,25 @@
 
 -- FIXES --
 
-TODO: optimization, route list specially 
-
-TODO: lokacije ruta se pokazuju na karti samo kad je ruta direktno ispod otvorenog područja
+TODO: clear state storage on service worker update
 
 TODO: zoom in on mobile phone on drawer will remove nav bar from view and on map 
 you can't see nav bar
 
-TODO: when i close an image i get zoomed all the way out
-  + refactor layer service so tag drawing gets called as a function
-  + how and when a zoom and map location should change
-
 -- FEATURES --
-
-TODO HOT: area search box
 
 TODO: color coding route and area tags
 TODO: add scale with grades to display
 
-TODO: if an image is tagged somewhere then don't show that image in image list on areas
-
-TODO: add recursive loading from climbing site all the way to sector regardless of what is open
-  same from mountain to sector ?
-
-TODO: add notification when work is syncronized
-
 TODO: hide options that you can't use if offline ?
-
--- OFFLINE PRECACHE on button click --
-
-TODO: add store for offline use button, then cache:
-  - store for offline use -
-  - only for area types: Climbing site, Mountain, Crag
-  - areas - all info + trails + images
-  - routes - all info + images + pitches
-  - images - all info
-  - map tiles for that area
-    - need area borders for map tiles to load + zoom every second zoom starting from most zoomed
-  
-  now i am storing everything as the user is surfing
-
--- UPGRADING --
-
-TODO: upgrade frontend packages
-TODO: upgrade backend packages
-TODO: investigate substituding store for composition api
 
 -- OPTIMIZATION --
 
--- BIG MAYBE -- 
+TODO: serve static files directly from nginx without calling php at all
 
-TODO: add backend cache for area index, area get, route index?, route get, image tags 
-  add static files and serve them directly from nginx without calling php at all
+TODO: list reduce amount of html and css on them (in generale try to reduce amount html on frontend)
 
-TODO: mapper for network data transfer, lower payload size
+-- OFFLINE MODE PRECACHE --
+
+On button click user can precache all the info images included into localstorage
+so when offline you can view the entire area information

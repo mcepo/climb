@@ -2,6 +2,7 @@
   <v-container fluid flat style='padding: 0px 0px 300px 0px'>
     <v-layout column>
       <v-layout class='pa-2 align-center'>
+          <back-button></back-button>
         <v-layout column class='pl-2'>
           <v-card-subtitle class='pa-0'>{{itemType}}</v-card-subtitle>
           <v-card-title class='pa-0'>
@@ -15,7 +16,7 @@
         </v-btn>
         <item-menu v-if='checkAuth' :item='item' :type='type'></item-menu>
       </v-layout>
-      <v-card text>
+      <v-card text flat>
         <v-card-text>
           <slot name="item-details" />
         </v-card-text>
@@ -30,7 +31,7 @@
         <v-tabs-items v-model="tabs" class="mt-2">
 
           <v-tab-item v-if="hasAreas" value="areas">
-            <area-list :area="item" />
+            <area-list :area="item" :searchable='item.areas.length > 10'/>
           </v-tab-item>
 
           <v-tab-item v-if="hasRoutes" value="routes">
@@ -62,6 +63,7 @@ import { mapActions, mapGetters } from 'vuex'
 import typeService from '../../services/type.service'
 import GetDirections from '../buttons/GetDirections'
 import { getUrl } from '../../router'
+import BackButton from '../buttons/BackButton'
 
 import drawers from '../../services/drawer.service'
 
@@ -118,7 +120,8 @@ export default {
     ExternalLinkList,
     PitchList,
     ItemMenu,
-    GetDirections
+    GetDirections,
+    BackButton
   }
 }
 </script>

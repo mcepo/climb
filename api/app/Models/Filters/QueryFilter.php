@@ -4,15 +4,25 @@ namespace App\Models\Filters;
 
 trait QueryFilter
 {
+
+  private function _sanitize($term) 
+  {
+      return preg_replace("/(\\,|\\.|\'|\")+/", "", trim($term));
+  }
+
   public function filterQuery($query, $term)
   {
 
-    if($term == '') return $query;
+    $sanitizedTerm = $this->_sanitize($term);
 
-    $term = str_replace(' ', ' & ', trim($term));
-    $term .= ':*';
-    return $query
-      ->whereRaw('ts_vector @@ to_tsquery(?)', [$term])
-      ->orderByRaw('ts_rank(ts_vector, to_tsquery(?)) DESC', [$term]);
+    if($sanitizedTerm == '') return $query;
+
+    $variableWordEnd = preg_replace('/\s+/', ':* ', $sanitizedTerm). ":*";
+    $looseSearch = preg_replace('/\s/', ' | ', trim($variableWordEnd));
+    $query
+      ->whereRaw("ts_vector @@ to_tsquery('simple', '".$looseSearch."')")
+      ->orderByRaw("ts_rank_cd(ts_vector, to_tsquery('".$looseSearch."')) desc");
+
+      return $query;
   }
 }

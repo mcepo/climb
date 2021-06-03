@@ -14,7 +14,7 @@
     </v-layout>
     <v-layout row>
       <div class="stat_name">
-        <strong>Tag coverage:</strong>
+        <strong>Topos coverage:</strong>
       </div>
       <div>{{ (item.tag_coverage * 100).toFixed(2) }} %</div>
     </v-layout>

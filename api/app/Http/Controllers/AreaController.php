@@ -13,10 +13,18 @@ class AreaController extends Controller
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        $query = Area::with('mapTag');
+
+        if($request->has('query') && $request->get('query') != '') {
+            $query = $query->filter($request->all())->limit(20);
+        } else {
+            $query = $query->countries();
+        }
+
         return [
-            'areas' => Area::roots()->with('mapTag')->get()
+            'areas' => $query->get()
         ];
     }
 

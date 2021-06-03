@@ -47,6 +47,7 @@ export class LayerService {
   private _selected: Array<string>
 
   private _lastBounds: LatLngBounds | undefined
+  private _lastSurface: number
 
   constructor () {
     this._layerGroup = new FeatureGroup()
@@ -58,6 +59,7 @@ export class LayerService {
     this._tooltipsClosed = false
 
     this._lastBounds = undefined
+    this._lastSurface = 1000
 
     this.registerHighlightWatch()
   }
@@ -146,8 +148,6 @@ export class LayerService {
     })
 
     this._anchors.clear()
-
-    this._lastBounds = undefined
   }
 
   hideTag (key: string) {
@@ -210,19 +210,26 @@ export class LayerService {
 
         // adding layer to map
         this._layerGroup.addLayer(layer)
+      }
+    })
 
+    if (store.getters.imageOpen) {
+      // drawing anchors after tags
+      // because in svg the draw order matters
+      // in order for anchors to be on top of routes/pitches
+      // they need to be added after tags
+      this._features.forEach((feature: Feature, key: string) => {
         if (
-          store.getters.imageOpen &&
-          (tag.tagged_type === ItemType.Route ||
-            tag.tagged_type === ItemType.Pitch)
+          (feature.tag.tagged_type === ItemType.Route ||
+            feature.tag.tagged_type === ItemType.Pitch)
         ) {
-          const anchor = this.createAnchor(tag.geometry.coordinates)
+          const anchor = this.createAnchor(feature.tag.geometry.coordinates)
 
           this._anchors.set(key, anchor)
           this._layerGroup.addLayer(anchor)
         }
-      }
-    })
+      })
+    }
 
     if (store.getters.imageOpen) {
       return
@@ -235,6 +242,8 @@ export class LayerService {
     // setting map view point on the layers
     const layerGroupBounds = this._layerGroup.getBounds()
 
+    const layerGroupBoundsSurface = this.calculateSurface(layerGroupBounds)
+
     let zoom = 18
 
     if (this._features.size === 1) {
@@ -245,14 +254,24 @@ export class LayerService {
       })
     }
 
-    if (!this._lastBounds || (!this._lastBounds.equals(layerGroupBounds))) {
+    if (!this._lastBounds ||
+        !this._lastBounds.overlaps(layerGroupBounds) ||
+        Math.abs(this._lastSurface - layerGroupBoundsSurface) > 0.0001
+    ) {
       this._map.fitBounds(layerGroupBounds, {
         padding: [100, 100],
         maxZoom: zoom
       })
 
       this._lastBounds = layerGroupBounds
+      this._lastSurface = layerGroupBoundsSurface
     }
+  }
+
+  calculateSurface (bounds: LatLngBounds) {
+    const x = bounds.getWest() - bounds.getEast()
+    const y = bounds.getNorth() - bounds.getSouth()
+    return Math.abs(x * y)
   }
 
   setDefaultStyle (key: string, feature: Feature) {

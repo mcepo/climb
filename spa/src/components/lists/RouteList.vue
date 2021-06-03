@@ -6,7 +6,7 @@
         <route-filters-button icon></route-filters-button>
       </v-list-item-icon>
       <v-list-item-content>
-        <v-text-field label="Search" v-model="routeQueryString"></v-text-field>
+        <v-text-field label="Search" v-model="routeQueryString" :loading='loading'></v-text-field>
       </v-list-item-content>
     </v-list-item>
     <v-list-item v-if='wasFiltered'>

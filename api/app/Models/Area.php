@@ -13,6 +13,7 @@ use App\Models\Traits\HasAncestors;
 use App\Models\Traits\HasOwner;
 use App\Models\Traits\IsDescendent;
 use Spatie\Activitylog\Traits\LogsActivity;
+use App\Models\Traits\HasTsVector;
 
 use App\User;
 
@@ -25,6 +26,7 @@ class Area extends Model
         QueryFilter,
         AreaFilters,
         HasAncestors,
+        HasTsVector,
         IsDescendent,
         HasOwner,
         LogsActivity;
@@ -52,7 +54,8 @@ class Area extends Model
         'min_altitude',
         'max_altitude',
         'created_at',
-        'updated_at'
+        'updated_at',
+        'ts_vector'
     ];
 
     protected $appends = [
@@ -100,7 +103,7 @@ class Area extends Model
         return $this->path ? implode('.', [$this->path, $this->id]) : $this->id;
     }
 
-    public static function scopeRoots($query)
+    public static function scopeCountries($query)
     {
         return $query->whereNull('parent_id');
     }

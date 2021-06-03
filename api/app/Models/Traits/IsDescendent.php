@@ -6,6 +6,8 @@ trait IsDescendent
 {
   public function scopeDescendents($query, $path)
   {
-      return $query->where('path', $path)->orWhere('path', 'like', $path . '.%');
+      $query->where(function($query) use ($path){
+        $query->where('path', $path)->orWhere('path', 'like', $path . '.%');
+      });
   }
 }
