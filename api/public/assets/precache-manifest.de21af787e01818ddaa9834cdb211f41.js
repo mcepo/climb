@@ -56,7 +56,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/fonts/MaterialIcons-Regular.da4ea5cd.ttf"
   },
   {
-    "revision": "49e23b1d6386e5f55e972ba823a8a9b3",
+    "revision": "5d351d4bb4a1902c671b93d7002ed32b",
     "url": "/assets/index.html"
   },
   {
@@ -120,7 +120,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/js/route.form.8c48eac9.js"
   },
   {
-    "revision": "3afbc1e9a2d88bdb515742f0cbf727ed",
+    "revision": "eb825243df1e29bc6401e6e92866dde9",
     "url": "/assets/manifest.json"
   },
   {
