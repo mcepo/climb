@@ -229,17 +229,20 @@ export class LayerService {
           this._layerGroup.addLayer(anchor)
         }
       })
-    }
 
-    if (store.getters.imageOpen) {
       return
     }
+
+    this.setMapViewpoint()
+  }
+
+  setMapViewpoint () {
+    // setting map viewpoint depending on the layers size
 
     if (this._layerGroup.getLayers().length === 0) {
       return
     }
 
-    // setting map view point on the layers
     const layerGroupBounds = this._layerGroup.getBounds()
 
     const layerGroupBoundsSurface = this.calculateSurface(layerGroupBounds)
@@ -258,14 +261,14 @@ export class LayerService {
         !this._lastBounds.overlaps(layerGroupBounds) ||
         Math.abs(this._lastSurface - layerGroupBoundsSurface) > 0.0001
     ) {
-      this._map.fitBounds(layerGroupBounds, {
-        padding: [100, 100],
-        maxZoom: zoom
-      })
-
       this._lastBounds = layerGroupBounds
       this._lastSurface = layerGroupBoundsSurface
     }
+
+    this._map.fitBounds(this._lastBounds, {
+      padding: [100, 100],
+      maxZoom: zoom
+    })
   }
 
   calculateSurface (bounds: LatLngBounds) {
