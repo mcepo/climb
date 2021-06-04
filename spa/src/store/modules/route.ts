@@ -180,7 +180,7 @@ const route: Module<RouteState, RootState> = {
 
       const filtered: Route[] = []
 
-      const routeIds: Array<string> = (area && area.routes.length !== 0) ? area.routes : state.allIds
+      const routeIds: Array<string> = (area && area.routes?.length !== 0) ? area.routes : state.allIds
 
       routeIds.forEach(id => {
         const route = state.byIds[id]
