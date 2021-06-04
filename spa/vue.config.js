@@ -28,7 +28,7 @@ module.exports = {
       name: 'ClimbLine',
       // eslint-disable-next-line @typescript-eslint/camelcase
       short_name: 'ClimbLine',
-      description: 'Community mainteined online climbers guide. Complete with topo images and gps locations',
+      description: 'Community maintained online climbers guide. Complete with topo images and gps locations',
       // eslint-disable-next-line @typescript-eslint/camelcase
       start_url: '/',
       icons: [
