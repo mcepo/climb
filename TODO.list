@@ -8,8 +8,7 @@ TODO: add popup disclamer community maintained site ....
 
 TODO: clear state storage on service worker update
 
-TODO: zoom in on mobile phone on drawer will remove nav bar from view and on map 
-you can't see nav bar
+TODO: add error message when frontend can't connect to backend
 
 -- FEATURES --
 
