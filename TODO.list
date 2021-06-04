@@ -10,6 +10,8 @@ TODO: clear state storage on service worker update
 
 TODO: add error message when frontend can't connect to backend
 
+TODO: when multipitch route is open highlight all pitches that are of that route
+
 -- FEATURES --
 
 TODO: color coding route and area tags
