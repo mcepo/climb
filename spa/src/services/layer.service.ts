@@ -202,9 +202,7 @@ export class LayerService {
         this.registerListeners(key, feature)
 
         // adding tooltip only if on image
-        if (
-          (this._mapType === 'image' && tooltipService[tag.tagged_type])
-        ) {
+        if (this._mapType === 'image' && tooltipService[tag.tagged_type]) {
           tooltipService[tag.tagged_type](feature)
         }
 
@@ -214,26 +212,29 @@ export class LayerService {
     })
 
     if (store.getters.imageOpen) {
-      // drawing anchors after tags
-      // because in svg the draw order matters
-      // in order for anchors to be on top of routes/pitches
-      // they need to be added after tags
-      this._features.forEach((feature: Feature, key: string) => {
-        if (
-          (feature.tag.tagged_type === ItemType.Route ||
-            feature.tag.tagged_type === ItemType.Pitch)
-        ) {
-          const anchor = this.createAnchor(feature.tag.geometry.coordinates)
-
-          this._anchors.set(key, anchor)
-          this._layerGroup.addLayer(anchor)
-        }
-      })
-
+      this.addAnchors()
       return
     }
 
     this.setMapViewpoint()
+  }
+
+  addAnchors () {
+    // drawing anchors after tags
+    // because in svg the draw order matters
+    // in order for anchors to be on top of routes/pitches
+    // they need to be added after tags
+    this._features.forEach((feature: Feature, key: string) => {
+      if (
+        feature.tag.tagged_type === ItemType.Route ||
+        feature.tag.tagged_type === ItemType.Pitch
+      ) {
+        const anchor = this.createAnchor(feature.tag.geometry.coordinates)
+
+        this._anchors.set(key, anchor)
+        this._layerGroup.addLayer(anchor)
+      }
+    })
   }
 
   setMapViewpoint () {
@@ -253,13 +254,14 @@ export class LayerService {
       this._features.forEach((feature) => {
         const path = feature.item.path
         const zoomOffset = 7
-        zoom = path ? (zoomOffset + path.split('.').length * 2) : zoomOffset
+        zoom = path ? zoomOffset + path.split('.').length * 2 : zoomOffset
       })
     }
 
-    if (!this._lastBounds ||
-        !this._lastBounds.overlaps(layerGroupBounds) ||
-        Math.abs(this._lastSurface - layerGroupBoundsSurface) > 0.0001
+    if (
+      !this._lastBounds ||
+      !this._lastBounds.overlaps(layerGroupBounds) ||
+      Math.abs(this._lastSurface - layerGroupBoundsSurface) > 0.0001
     ) {
       this._lastBounds = layerGroupBounds
       this._lastSurface = layerGroupBoundsSurface
