@@ -31,8 +31,6 @@ TODO: publish crag locations to openstreetmap
 
 TODO: implement ssr
 
-TODO: add TTL to static files infinitive
-
 TODO: activity log every click is logged, possibly to elasticsearch
 
 TODO: error log also to elastic search
