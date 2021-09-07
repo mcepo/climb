@@ -88,7 +88,7 @@ export class LayerService {
         return highlight.key
       },
       (highlightedKey: string | undefined | null) => {
-        this.highlightFeature(highlightedKey)
+        this.refreshStyle(highlightedKey)
       }
     )
   }
@@ -114,11 +114,26 @@ export class LayerService {
     const params = store.state.url?.params
 
     for (const id in params) {
-      // removing the Id part of route parameter
+      // removing the Id part of route parameter (areaId, routeId)
       // adding the id of the item thus forming the key
-      const key = id.slice(0, -2) + params[id]
+
+      const itemType = id.slice(0, -2)
+      const itemId = params[id]
+
+      const key = itemType + itemId
 
       this._selected.push(key)
+
+      // if its a multipitch route pitches should be set as selected as well as
+      // route
+      if (itemType === ItemType.Route) {
+        const route = store.getters[ItemType.Route + '/find'](itemId)
+        if (route && route.pitches) {
+          for (const pitchId of route.pitches) {
+            this._selected.push(ItemType.Pitch + pitchId)
+          }
+        }
+      }
     }
   }
 
@@ -126,7 +141,7 @@ export class LayerService {
     return this._selected.includes(key)
   }
 
-  highlightFeature (highlightedKey: string | undefined | null) {
+  refreshStyle (highlightedKey?: string | undefined | null) {
     this._features.forEach((feature, key) => {
       if (highlightedKey === key) {
         this.setStyle('highlight', feature)
@@ -197,8 +212,6 @@ export class LayerService {
 
         this._features.set(key, feature)
 
-        this.setDefaultStyle(key, feature)
-
         this.registerListeners(key, feature)
 
         // adding tooltip only if on image
@@ -210,6 +223,8 @@ export class LayerService {
         this._layerGroup.addLayer(layer)
       }
     })
+
+    this.refreshStyle()
 
     if (store.getters.imageOpen) {
       this.addAnchors()

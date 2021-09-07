@@ -107,6 +107,7 @@ const routeImageLayerStyle = {
   },
   selected (obj: StylingPolyline) {
     setPolylineStyle(obj.layer, 'yellow')
+    obj.layer.bringToFront()
   }
 }
 
@@ -133,6 +134,7 @@ const pitchLayerStyle = {
   },
   selected (obj: StylingPolyline) {
     setPolylineStyle(obj.layer, 'yellow')
+    obj.layer.bringToFront()
   }
 }
 
