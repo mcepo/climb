@@ -18,7 +18,7 @@ trait HasAncestors
       return Area::orderByRaw(DB::raw("POSITION(id::text in '$path')"))
       // max_altitude and min_altitude is needed if i edit the child area
       // and parent wans't loaded already before i don't have altitude
-        ->select('id', 'name', 'max_altitude', 'min_altitude', 'type_id')
+        ->select('id', 'name', 'max_altitude', 'min_altitude', 'type_id', 'path')
         ->with('mapTag')
         ->findMany($ids);
     }

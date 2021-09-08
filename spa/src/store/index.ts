@@ -14,6 +14,7 @@ import { UserState } from './modules/user'
 
 import localStorage from './plugins/localStorage'
 import { PitchState } from './modules/pitch'
+import { ItemType } from '@/services/type.service'
 
 Vue.use(Vuex)
 
@@ -98,6 +99,29 @@ const store = new Vuex.Store<RootState>({
       }
 
       return ancestors
+    },
+    urlPath: (state) => (itemType: ItemType, id: string) => {
+      const item = state[itemType]?.byIds[id]
+
+      if (!item) {
+        return null
+      }
+
+      const ancestorsIds = item.path ? item.path.split('.').map((a) => parseInt(a)) : []
+
+      let path = ''
+
+      ancestorsIds.forEach((id) => {
+        const ancestor = state.area?.byIds[id]
+
+        if (ancestor) {
+          path += ancestor.name + '-'
+        }
+      })
+
+      path += item.name
+
+      return path.toLowerCase().replace(/[^a-zđčćžš0-9\s\\-]/g, '').replace(/\s/g, '_')
     }
   },
   modules

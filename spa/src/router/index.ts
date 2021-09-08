@@ -45,7 +45,23 @@ const routes = [
         }
       },
       {
+        // /a/croatia-paklenica-anica_kuk-trapez/123
+        path: 'a/:path/:areaId',
+        components: {
+          default: AreaDetails,
+          map: LeafletMap
+        }
+      },
+      {
         path: 'area/:areaId/image/:imageId',
+        components: {
+          default: AreaDetails,
+          map: ImageMap
+        }
+      },
+      {
+        // /a/croatia-paklenica-anica_kuk-trapez/123/image/1
+        path: 'a/:path/:areaId/image/:imageId',
         components: {
           default: AreaDetails,
           map: ImageMap
@@ -59,7 +75,23 @@ const routes = [
         }
       },
       {
+        // /r/croatia-paklenica-anica_kuk-trapez-mosoraski/123
+        path: 'r/:path/:routeId',
+        components: {
+          default: RouteDetails,
+          map: LeafletMap
+        }
+      },
+      {
         path: 'route/:routeId/image/:imageId',
+        components: {
+          default: RouteDetails,
+          map: ImageMap
+        }
+      },
+      {
+        // /r/croatia-paklenica-anica_kuk-trapez-mosoraski/123/image/1
+        path: 'r/:path/:routeId/image/:imageId',
         components: {
           default: RouteDetails,
           map: ImageMap
@@ -129,10 +161,18 @@ const router = new VueRouter({
 })
 
 // solution on how to change one view and keep the other as is
-// no a very good solution
+// not a very good solution
 
 export function getUrl (type: string, id: string) {
   const newParams = { ...router.currentRoute.params }
+
+  let path: string = store.getters.urlPath(type, id)
+
+  if (!path) {
+    path = newParams.path
+  }
+
+  path += '/'
 
   if (type === 'image') {
     newParams.imageId = id
@@ -147,9 +187,9 @@ export function getUrl (type: string, id: string) {
   let url = ''
 
   if (newParams.areaId) {
-    url = '/area/' + newParams.areaId
+    url = '/a/' + path + newParams.areaId
   } else if (newParams.routeId) {
-    url = '/route/' + newParams.routeId
+    url = '/r/' + path + newParams.routeId
   }
 
   if (newParams.imageId) {
