@@ -2,7 +2,7 @@ import axios, { AxiosError } from 'axios'
 import store from '.'
 import router from '../router'
 
-const baseURL = 'api/'
+const baseURL = '/api/'
 
 export { baseURL }
 
