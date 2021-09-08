@@ -87,13 +87,13 @@ const areaLayerStyle = {
 const routeLeafletLayerStyle = {
 
   default (obj: StylingMarker) {
-    setMarkerStyle(obj.layer, getStarSvg('black'))
+    setMarkerStyle(obj.layer, getCircleSvg('black'))
   },
   highlight (obj: StylingMarker) {
-    setMarkerStyle(obj.layer, getStarSvg(highlighColor))
+    setMarkerStyle(obj.layer, getCircleSvg(highlighColor))
   },
   selected (obj: StylingMarker) {
-    setMarkerStyle(obj.layer, getStarSvg('orangered'))
+    setMarkerStyle(obj.layer, getCircleSvg('orangered'))
   }
 }
 
