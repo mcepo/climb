@@ -52,3 +52,9 @@ html {
   width: 200px;
   height: auto;
 }
+
+/* Default icon URLs */
+/* this is a fix for marker not shown when drawing */
+.leaflet-default-icon-path {
+	background-image: none;
+}
