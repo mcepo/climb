@@ -1,7 +1,7 @@
 <template>
   <v-card flat class='popup-box'>
     <slot name='header'></slot>
-    <a style='white-space: nowrap' @click='openItem()'>
+    <a @click='openItem()'>
       <slot name='item'></slot>
     </a>
     <slot name="content"></slot>
