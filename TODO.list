@@ -36,6 +36,8 @@ TODO: clear state storage on service worker update
 
 TODO: add error message when frontend can't connect to backend
 
+TODO: sidrište mi je iza linije rute kad je ruta selektirana
+
 -- FEATURES --
 
 TODO: color coding route and area tags
