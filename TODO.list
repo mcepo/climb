@@ -17,8 +17,6 @@ TODO: integrate weather api-s
 
 TODO: seo optimization steps 
 
-TODO: area/route names in links
-
 TODO: sitemaps
 
 TODO: publish crag locations to openstreetmap
@@ -38,11 +36,10 @@ TODO: clear state storage on service worker update
 
 TODO: add error message when frontend can't connect to backend
 
-TODO: when multipitch route is open highlight all pitches that are of that route
-
 -- FEATURES --
 
 TODO: color coding route and area tags
+
 TODO: add scale with grades to display
 
 TODO: hide options that you can't use if offline ?
