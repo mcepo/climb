@@ -106,11 +106,13 @@ export default {
       this.drawers.left = false
     }
   },
-  watch: {
+  created () {
     // fix for messed up tabs when switching between areas that have
     // pictures and those that dont have
-    item (newItem) {
-      this.tabs = newItem && newItem.children ? 'areas' : 'pitches'
+    this.tabs = this.item && this.item.children ? 'areas' : 'pitches'
+
+    if (this.item && !document.title.includes(this.item.name)) {
+      document.title = 'Climbline' + (' - ' + this.item.name)
     }
   },
   components: {
