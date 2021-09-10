@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 Route::namespace('Auth')->group(function() {
   Route::post('login', 'LoginController@login');
   Route::post('register', 'RegisterController@register');

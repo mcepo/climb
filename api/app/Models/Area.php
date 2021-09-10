@@ -103,6 +103,12 @@ class Area extends Model
         return $this->path ? implode('.', [$this->path, $this->id]) : $this->id;
     }
 
+    public function isNoName() {
+        // check if area is of type that usually doesnt have a unique name 
+        // such as mountain face (4) or sector (7)
+        return in_array($this->type_id, [4, 7]);
+    }
+
     public static function scopeCountries($query)
     {
         return $query->whereNull('parent_id');
