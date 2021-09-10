@@ -19,7 +19,7 @@ class WebController extends Controller
     public function route($path, Route $route)
     {
         return view('index', [
-            'title' => 'Climbline - ' . $route->name,
+            'title' => 'ClimbLine - ' . $route->name,
             'description' => "Explore route '" . $route->name . "' and add missing info.",
             'keywords' => 'rock climbing guidebook, route topo, crag location, online guide'
         ]);
@@ -34,7 +34,7 @@ class WebController extends Controller
         }
 
         return view('index', [
-            'title' => 'Climbline - ' . $name,
+            'title' => 'ClimbLine - ' . $name,
             'description' => $name . ' currently has a route topo coverage of ' . ($area->tag_coverage * 100) . "%. Explore existing routes and add missing info.",
             'keywords' => 'rock climbing guidebook, route topo, crag location, online guide'
         ]);

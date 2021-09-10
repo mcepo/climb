@@ -107,7 +107,7 @@ export default {
     },
     setTitle() {
       if (this.item && !document.title.includes(this.item.name)) {
-        document.title = 'Climbline' + (' - ' + this.item.name)
+        document.title = 'ClimbLine' + (' - ' + this.item.name)
       }
     }
   },
