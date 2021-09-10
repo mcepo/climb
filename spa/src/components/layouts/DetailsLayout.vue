@@ -104,15 +104,22 @@ export default {
     closeDrawer () {
       this.$router.push(getUrl('image', null))
       this.drawers.left = false
+    },
+    setTitle() {
+      if (this.item && !document.title.includes(this.item.name)) {
+        document.title = 'Climbline' + (' - ' + this.item.name)
+      }
     }
   },
   created () {
-    // fix for messed up tabs when switching between areas that have
-    // pictures and those that dont have
-    this.tabs = this.item && this.item.children ? 'areas' : 'pitches'
-
-    if (this.item && !document.title.includes(this.item.name)) {
-      document.title = 'Climbline' + (' - ' + this.item.name)
+    this.setTitle()
+  },
+  watch: {
+    item(newItem) {
+      // fix for messed up tabs when switching between areas that have
+      // pictures and those that dont have
+      this.tabs = newItem && this.item.children ? 'areas' : 'pitches'
+      this.setTitle()
     }
   },
   components: {
