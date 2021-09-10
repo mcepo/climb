@@ -1,5 +1,7 @@
 -- HOT --
 
+TODO: welcome and disclamer popup community maintained site .... vuetify overlay
+
 TODO: prilikom odabira ocjene smjera dodati i odabir ljestvice koje će se po defaultu koristiti za taj smjer
 
 TODO: moram omogućiti skrol na formama jer ne mogu ocjenu skrolati onda na mobitelu, a to sam onemogućio jer 
@@ -8,10 +10,6 @@ mi se pojebe pregled na mobitelu
 TODO: razlikovati pristupe i odstupe 
 
 -- MUST --
-
-TODO: change title and meta description on area change
-
-TODO: add popup disclamer community maintained site ....
 
 TODO: integrate weather api-s
 
