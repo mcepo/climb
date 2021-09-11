@@ -21,8 +21,8 @@ class JWTAuthentication
      */
     public function handle(Request $request, Closure $next, $guard = null)
     {
-      if($request->hasHeader('Authorization')){
-
+      if($request->hasHeader('Authorization'))
+      {
         // get authorization header from request
         $token = explode(' ', $request->header('Authorization'))[1];
 
@@ -47,7 +47,7 @@ class JWTAuthentication
           
         } catch (Exception $e) {
           // unable to authenticate user from JWT
-          return $e;
+          // ignore error
         }
       } else {
         if(config('app.debug')) {
