@@ -1,9 +1,13 @@
 -- HOT --
 
+TODO: list reduce amount of html and css on them (in generale try to reduce amount html on frontend)
+
 TODO: welcome and disclamer popup community maintained site .... vuetify overlay
 
 TODO: prilikom odabira ocjene smjera dodati i odabir ljestvice koje će se po defaultu koristiti za taj smjer
+TODO: dodati i broj spitova u smjeru/ cugu
 
+TODO: change meta to user-scrollable when a form is opened
 TODO: moram omogućiti skrol na formama jer ne mogu ocjenu skrolati onda na mobitelu, a to sam onemogućio jer 
 mi se pojebe pregled na mobitelu
 
@@ -46,10 +50,6 @@ TODO: in area/route details put image with the most topos
     in the header under name
 
 -- OPTIMIZATION --
-
-TODO: serve static files directly from nginx without calling php at all
-
-TODO: list reduce amount of html and css on them (in generale try to reduce amount html on frontend)
 
 -- OFFLINE MODE PRECACHE --
 
