@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Route;
-use App\Models\Area;
 use Illuminate\Http\Request;
 
 class RouteController extends Controller
@@ -12,6 +11,8 @@ class RouteController extends Controller
     public function __construct()
     {
         $this->middleware('auth', ['except' => ['index','show']]);
+        $this->middleware('check-cache', ['only' => ['show']]);
+        $this->middleware('flush-cache', ['except' => ['show', 'index']]);
     }
 
     public function index(Request $request)

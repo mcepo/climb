@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Area;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 class AreaController extends Controller
 {
 
     public function __construct()
     {
         $this->middleware('auth', ['except' => ['index', 'show']]);
+        $this->middleware('check-cache', ['only' => ['index', 'show']]);
+        $this->middleware('flush-cache', ['except' => ['index', 'show']]);
     }
 
     public function index(Request $request)
@@ -51,7 +54,7 @@ class AreaController extends Controller
         ]);
         $area->loadAreaAssets(request()->all());
 
-        return response()->json($area);
+        return $area->toJson();
     }
 
     public function update(Request $request, Area $area)

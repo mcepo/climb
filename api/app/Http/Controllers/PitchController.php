@@ -13,6 +13,7 @@ class PitchController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('flush-cache');
     }
     
     public function store(Request $request)

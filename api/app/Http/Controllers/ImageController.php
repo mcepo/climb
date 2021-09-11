@@ -11,6 +11,7 @@ class ImageController extends Controller
     public function __construct()
     {
         $this->middleware('auth', ['only' => ['destroy']]);
+        $this->middleware('flush-cache', ['only' => ['destroy']]);
     }
 
     public function show(Image $image)

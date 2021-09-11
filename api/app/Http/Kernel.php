@@ -61,5 +61,12 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'check-cache' => \App\Http\Middleware\CheckCache::class,
+        'flush-cache' => \App\Http\Middleware\FlushCache::class
+    ];
+
+    protected $middlewarePriority = [
+        \App\Http\Middleware\CheckCache::class,
+        \Illuminate\Routing\Middleware\SubstituteBindings::class
     ];
 }
