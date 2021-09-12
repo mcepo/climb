@@ -9,6 +9,11 @@ class WebController extends Controller
 {   
     public function index()
     {
+        // TODO
+        // <meta name="description" content="Kalnik with map, topos, photos and more.">
+        // <meta name="keywords" content="topo, climbing, rock climbing, bouldering, crag, boulder, route, climb, climbing trip">
+
+        // og tags for facebook and twitter
         return view('index', [
             'title' => 'ClimbLine - Community maintained online climbers guide',
             'description' => 'Home of free route topos and crag locations. Document your favorite crag in an easy and efficient manner while on the crag and share it with others or explore existing topos and crags',

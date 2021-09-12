@@ -1,4 +1,16 @@
 -- HOT --
+TODO: djeca vide sve trailove od roditelja, roditelj ne vidi trailove od djece
+TODO: remove location tags from lists except pitches
+TODO: rename tags to location and topos
+TODO: align image count and tag count to right
+TODO: "links with more info" se vidi i kad nema linkova
+TODO: forma za dodavanje linkova
+TODO: da li mi stvarno treba na slici koje je područje uslikano 
+TODO: dodati broj topos za slike
+TODO: statistiku staviti unutar componente expansion panel na svaki posebno graf
+
+
+TODO: service worker možda ga ne instalirati odmah već to nekako drugačije rješiti
 
 TODO: list reduce amount of html and css on them (in generale try to reduce amount html on frontend)
 
