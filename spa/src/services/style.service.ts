@@ -22,9 +22,10 @@ interface StylingPolyline {
 
 const highlighColor = '#3490dc'
 
-function getStarSvg (color: string) {
-  return '<path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z" fill="' + color + '"/>'
-}
+// currentlly unused
+// function getStarSvg (color: string) {
+//   return '<path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z" fill="' + color + '"/>'
+// }
 
 function getCircleSvg (color: string) {
   return '<circle cx="12" cy="12" r="6" fill="' + color + '"/>'

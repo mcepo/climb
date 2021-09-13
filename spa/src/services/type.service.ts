@@ -221,7 +221,7 @@ export default {
       mapTag: true,
       imageTag: true,
       image: true,
-      trail: false,
+      trail: true,
       routes: true,
       currentLocationTag: true,
       parenting: [],

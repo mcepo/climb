@@ -116,13 +116,10 @@ class Area extends Model
 
     public function loadAreaAssets()
     {
-        // with area i only send the routes that are directly under that area
-        // and when an area has those routes then i don't show the area tab at all
-        $this->setAttribute('routes', Route::where('area_id', $this->id)->with(['mapTag', 'grades'])->orderBy('position')->get());
-
         $this->loadImages();
 
-        $this->load(['areas.mapTag', 'trails.mapTag']);
+        // getting trails of all areas that are above in hierarchy
+        $this->setAttribute('trails', Trail::ancestorAreas($this->path))->with('mapTag')->get();
     }
 
     public function loadImages()

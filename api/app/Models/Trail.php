@@ -17,4 +17,11 @@ class Trail extends Model
         'created_at',
         'updated_at'
     ];
+
+    public function scopeAncestorAreas($query, $path)
+    {
+        $areaIds = explode('.', $path);
+
+        return $query->where('area_id', 'IN', $areaIds);
+    }
 }

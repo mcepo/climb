@@ -59,6 +59,12 @@ const area: Module<AreaState, RootState> = {
       state.byIds[payload.id].images.push(payload.imageId)
     },
     appendTrail (state: AreaState, payload) {
+      const area = state.byIds[payload.id]
+
+      if (!Array.isArray(area.trails)) {
+        area.trails = []
+      }
+
       state.byIds[payload.id].trails.push(payload.trailId)
     },
     updateRouteIds (state: AreaState, payload) {

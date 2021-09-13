@@ -105,7 +105,7 @@ export default {
       this.$router.push(getUrl('image', null))
       this.drawers.left = false
     },
-    setTitle() {
+    setTitle () {
       if (this.item && !document.title.includes(this.item.name)) {
         document.title = 'ClimbLine' + (' - ' + this.item.name)
       }
@@ -115,7 +115,7 @@ export default {
     this.setTitle()
   },
   watch: {
-    item(newItem) {
+    item (newItem) {
       // fix for messed up tabs when switching between areas that have
       // pictures and those that dont have
       this.tabs = newItem && this.item.children ? 'areas' : 'pitches'

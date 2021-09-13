@@ -47,7 +47,9 @@ class AreaController extends Controller
         $area->load([
             'mapTag',
             'links',
-            'moderators'
+            'moderators',
+            'areas.mapTag',
+            'routes.mapTag'
         ])->append([
             'altitude',
             'ancestors'
