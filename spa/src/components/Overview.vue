@@ -1,7 +1,7 @@
 <template>
   <v-container fluid flat style="padding: 0px 0px 300px 0px">
     <v-layout column>
-      <area-list :taggable="false" searchable/>
+      <area-list searchable/>
       <div class="d-flex pa-2">
         <h3 class="headline pa-2">Countries</h3>
         <v-spacer></v-spacer>
@@ -22,7 +22,7 @@
       <div class="d-flex pa-2">
         <h3 class="headline pa-2">Recently viewed</h3>
       </div>
-      <area-list :areaIds="recentlyViewedIds" :taggable="false"/>
+      <area-list :areaIds="recentlyViewedIds"/>
     </v-layout>
   </v-container>
 </template>

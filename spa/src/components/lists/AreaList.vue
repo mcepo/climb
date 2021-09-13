@@ -15,7 +15,7 @@
         ></v-progress-circular>
       </v-list-item-content>
     </v-list-item>
-    <area-list-item v-else v-for="area in areas" :key="area.id" :area='area' :taggable='taggable' />
+    <area-list-item v-else v-for="area in areas" :key="area.id" :area='area' />
   </v-list>
 </template>
 
@@ -29,10 +29,6 @@ export default {
   props: {
     area: Object,
     areaIds: Array,
-    taggable: {
-      type: Boolean,
-      default: true
-    },
     searchable: {
       type: Boolean,
       default: false
