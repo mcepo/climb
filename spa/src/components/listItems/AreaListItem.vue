@@ -5,11 +5,11 @@
     :class="{area_list_hover: highlight, area_list: true}"
     @click.prevent="link()"
   >
-      <div style='width:200px'>
+      <div style='width:550px'>
         <v-list-item-subtitle>{{typeName}}</v-list-item-subtitle>
         <v-list-item-title >{{area.name}}</v-list-item-title>
       </div>
-      <div>
+      <v-list-item-subtitle>
         <div style='display:inline-block; width:90px' title='Topos coverage'>
           <v-icon>timeline</v-icon
           ><b>{{ (area.tag_coverage * 100).toFixed(2) }} %</b>
@@ -18,7 +18,7 @@
           <v-icon>photo_library</v-icon>
           <b>{{ area.image_count }}</b>
         </div>
-      </div>
+      </v-list-item-subtitle>
   </v-list-item>
 </template>
 <script>
