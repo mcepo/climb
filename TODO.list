@@ -10,6 +10,8 @@ TODO: dodati broj topos za slike
 TODO: statistiku staviti unutar componente expansion panel na svaki posebno graf
 
 
+TODO: kad se mjenja područje itemi koji ostaju blicnu to doraditi da promjena prođe bez blicanja
+
 TODO: service worker možda dodati prompt za instalaciju, moguće da mi se sad neće ni ažurirati novi sw
     to treba provjeriti
 
