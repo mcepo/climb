@@ -5,7 +5,7 @@
     :class="{area_list_hover: highlight, area_list: true}"
     @click.prevent="link()"
   >
-      <div style='width:550px'>
+      <div style='width:400px'>
         <v-list-item-subtitle>{{typeName}}</v-list-item-subtitle>
         <v-list-item-title >{{area.name}}</v-list-item-title>
       </div>
