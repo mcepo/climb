@@ -1,6 +1,6 @@
 -- HOT --
 
-TODO: trailovi se ne učitavaju uopče izgleda
+TODO: don't cache if response is not 200
 
 TODO: rename tags to location and topos
 TODO: "links with more info" se vidi i kad nema linkova
