@@ -10,7 +10,10 @@ TODO: dodati broj topos za slike
 TODO: statistiku staviti unutar componente expansion panel na svaki posebno graf
 
 
-TODO: service worker možda ga ne instalirati odmah već to nekako drugačije rješiti
+TODO: service worker možda dodati prompt za instalaciju, moguće da mi se sad neće ni ažurirati novi sw
+    to treba provjeriti
+
+TODO: kanonski urlovi provjeriti
 
 TODO: list reduce amount of html and css on them (in generale try to reduce amount html on frontend)
 TODO: mapa se na mobitelu ne treba odmah učitati jer se ne vidi. lijevi panel dodati kao fiksni div
