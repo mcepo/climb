@@ -119,7 +119,7 @@ class Area extends Model
         $this->loadImages();
 
         // getting trails of all areas that are above in hierarchy
-        $this->setAttribute('trails', Trail::ancestorAreas($this->path))->with('mapTag')->get();
+        $this->setAttribute('trails', Trail::ancestorAreas($this->getPathWithSelf())->with('mapTag')->get());
     }
 
     public function loadImages()

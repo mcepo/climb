@@ -21,7 +21,6 @@ class Trail extends Model
     public function scopeAncestorAreas($query, $path)
     {
         $areaIds = explode('.', $path);
-
-        return $query->where('area_id', 'IN', $areaIds);
+        return $query->whereIn('area_id', $areaIds);
     }
 }
