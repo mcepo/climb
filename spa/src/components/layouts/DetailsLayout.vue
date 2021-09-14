@@ -21,7 +21,7 @@
           <slot name="item-details" />
         </v-card-text>
       </v-card>
-      <external-link-list :links='item.links'></external-link-list>
+      <external-link-list v-if='item.link && item.links.length' :links='item.links'></external-link-list>
 
       <v-tabs v-model="tabs" grow mobile-break-point=300>
         <v-tab v-if="hasAreas" href="#areas">Areas</v-tab>
