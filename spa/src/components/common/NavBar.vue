@@ -80,7 +80,6 @@
       style='z-index:201;'
       disable-resize-watcher
       disable-route-watch
-      touchless
       stateless
       >
       <form-layout></form-layout>

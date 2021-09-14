@@ -33,7 +33,6 @@ const form: Module<FormState, RootState> = {
       drawers.left = false
       drawers.right = true
       commit('open', payload)
-      setViewportUserScalable(1)
     },
     authorizeAndOpen ({ dispatch }, { form, item }) {
       // authorize based on the item the user wants to edit
@@ -61,7 +60,6 @@ const form: Module<FormState, RootState> = {
       drawers.right = false
       commit('close')
       drawers.left = true
-      setViewportUserScalable(0)
     }
   }
 }
