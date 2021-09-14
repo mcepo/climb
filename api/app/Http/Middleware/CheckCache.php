@@ -19,6 +19,10 @@ class CheckCache
     public function handle(Request $request, Closure $next, $guard = null)
     {
 
+        if(config('app.debug')) {
+          return $next($request);
+        }
+
         $route = $request->route();
 
         $routeName = $request->route()->getName();
@@ -39,7 +43,9 @@ class CheckCache
 
         $response = $next($request);
 
-        Cache::put($cacheKey, $response);
+        if($response->status() == 200 ) {
+          Cache::put($cacheKey, $response);
+        }
 
         return $response;
     }
