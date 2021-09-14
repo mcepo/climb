@@ -1,4 +1,3 @@
-import { setViewportUserScalable } from '@/utils/dom'
 import { Module } from 'vuex'
 import { RootState } from '..'
 
