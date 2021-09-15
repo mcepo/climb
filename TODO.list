@@ -7,6 +7,8 @@ TODO: dodati broj topos za slike
 TODO: statistiku staviti unutar componente expansion panel na svaki posebno graf
 
 
+TODO: kad se pretražuje područje treba samo biti lokalni load
+
 TODO: prilikom crtanja markera se napravi nepotreban zahtjev
 
 TODO: kad se mjenja područje itemi koji ostaju blicnu to doraditi da promjena prođe bez blicanja
