@@ -6,6 +6,10 @@ TODO: da li mi stvarno treba na slici koje je područje uslikano
 TODO: dodati broj topos za slike
 TODO: statistiku staviti unutar componente expansion panel na svaki posebno graf
 
+TODO: 100.0 tagiranost mi bprebaci u dva redu u listi područa
+TODO: ux lista područja (tip područja doraditi)
+
+TODO: rute samo koje su direktno unutar otvorenog područja idu na mapu
 
 TODO: kad se pretražuje područje treba samo biti lokalni load
 
@@ -25,7 +29,6 @@ TODO: welcome and disclamer popup community maintained site .... vuetify overlay
 TODO: prilikom odabira ocjene smjera dodati i odabir ljestvice koje će se po defaultu koristiti za taj smjer
 TODO: dodati i broj spitova u smjeru/ cugu
 
-TODO: change meta to user-scrollable when a form is opened
 TODO: moram omogućiti skrol na formama jer ne mogu ocjenu skrolati onda na mobitelu, a to sam onemogućio jer 
 mi se pojebe pregled na mobitelu
 
