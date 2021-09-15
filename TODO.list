@@ -19,6 +19,8 @@ TODO: kad se mjenja područje itemi koji ostaju blicnu to doraditi da promjena p
 
 TODO: kanonski urlovi provjeriti
 
+TODO: skrol učitavanje za područja iz stora
+
 TODO: list reduce amount of html and css on them (in generale try to reduce amount html on frontend)
 TODO: mapa se na mobitelu ne treba odmah učitati jer se ne vidi. lijevi panel dodati kao fiksni div
     koji se proširuje kako se ekran povečava a na određenoj širini npr 700px se mapa otvara sa strane.
