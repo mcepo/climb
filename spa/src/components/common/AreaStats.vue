@@ -1,46 +1,38 @@
 <template>
-  <v-container>
-    <v-layout row v-if="item.altitude[0] !== null && item.altitude[1] !== null">
-      <div class="stat_name">
-        <strong>Altitude:</strong>
-      </div>
-      <div>{{ item.altitude[0] + 'm - ' + item.altitude[1] + 'm' }}</div>
-    </v-layout>
-    <v-layout row v-if='hasOrientation'>
-      <div class="stat_name">
-        <strong>Orientation:</strong>
-      </div>
-      <div>{{orientation}}</div>
-    </v-layout>
-    <v-layout row>
-      <div class="stat_name">
-        <strong>Topos coverage:</strong>
-      </div>
-      <div>{{ (item.tag_coverage * 100).toFixed(2) }} %</div>
-    </v-layout>
-    <v-layout row>
-      <div class="stat_name">
-        <strong>Photos:</strong>
-      </div>
-      <div>{{ item.image_count }}</div>
-    </v-layout>
-    <v-layout row>
-      <div class="stat_name">
-        <strong>Trails:</strong>
-      </div>
-      <div>{{ item.trail_count }}</div>
-    </v-layout>
-    <v-layout row v-for="id in Object.keys(routeStats)" :key="id">
-      <div class="stat_name">
-        <strong>{{ routeType(id) }}:</strong>
-      </div>
-      <div>{{ routeStats[id] }}</div>
-    </v-layout>
-  </v-container>
+  <v-simple-table>
+    <template v-slot:default>
+      <tbody>
+        <tr v-if="item.altitude[0] !== null && item.altitude[1] !== null">
+          <td class='stat_name'>Altitude</td>
+          <td>{{ item.altitude[0] + 'm - ' + item.altitude[1] + 'm' }}</td>
+        </tr>
+        <tr v-if='hasOrientation'>
+          <td class='stat_name'>Orientation</td>
+          <td>{{orientation}}</td>
+        </tr>
+        <tr>
+          <td class='stat_name'>Topos coverage</td>
+          <td>{{ (item.tag_coverage * 100).toFixed(2) }} %</td>
+        </tr>
+        <tr>
+          <td class='stat_name'>Photos</td>
+          <td>{{ item.image_count }}</td>
+        </tr>
+        <tr>
+          <td class='stat_name'>Trails</td>
+          <td>{{ item.trail_count }}</td>
+        </tr>
+        <tr v-for="id in Object.keys(routeStats)" :key="id">
+          <td class='stat_name'>{{ routeType(id) }}</td>
+          <td>{{ routeStats[id] }}</td>
+        </tr>
+      </tbody>
+    </template>
+  </v-simple-table>
 </template>
 <style>
 .stat_name {
-  width: 120px;
+  font-weight: bold;
 }
 </style>
 <script>

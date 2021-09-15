@@ -1,5 +1,5 @@
 <template>
-    <v-snackbar absolute v-model="drawing" :timeout=-1 top class='action-snackbar'>
+    <v-snackbar v-if='drawing' absolute v-model="drawing" :timeout=-1 top class='action-snackbar'>
         <div class='d-flex flex-row justify-center'>
             <v-btn text @click="save">
                 Save

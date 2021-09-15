@@ -1,19 +1,15 @@
 <template>
   <v-list>
     <v-list-item v-if='searchable'>
-      <v-list-item-content>
         <v-text-field label="Search areas" v-model="areaQueryString" :loading='loading && searchable'></v-text-field>
-      </v-list-item-content>
     </v-list-item>
     <v-list-item v-if='wasFiltered'>
       <filtering-alert type='areas'></filtering-alert>
     </v-list-item>
     <v-list-item v-if='loading && searchable'>
-      <v-list-item-content>
-        <v-progress-circular
-          indeterminate
-        ></v-progress-circular>
-      </v-list-item-content>
+      <v-progress-circular
+        indeterminate
+      ></v-progress-circular>
     </v-list-item>
     <area-list-item v-else v-for="area in areas" :key="area.id" :area='area' />
   </v-list>
