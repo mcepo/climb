@@ -1,12 +1,13 @@
 -- HOT --
 
 TODO: rename tags to location and topos
-TODO: "links with more info" se vidi i kad nema linkova
 TODO: forma za dodavanje linkova
 TODO: da li mi stvarno treba na slici koje je područje uslikano 
 TODO: dodati broj topos za slike
 TODO: statistiku staviti unutar componente expansion panel na svaki posebno graf
 
+
+TODO: prilikom crtanja markera se napravi nepotreban zahtjev
 
 TODO: kad se mjenja područje itemi koji ostaju blicnu to doraditi da promjena prođe bez blicanja
 
