@@ -6,7 +6,8 @@
     <v-simple-table style='cursor: pointer;' v-else>
       <template v-slot:default>
         <tbody>
-          <area-list-item v-for="area in areas" :key="area.id" :area='area' />
+          <area-list-item v-for="area in limitedAreas" :key="area.id" :area='area' />
+          <tr v-intersect='loadOnIntersect'></tr>
         </tbody>
       </template>
     </v-simple-table>
@@ -35,7 +36,8 @@ export default {
   },
   data () {
     return {
-      areaQueryString: null
+      areaQueryString: null,
+      areaLimit: 10
     }
   },
   computed: {
@@ -58,6 +60,9 @@ export default {
     ...mapState({
       loading: s => s.area.loading
     }),
+    limitedAreas () {
+      return this.areas.slice(0, this.areaLimit)
+    },
     areas () {
       if (this.areaIds) {
         const areas = []
@@ -94,6 +99,9 @@ export default {
       this.$store.commit('area/loading', true)
       this.$options.cancelToken && clearTimeout(this.$options.cancelToken)
       this.$options.cancelToken = setTimeout(() => this.$store.dispatch('area/fetchMany', query), 500)
+    },
+    loadOnIntersect () {
+      this.areaLimit += 10
     }
   }
 }
