@@ -194,7 +194,9 @@ const area: Module<AreaState, RootState> = {
         })
     },
     fetchMany ({ commit }, query: string|null) {
-      commit('loading', true)
+      if (query == null) {
+        commit('loading', true)
+      }
 
       const params = query ? { query } : {}
 

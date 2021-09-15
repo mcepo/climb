@@ -1,23 +1,21 @@
 <template>
-  <v-list>
-    <v-list-item v-if='searchable'>
-        <v-text-field label="Search areas" v-model="areaQueryString" :loading='loading && searchable'></v-text-field>
-    </v-list-item>
-    <v-list-item v-if='wasFiltered'>
-      <filtering-alert type='areas'></filtering-alert>
-    </v-list-item>
-    <v-list-item v-if='loading && searchable'>
-      <v-progress-circular
-        indeterminate
-      ></v-progress-circular>
-    </v-list-item>
-    <area-list-item v-else v-for="area in areas" :key="area.id" :area='area' />
-  </v-list>
+  <v-container>
+    <v-text-field v-if='searchable' label="Search areas" v-model="areaQueryString" :loading='loading && areaQueryString !== null'></v-text-field>
+    <filtering-alert v-if='wasFiltered' type='areas'></filtering-alert>
+    <details-loading v-if="(loading && !searchable) || (loading && areaQueryString !== null)"></details-loading>
+    <v-simple-table style='cursor: pointer;' v-else>
+      <template v-slot:default>
+        <tbody>
+          <area-list-item v-for="area in areas" :key="area.id" :area='area' />
+        </tbody>
+      </template>
+    </v-simple-table>
+  </v-container>
 </template>
-
 <script>
 import AreaListItem from '../listItems/AreaListItem'
 import FilteringAlert from '../common/FilteringAlert'
+import DetailsLoading from '../common/DetailsLoading.vue'
 import { mapState } from 'vuex'
 
 export default {
@@ -32,7 +30,8 @@ export default {
   },
   components: {
     AreaListItem,
-    FilteringAlert
+    FilteringAlert,
+    DetailsLoading
   },
   data () {
     return {
