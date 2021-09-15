@@ -5,7 +5,7 @@
     @click="link()"
     :class="{area_list_hover: highlight}"
   >
-    <td style='min-width:150px'>
+    <td style='max-width:160px; min-width:120px'>
       <v-list-item-subtitle>{{typeName}}</v-list-item-subtitle>
       <v-list-item-title >{{area.name}}</v-list-item-title>
     </td>
