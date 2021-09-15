@@ -102,7 +102,9 @@ export default {
       openAuthorizedForm: 'form/authorizeAndOpen'
     }),
     closeDrawer () {
-      this.$router.push(getUrl('image', null))
+      if (this.$store.getters.imageOpen) {
+        this.$router.push(getUrl('image', null))
+      }
       this.drawers.left = false
     },
     setTitle () {

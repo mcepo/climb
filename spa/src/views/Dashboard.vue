@@ -2,7 +2,7 @@
   <v-app>
     <nav-bar></nav-bar>
 
-    <v-main style='padding:0px'>
+    <v-main style='padding:0px' v-if='loadMain'>
       <drawing-actionbar></drawing-actionbar>
       <router-view name='map'></router-view>
     </v-main>
@@ -20,12 +20,24 @@ import NotificationSnackbar from '../components/common/NotificationSnackbar.vue'
 import NavBar from '../components/common/NavBar.vue'
 import '../plugins/leaflet'
 
+import drawers from '../services/drawer.service'
+
 export default Vue.extend({
 
   components: {
     DrawingActionbar,
     NavBar,
     NotificationSnackbar
+  },
+  computed: {
+    loadMain () {
+      return window.innerWidth > 500 || drawers.left === false
+    }
+  },
+  setup () {
+    return {
+      drawers
+    }
   }
 })
 </script>
