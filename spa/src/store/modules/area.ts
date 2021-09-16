@@ -14,6 +14,7 @@ export interface AreaState {
   byIds: Record<string, Area>;
   allIds: Array<number>;
   loading: boolean;
+  searching: boolean;
   rootIds: Array<number>;
   recentlyViewedIds: Array<number>;
 }
@@ -35,11 +36,15 @@ const area: Module<AreaState, RootState> = {
     byIds: {},
     allIds: [],
     loading: true,
+    searching: false,
     rootIds: [],
     recentlyViewedIds: []
   },
   mutations: {
     ...entityMutations,
+    searching (state, searchingState: boolean) {
+      state.searching = searchingState
+    },
     appendArea (state: AreaState, { parentId, areaId }) {
       if (parentId) {
         const parent = state.byIds[parentId]
@@ -194,9 +199,7 @@ const area: Module<AreaState, RootState> = {
         })
     },
     fetchMany ({ commit }, query: string|null) {
-      if (query == null) {
-        commit('loading', true)
-      }
+      commit(query ? 'searching' : 'loading', true)
 
       const params = query ? { query } : {}
 
@@ -215,7 +218,7 @@ const area: Module<AreaState, RootState> = {
           drawers.left = true
         })
         .finally(() => {
-          commit('loading', false)
+          commit(query ? 'searching' : 'loading', false)
         })
     }
   },

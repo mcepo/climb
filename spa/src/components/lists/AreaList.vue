@@ -2,7 +2,7 @@
   <v-container>
     <v-text-field v-if='searchable' label="Search areas" v-model="areaQueryString" :loading='loading && areaQueryString !== null'></v-text-field>
     <filtering-alert v-if='wasFiltered' type='areas'></filtering-alert>
-    <details-loading v-if="(loading && !searchable) || (loading && areaQueryString !== null)"></details-loading>
+    <details-loading v-if="(loading && !searchable) || (searchable && searching)"></details-loading>
     <v-simple-table style='cursor: pointer;' v-else>
       <template v-slot:default>
         <tbody>
@@ -58,7 +58,8 @@ export default {
         )
     },
     ...mapState({
-      loading: s => s.area.loading
+      loading: s => s.area.loading,
+      searching: s => s.area.searching
     }),
     limitedAreas () {
       return this.areas.slice(0, this.areaLimit)
@@ -82,7 +83,7 @@ export default {
   watch: {
     areaQueryString (newQuery) {
       newQuery = newQuery === '' ? null : newQuery
-      if (!this.area) {
+      if (!this.area && newQuery) {
         this.loadAreasOnce(newQuery)
       }
     },
@@ -96,7 +97,6 @@ export default {
   },
   methods: {
     loadAreasOnce (query) {
-      this.$store.commit('area/loading', true)
       this.$options.cancelToken && clearTimeout(this.$options.cancelToken)
       this.$options.cancelToken = setTimeout(() => this.$store.dispatch('area/fetchMany', query), 500)
     },
