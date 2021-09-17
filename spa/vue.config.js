@@ -77,23 +77,6 @@ module.exports = {
   configureWebpack: {
     plugins: [
       new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /en\-gb/),
-    ],
-    optimization: {
-      splitChunks: {
-        chunks: 'all',
-        maxInitialRequests: Infinity,
-        minSize: 0,
-        cacheGroups: {
-          chart: {
-            test: /chart/,
-            name: 'chunk-vendors-chart'
-          },
-          leaflet: {
-            test: /leaflet\-src/,
-            name: 'chunk-vendors-leaflet'
-          }
-        },
-      },
-    },
+    ]
   }
 }
