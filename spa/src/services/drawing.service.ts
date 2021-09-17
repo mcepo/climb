@@ -47,7 +47,7 @@ class DrawingService {
     return this._map
   }
 
-  private async loadGeoman() {
+  private async loadGeoman () {
     await import(/* webpackChunkName: "leaflet-geoman" */ '@geoman-io/leaflet-geoman-free')
   }
 

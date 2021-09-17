@@ -14,30 +14,32 @@ export default {
   async mounted () {
     if (!this.orientations) return
 
-    const Chart = await import(/* webpackChunkName: "chart-js" */ 'chart.js')
-
-    const ctx = document.getElementById(this.divId)
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const myChart = new Chart(ctx, {
-      type: 'radar',
-      data: {
-        labels: ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'],
-        datasets: [
-          {
-            label: 'Route orientations (%)',
-            data: Object.values(this.orientations)
-          }
-        ]
-      },
-      options: {
-        scale: {
-          ticks: {
-            suggestedMin: 0,
-            suggestedMax: 50
-          }
-        }
-      }
-    })
+    import(/* webpackChunkName: "chart-js" */ 'chart.js')
+      .then(
+        ({ default: Chart }) => {
+          const ctx = document.getElementById(this.divId)
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          const myChart = new Chart(ctx, {
+            type: 'radar',
+            data: {
+              labels: ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'],
+              datasets: [
+                {
+                  label: 'Route orientations (%)',
+                  data: Object.values(this.orientations)
+                }
+              ]
+            },
+            options: {
+              scale: {
+                ticks: {
+                  suggestedMin: 0,
+                  suggestedMax: 50
+                }
+              }
+            }
+          })
+        })
   }
 }
 </script>

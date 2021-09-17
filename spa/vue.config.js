@@ -57,9 +57,6 @@ module.exports = {
   indexPath: process.env.NODE_ENV === 'production'
     ? '../../resources/views/index.blade.php'
     : 'index.html',
-  css: {
-    extract: true
-  },
   chainWebpack: config => {
     config.plugin('html').tap((args) => {
       args[0].minify = {

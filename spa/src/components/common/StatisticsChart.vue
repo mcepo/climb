@@ -32,47 +32,48 @@ export default {
     }
   },
   async mounted () {
-
-    const Chart = await import(/* webpackChunkName: "chart-js" */ 'chart.js')
-
-    const ctx = document.getElementById(this.divId)
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const myChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: this.gradeChartArray,
-        datasets: [
-          {
-            label: 'Climbs ',
-            data: this.data
-          }
-        ]
-      },
-      options: {
-        legend: {
-          display: false
-        },
-        title: {
-          text: this.gradeTypeObject.name,
-          display: true
-        },
-        elements: {
-          rectangle: {
-            backgroundColor: 'grey'
-          }
-        },
-        scales: {
-          yAxes: [
-            {
-              ticks: {
-                beginAtZero: true,
-                precision: 0
+    import(/* webpackChunkName: "chart-js" */ 'chart.js')
+      .then(
+        ({ default: Chart }) => {
+          const ctx = document.getElementById(this.divId)
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: this.gradeChartArray,
+              datasets: [
+                {
+                  label: 'Climbs ',
+                  data: this.data
+                }
+              ]
+            },
+            options: {
+              legend: {
+                display: false
+              },
+              title: {
+                text: this.gradeTypeObject.name,
+                display: true
+              },
+              elements: {
+                rectangle: {
+                  backgroundColor: 'grey'
+                }
+              },
+              scales: {
+                yAxes: [
+                  {
+                    ticks: {
+                      beginAtZero: true,
+                      precision: 0
+                    }
+                  }
+                ]
               }
             }
-          ]
-        }
-      }
-    })
+          })
+        })
   }
 }
 </script>

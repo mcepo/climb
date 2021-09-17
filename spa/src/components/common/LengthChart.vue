@@ -24,49 +24,51 @@ export default {
       return this.stats && (!Array.isArray(this.stats))
     }
   },
-  async mounted () {
+  mounted () {
     if (!this.show) return
 
-    const Chart = await import(/* webpackChunkName: "chart-js" */ 'chart.js')
-
-    const ctx = document.getElementById(this.divId)
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const myChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: this.keys,
-        datasets: [
-          {
-            label: 'Climbs ',
-            data: this.data
-          }
-        ]
-      },
-      options: {
-        legend: {
-          display: false
-        },
-        title: {
-          text: 'Route lengths',
-          display: true
-        },
-        elements: {
-          rectangle: {
-            backgroundColor: 'grey'
-          }
-        },
-        scales: {
-          yAxes: [
-            {
-              ticks: {
-                beginAtZero: true,
-                precision: 0
+    import(/* webpackChunkName: "chart-js" */ 'chart.js')
+      .then(
+        ({ default: Chart }) => {
+          const ctx = document.getElementById(this.divId)
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: this.keys,
+              datasets: [
+                {
+                  label: 'Climbs ',
+                  data: this.data
+                }
+              ]
+            },
+            options: {
+              legend: {
+                display: false
+              },
+              title: {
+                text: 'Route lengths',
+                display: true
+              },
+              elements: {
+                rectangle: {
+                  backgroundColor: 'grey'
+                }
+              },
+              scales: {
+                yAxes: [
+                  {
+                    ticks: {
+                      beginAtZero: true,
+                      precision: 0
+                    }
+                  }
+                ]
               }
             }
-          ]
-        }
-      }
-    })
+          })
+        })
   }
 }
 </script>
