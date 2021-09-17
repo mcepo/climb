@@ -2,6 +2,8 @@
 // const CircularDependencyPlugin = require('circular-dependency-plugin')
 // const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
+const webpack = require('webpack');
+
 module.exports = {
   transpileDependencies: ['vuetify'],
   devServer: {
@@ -71,5 +73,10 @@ module.exports = {
     webpackBundleAnalyzer: {
       openAnalyzer: false
     }
+  },
+  configureWebpack: {
+    plugins: [
+      new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /en\-gb/),
+    ]
   }
 }
