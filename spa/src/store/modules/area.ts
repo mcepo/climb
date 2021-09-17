@@ -268,6 +268,7 @@ const area: Module<AreaState, RootState> = {
       rootGetters: any
     ) {
       let area: Area = getters.get
+      const child: Area = area
 
       let tags: Array<Tag> = []
 
@@ -310,7 +311,7 @@ const area: Module<AreaState, RootState> = {
       }
 
       rootGetters['route/getFiltered'].forEach((route: Route) => {
-        route.map_tag && tags.push(route.map_tag)
+        route.map_tag && route.area_id === child.id && tags.push(route.map_tag)
       })
 
       return tags
