@@ -77,6 +77,29 @@ module.exports = {
   configureWebpack: {
     plugins: [
       new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /en\-gb/),
-    ]
+    ],
+    optimization: {
+      splitChunks: {
+        chunks: 'all',
+        maxInitialRequests: Infinity,
+        minSize: 0,
+        cacheGroups: {
+          geoman: {
+            // regex to compare against build resource by path name (e.g., `/node_modules/vuetify`)
+            test: /leaflet\-geoman/,
+            // basename of output file
+            name: 'chunk-vendors-geoman'
+          },
+          chart: {
+            test: /chart/,
+            name: 'chunk-vendors-chart'
+          },
+          leaflet: {
+            test: /leaflet\-src/,
+            name: 'chunk-vendors-leaflet'
+          }
+        },
+      },
+    },
   }
 }
