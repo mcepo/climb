@@ -3,7 +3,6 @@
 </template>
 
 <script>
-import Chart from 'chart.js'
 
 export default {
   props: ['stats'],
@@ -25,8 +24,10 @@ export default {
       return this.stats && (!Array.isArray(this.stats))
     }
   },
-  mounted () {
+  async mounted () {
     if (!this.show) return
+
+    const Chart = await import(/* webpackChunkName: "chart-js" */ 'chart.js')
 
     const ctx = document.getElementById(this.divId)
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

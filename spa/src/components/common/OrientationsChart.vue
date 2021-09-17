@@ -3,7 +3,6 @@
 </template>
 
 <script>
-import Chart from 'chart.js'
 
 export default {
   props: ['orientations'],
@@ -12,8 +11,10 @@ export default {
       return 'orientations-chart'
     }
   },
-  mounted () {
+  async mounted () {
     if (!this.orientations) return
+
+    const Chart = await import(/* webpackChunkName: "chart-js" */ 'chart.js')
 
     const ctx = document.getElementById(this.divId)
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

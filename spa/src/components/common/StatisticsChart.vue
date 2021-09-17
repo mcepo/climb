@@ -3,7 +3,6 @@
 </template>
 
 <script>
-import Chart from 'chart.js'
 
 import gradeService from '../../services/grade.service'
 
@@ -32,7 +31,10 @@ export default {
       return arrayData
     }
   },
-  mounted () {
+  async mounted () {
+
+    const Chart = await import(/* webpackChunkName: "chart-js" */ 'chart.js')
+
     const ctx = document.getElementById(this.divId)
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const myChart = new Chart(ctx, {
