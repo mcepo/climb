@@ -2,7 +2,6 @@ import layerService from './layer.service'
 import store from '../store'
 import { TaggedType, Tag } from '@/models'
 import api from '@/store/api'
-import '@geoman-io/leaflet-geoman-free'
 import '@geoman-io/leaflet-geoman-free/dist/leaflet-geoman.css'
 import geolocationService from './geolocation.service'
 
@@ -35,7 +34,7 @@ class DrawingService {
 
   private _taggedType!: string
 
-  setMapAndType (type: TaggedType) {
+  private setMapAndType (type: TaggedType) {
     this._map = layerService.map
     this._taggedType = type
 
@@ -48,8 +47,13 @@ class DrawingService {
     return this._map
   }
 
+  private async loadGeoman() {
+    await import(/* webpackChunkName: "leaflet-geoman" */ '@geoman-io/leaflet-geoman-free')
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  createTag (type: TaggedType, item: any) {
+  public async createTag (type: TaggedType, item: any) {
+    await this.loadGeoman()
     // authorize this action, only checking if user is logged in
     store.dispatch('auth/authorize').then(() => {
       // if there is no map stop drawing
@@ -74,7 +78,8 @@ class DrawingService {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  editTag (type: TaggedType, item: any) {
+  public async editTag (type: TaggedType, item: any) {
+    await this.loadGeoman()
     const key = type + item.id
 
     if (!layerService.hasTag(key)) {
@@ -109,7 +114,8 @@ class DrawingService {
   // of the user
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  setTagAtCurrentLocation (type: TaggedType, item: any) {
+  public async setTagAtCurrentLocation (type: TaggedType, item: any) {
+    await this.loadGeoman()
     store.dispatch('snackbar/show', "Tagging '" + item.name + "' at your current location<br/>Depending on your device/browser, this may take some time ...")
 
     const key = type + item.id
@@ -154,7 +160,7 @@ class DrawingService {
       })
   }
 
-  createDrawingLayer () {
+  private createDrawingLayer () {
     this._layer = this._tag && layerService.createLayer(this._tag)
 
     this._layer.addTo(this._map)
@@ -162,7 +168,7 @@ class DrawingService {
     this._layer.pm.enable()
   }
 
-  registerListenerOnDraw () {
+  private registerListenerOnDraw () {
     this._map.once('pm:create', (e) => {
       this._map.pm.disableDraw(this._drawingType)
 
@@ -181,7 +187,7 @@ class DrawingService {
     })
   }
 
-  enableDrawing () {
+  private enableDrawing () {
     this._map.pm.enableDraw(this._drawingType, {
       snappable: true,
 
@@ -191,7 +197,7 @@ class DrawingService {
     })
   }
 
-  createRequest () {
+  private createRequest () {
     return {
       id: this._tag?.id || null,
 
@@ -208,7 +214,7 @@ class DrawingService {
     } as Tag
   }
 
-  storeTrailTag (request: Tag) {
+  private storeTrailTag (request: Tag) {
     api.post('trail', request).then(
       ({ data }) => {
         store.commit('trail/add', data)
@@ -223,7 +229,7 @@ class DrawingService {
       })
   }
 
-  storeTag (tag?: Tag) {
+  public storeTag (tag?: Tag) {
     store.dispatch('snackbar/show', 'Storing tag')
 
     const request = tag || this.createRequest()
@@ -257,7 +263,7 @@ class DrawingService {
       })
   }
 
-  afterDrawing () {
+  private afterDrawing () {
     this._layer && this._layer.remove()
 
     this._map && this._map.pm.disableDraw(this._drawingType)
@@ -275,7 +281,7 @@ class DrawingService {
     this._map = null
   }
 
-  discardLayer () {
+  public discardLayer () {
     this._tag && layerService.showTag(this._tag)
 
     this.afterDrawing()
