@@ -4,7 +4,7 @@ import { TaggedType, Tag } from '@/models'
 import api from '@/store/api'
 import '@geoman-io/leaflet-geoman-free/dist/leaflet-geoman.css'
 import geolocationService from './geolocation.service'
-
+import * as L from 'leaflet'
 const drawingTypes = {
   map: {
     area: 'Marker',
@@ -48,16 +48,20 @@ class DrawingService {
   }
 
   private async loadGeoman () {
-    await import(/* webpackChunkName: "leaflet-geoman" */ '@geoman-io/leaflet-geoman-free')
+    if (!this._map.pm) {
+      await import(/* webpackChunkName: "leaflet-geoman" */ '@geoman-io/leaflet-geoman-free')
+      L.PM.reInitLayer(this._map)
+    }
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public async createTag (type: TaggedType, item: any) {
-    await this.loadGeoman()
+  public createTag (type: TaggedType, item: any) {
     // authorize this action, only checking if user is logged in
-    store.dispatch('auth/authorize').then(() => {
+    store.dispatch('auth/authorize').then(async () => {
       // if there is no map stop drawing
       if (!this.setMapAndType(type)) return
+
+      await this.loadGeoman()
 
       store.dispatch('snackbar/show', 'Adding tag for ' + (item?.name || type))
 
@@ -79,7 +83,6 @@ class DrawingService {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async editTag (type: TaggedType, item: any) {
-    await this.loadGeoman()
     const key = type + item.id
 
     if (!layerService.hasTag(key)) {
@@ -91,11 +94,13 @@ class DrawingService {
 
     store
       .dispatch('auth/authorize', this._tag)
-      .then(() => {
+      .then(async () => {
         layerService.hideTag(key)
 
         // if there is no map stop drawing
         if (!this.setMapAndType(type)) return
+
+        await this.loadGeoman()
 
         this._item = item
 
@@ -114,8 +119,7 @@ class DrawingService {
   // of the user
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public async setTagAtCurrentLocation (type: TaggedType, item: any) {
-    await this.loadGeoman()
+  public setTagAtCurrentLocation (type: TaggedType, item: any) {
     store.dispatch('snackbar/show', "Tagging '" + item.name + "' at your current location<br/>Depending on your device/browser, this may take some time ...")
 
     const key = type + item.id
