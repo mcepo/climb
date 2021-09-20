@@ -11,7 +11,7 @@
     </v-snackbar>
 </template>
 
-<style>
+<style scoped>
 .action-snackbar{
   margin: auto;
   max-width:150px;
