@@ -48,10 +48,6 @@ const image: Module<ImageState, RootState> = {
   actions: {
 
     normalizeData ({ commit }, image: Image) {
-      // adding to store parent of this image
-      commit(image.captured_type + '/add', image.captured, { root: true })
-
-      delete image.captured
 
       // adding tagged entities to store
       image.tags && image.tags.forEach((tag: Tag) => {

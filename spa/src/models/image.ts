@@ -3,9 +3,6 @@ import { Area, Route, Trail, Pitch, Tag } from '.'
 export interface Image {
   id: number;
   size: number[];
-  captured_type: 'area'|'route'|'pitch'|'trail';
-  captured_id: number;
-  captured?: Area|Route|Trail|Pitch;
   tags: Tag[];
   map_tag: Tag;
   path: string;
