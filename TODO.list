@@ -11,10 +11,8 @@ TODO: kanonski urlovi provjeriti
 
 TODO: izgled popup-a na području je sjeban
 
-TODO: list reduce amount of html and css on them (in generale try to reduce amount html on frontend)
-TODO: mapa se na mobitelu ne treba odmah učitati jer se ne vidi. lijevi panel dodati kao fiksni div
-    koji se proširuje kako se ekran povečava a na određenoj širini npr 700px se mapa otvara sa strane.
-    na mobitelu sa klikom na mapu se mjenja div koji je otvoren
+TODO: extract vuetify by components from vuetify/lib, extract vue-social-auth to login/register blade
+google-mutant to google load, maybe leaflet lazy load, usefull for mobile, composition api to vue observables
 
 TODO: welcome and disclamer popup community maintained site .... vuetify overlay
 
