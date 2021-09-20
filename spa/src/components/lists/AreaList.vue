@@ -3,16 +3,20 @@
     <v-text-field v-if='searchable' label="Search areas" v-model="areaQueryString" :loading='loading && areaQueryString !== null'></v-text-field>
     <filtering-alert v-if='wasFiltered' type='areas'></filtering-alert>
     <details-loading v-if="(loading && !searchable) || (searchable && searching)"></details-loading>
-    <v-simple-table style='cursor: pointer;' v-else>
-      <template v-slot:default>
-        <tbody>
-          <area-list-item v-for="area in limitedAreas" :key="area.id" :area='area' />
-          <tr v-intersect='loadOnIntersect'></tr>
-        </tbody>
-      </template>
-    </v-simple-table>
+    <table class='area-table' v-else>
+      <tbody>
+        <area-list-item v-for="area in limitedAreas" :key="area.id" :area='area' />
+        <tr v-intersect='loadOnIntersect'></tr>
+      </tbody>
+    </table>
   </v-container>
 </template>
+<style>
+.area-table {
+  cursor: pointer;
+  border-spacing: 0px;
+}
+</style>
 <script>
 import AreaListItem from '../listItems/AreaListItem'
 import FilteringAlert from '../common/FilteringAlert'

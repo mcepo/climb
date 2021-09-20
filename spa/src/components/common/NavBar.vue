@@ -109,11 +109,21 @@ export default Vue.extend({
     installable () {
       return !this.installed && this.hasDeferrerPrompt
     },
-    rightDrawer () {
-      return drawers.state.right
+    rightDrawer: {
+      get () {
+        return drawers.state.right
+      },
+      set (value) {
+        drawers.state.right = value
+      }
     },
-    leftDrawer () {
-      return drawers.state.left
+    leftDrawer: {
+      get () {
+        return drawers.state.left
+      },
+      set (value) {
+        drawers.state.left = value
+      }
     }
   },
 

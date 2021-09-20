@@ -1,6 +1,5 @@
 <template>
-  <v-simple-table>
-    <template v-slot:default>
+  <table class='pitch_table'>
       <thead>
         <tr>
           <th class="text-left">Pitch</th>
@@ -12,8 +11,10 @@
       <tbody>
         <tr v-for="(pitch, index) in pitches"
           :key="index"
-          @mouseenter="onMouseEnter('pitch' + pitch.id)"
-          @mouseleave="onMouseLeave()">
+          @mouseenter="onMouseEnter(type + pitch.id)"
+          @mouseleave="onMouseLeave()"
+          :class="{pitch_row_hover: highlighted(type + pitch.id)}"
+          >
           <td>{{ index + 1 }}</td>
           <td>{{ forgeGrade(pitch.grades) }}</td>
           <td>{{ pitch.length ? pitch.length + 'm' : ''}}</td>
@@ -26,21 +27,33 @@
           </td>
         </tr>
       </tbody>
-    </template>
-  </v-simple-table>
+  </table>
 </template>
-
+<style>
+.pitch_row_hover {
+  background-color: lightgray;
+}
+.pitch_table {
+  cursor: pointer;
+  border-spacing: 0px;
+}
+</style>
 <script>
 import TagControl from '../buttons/TagControl'
 import DeleteButton from '../buttons/DeleteButton'
 import gradeService from '../../services/grade.service'
 import { mapActions } from 'vuex'
 
+import { ItemType } from '../../services/type.service'
+
 import highlight from '../../services/highlight.service'
 
 export default {
   props: ['route'],
   computed: {
+    type () {
+      return ItemType.Pitch
+    },
     notMap () {
       return !!this.$route.params.imageId
     },
@@ -69,8 +82,8 @@ export default {
     forgeGrade (grades) {
       return grades ? gradeService.forge(grades) : ''
     },
-    highlight (item) {
-      return highlight.key === 'pitch' + item.id
+    highlighted (key) {
+      return key === highlight.key
     }
   },
   components: {

@@ -56,7 +56,7 @@ export default {
         }
       }
       drawers.setLeft(true)
-      drawers.setRigth(false)
+      drawers.setRight(false)
     }
   }
 }

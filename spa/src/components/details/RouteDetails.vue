@@ -2,24 +2,22 @@
   <details-loading v-if="loading"></details-loading>
   <details-layout v-else :item="route" :type="type">
     <template slot="item-details">
-    <v-simple-table>
-    <template v-slot:default>
-      <tbody>
-        <tr>
-          <td class='stat_name'>Grade</td>
-          <td>{{grade}}</td>
-        </tr>
-        <tr>
-          <td class='stat_name'>Length</td>
-          <td>{{route.length}}m</td>
-        </tr>
-        <tr>
-          <td class='stat_name'>Orientation</td>
-          <td>{{orientation}}</td>
-        </tr>
-      </tbody>
-    </template>
-  </v-simple-table>
+    <table>
+    <tbody>
+      <tr>
+        <td class='stat_name'>Grade</td>
+        <td>{{grade}}</td>
+      </tr>
+      <tr>
+        <td class='stat_name'>Length</td>
+        <td>{{route.length}}m</td>
+      </tr>
+      <tr>
+        <td class='stat_name'>Orientation</td>
+        <td>{{orientation}}</td>
+      </tr>
+    </tbody>
+  </table>
     </template>
   </details-layout>
 </template>
