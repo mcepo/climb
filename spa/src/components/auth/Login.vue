@@ -51,6 +51,7 @@
 <script>
 import api from '../../store/api'
 import { mapActions } from 'vuex'
+import '../../plugins/social-auth'
 
 export default {
   data: () => ({
