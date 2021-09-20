@@ -2,7 +2,6 @@ import layerService from './layer.service'
 import store from '../store'
 import { TaggedType, Tag } from '@/models'
 import api from '@/store/api'
-import '@geoman-io/leaflet-geoman-free/dist/leaflet-geoman.css'
 import geolocationService from './geolocation.service'
 import * as L from 'leaflet'
 const drawingTypes = {
@@ -49,7 +48,7 @@ class DrawingService {
 
   private async loadGeoman () {
     if (!this._map.pm) {
-      await import(/* webpackChunkName: "leaflet-geoman" */ '@geoman-io/leaflet-geoman-free')
+      await import(/* webpackChunkName: "leaflet-geoman" */ '../plugins/geoman')
       L.PM.reInitLayer(this._map)
     }
   }
