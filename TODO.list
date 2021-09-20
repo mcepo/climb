@@ -9,10 +9,6 @@ TODO: kad se mjenja područje itemi koji ostaju blicnu to doraditi da promjena p
 
 TODO: kanonski urlovi provjeriti
 
-TODO: izgled popup-a na području je sjeban
-
-TODO: maybe leaflet lazy load usefull for mobile
-
 TODO: welcome and disclamer popup community maintained site .... vuetify overlay
 
 TODO: prilikom odabira ocjene smjera dodati i odabir ljestvice koje će se po defaultu koristiti za taj smjer
@@ -27,8 +23,6 @@ TODO: integrate weather api-s
 TODO: seo optimization steps
 
 TODO: publish crag locations to openstreetmap
-
-TODO: implement ssr
 
 TODO: activity log every click is logged, possibly to elasticsearch
 
@@ -57,6 +51,10 @@ TODO: in area/route details put image with the most topos
     in the header under name
 
 -- OPTIMIZATION --
+
+TODO: maybe leaflet lazy load usefull for mobile
+
+TODO: split css, all of vendor css is loaded initially, which impacts performance significantly
 
 -- OFFLINE MODE PRECACHE --
 
