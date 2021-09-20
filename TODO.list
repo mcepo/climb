@@ -4,8 +4,6 @@ TODO: forma za dodavanje linkova
 TODO: da li mi stvarno treba na slici koje je područje uslikano 
 TODO: dodati broj topos za slike
 
-TODO: kad se mjenja područje itemi koji ostaju blicnu to doraditi da promjena prođe bez blicanja
-
 TODO: kanonski urlovi provjeriti
 
 TODO: welcome and disclamer popup community maintained site .... vuetify overlay
@@ -50,6 +48,8 @@ TODO: in area/route details put image with the most topos
     in the header under name
 
 -- OPTIMIZATION --
+
+TODO: lazy load drawing service
 
 TODO: maybe leaflet lazy load usefull for mobile
 
