@@ -35,11 +35,6 @@ export default Vue.extend({
       return this.$store.getters.hasTag(this.type + this.item.id)
     }
   },
-  setup () {
-    return {
-      drawers
-    }
-  },
   methods: {
     createTag (e) {
       this.stop && e.stopPropagation()
@@ -53,7 +48,7 @@ export default Vue.extend({
     },
     closeDrawerIfMobile () {
       if (this.$vuetify.breakpoint.xs) {
-        this.drawers.left = false
+        drawers.setLeft(false)
       }
     }
   }

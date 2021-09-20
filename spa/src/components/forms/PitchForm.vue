@@ -60,13 +60,6 @@ export default {
       this.assignPropToFormData(this.pitch)
     }
   },
-
-  setup () {
-    return {
-      drawers
-    }
-  },
-
   watch: {
     pitch (newPitch) {
       if (newPitch) {
@@ -125,9 +118,9 @@ export default {
       this.$store.commit('pitch/add', pitch)
       this.$store.dispatch('snackbar/success', 'Done!')
       if (this.$vuetify.breakpoint.xs) {
-        this.drawers.right = false
+        drawers.setRight(false)
       }
-      this.drawers.left = true
+      drawers.setLeft(true)
       this.close()
     }
   }

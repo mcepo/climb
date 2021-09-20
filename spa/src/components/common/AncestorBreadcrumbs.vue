@@ -39,11 +39,6 @@ export default {
       return this.trim ? breadcrumbs.slice(trimIndex, breadcrumbs.length) : breadcrumbs
     }
   },
-  setup () {
-    return {
-      drawers
-    }
-  },
   methods: {
     open (item = null) {
       if (item) {
@@ -60,8 +55,8 @@ export default {
           this.$router.push(getUrl(ItemType.Area, null))
         }
       }
-      this.drawers.left = true
-      this.drawers.right = false
+      drawers.setLeft(true)
+      drawers.setRigth(false)
     }
   }
 }

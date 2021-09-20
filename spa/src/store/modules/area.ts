@@ -165,7 +165,7 @@ const area: Module<AreaState, RootState> = {
         if (miliSecSincLastRefresh < 3600000) {
           commit('loading', false) // just in case, also needed when opening sector
           setTimeout(() => {
-            drawers.left = true
+            drawers.setLeft(true)
           }, 1000)
           return
         }
@@ -183,7 +183,7 @@ const area: Module<AreaState, RootState> = {
           // will not add countries to recently viewed because its in the same component
           data.type_id !== AreaDatabaseId.Country && commit('addRecentlyViewed', data.id)
 
-          drawers.left = true
+          drawers.setLeft(true)
 
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const parent: any = data.parent_id && data.ancestors.pop()
@@ -215,7 +215,7 @@ const area: Module<AreaState, RootState> = {
             }
           })
 
-          drawers.left = true
+          drawers.setLeft(true)
         })
         .finally(() => {
           commit(query ? 'searching' : 'loading', false)

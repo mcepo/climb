@@ -92,11 +92,6 @@ export default {
       checkAuth: 'auth/check'
     })
   },
-  setup () {
-    return {
-      drawers
-    }
-  },
   methods: {
     ...mapActions({
       openAuthorizedForm: 'form/authorizeAndOpen'
@@ -105,7 +100,7 @@ export default {
       if (this.$store.getters.imageOpen) {
         this.$router.push(getUrl('image', null))
       }
-      this.drawers.left = false
+      drawers.setLeft(false)
     },
     setTitle () {
       if (this.item && !document.title.includes(this.item.name)) {

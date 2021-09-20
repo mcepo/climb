@@ -60,18 +60,13 @@ export default {
       loading: true
     }
   },
-  setup () {
-    return {
-      drawers
-    }
-  },
   methods: {
     src (id) {
       return '/api/image/' + id + '/thumbnail'
     },
     open (id) {
       this.$router.push(getUrl('image', id))
-      this.drawers.left = false
+      drawers.setLeft(false)
     },
     imageLoaded () {
       this.loading = false

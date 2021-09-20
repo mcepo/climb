@@ -2,7 +2,7 @@
   <div>
     <!-- has to have z-index in style, can't be a class because it get run over -->
     <v-navigation-drawer
-      v-model="drawers.left"
+      v-model="leftDrawer"
       app
       clipped
       width="400"
@@ -18,7 +18,7 @@
     </v-navigation-drawer>
 
     <v-app-bar app clipped-right clipped-left style='z-index:900'>
-      <v-app-bar-nav-icon @click.stop="drawers.left = !drawers.left"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click.stop="toggleLeft()"></v-app-bar-nav-icon>
       <ancestor-breadcrumbs :trim=3></ancestor-breadcrumbs>
       <v-spacer></v-spacer>
       <v-menu
@@ -72,7 +72,7 @@
     </v-app-bar>
       <!-- has to have z-index in style, can't be a class because it get run over -->
     <v-navigation-drawer
-      v-model="drawers.right"
+      v-model="rightDrawer"
       right
       clipped
       app
@@ -105,16 +105,15 @@ export default Vue.extend({
       hasDeferrerPrompt: false
     }
   },
-
-  setup () {
-    return {
-      drawers
-    }
-  },
-
   computed: {
     installable () {
       return !this.installed && this.hasDeferrerPrompt
+    },
+    rightDrawer () {
+      return drawers.state.right
+    },
+    leftDrawer () {
+      return drawers.state.left
     }
   },
 
@@ -147,7 +146,10 @@ export default Vue.extend({
       getUserName: 'auth/username'
     }),
     swipeLeft () {
-      this.drawers.left = false
+      drawers.setLeft(false)
+    },
+    toggleLeft () {
+      drawers.setLeft(!drawers.state.left)
     },
     installApp () {
       // Show the install prompt

@@ -29,8 +29,8 @@ const form: Module<FormState, RootState> = {
   },
   actions: {
     open ({ commit }, payload) {
-      drawers.left = false
-      drawers.right = true
+      drawers.setLeft(false)
+      drawers.setRight(true)
       commit('open', payload)
     },
     authorizeAndOpen ({ dispatch }, { form, item }) {
@@ -56,9 +56,9 @@ const form: Module<FormState, RootState> = {
       )
     },
     close ({ commit }) {
-      drawers.right = false
+      drawers.setRight(false)
       commit('close')
-      drawers.left = true
+      drawers.setLeft(true)
     }
   }
 }

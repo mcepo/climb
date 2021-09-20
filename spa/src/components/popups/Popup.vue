@@ -37,15 +37,10 @@ export default Vue.extend({
       return this.url || getUrl(this.type, this.item.id)
     }
   },
-  setup () {
-    return {
-      drawers
-    }
-  },
   methods: {
     openItem () {
       this.$router.push(this.link)
-      this.drawers.left = this.type !== 'image'
+      drawers.setLeft(this.type !== 'image')
     }
   }
 })

@@ -87,7 +87,7 @@ const route: Module<RouteState, RootState> = {
         // don't refresh if less then an hour has passed
         if (miliSecSincLastRefresh < 3600000) {
           setTimeout(() => {
-            drawers.left = true
+            drawers.setLeft(true)
           }, 1000)
           return
         }
