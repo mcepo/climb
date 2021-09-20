@@ -29,13 +29,16 @@
       </tbody>
   </table>
 </template>
-<style>
+<style lang='scss'>
 .pitch_row_hover {
   background-color: lightgray;
 }
 .pitch_table {
   cursor: pointer;
   border-spacing: 0px;
+  tr > td:first-child, th:first-child {
+    padding-left:20px;
+    }
 }
 </style>
 <script>
