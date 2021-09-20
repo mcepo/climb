@@ -11,8 +11,7 @@ TODO: kanonski urlovi provjeriti
 
 TODO: izgled popup-a na području je sjeban
 
-TODO: extract vuetify by components from vuetify/lib, extract vue-social-auth to login/register blade
-google-mutant to google load, maybe leaflet lazy load, usefull for mobile, composition api to vue observables
+TODO: maybe leaflet lazy load usefull for mobile
 
 TODO: welcome and disclamer popup community maintained site .... vuetify overlay
 
