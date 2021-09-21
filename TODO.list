@@ -53,7 +53,7 @@ TODO: lazy load drawing service
 
 TODO: maybe leaflet lazy load usefull for mobile
 
-TODO: split css, all of vendor css is loaded initially, which impacts performance significantly
+TODO: material-design-icons učitavam sve ikone, a korisim ih 10ak, potencijalna ušteda 11KB GZIPed
 
 -- OFFLINE MODE PRECACHE --
 
