@@ -263,7 +263,7 @@ const area: Module<AreaState, RootState> = {
       state: AreaState,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       getters: any,
-      _: RootState,
+      rootState: RootState,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       rootGetters: any
     ) {
@@ -285,6 +285,13 @@ const area: Module<AreaState, RootState> = {
       }
 
       tags = tags.concat(getters.tagsFor(area))
+
+      area.trails &&
+      area.trails.forEach((id: number) => {
+        if (rootState.trail?.byIds[id]?.map_tag) {
+          tags.push(rootState.trail.byIds[id].map_tag)
+        }
+      })
 
       const parent = state.byIds[area.parent_id]
 
@@ -326,13 +333,6 @@ const area: Module<AreaState, RootState> = {
 
       getters.getFiltered(currentArea.id).forEach((area: Area) => {
         area.map_tag && tags.push(area.map_tag)
-      })
-
-      currentArea.trails &&
-      currentArea.trails.forEach((id: number) => {
-        if (rootState.trail?.byIds[id]?.map_tag) {
-          tags.push(rootState.trail.byIds[id].map_tag)
-        }
       })
 
       currentArea.images &&
