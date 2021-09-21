@@ -31,6 +31,15 @@ workbox.routing.registerRoute(
   })
 )
 
+// caching area/route information
+
+workbox.routing.registerRoute(
+  new RegExp('/api/(area|route)/*'),
+  new workbox.strategies.NetworkFirst({
+    cacheName: 'app-information'
+  })
+)
+
 // background sync
 
 const bgSyncPlugin = new workbox.backgroundSync.Plugin('backgroundSyncQueue', {
