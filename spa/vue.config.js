@@ -53,7 +53,7 @@ module.exports = {
     }
   },
   css: {
-    extract: false
+    extract: true
   },
 
   // modify the location of the generated HTML file.
