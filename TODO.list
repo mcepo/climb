@@ -7,6 +7,7 @@ TODO: kanonski urlovi provjeriti
 TODO: welcome and disclamer popup community maintained site .... vuetify overlay
 
 TODO: prilikom odabira ocjene smjera dodati i odabir ljestvice koje će se po defaultu koristiti za taj smjer
+
 TODO: dodati i broj spitova u smjeru/ cugu
 
 TODO: razlikovati pristupe i odstupe 
@@ -25,10 +26,6 @@ TODO: activity reverting on tags only ?
 
 TODO: admin panel user review, tags review and images
 -- FIXES --
-
-TODO: clear state storage on service worker update
-
-TODO: sidrište mi je iza linije rute kad je ruta selektirana
 
 -- FEATURES --
 
