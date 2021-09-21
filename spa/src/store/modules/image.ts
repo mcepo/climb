@@ -46,9 +46,7 @@ const image: Module<ImageState, RootState> = {
     }
   },
   actions: {
-
     normalizeData ({ commit }, image: Image) {
-
       // adding tagged entities to store
       image.tags && image.tags.forEach((tag: Tag) => {
         commit(tag.tagged_type + '/add', tag.tagged, { root: true })

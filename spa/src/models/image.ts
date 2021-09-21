@@ -1,4 +1,4 @@
-import { Area, Route, Trail, Pitch, Tag } from '.'
+import { Route, Tag } from '.'
 
 export interface Image {
   id: number;
