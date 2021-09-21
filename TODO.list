@@ -31,7 +31,8 @@ TODO: admin panel user review, tags review and images
 
 TODO: clear state storage on service worker update
 
-TODO: add error message when frontend can't connect to backend
+TODO: add error message when frontend can't connect to backend, resource unavailable error check
+zašto mi se to pojavljuje kad ima podataka za otvoriti
 
 TODO: sidrište mi je iza linije rute kad je ruta selektirana
 
