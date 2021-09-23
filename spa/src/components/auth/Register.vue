@@ -37,8 +37,13 @@
 
       <v-layout justify-center>
         <v-card-actions>
-          <v-btn :disabled="!valid" color="success" @click="submit">Register</v-btn>
-          <v-btn color="error" @click="close">Cancel</v-btn>
+          <v-btn
+            aria-label='Register'
+            :disabled="!valid"
+            color="success"
+            @click="submit">
+              Register
+          </v-btn>
         </v-card-actions>
       </v-layout>
     </v-card>

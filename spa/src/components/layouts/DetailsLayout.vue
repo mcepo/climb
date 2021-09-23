@@ -11,7 +11,7 @@
         </v-layout>
         <v-spacer></v-spacer>
         <get-directions :item='item' :type='type'></get-directions>
-        <v-btn icon title="Close drawer" @click.stop="closeDrawer">
+        <v-btn icon aria-label='Close drawer' title="Close drawer" @click.stop="closeDrawer">
           <v-icon>map</v-icon>
         </v-btn>
         <item-menu v-if='checkAuth' :item='item' :type='type'></item-menu>

@@ -34,7 +34,7 @@
             </v-btn>
             <v-card-subtitle class="font-weight-light" style='text-align:center'>or</v-card-subtitle>
             <v-btn
-              @click="authProvider('google', 'Google')" 
+              @click="authProvider('google', 'Google')"
               aria-label="Google login">
                 <img  style='height:16px; weight:16px; padding-right:5px' src="/img/icons/google-logo.svg" alt="">
                 Google login

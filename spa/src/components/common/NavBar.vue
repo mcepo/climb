@@ -30,6 +30,7 @@
       >
         <template v-slot:activator="{ on, attrs }">
           <v-btn
+            aria-label='Toggle menu'
             icon
             v-bind="attrs"
             v-on="on"
