@@ -27,17 +27,20 @@
           Forgotten password?
         </a>
       </v-card-text>
-
-      <v-layout justify-center>
-        <v-card-actions>
-          <v-btn @click="authProvider('google', 'Google')">Google login</v-btn>
-          <v-btn :disabled="!valid" color="success" @click="submit"
-            >Login</v-btn
-          >
-
-          <v-btn color="error" @click="closeForm()">Cancel</v-btn>
+        <v-card-actions class='ma-4'>
+          <v-layout justify-center column>
+            <v-btn :disabled="!valid" color="success" @click="submit">
+              Login
+            </v-btn>
+            <v-card-subtitle class="font-weight-light" style='text-align:center'>or</v-card-subtitle>
+            <v-btn
+              @click="authProvider('google', 'Google')" 
+              aria-label="Google login">
+                <img  style='height:16px; weight:16px; padding-right:5px' src="/img/icons/google-logo.svg" alt="">
+                Google login
+              </v-btn>
+          </v-layout>
         </v-card-actions>
-      </v-layout>
       <v-card-text
         >Don't have an account yet ...
         <a @click.stop="openForm({ component: 'register-form', params: null })"

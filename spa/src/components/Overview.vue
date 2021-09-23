@@ -9,6 +9,7 @@
           title="Add country"
           text
           icon
+          aria-label="Add country"
           @click.stop="
             openOnlyAdminForm({ component: 'area-form', params: null })
           "
