@@ -11,7 +11,7 @@
         </v-layout>
         <v-spacer></v-spacer>
         <get-directions :item='item' :type='type'></get-directions>
-        <v-btn icon title="Close drawer" @click.stop="closeDrawer">
+        <v-btn icon aria-label='Close drawer' title="Close drawer" @click.stop="closeDrawer">
           <v-icon>map</v-icon>
         </v-btn>
         <item-menu v-if='checkAuth' :item='item' :type='type'></item-menu>
@@ -92,11 +92,6 @@ export default {
       checkAuth: 'auth/check'
     })
   },
-  setup () {
-    return {
-      drawers
-    }
-  },
   methods: {
     ...mapActions({
       openAuthorizedForm: 'form/authorizeAndOpen'
@@ -105,7 +100,7 @@ export default {
       if (this.$store.getters.imageOpen) {
         this.$router.push(getUrl('image', null))
       }
-      this.drawers.left = false
+      drawers.setLeft(false)
     },
     setTitle () {
       if (this.item && !document.title.includes(this.item.name)) {

@@ -58,3 +58,7 @@ html {
 .leaflet-default-icon-path {
 	background-image: none;
 }
+
+table {
+  width:100%;
+}

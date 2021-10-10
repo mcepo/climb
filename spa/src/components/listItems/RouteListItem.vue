@@ -5,10 +5,7 @@
     @click.prevent="link()"
     :class="{route_list_hover: highlight}"
   >
-    <v-list-item-icon size="90">
-      <v-chip>{{typeName}}</v-chip>
-    </v-list-item-icon>
-    <v-list-item-content>
+    <v-list-item-content class='pl-2'>
       <v-list-item-subtitle>
         {{nextAreaName}}
       </v-list-item-subtitle>

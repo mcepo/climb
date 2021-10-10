@@ -1,4 +1,4 @@
-import 'leaflet.gridlayer.googlemutant'
+// import 'leaflet.gridlayer.googlemutant'
 import { Map, TileLayer, control } from 'leaflet'
 
 const first = {

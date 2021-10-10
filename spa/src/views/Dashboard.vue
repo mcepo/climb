@@ -31,12 +31,7 @@ export default Vue.extend({
   },
   computed: {
     loadMain () {
-      return window.innerWidth > 500 || drawers.left === false
-    }
-  },
-  setup () {
-    return {
-      drawers
+      return window.innerWidth > 500 || drawers.state.left === false
     }
   }
 })

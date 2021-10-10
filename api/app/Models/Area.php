@@ -125,10 +125,10 @@ class Area extends Model
     public function loadImages()
     {
         // getting images of this area
-        $this->load(['images.mapTag', 'images.captured']);
+        $this->load(['images.mapTag', 'images']);
 
         // loading all image tags of this area with the image they are tagged on
-        $this->load(['imageTags.image.mapTag', 'imageTags.image.captured']);
+        $this->load(['imageTags.image.mapTag', 'imageTags.image']);
 
         $this->setAttribute('images', $this->imageTags
             ->pluck('image') // getting images from image tag collection

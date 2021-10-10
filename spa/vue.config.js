@@ -52,6 +52,9 @@ module.exports = {
       swDest: '../service-worker.js'
     }
   },
+  css: {
+    extract: true
+  },
 
   // modify the location of the generated HTML file.
   indexPath: process.env.NODE_ENV === 'production'

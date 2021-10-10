@@ -1,12 +1,12 @@
 <template>
   <div v-if="canTag" style="display: inline;">
-    <v-btn v-if="edit" text :icon='!showText' @click="editTag($event)" title="Edit tag"  :block='showText' :class="{'menu-button': showText}">
+    <v-btn v-if="edit" text :icon='!showText' @click="editTag($event)" :title="'Edit ' + addingTypeText"  :block='showText' :class="{'menu-button': showText}">
       <v-icon>edit_location</v-icon>
-      <div v-if="showText">Edit {{type}} tag</div>
+      <div v-if="showText">Edit {{type}} {{addingTypeText}}</div>
     </v-btn>
-    <v-btn v-else text :icon='!showText' @click="createTag($event)" title="Add tag"  :block='showText' :class="{'menu-button': showText}">
+    <v-btn v-else text :icon='!showText' @click="createTag($event)" :title="'Add ' + addingTypeText"  :block='showText' :class="{'menu-button': showText}">
       <v-icon>add_location</v-icon>
-      <div v-if="showText">Add {{type}} tag</div>
+      <div v-if="showText">Add {{type}} {{addingTypeText}}</div>
     </v-btn>
   </div>
 </template>
@@ -14,8 +14,8 @@
 <script>
 import Vue from 'vue'
 import drawingService from '../../services/drawing.service'
-
 import drawers from '../../services/drawer.service'
+import { ItemType } from '../../services/type.service'
 
 export default Vue.extend({
   props: {
@@ -33,11 +33,13 @@ export default Vue.extend({
     },
     edit () {
       return this.$store.getters.hasTag(this.type + this.item.id)
-    }
-  },
-  setup () {
-    return {
-      drawers
+    },
+    addingTypeText () {
+      if (ItemType.Area === this.type || (ItemType.Route === this.type && !this.$store.getters.imageOpen)) {
+        return 'location'
+      }
+
+      return 'topo'
     }
   },
   methods: {
@@ -53,7 +55,7 @@ export default Vue.extend({
     },
     closeDrawerIfMobile () {
       if (this.$vuetify.breakpoint.xs) {
-        this.drawers.left = false
+        drawers.setLeft(false)
       }
     }
   }

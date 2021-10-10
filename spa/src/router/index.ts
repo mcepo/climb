@@ -4,8 +4,6 @@ import Dashboard from '../views/Dashboard.vue'
 import Overview from '../components/Overview.vue'
 import AreaDetails from '../components/details/AreaDetails.vue'
 import RouteDetails from '../components/details/RouteDetails.vue'
-import LeafletMap from '../components/map/LeafletMap.vue'
-import ImageMap from '../components/map/ImageMap.vue'
 
 import store from '../store'
 
@@ -17,6 +15,8 @@ const UsersPage = () => import(/* webpackChunkName: "admin.panel" */'../admin/pa
 const ActivityLogPage = () => import(/* webpackChunkName: "admin.panel" */'../admin/pages/ActivityLogPage.vue')
 const ImagesPage = () => import(/* webpackChunkName: "admin.panel" */'../admin/pages/ImagesPage.vue')
 const UserOverviewPage = () => import(/* webpackChunkName: "admin.panel" */'../admin/pages/UserOverviewPage.vue')
+const LeafletMap = () => import(/* webpackChunkName: "leaflet.map" */'../components/map/LeafletMap.vue')
+const ImageMap = () => import(/* webpackChunkName: "image.map" */'../components/map/ImageMap.vue')
 
 const routes = [
   {

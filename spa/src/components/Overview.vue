@@ -9,6 +9,7 @@
           title="Add country"
           text
           icon
+          aria-label="Add country"
           @click.stop="
             openOnlyAdminForm({ component: 'area-form', params: null })
           "
@@ -31,8 +32,6 @@
 import { mapState, mapActions } from 'vuex'
 import AreaList from './lists/AreaList'
 
-import drawers from '../services/drawer.service'
-
 export default {
   cancelationToken: null,
   data () {
@@ -45,12 +44,6 @@ export default {
       rootIds: s => s.area.rootIds,
       recentlyViewedIds: s => s.area.recentlyViewedIds
     })
-  },
-
-  setup () {
-    return {
-      drawers
-    }
   },
 
   created () {

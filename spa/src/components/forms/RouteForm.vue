@@ -131,13 +131,6 @@ export default {
     this.formDefaultValues()
     this.route && this.assignPropToFormData(this.route)
   },
-
-  setup () {
-    return {
-      drawers
-    }
-  },
-
   watch: {
     route (newRoute) {
       newRoute && this.assignPropToFormData(newRoute)
@@ -200,9 +193,9 @@ export default {
       this.$store.dispatch('area/updateRoutePositions', { id: this.area.id, routes })
       this.$store.dispatch('snackbar/success', 'Done!')
       if (this.$vuetify.breakpoint.xs) {
-        this.drawers.right = false
+        drawers.setRight(false)
       }
-      this.drawers.left = true
+      drawers.setLeft(true)
       this.close()
     }
   }

@@ -1,9 +1,17 @@
 import Vue from 'vue'
-import VueCompositionApi, { reactive } from '@vue/composition-api'
 
-Vue.use(VueCompositionApi)
-
-export default reactive({
-  left: true,
-  right: false
-})
+const drawers = {
+  state: Vue.observable(
+    {
+      left: true,
+      right: false
+    }
+  ),
+  setLeft (state: boolean) {
+    this.state.left = state
+  },
+  setRight (state: boolean) {
+    this.state.right = state
+  }
+}
+export default drawers

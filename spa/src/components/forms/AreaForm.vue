@@ -100,11 +100,6 @@ export default {
     this.formDefaultValues()
     this.area && this.assignPropToFormData(this.area)
   },
-  setup () {
-    return {
-      drawers
-    }
-  },
   watch: {
     area (newArea) {
       newArea && this.assignPropToFormData(newArea)
@@ -164,9 +159,9 @@ export default {
       this.$store.commit('area/add', area)
       this.$store.dispatch('snackbar/success', 'Changes stored!')
       if (this.$vuetify.breakpoint.xs) {
-        this.drawers.right = false
+        drawers.setRight(false)
       }
-      this.drawers.left = true
+      drawers.setLeft(true)
       this.close()
     }
   }

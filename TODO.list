@@ -1,22 +1,14 @@
 -- HOT --
 
-TODO: rename tags to location and topos
 TODO: forma za dodavanje linkova
-TODO: da li mi stvarno treba na slici koje je područje uslikano 
-TODO: dodati broj topos za slike
 
-TODO: kad se mjenja područje itemi koji ostaju blicnu to doraditi da promjena prođe bez blicanja
-
-TODO: kanonski urlovi provjeriti
-
-TODO: izgled popup-a na području je sjeban
-
-TODO: extract vuetify by components from vuetify/lib, extract vue-social-auth to login/register blade
-google-mutant to google load, maybe leaflet lazy load, usefull for mobile, composition api to vue observables
+TODO: kanonski urlovi provjeriti, google indexiranje mi ne pronalazi pravilno područja
+npr za pretragu Croatia mi izbaci tamo neki sektor, povečati razliku u faktoru važnosti u sitemaps
 
 TODO: welcome and disclamer popup community maintained site .... vuetify overlay
 
 TODO: prilikom odabira ocjene smjera dodati i odabir ljestvice koje će se po defaultu koristiti za taj smjer
+
 TODO: dodati i broj spitova u smjeru/ cugu
 
 TODO: razlikovati pristupe i odstupe 
@@ -25,11 +17,7 @@ TODO: razlikovati pristupe i odstupe
 
 TODO: integrate weather api-s
 
-TODO: seo optimization steps
-
 TODO: publish crag locations to openstreetmap
-
-TODO: implement ssr
 
 TODO: activity log every click is logged, possibly to elasticsearch
 
@@ -39,12 +27,6 @@ TODO: activity reverting on tags only ?
 
 TODO: admin panel user review, tags review and images
 -- FIXES --
-
-TODO: clear state storage on service worker update
-
-TODO: add error message when frontend can't connect to backend
-
-TODO: sidrište mi je iza linije rute kad je ruta selektirana
 
 -- FEATURES --
 
@@ -58,6 +40,12 @@ TODO: in area/route details put image with the most topos
     in the header under name
 
 -- OPTIMIZATION --
+
+TODO: lazy load drawing service
+
+TODO: maybe leaflet lazy load usefull for mobile
+
+TODO: material-design-icons učitavam sve ikone, a korisim ih 10ak, potencijalna ušteda 11KB GZIPed
 
 -- OFFLINE MODE PRECACHE --
 

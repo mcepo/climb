@@ -280,12 +280,12 @@ export class LayerService {
     ) {
       this._lastBounds = layerGroupBounds
       this._lastSurface = layerGroupBoundsSurface
-    }
 
-    this._map.fitBounds(this._lastBounds, {
-      padding: [100, 100],
-      maxZoom: zoom
-    })
+      this._map.fitBounds(this._lastBounds, {
+        padding: [100, 100],
+        maxZoom: zoom
+      })
+    }
   }
 
   calculateSurface (bounds: LatLngBounds) {

@@ -53,7 +53,7 @@ class ImageController extends Controller
 
     public function tags(Image $image) {
 
-        $image->load(['captured', 'tags.tagged']);
+        $image->load(['tags.tagged']);
 
         $image->loadPitchRoutes();
 

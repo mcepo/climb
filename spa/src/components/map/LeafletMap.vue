@@ -3,6 +3,7 @@
   <v-btn
     class='map-button'
     title="My location"
+    aria-label='My location'
     fab
     small
     style='position: fixed'
