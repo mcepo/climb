@@ -38,12 +38,6 @@ TODO: in area/route details put image with the most topos
 
 -- OPTIMIZATION --
 
-TODO: lazy load drawing service
-
-TODO: maybe leaflet lazy load usefull for mobile
-
-TODO: material-design-icons učitavam sve ikone, a korisim ih 10ak, potencijalna ušteda 11KB GZIPed
-
 -- OFFLINE MODE PRECACHE --
 
 On button click user can precache all the info images included into localstorage
