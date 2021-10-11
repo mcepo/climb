@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/css/admin.panel~area.form~moderator.form~route.filters~route.form.f058a909.css"
   },
   {
-    "revision": "40b912cd3b3a36403088",
-    "url": "/assets/css/app.e172cae9.css"
+    "revision": "47b37aa11f201b1ad095",
+    "url": "/assets/css/app.fb0abc21.css"
   },
   {
     "revision": "1c55ddb3eceaf00a27d2",
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/css/area.form~pitch.form~route.filters~route.form.f9d4f751.css"
   },
   {
-    "revision": "8a07c5495affed84220c",
-    "url": "/assets/css/chunk-vendors.bb12245d.css"
+    "revision": "c0af794af9e53e9954f7",
+    "url": "/assets/css/chunk-vendors.3cc44aee.css"
   },
   {
     "revision": "052b9e7b9a288e9614f9",
@@ -60,7 +60,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/fonts/MaterialIcons-Regular.da4ea5cd.ttf"
   },
   {
-    "revision": "4c93a0a0e12dd784a2b01d6481a82f59",
+    "revision": "f44deaeaa8180fd45eb0fc3dd433070e",
     "url": "/assets/index.html"
   },
   {
@@ -72,8 +72,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/js/admin.panel~area.form~moderator.form~route.filters~route.form.9450cd7d.js"
   },
   {
-    "revision": "40b912cd3b3a36403088",
-    "url": "/assets/js/app.cd096cf7.js"
+    "revision": "47b37aa11f201b1ad095",
+    "url": "/assets/js/app.8e9824ba.js"
   },
   {
     "revision": "1c55ddb3eceaf00a27d2",
@@ -92,8 +92,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/js/chart-js.f86bf27d.js"
   },
   {
-    "revision": "8a07c5495affed84220c",
-    "url": "/assets/js/chunk-vendors.616c39d9.js"
+    "revision": "c0af794af9e53e9954f7",
+    "url": "/assets/js/chunk-vendors.ffed6a2c.js"
   },
   {
     "revision": "509d608a3bfe4ff81e1d",
