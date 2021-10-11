@@ -4,11 +4,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/css/admin.panel.2ab20800.css"
   },
   {
-    "revision": "f2684f9b8ffc7e77de4a",
-    "url": "/assets/css/admin.panel~area.form~moderator.form~route.filters~route.form.10d9c775.css"
+    "revision": "5ec2b75f686dda5035f9",
+    "url": "/assets/css/admin.panel~area.form~moderator.form~route.filters~route.form.f058a909.css"
   },
   {
-    "revision": "e9cc9bf6ca67602cda33",
+    "revision": "40b912cd3b3a36403088",
     "url": "/assets/css/app.e172cae9.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/css/area.form~pitch.form~route.filters~route.form.f9d4f751.css"
   },
   {
-    "revision": "9c37f20f45c08d79f979",
-    "url": "/assets/css/chunk-vendors.e3ba18d2.css"
+    "revision": "8a07c5495affed84220c",
+    "url": "/assets/css/chunk-vendors.bb12245d.css"
   },
   {
     "revision": "052b9e7b9a288e9614f9",
@@ -60,7 +60,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/fonts/MaterialIcons-Regular.da4ea5cd.ttf"
   },
   {
-    "revision": "476960aa92138ffd4d87b3c9eb0b604b",
+    "revision": "4c93a0a0e12dd784a2b01d6481a82f59",
     "url": "/assets/index.html"
   },
   {
@@ -68,12 +68,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/js/admin.panel.47ea5146.js"
   },
   {
-    "revision": "f2684f9b8ffc7e77de4a",
-    "url": "/assets/js/admin.panel~area.form~moderator.form~route.filters~route.form.4ecebcac.js"
+    "revision": "5ec2b75f686dda5035f9",
+    "url": "/assets/js/admin.panel~area.form~moderator.form~route.filters~route.form.9450cd7d.js"
   },
   {
-    "revision": "e9cc9bf6ca67602cda33",
-    "url": "/assets/js/app.6a979f03.js"
+    "revision": "40b912cd3b3a36403088",
+    "url": "/assets/js/app.cd096cf7.js"
   },
   {
     "revision": "1c55ddb3eceaf00a27d2",
@@ -92,8 +92,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/js/chart-js.f86bf27d.js"
   },
   {
-    "revision": "9c37f20f45c08d79f979",
-    "url": "/assets/js/chunk-vendors.d1df34d0.js"
+    "revision": "8a07c5495affed84220c",
+    "url": "/assets/js/chunk-vendors.616c39d9.js"
   },
   {
     "revision": "509d608a3bfe4ff81e1d",
@@ -108,8 +108,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/js/leaflet-geoman.6a8b4c6d.js"
   },
   {
-    "revision": "2afe4446ac7c92648af3",
-    "url": "/assets/js/leaflet.map.b46d02c5.js"
+    "revision": "953f8124b6e71dbd48e4",
+    "url": "/assets/js/leaflet.map.a0a89cc3.js"
   },
   {
     "revision": "06d4cdebe4ec451fb378",
