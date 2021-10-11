@@ -79,7 +79,7 @@ class SitemapGenerate extends Command
         );
 
         $area->areas->each(function($area) use ($url, $priority) {
-            $this->addSitemapEntry($url, $priority * 0.60, $area);
+            $this->addSitemapEntry($url, $priority - 0.1, $area);
         });
     }
 }
