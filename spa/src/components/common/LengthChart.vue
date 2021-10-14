@@ -38,7 +38,7 @@ export default {
               labels: this.keys,
               datasets: [
                 {
-                  label: 'Climbs ',
+                  label: 'Routes ',
                   data: this.data
                 }
               ]
