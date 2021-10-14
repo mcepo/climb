@@ -118,6 +118,8 @@ return [
     |
     */
 
+    'weather_api_id' => env('WEATHER_API_ID', null),
+
     'providers' => [
         /*
          * Laravel Framework Service Providers...

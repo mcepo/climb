@@ -87,7 +87,7 @@ class WeatherUpdate extends Command
 
   private function getUrl($coordinates)
   {
-    return 'http://api.openweathermap.org/data/2.5/onecall?units=metric&exclude=alerts&lat='.$coordinates[1].'&lon='.$coordinates[0].'&dt='.time().'&appid=ed5357766b82454fb204fc69c0f440f5';
+    return 'http://api.openweathermap.org/data/2.5/onecall?units=metric&exclude=alerts&lat='.$coordinates[1].'&lon='.$coordinates[0].'&dt='.time().'&appid='.config('app.weather_api_id');
   }
 
   private function getAreas()
