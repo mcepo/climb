@@ -49,7 +49,8 @@ class AreaController extends Controller
             'links',
             'moderators',
             'areas.mapTag',
-            'routes.mapTag'
+            'routes.mapTag',
+            'latestWeather'
         ])->append([
             'altitude',
             'ancestors'

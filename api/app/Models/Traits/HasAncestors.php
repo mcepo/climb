@@ -24,4 +24,9 @@ trait HasAncestors
     }
     return [];
   }
+
+  public function getAncestorIdsAttribute()
+  {
+    return isset($this->path) ? explode('.', $this->path) : [];
+  }
 }

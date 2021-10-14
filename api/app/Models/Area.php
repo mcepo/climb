@@ -67,6 +67,11 @@ class Area extends Model
         return $this->belongsToMany(User::class);
     }
 
+    public function latestWeather()
+    {
+        return $this->hasOne(Weather::class)->orderBy('id', 'desc');
+    }
+
     public function areas()
     {
         return $this->hasMany(self::class, 'parent_id')->orderBy('name');
