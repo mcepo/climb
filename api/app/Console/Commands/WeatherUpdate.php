@@ -51,6 +51,7 @@ class WeatherUpdate extends Command
           $weatherData = $this->getWeatherData($this->getUrl($area->mapTag->geometry['coordinates']));
           if(isset($weatherData)) {
             $this->storeWeatherData($area, $weatherData);
+            die;
           }
         }
       }
@@ -76,7 +77,7 @@ class WeatherUpdate extends Command
     $weather = new Weather();
 
     $weather->area_id = $area->id;
-    $weather->data = $weatherData['current'];
+    $weather->current = $weatherData['current'];
     $weather->minutely = $weatherData['minutely'];
     $weather->hourly = $weatherData['hourly'];
     $weather->daily = $weatherData['daily'];
