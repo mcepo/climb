@@ -47,7 +47,7 @@ class SitemapGenerate extends Command
             $this->addSitemapEntry('', 1, $area);
         });
 
-        $this->sitemap->writeToFile('./public/assets/sitemap.xml');
+        $this->sitemap->writeToFile('./public/sitemap.xml');
     }
 
     private function addSitemapEntry($url, $priority, $area)
@@ -79,7 +79,7 @@ class SitemapGenerate extends Command
         );
 
         $area->areas->each(function($area) use ($url, $priority) {
-            $this->addSitemapEntry($url, $priority * 0.85, $area);
+            $this->addSitemapEntry($url, $priority - 0.1, $area);
         });
     }
 }

@@ -1,13 +1,8 @@
 -- HOT --
 
-TODO: kad područje/rute ne postoji redirectaj na roditelja
-
-TODO: fix nakon što se obriše područje tagovi se ne prikazuju na mapi i izbaci se greška
+TODO: staviti prava da svi sve mogu editirati za sad
 
 TODO: forma za dodavanje linkova
-
-TODO: kanonski urlovi provjeriti, google indexiranje mi ne pronalazi pravilno područja
-npr za pretragu Croatia mi izbaci tamo neki sektor, povečati razliku u faktoru važnosti u sitemaps
 
 TODO: welcome and disclamer popup community maintained site .... vuetify overlay
 
@@ -44,12 +39,6 @@ TODO: in area/route details put image with the most topos
     in the header under name
 
 -- OPTIMIZATION --
-
-TODO: lazy load drawing service
-
-TODO: maybe leaflet lazy load usefull for mobile
-
-TODO: material-design-icons učitavam sve ikone, a korisim ih 10ak, potencijalna ušteda 11KB GZIPed
 
 -- OFFLINE MODE PRECACHE --
 

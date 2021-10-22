@@ -43,7 +43,7 @@ export default {
               labels: this.gradeChartArray,
               datasets: [
                 {
-                  label: 'Climbs ',
+                  label: 'Routes ',
                   data: this.data
                 }
               ]
