@@ -14,8 +14,6 @@ TODO: dodati i broj spitova u smjeru/ cugu
 
 TODO: razlikovati pristupe i odstupe 
 
--- MUST --
-
 TODO: integrate weather api-s
 
 TODO: publish crag locations to openstreetmap
@@ -27,6 +25,8 @@ TODO: error log also to elastic search
 TODO: activity reverting on tags only ?
 
 TODO: admin panel user review, tags review and images
+
+TODO: create android application
 
 -- FEATURES --
 
