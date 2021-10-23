@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use App\Models\Link;
 use App\Models\Area;
 use App\Models\Route;
+use App\User;
 use Goutte\Client;
 use Symfony\Component\HttpClient\HttpClient;
 
