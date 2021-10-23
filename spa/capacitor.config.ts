@@ -1,10 +1,10 @@
-import { CapacitorConfig } from '@capacitor/cli';
+import { CapacitorConfig } from '@capacitor/cli'
 
 const config: CapacitorConfig = {
   appId: 'net.climbline',
   appName: 'ClimbLine',
-  webDir: 'dist',
+  webDir: '../api/public/assets',
   bundledWebRuntime: false
-};
+}
 
-export default config;
+export default config

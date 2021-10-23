@@ -1,0 +1,6 @@
+{
+	"appId": "net.climbline",
+	"appName": "ClimbLine",
+	"webDir": "../api/public/assets",
+	"bundledWebRuntime": false
+}
