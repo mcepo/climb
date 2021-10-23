@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "4baccb69e22339cf828d",
+    "revision": "014b81f2c54b8a30215e",
     "url": "/assets/css/admin.panel.2ab20800.css"
   },
   {
@@ -8,11 +8,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/css/admin.panel~area.form~moderator.form~route.filters~route.form.f058a909.css"
   },
   {
-    "revision": "47b37aa11f201b1ad095",
+    "revision": "0cf844b2e39ad21c5dce",
     "url": "/assets/css/app.fb0abc21.css"
   },
   {
-    "revision": "1c55ddb3eceaf00a27d2",
+    "revision": "cb3de4ade742653051e6",
     "url": "/assets/css/area.form.09316a61.css"
   },
   {
@@ -24,7 +24,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/css/chunk-vendors.3cc44aee.css"
   },
   {
-    "revision": "052b9e7b9a288e9614f9",
+    "revision": "53b0e5e3dbec09ca47f9",
     "url": "/assets/css/image.upload.640da394.css"
   },
   {
@@ -32,15 +32,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/css/leaflet-geoman.8c7a4794.css"
   },
   {
-    "revision": "4c329b23cfb8c5eb2e03",
+    "revision": "068b58f8e36010214f55",
     "url": "/assets/css/moderator.form.d3de4bc2.css"
   },
   {
-    "revision": "2421840f97a2b6f5beac",
+    "revision": "29bb5dca3dd382e552cf",
     "url": "/assets/css/pitch.form.207437e9.css"
   },
   {
-    "revision": "601bfbfa7a8021225edb",
+    "revision": "e18157eb6a58bab4a789",
     "url": "/assets/css/route.filters.09316a61.css"
   },
   {
@@ -60,32 +60,32 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/fonts/MaterialIcons-Regular.da4ea5cd.ttf"
   },
   {
-    "revision": "f44deaeaa8180fd45eb0fc3dd433070e",
+    "revision": "c2f83e8f9cd80fb2c84c248aa34015cd",
     "url": "/assets/index.html"
   },
   {
-    "revision": "4baccb69e22339cf828d",
-    "url": "/assets/js/admin.panel.47ea5146.js"
+    "revision": "014b81f2c54b8a30215e",
+    "url": "/assets/js/admin.panel.04a635a2.js"
   },
   {
     "revision": "5ec2b75f686dda5035f9",
     "url": "/assets/js/admin.panel~area.form~moderator.form~route.filters~route.form.9450cd7d.js"
   },
   {
-    "revision": "47b37aa11f201b1ad095",
-    "url": "/assets/js/app.8e9824ba.js"
+    "revision": "0cf844b2e39ad21c5dce",
+    "url": "/assets/js/app.108f622c.js"
   },
   {
-    "revision": "1c55ddb3eceaf00a27d2",
-    "url": "/assets/js/area.form.7d2d01f5.js"
+    "revision": "cb3de4ade742653051e6",
+    "url": "/assets/js/area.form.bcdfff53.js"
   },
   {
     "revision": "37f2ab522ff975ba1b8d",
     "url": "/assets/js/area.form~pitch.form~route.filters~route.form.42e79346.js"
   },
   {
-    "revision": "44922b03427106da2408",
-    "url": "/assets/js/change-password.form.305cfaaf.js"
+    "revision": "f0660db1e5887cd01cfa",
+    "url": "/assets/js/change-password.form.2c0ba88f.js"
   },
   {
     "revision": "bb6de41676df92479e88",
@@ -96,48 +96,48 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/js/chunk-vendors.ffed6a2c.js"
   },
   {
-    "revision": "509d608a3bfe4ff81e1d",
-    "url": "/assets/js/image.map.e2d309a7.js"
+    "revision": "93ee05e24f27253c90e1",
+    "url": "/assets/js/image.map.3c3eb809.js"
   },
   {
-    "revision": "052b9e7b9a288e9614f9",
-    "url": "/assets/js/image.upload.651b3c1f.js"
+    "revision": "53b0e5e3dbec09ca47f9",
+    "url": "/assets/js/image.upload.f8f7b78d.js"
   },
   {
     "revision": "ac380fad5131d53d8117",
     "url": "/assets/js/leaflet-geoman.6a8b4c6d.js"
   },
   {
-    "revision": "953f8124b6e71dbd48e4",
-    "url": "/assets/js/leaflet.map.a0a89cc3.js"
+    "revision": "5a996b07d5d506e30fc0",
+    "url": "/assets/js/leaflet.map.b9671fd4.js"
   },
   {
-    "revision": "06d4cdebe4ec451fb378",
-    "url": "/assets/js/login.form.0766b708.js"
+    "revision": "63815f625a3dc7422834",
+    "url": "/assets/js/login.form.d402a570.js"
   },
   {
-    "revision": "4c329b23cfb8c5eb2e03",
-    "url": "/assets/js/moderator.form.001d4c34.js"
+    "revision": "068b58f8e36010214f55",
+    "url": "/assets/js/moderator.form.68f2c297.js"
   },
   {
-    "revision": "2421840f97a2b6f5beac",
-    "url": "/assets/js/pitch.form.f82a3e39.js"
+    "revision": "29bb5dca3dd382e552cf",
+    "url": "/assets/js/pitch.form.bd545bf5.js"
   },
   {
-    "revision": "ecbca7f10b63331833e4",
-    "url": "/assets/js/popup.service.ac70b924.js"
+    "revision": "b16b093acac27c9cebc3",
+    "url": "/assets/js/popup.service.ba8b68f9.js"
   },
   {
-    "revision": "3fb751929cf10f25fd12",
-    "url": "/assets/js/register.form.84baf0bc.js"
+    "revision": "456647151c80be4a6470",
+    "url": "/assets/js/register.form.096f5a3c.js"
   },
   {
-    "revision": "601bfbfa7a8021225edb",
-    "url": "/assets/js/route.filters.17725608.js"
+    "revision": "e18157eb6a58bab4a789",
+    "url": "/assets/js/route.filters.91bf422c.js"
   },
   {
-    "revision": "a516cce8355c55be6f5b",
-    "url": "/assets/js/route.form.30f5437a.js"
+    "revision": "51d12ec2e75177a7a44c",
+    "url": "/assets/js/route.form.e9038347.js"
   },
   {
     "revision": "372d76914e2e36cf8f8a23af440c030f",
