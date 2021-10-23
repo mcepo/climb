@@ -41,12 +41,12 @@ class Tag extends Model
     }
 
     public function setBinaryCoordinates()
-{
-    self::where('id', $this->id)
-    ->update(
-        [
+    {
+        self::where('id', $this->id)
+        ->update(
+            [
             'binary_coordinates' => \DB::raw('ST_GeomFromGeoJSON(geometry::text)')
-        ]
-    );
-}
+            ]
+        );
+    }
 }

@@ -7,26 +7,26 @@ use Illuminate\Http\Request;
 
 class IsAdmin
 {
-   /**
+    /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @param  string|null  $guard
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Closure                 $next
+     * @param  string|null              $guard
      * @return mixed
      */
     public function handle(Request $request, Closure $next, $guard = null)
     {
-      $user = auth()->user();
+        $user = auth()->user();
 
-      if(isset($user)) {
-        if($user->isAdmin()) {
-          return $next($request);
+        if(isset($user)) {
+            if($user->isAdmin()) {
+                return $next($request);
+            } else {
+                return abort(403);
+            }
         } else {
-          return abort(403);
+            return abort(401);
         }
-      } else {
-        return abort(401);
-      }
     }
 }

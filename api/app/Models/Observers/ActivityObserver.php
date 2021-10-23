@@ -9,8 +9,8 @@ class ActivityObserver
 
     public function saving(Activity $activity)
     { 
-      if(!$activity->path){
-        $activity->path = $activity->properties->get('attributes')['path'];
-      }
+        if(!$activity->path) {
+            $activity->path = $activity->properties->get('attributes')['path'];
+        }
     }
 }

@@ -32,35 +32,51 @@ class InitPositions extends Command
 
         $this->_loginMe();
 
-        Area::with(['routes' => function($query){
-            return $query->orderBy('id', 'asc');
-        }])
-            ->whereHas('routes')
-            ->chunk(500, function($chunk){
-                $chunk->each(function($area){
-                    $area->routes->reduce(function($carry, $route){
-                        $route->position = $carry;
-                        $route->save();
-                        $carry++;
-                        return $carry;
-                    }, 1);
-                });
-            });
-
-        Route::with(['pitches' => function($query){
+        Area::with(
+            ['routes' => function ($query) {
                 return $query->orderBy('id', 'asc');
-            }])
+            }]
+        )
+            ->whereHas('routes')
+            ->chunk(
+                500, function ($chunk) {
+                    $chunk->each(
+                        function ($area) {
+                            $area->routes->reduce(
+                                function ($carry, $route) {
+                                    $route->position = $carry;
+                                    $route->save();
+                                    $carry++;
+                                    return $carry;
+                                }, 1
+                            );
+                        }
+                    );
+                }
+            );
+
+        Route::with(
+            ['pitches' => function ($query) {
+                return $query->orderBy('id', 'asc');
+            }]
+        )
                 ->where('type_id', 0)
-                ->chunk(500, function($chunk){
-                    $chunk->each(function($route){
-                        $route->pitches->reduce(function($carry, $pitch){
-                            $pitch->position = $carry;
-                            $pitch->save();
-                            $carry++;
-                            return $carry;
-                        }, 1);
-                    });
-                });
+                ->chunk(
+                    500, function ($chunk) {
+                        $chunk->each(
+                            function ($route) {
+                                $route->pitches->reduce(
+                                    function ($carry, $pitch) {
+                                        $pitch->position = $carry;
+                                        $pitch->save();
+                                        $carry++;
+                                        return $carry;
+                                    }, 1
+                                );
+                            }
+                        );
+                    }
+                );
     }
 
     private function _loginMe()

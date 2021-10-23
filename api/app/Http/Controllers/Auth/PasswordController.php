@@ -11,7 +11,8 @@ use App\User;
 class PasswordController extends Controller
 {
 
-    public function forgotten(Request $request) {
+    public function forgotten(Request $request)
+    {
 
         if(!$request->has('email')) {
             return abort(400);
@@ -28,7 +29,8 @@ class PasswordController extends Controller
         return response('Password reset link was sent to '.$request->get('email'), 200);
     }
 
-    public function change(Request $request) {
+    public function change(Request $request)
+    {
 
         $user = User::findOrFail(auth()->user()->id);
 

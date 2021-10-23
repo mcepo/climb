@@ -28,9 +28,11 @@ class ImageController extends Controller
         $manager = new ImageManager();
 
         $thumbnail = $manager->make($image->getContent())
-            ->resize(300, null, function ($constraint) {
-                $constraint->aspectRatio();
-            });
+            ->resize(
+                300, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                }
+            );
 
         return $thumbnail->response();
     }
@@ -51,7 +53,8 @@ class ImageController extends Controller
         }
     }
 
-    public function tags(Image $image) {
+    public function tags(Image $image)
+    {
 
         $image->load(['tags.tagged']);
 

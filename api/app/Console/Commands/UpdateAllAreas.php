@@ -46,11 +46,15 @@ class UpdateAllAreas extends Command
      */
     public function handle()
     {
-        Area::chunk(100, function($areas){
-            $areas->each(function($area){
-                dump($area->name);
-                $this->areaUpdateService->update($area);  
-            });
-        });
+        Area::chunk(
+            100, function ($areas) {
+                $areas->each(
+                    function ($area) {
+                        dump($area->name);
+                        $this->areaUpdateService->update($area);  
+                    }
+                );
+            }
+        );
     }
 }

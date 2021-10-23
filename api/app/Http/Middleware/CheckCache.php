@@ -8,19 +8,19 @@ use Illuminate\Support\Facades\Cache;
 
 class CheckCache
 {
-   /**
+    /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @param  string|null  $guard
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Closure                 $next
+     * @param  string|null              $guard
      * @return mixed
      */
     public function handle(Request $request, Closure $next, $guard = null)
     {
 
         if(config('app.debug')) {
-          return $next($request);
+            return $next($request);
         }
 
         $route = $request->route();
@@ -28,7 +28,7 @@ class CheckCache
         $routeName = $request->route()->getName();
 
         if(!$routeName || $request->getQueryString() !== null) {
-          return $next($request);
+            return $next($request);
         }
 
         [$model] = explode('.', $routeName);
@@ -38,13 +38,13 @@ class CheckCache
         $cacheKey = $routeName.$modelId;
 
         if(Cache::has($cacheKey)) {
-          return Cache::get($cacheKey);
+            return Cache::get($cacheKey);
         }
 
         $response = $next($request);
 
         if($response->status() == 200 ) {
-          Cache::put($cacheKey, $response);
+            Cache::put($cacheKey, $response);
         }
 
         return $response;

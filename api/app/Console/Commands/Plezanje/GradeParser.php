@@ -93,18 +93,18 @@ class GradeParser
             $this->_setGradeWeight('incline', $inclineGrade[0][0]);
 
             switch (count($inclineGrade[0])) {
-                case 4:
-                    $this->_setGradeWeight('avg_incline', $inclineGrade[0][1]);
-                    $this->_setGradeWeight('rng_to_incline', $inclineGrade[0][2]);
-                    $this->_setGradeWeight('rng_from_incline', $inclineGrade[0][3]);
-                    break;
-                case 3:
-                    $this->_setGradeWeight('incline', $inclineGrade[0][1]);
-                    $this->_setGradeWeight('incline', $inclineGrade[0][2]);
-                    break;
-                case 2:
-                    $this->_setGradeWeight('incline', $inclineGrade[0][1]);
-                    break;
+            case 4:
+                $this->_setGradeWeight('avg_incline', $inclineGrade[0][1]);
+                $this->_setGradeWeight('rng_to_incline', $inclineGrade[0][2]);
+                $this->_setGradeWeight('rng_from_incline', $inclineGrade[0][3]);
+                break;
+            case 3:
+                $this->_setGradeWeight('incline', $inclineGrade[0][1]);
+                $this->_setGradeWeight('incline', $inclineGrade[0][2]);
+                break;
+            case 2:
+                $this->_setGradeWeight('incline', $inclineGrade[0][1]);
+                break;
             }
             $grade = preg_replace($this->patterns['incline'], '', $grade);
         }

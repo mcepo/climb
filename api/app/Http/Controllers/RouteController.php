@@ -36,11 +36,13 @@ class RouteController extends Controller
 
     public function show(Route $route)
     {
-        $route->load([
+        $route->load(
+            [
             'mapTag',
             'pitches.grades',
             'links'
-        ])->append(['ancestors']);
+            ]
+        )->append(['ancestors']);
 
         $route->loadImages();
 

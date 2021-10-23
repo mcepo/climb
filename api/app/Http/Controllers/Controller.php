@@ -9,12 +9,14 @@ use App\Jobs\AreaUpdateJob;
 
 class Controller extends BaseController
 {
-    public function canUserModify($item) {
+    public function canUserModify($item)
+    {
 
         return Gate::authorize('authorize', $item);
     }
 
-    public function isAdmin() {
+    public function isAdmin()
+    {
 
         $user = auth()->user();
 

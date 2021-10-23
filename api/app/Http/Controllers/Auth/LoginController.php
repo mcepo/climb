@@ -14,37 +14,37 @@ class LoginController extends Controller
 {
     public function socialLogin($provider)
     {
-      // Socialite will pick response data automatic 
-      $providerUser = Socialite::driver($provider)->stateless()->user();
+        // Socialite will pick response data automatic 
+        $providerUser = Socialite::driver($provider)->stateless()->user();
   
-      if (!$user = User::getByProviderId($provider, $providerUser->id)) {
-        $user = User::registerFromProvider($provider, $providerUser);
-      }
+        if (!$user = User::getByProviderId($provider, $providerUser->id)) {
+            $user = User::registerFromProvider($provider, $providerUser);
+        }
 
-      Auth::login($user);
+        Auth::login($user);
     }
   
     public function login(Request $request)
     {
   
-      $credentials = $request->only('email', 'password');
+        $credentials = $request->only('email', 'password');
   
-      // failed to login, 401 is taken when users aren't logged in 
-      // and need to to perform an action, so i am using 400 for failed login
+        // failed to login, 401 is taken when users aren't logged in 
+        // and need to to perform an action, so i am using 400 for failed login
 
-      if (!Auth::attempt($credentials)) {
+        if (!Auth::attempt($credentials)) {
 
-        return response('Invalid credentials.', 400);
-      }
+            return response('Invalid credentials.', 400);
+        }
 
-      // at this point user is succesfully logged in
+        // at this point user is succesfully logged in
 
-      // now i am checking if his email is verified
-      // if not send an error response
+        // now i am checking if his email is verified
+        // if not send an error response
 
-      if(!auth()->user()->hasVerifiedEmail()) {
+        if(!auth()->user()->hasVerifiedEmail()) {
 
-        return response('Please verify your email before using the application.', 422);
-      }
+            return response('Please verify your email before using the application.', 422);
+        }
     }
 }

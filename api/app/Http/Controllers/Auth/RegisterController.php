@@ -10,11 +10,11 @@ class RegisterController extends Controller
 {
     public function register(Request $request)
     {
-      if ($user = User::register($request->all())) {
+        if ($user = User::register($request->all())) {
   
-        $user->sendEmailVerificationMail();
-      } else {
-        return response(null, 409);
-      }
+            $user->sendEmailVerificationMail();
+        } else {
+            return response(null, 409);
+        }
     }
 }

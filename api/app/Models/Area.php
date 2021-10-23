@@ -103,7 +103,8 @@ class Area extends Model
         return $this->path ? implode('.', [$this->path, $this->id]) : $this->id;
     }
 
-    public function isNoName() {
+    public function isNoName()
+    {
         // check if area is of type that usually doesnt have a unique name 
         // such as mountain face (4) or sector (7)
         return in_array($this->type_id, [4, 7]);
@@ -130,10 +131,12 @@ class Area extends Model
         // loading all image tags of this area with the image they are tagged on
         $this->load(['imageTags.image.mapTag', 'imageTags.image']);
 
-        $this->setAttribute('images', $this->imageTags
-            ->pluck('image') // getting images from image tag collection
-            ->merge($this->images) // merging images with area image
-            ->unique('id')); // removing duplicate images
+        $this->setAttribute(
+            'images', $this->imageTags
+                ->pluck('image') // getting images from image tag collection
+                ->merge($this->images) // merging images with area image
+                ->unique('id')
+        ); // removing duplicate images
     }
 
     public function toArray()

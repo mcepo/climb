@@ -44,16 +44,20 @@ class AreaController extends Controller
 
     public function show(Area $area)
     {
-        $area->load([
+        $area->load(
+            [
             'mapTag',
             'links',
             'moderators',
             'areas.mapTag',
             'routes.mapTag'
-        ])->append([
-            'altitude',
-            'ancestors'
-        ]);
+            ]
+        )->append(
+            [
+                'altitude',
+                'ancestors'
+                ]
+        );
         $area->loadAreaAssets(request()->all());
 
         return $area->toJson();
@@ -74,7 +78,7 @@ class AreaController extends Controller
     {
         $this->canUserModify($area);
 
-        if ( $area->canBeDeleted() ) {
+        if ($area->canBeDeleted() ) {
 
             $area->delete();
 

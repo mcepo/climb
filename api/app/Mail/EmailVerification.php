@@ -33,13 +33,16 @@ class EmailVerification extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.email-verification', [
+        return $this->view(
+            'emails.email-verification', [
             'user' => $this->user,
             'url' => $this->_generateVerificationUrl()
-        ]);
+            ]
+        );
     }
 
-    private function _generateVerificationUrl() {
+    private function _generateVerificationUrl()
+    {
 
         return URL::temporarySignedRoute(
             'verification.verify',

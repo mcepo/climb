@@ -50,9 +50,11 @@ class User extends AuthUser  implements MustVerifyEmail
     {
         parent::boot();
 
-        self::saving(function ($model) {
-            $model->updateTsVector();
-        });
+        self::saving(
+            function ($model) {
+                $model->updateTsVector();
+            }
+        );
     }
 
     public function updateTsVector()
@@ -111,11 +113,13 @@ class User extends AuthUser  implements MustVerifyEmail
     public function hasPermissionInArea($path)
     {
 
-        if (!is_array($this->areas)) return false;
+        if (!is_array($this->areas)) { return false;
+        }
 
         foreach ($this->areas as $permittedArea) {
-            if (substr($path, 0, strlen($permittedArea->path)) === $permittedArea->path)
+            if (substr($path, 0, strlen($permittedArea->path)) === $permittedArea->path) {
                 return true;
+            }
         }
         return false;
     }

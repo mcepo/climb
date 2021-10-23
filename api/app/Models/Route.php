@@ -77,15 +77,19 @@ class Route extends Model
         $routeId = $this->id;
         // get all images where route is tagged and where pitches 
         // of that route are tagged
-        $images = Tag::where(function($query) use ($pids){
-            // images with this route tags
-            return $query->where('tagged_type', 'pitch')
-                ->whereIn('tagged_id', $pids);
-        })->orWhere(function($query) use ($routeId){
-            // images with this route pitches tags
-            return $query->where('tagged_type', 'route')
-                ->where('tagged_id', $routeId);
-        })->whereNotNull('image_id')
+        $images = Tag::where(
+            function ($query) use ($pids) {
+                // images with this route tags
+                return $query->where('tagged_type', 'pitch')
+                    ->whereIn('tagged_id', $pids);
+            }
+        )->orWhere(
+            function ($query) use ($routeId) {
+                // images with this route pitches tags
+                return $query->where('tagged_type', 'route')
+                    ->where('tagged_id', $routeId);
+            }
+        )->whereNotNull('image_id')
         ->with('image')
         ->get()
         // remove duplicate images
@@ -96,11 +100,13 @@ class Route extends Model
         $this->setAttribute('images', $images);
     }
 
-    public static function loadChunk($filters) {
+    public static function loadChunk($filters)
+    {
         return self::filter($filters)->with(['mapTag', 'grades'])->orderBy('id')->limit(10)->get();
     }
 
-    public function canBeDeleted() {
+    public function canBeDeleted()
+    {
         return Tag::where(['tagged_type' => 'route', 'tagged_id' => $this->id])->count() == 0 && 
                 Pitch::where(['route_id' => $this->id])->count() == 0 ;
     }
@@ -117,7 +123,7 @@ class Route extends Model
     public function increasePrecedingNewPosition() 
     {
 
-        Route::where('area_id',$this->area_id)
+        Route::where('area_id', $this->area_id)
             ->where('id', '<>', $this->id)
             ->where('position', '>=', $this->position)
             ->update(['position' => DB::raw('position + 1')]);
@@ -125,7 +131,7 @@ class Route extends Model
 
     public function reducePrecedingOriginalPosition() 
     {
-        Route::where('area_id',$this->area_id)
+        Route::where('area_id', $this->area_id)
             ->where('id', '<>', $this->id)
             ->where('position', '>=', $this->getOriginal('position'))
             ->update(['position' => DB::raw('position - 1')]);

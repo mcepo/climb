@@ -24,7 +24,8 @@ class AreaObserver
         }
     }
 
-    public function saved(Area $area) {
+    public function saved(Area $area)
+    {
         // if area name changed update ts vector
         if ($area->isDirty('name')) {
             $area->updateTsVector();
@@ -49,21 +50,27 @@ class AreaObserver
         // getting all subareas in area and deleting them
         // can't do a mass delete because all areas have 
         // relations that need to be deleted by hand
-        $area->areas->each(function ($area) {
-            $area->delete();
-        });
+        $area->areas->each(
+            function ($area) {
+                $area->delete();
+            }
+        );
 
         // same as with subareas
-        $area->routes->each(function ($route) {
-            $route->delete();
-        });
+        $area->routes->each(
+            function ($route) {
+                $route->delete();
+            }
+        );
 
         $area->mapTag()->delete();
 
         // same as with images of area
-        $area->images->each(function ($image) {
-            $image->delete();
-        });
+        $area->images->each(
+            function ($image) {
+                $image->delete();
+            }
+        );
 
         $area->imageTags()->delete();
         $area->links()->delete();

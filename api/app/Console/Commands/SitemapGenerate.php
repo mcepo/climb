@@ -43,9 +43,11 @@ class SitemapGenerate extends Command
     public function handle()
     {
 
-        Area::countries()->with('areas')->get()->each(function ($area) {
-            $this->addSitemapEntry('', 1, $area);
-        });
+        Area::countries()->with('areas')->get()->each(
+            function ($area) {
+                $this->addSitemapEntry('', 1, $area);
+            }
+        );
 
         $this->sitemap->writeToFile('./public/sitemap.xml');
     }
@@ -55,9 +57,9 @@ class SitemapGenerate extends Command
 
         $name = mb_strtolower($area->name);
 
-        $name = preg_replace('/[^a-zđčćžš0-9\s\\-]/', '', $name );
+        $name = preg_replace('/[^a-zđčćžš0-9\s\\-]/', '', $name);
 
-        $name = preg_replace('/[\s|\-]+/', '_', $name );
+        $name = preg_replace('/[\s|\-]+/', '_', $name);
 
         $name = trim($name, "_");
 
@@ -78,8 +80,10 @@ class SitemapGenerate extends Command
                 ->setPriority($priority)
         );
 
-        $area->areas->each(function($area) use ($url, $priority) {
-            $this->addSitemapEntry($url, $priority - 0.1, $area);
-        });
+        $area->areas->each(
+            function ($area) use ($url, $priority) {
+                $this->addSitemapEntry($url, $priority - 0.1, $area);
+            }
+        );
     }
 }

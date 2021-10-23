@@ -27,8 +27,7 @@ class VerificationController extends Controller
     {
         $user = User::findOrFail($request->route('id'));
 
-        if (!$this->_checkVerificationHash($user, $request->get('hash'))) 
-        {
+        if (!$this->_checkVerificationHash($user, $request->get('hash'))) {
             throw new AuthorizationException;
         }
 
@@ -41,15 +40,13 @@ class VerificationController extends Controller
 
     public function resend(Request $request)
     {
-        if(!$request->has('email')) 
-        {
+        if(!$request->has('email')) {
             return abort(400);
         }
 
         $user = User::where('email', $request->get('email'))->firstOrFail();
 
-        if ($user->hasVerifiedEmail()) 
-        {
+        if ($user->hasVerifiedEmail()) {
             return response('Email already verified', 204);
         }
 

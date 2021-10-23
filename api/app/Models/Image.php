@@ -57,9 +57,11 @@ class Image extends Model
 
         $tagged = $this->tags
             ->pluck('tagged')
-            ->groupBy(function ($model) {
-                return get_class($model);
-            });
+            ->groupBy(
+                function ($model) {
+                    return get_class($model);
+                }
+            );
 
         if (isset($tagged[Pitch::class])) {
             $routeIds = $tagged[Pitch::class]->pluck('route_id')->unique();

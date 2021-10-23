@@ -140,21 +140,23 @@ class PlaveGoreCrawler extends Command
 
         $cragLinks = $page->filter('.col-container > .one-third > dl#quick_facts > dt > a');
 
-        $cragLinks->each(function ($a) use ($area) {
+        $cragLinks->each(
+            function ($a) use ($area) {
 
-            $link = $a->attr('href');
+                $link = $a->attr('href');
 
-            $page = $this->_getPage($link);
+                $page = $this->_getPage($link);
 
-            if ($page == null) {
-                echo ' **** ' . $link . ' is null';
-                return;
+                if ($page == null) {
+                    echo ' **** ' . $link . ' is null';
+                    return;
+                }
+
+                $crag = $this->_parseCrag($area, $page);
+
+                $this->_storeLink($crag, $link);
             }
-
-            $crag = $this->_parseCrag($area, $page);
-
-            $this->_storeLink($crag, $link);
-        });
+        );
 
         return $area;
     }
@@ -167,17 +169,21 @@ class PlaveGoreCrawler extends Command
 
             echo $name . " -> new area\n";
 
-            $area = new Area([
+            $area = new Area(
+                [
                 'name' => $this->_santizeName($name),
                 'parent_id' => $parent->id,
                 'type_id' => $typeId
-            ]);
+                ]
+            );
 
             $area->save();
         } else {
-            $area->fill([
+            $area->fill(
+                [
                 'name' => $this->_santizeName($name)
-            ]);
+                ]
+            );
             $area->save();
         }
 
@@ -188,9 +194,13 @@ class PlaveGoreCrawler extends Command
     {
         echo 'Crawling -> ' . $link . "\n";
 
-        $client = new Client(HttpClient::create(['headers' => [
-            'User-Agent' => 'Googlebot',
-        ]]));
+        $client = new Client(
+            HttpClient::create(
+                ['headers' => [
+                'User-Agent' => 'Googlebot',
+                ]]
+            )
+        );
 
         $page = $client->request('GET', $link);
 
@@ -222,32 +232,36 @@ class PlaveGoreCrawler extends Command
 
         $sector = null;
 
-        $routeTableRows->each(function ($tr) use ($crag, &$sector, $coordinates) {
+        $routeTableRows->each(
+            function ($tr) use ($crag, &$sector, $coordinates) {
 
-            $tds = $tr->children();
+                $tds = $tr->children();
 
-            $sectorName = $tds->eq(2)->text();
+                $sectorName = $tds->eq(2)->text();
 
-            if (!isset($sector) || $sector->name != $sectorName) {
-                // novi sektor
-                // type_id = 7
-                $sector = $this->_getArea($crag, $sectorName, 7);
+                if (!isset($sector) || $sector->name != $sectorName) {
+                    // novi sektor
+                    // type_id = 7
+                    $sector = $this->_getArea($crag, $sectorName, 7);
 
-                $this->_storeMapTag($sector, array_shift($coordinates));
+                    $this->_storeMapTag($sector, array_shift($coordinates));
+                }
+
+                $link = $tds->eq(2)->filter('a')->first()->attr('href');
+
+                $route = $this->_storeRoute(
+                    [
+                    'name' => $tds->eq(1)->text(),
+                    'grade' => $tds->eq(3)->text(),
+                    'length' => $tds->eq(4)->text(),
+                    'area_id' => $sector->id
+
+                    ]
+                );
+
+                $this->_storeLink($route, $link);
             }
-
-            $link = $tds->eq(2)->filter('a')->first()->attr('href');
-
-            $route = $this->_storeRoute([
-                'name' => $tds->eq(1)->text(),
-                'grade' => $tds->eq(3)->text(),
-                'length' => $tds->eq(4)->text(),
-                'area_id' => $sector->id
-
-            ]);
-
-            $this->_storeLink($route, $link);
-        });
+        );
 
         return $crag;
     }
@@ -298,23 +312,27 @@ class PlaveGoreCrawler extends Command
 
         $routeTableRows = $page->filter('table.datatable > tbody > tr');
 
-        $routeTableRows->each(function ($tr) use ($crag) {
+        $routeTableRows->each(
+            function ($tr) use ($crag) {
 
-            $tds = $tr->children();
+                $tds = $tr->children();
 
-            $link = $tds->eq(1)->filter('a')->first()->attr('href');
+                $link = $tds->eq(1)->filter('a')->first()->attr('href');
 
-            $route = $this->_storeRoute([
-                'name' => $tds->eq(1)->text(),
-                'grade' => $tds->eq(2)->text(),
-                'length' => $tds->eq(3)->text(),
-                'area_id' => $crag->id
-            ]);
+                $route = $this->_storeRoute(
+                    [
+                    'name' => $tds->eq(1)->text(),
+                    'grade' => $tds->eq(2)->text(),
+                    'length' => $tds->eq(3)->text(),
+                    'area_id' => $crag->id
+                    ]
+                );
 
-            $this->_storeLink($route, $link);
+                $this->_storeLink($route, $link);
 
-            return $crag;
-        });
+                return $crag;
+            }
+        );
 
         return $crag;
     }
@@ -350,7 +368,8 @@ class PlaveGoreCrawler extends Command
     {
         $area->mapTag()->delete();
 
-        if ($coordinate == null) return;
+        if ($coordinate == null) { return;
+        }
 
         $area->mapTag()
             ->create(

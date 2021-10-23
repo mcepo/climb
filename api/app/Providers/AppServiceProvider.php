@@ -40,14 +40,16 @@ class AppServiceProvider extends ServiceProvider
         Pitch::observe(PitchObserver::class);
         Activity::observe(ActivityObserver::class);
         
-        Relation::morphMap([
+        Relation::morphMap(
+            [
             'area' => 'App\Models\Area',
             'route' => 'App\Models\Route',
             'image' => 'App\Models\Image',
             'trail' => 'App\Models\Trail',
             'pitch' => 'App\Models\Pitch',
             'tag' => 'App\Models\Tag',
-        ]);
+            ]
+        );
     }
 
     /**
@@ -57,8 +59,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(\App\Services\AreaUpdateService::class, function ($app) {
-            return new \App\Services\AreaUpdateService();
-        });
+        $this->app->singleton(
+            \App\Services\AreaUpdateService::class, function ($app) {
+                return new \App\Services\AreaUpdateService();
+            }
+        );
     }
 }

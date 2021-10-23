@@ -33,13 +33,16 @@ class EmailPasswordReset extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.email-password-reset', [
+        return $this->view(
+            'emails.email-password-reset', [
             'user' => $this->user,
             'url' => $this->_generateVerificationUrl()
-        ]);
+            ]
+        );
     }
 
-    private function _generateVerificationUrl() {
+    private function _generateVerificationUrl()
+    {
 
         return URL::temporarySignedRoute(
             'verification.verify',

@@ -17,7 +17,8 @@ class Grade extends Model
         return $this->belongsTo(Route::class);
     }
 
-    public function toArray() {
+    public function toArray()
+    {
         return [$this->type_id, $this->weight];
     }
 }

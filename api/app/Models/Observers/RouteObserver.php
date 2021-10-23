@@ -67,9 +67,11 @@ class RouteObserver
         // getting all pitches in route and deleting them
         // can't do a mass delete because all pitches have 
         // relations that need to be deleted by hand
-        $route->pitches->each(function ($pitch) {
-            $pitch->delete();
-        });
+        $route->pitches->each(
+            function ($pitch) {
+                $pitch->delete();
+            }
+        );
 
         $route->mapTag()->delete();
         $route->imageTags()->delete();

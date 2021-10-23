@@ -32,16 +32,16 @@ class AdminController extends Controller
         $item = $activity->subject;
 
         switch ($activity->description) {
-            case 'created':
-                $item->delete();
-                break;
-            case 'updated':
-                $item->fill($activity->properties['old']);
-                $item->save();
-                break;
-            case 'deleted':
-                $this->_revertDeleted($activity);
-                break;
+        case 'created':
+            $item->delete();
+            break;
+        case 'updated':
+            $item->fill($activity->properties['old']);
+            $item->save();
+            break;
+        case 'deleted':
+            $this->_revertDeleted($activity);
+            break;
         }
 
         $activity->reviewed_at = now();
@@ -56,21 +56,21 @@ class AdminController extends Controller
         // item isn't restored in frontend store so it won't be displayed
 
         switch ($activity->subject_type) {
-            case 'tag':
-                (new Tag($activity->properties->get('attributes')))->save();
-                break;
-            case 'area':
-                (new Area($activity->properties->get('attributes')))->save();
-                break;
-            case 'route':
-                (new Route($activity->properties->get('attributes')))->save();
-                break;
-            case 'trail':
-                (new Trail($activity->properties->get('attributes')))->save();
-                break;
-            case 'image':
-                (new Image($activity->properties->get('attributes')))->save();
-                break;
+        case 'tag':
+            (new Tag($activity->properties->get('attributes')))->save();
+            break;
+        case 'area':
+            (new Area($activity->properties->get('attributes')))->save();
+            break;
+        case 'route':
+            (new Route($activity->properties->get('attributes')))->save();
+            break;
+        case 'trail':
+            (new Trail($activity->properties->get('attributes')))->save();
+            break;
+        case 'image':
+            (new Image($activity->properties->get('attributes')))->save();
+            break;
         }
 
         // TODO: if number od users grow change this

@@ -49,11 +49,13 @@ trait HasImages
         $size = [$image->width(), $image->height()];
 
         $image = $this->images()
-            ->create([
+            ->create(
+                [
                 'file_path' => $path,
                 'size' => $size,
                 'boundary' => $this->_getBoundary($size)
-            ]);
+                ]
+            );
 
         return $image;
     }

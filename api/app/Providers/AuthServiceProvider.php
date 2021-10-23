@@ -26,23 +26,27 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::before(function (User $user) {
-            if($user->isAdmin()){
-                // if a user is admin don't log activity for that user
-                activity()->disableLogging();
-                return true;
+        Gate::before(
+            function (User $user) {
+                if($user->isAdmin()) {
+                    // if a user is admin don't log activity for that user
+                    activity()->disableLogging();
+                    return true;
+                }
             }
-        });
+        );
 
-        Gate::define('authorize', function ($user, $item) {
-            if ($user->hasPermissionInArea($item->path)) {
-                return true;
+        Gate::define(
+            'authorize', function ($user, $item) {
+                if ($user->hasPermissionInArea($item->path)) {
+                    return true;
+                }
+
+                if($user->isOwnerOf($item)) {
+                    return true;
+                }
+
             }
-
-            if($user->isOwnerOf($item)) {
-                return true;
-            }
-
-        });
+        );
     }
 }

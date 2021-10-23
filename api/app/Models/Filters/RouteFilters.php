@@ -26,10 +26,12 @@ trait RouteFilters
                             $query = $query->orWhere(
                                 function ($query) use ($type_id, $grade) {
                                     return $query->where('type_id', $type_id)
-                                        ->where(function ($query) use ($grade) {
-                                            return $query->orWhere('weight', '<', $grade[0])
-                                                ->orWhere('weight', '>', $grade[1]);
-                                        });
+                                        ->where(
+                                            function ($query) use ($grade) {
+                                                return $query->orWhere('weight', '<', $grade[0])
+                                                    ->orWhere('weight', '>', $grade[1]);
+                                            }
+                                        );
                                 }
                             );
                         }
@@ -89,12 +91,14 @@ trait RouteFilters
 
     public function filterType($query, $types)
     {
-        return $query->where(function ($query) use ($types) {
-            foreach ($types as $type_id) {
-                $query = $query->orWhere('type_id', $type_id);
-            }
+        return $query->where(
+            function ($query) use ($types) {
+                foreach ($types as $type_id) {
+                    $query = $query->orWhere('type_id', $type_id);
+                }
 
-            return $query;
-        });
+                return $query;
+            }
+        );
     }
 }

@@ -39,9 +39,11 @@ class ImageObserver
         // get all image tags and delete them by hand
         // this is done because of item tags
         // the item needs to be deleted as well
-        $image->tags->each(function ($tag) {
-            $tag->delete();
-        });
+        $image->tags->each(
+            function ($tag) {
+                $tag->delete();
+            }
+        );
 
         $image->imageTags()->delete();
         $image->mapTag()->delete();

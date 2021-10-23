@@ -12,7 +12,8 @@ class PitchGrade extends Model
 
     protected $guarded = [];
 
-    public function toArray() {
+    public function toArray()
+    {
         return [$this->type_id, $this->weight];
     }
 

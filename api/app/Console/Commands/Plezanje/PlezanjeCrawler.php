@@ -54,10 +54,10 @@ class PlezanjeCrawler extends Command
     ];
 
     /**
-    * The console command description.
-    *
-    * @var string
-    */
+     * The console command description.
+     *
+     * @var string
+     */
     protected $start_url = 'https://www.plezanje.net/climbing/db/countryIntro.asp';
     protected $base_url = 'https://www.plezanje.net/climbing/db/';
     private $_pattern;
@@ -80,10 +80,10 @@ class PlezanjeCrawler extends Command
     }
 
     /**
-    * Execute the console command.
-    *
-    * @return mixed
-    */
+     * Execute the console command.
+     *
+     * @return mixed
+     */
     public function handle()
     {
 
@@ -107,44 +107,44 @@ class PlezanjeCrawler extends Command
         $countries = $mainPage->filter('.fmtTable')->children();
 
         $countries->each(
-                function ($tr, $i) {
-                    $td = $tr->children();
+            function ($tr, $i) {
+                $td = $tr->children();
 
-                    $country = $td->eq(0)->text();
+                $country = $td->eq(0)->text();
 
-                    //check if country has a english name in list
-                    if (!isset(self::$replace_country[$country])) {
-                        echo "Country $country  not listed in replace array \n";
+                //check if country has a english name in list
+                if (!isset(self::$replace_country[$country])) {
+                    echo "Country $country  not listed in replace array \n";
 
-                        return;
-                    }
-                    // check if country in pattern for parsing
-                    if (!preg_match("/$this->_pattern/", self::$replace_country[$country])) {
-                        echo "Skipping country $country \n";
+                    return;
+                }
+                // check if country in pattern for parsing
+                if (!preg_match("/$this->_pattern/", self::$replace_country[$country])) {
+                    echo "Skipping country $country \n";
 
-                        return ;
-                    }
-                    echo 'Parsing countery ' . $country . "\n";
+                    return ;
+                }
+                echo 'Parsing countery ' . $country . "\n";
 
-                    // get all pages for parsing
-                    $pages = [
-                        $td->eq(2)->filter('a'), // peak list
-                        $td->eq(3)->filter('a'), // crags list
-                        $td->eq(5)->filter('a'), // boldering areas
-                        $td->eq(7)->filter('a') // ice climbing valleys
-                    ];
+                // get all pages for parsing
+                $pages = [
+                    $td->eq(2)->filter('a'), // peak list
+                    $td->eq(3)->filter('a'), // crags list
+                    $td->eq(5)->filter('a'), // boldering areas
+                    $td->eq(7)->filter('a') // ice climbing valleys
+                ];
        
-                    foreach ($pages as $page) {
-                        if ($page->count() === 1) {
-                            // parse page
-                            $this->_getFromLink(
-                                $this->base_url
-                                . $page->attr('href')
-                            );
-                        }
+                foreach ($pages as $page) {
+                    if ($page->count() === 1) {
+                        // parse page
+                        $this->_getFromLink(
+                            $this->base_url
+                            . $page->attr('href')
+                        );
                     }
                 }
-            );
+            }
+        );
 
         $this->_runtime = microtime(true) - $this->_runtime;
 
@@ -165,27 +165,27 @@ class PlezanjeCrawler extends Command
         // foreach row, if a link exists in row follow that link
         // to new page
         $areas->each(
-                function ($tr) {
-                    // rows with this class are to be skipped
-                    if ($tr->attr('class') !== 'sectorRow expandable') {
-                        // getting links from row
-                        $a = $tr->filter('a');
+            function ($tr) {
+                // rows with this class are to be skipped
+                if ($tr->attr('class') !== 'sectorRow expandable') {
+                    // getting links from row
+                    $a = $tr->filter('a');
 
-                        // if there is only one link
-                        if (($a->count()) === 1) {
-                            // get area type that the link will lead to
-                            $type = $this->_getAreaType($a);
+                    // if there is only one link
+                    if (($a->count()) === 1) {
+                        // get area type that the link will lead to
+                        $type = $this->_getAreaType($a);
 
-                            // call aproppriate method for parsing
-                            if ($type === 'crag') {
-                                $this->_parseCrag($this->base_url . $a->attr('href'));
-                            } else {
-                                $this->_getFromLink($this->base_url . $a->attr('href'));
-                            }
+                        // call aproppriate method for parsing
+                        if ($type === 'crag') {
+                            $this->_parseCrag($this->base_url . $a->attr('href'));
+                        } else {
+                            $this->_getFromLink($this->base_url . $a->attr('href'));
                         }
                     }
                 }
-            );
+            }
+        );
     }
 
     private function _getPage($link)
@@ -196,9 +196,13 @@ class PlezanjeCrawler extends Command
             return null;
         }
 
-        $client = new Client(HttpClient::create(['headers' => [
-            'User-Agent' => 'Googlebot',
-        ]]));
+        $client = new Client(
+            HttpClient::create(
+                ['headers' => [
+                'User-Agent' => 'Googlebot',
+                ]]
+            )
+        );
 
         $page = $client->request('GET', $link);
 
@@ -226,31 +230,31 @@ class PlezanjeCrawler extends Command
         $routes = $page->filter('#routeTable > tbody > tr');
 
         $routes->each(
-                function ($tr, $i) use ($grandParent, &$parent, $link) {
-                    if ($tr->attr('class') == 'sectorRow expandable') {
-                        // this is a sector so store it as area
-                        $parent = $this->_storeArea($grandParent, 'sector', $link, trim($tr->text()));
-                    } else {
-                        // this  is an actual route
-                        $td = $tr->filter('td');
-                        $href = $this->base_url . $td->eq(0)->filter('a')->eq(0)->attr('href');
+            function ($tr, $i) use ($grandParent, &$parent, $link) {
+                if ($tr->attr('class') == 'sectorRow expandable') {
+                    // this is a sector so store it as area
+                    $parent = $this->_storeArea($grandParent, 'sector', $link, trim($tr->text()));
+                } else {
+                    // this  is an actual route
+                    $td = $tr->filter('td');
+                    $href = $this->base_url . $td->eq(0)->filter('a')->eq(0)->attr('href');
 
-                        $length = (int)preg_replace('/[^0-9]/', '', $td->eq(2)->text());
-                        $grade = trim($td->eq(1)->text());
+                    $length = (int)preg_replace('/[^0-9]/', '', $td->eq(2)->text());
+                    $grade = trim($td->eq(1)->text());
 
-                        [$grades, $pitches] = $this->gradeParser->parse($grade);
+                    [$grades, $pitches] = $this->gradeParser->parse($grade);
 
-                        $route = [
-                            'name' => trim($td->eq(0)->filter('a')->eq(0)->text()),
-                            'length' => $length,
-                            'grades' => $grades
-                        ];
+                    $route = [
+                        'name' => trim($td->eq(0)->filter('a')->eq(0)->text()),
+                        'length' => $length,
+                        'grades' => $grades
+                    ];
 
-                        $routeModel = $this->_storeRoute($route, $parent, $pitches);
-                        $this->_storeLink($routeModel, $href );
-                    }
+                    $routeModel = $this->_storeRoute($route, $parent, $pitches);
+                    $this->_storeLink($routeModel, $href);
                 }
-            );
+            }
+        );
     }
 
     private function _parseBreadcrumbs($p)
@@ -261,25 +265,25 @@ class PlezanjeCrawler extends Command
         $parent = null;
 
         $p->eq(0)->filter('a')
-                ->each(
-                    function ($a, $i) use (&$parent) {
-                        if ($i < 3) {
-                            return;
-                        }
-
-                        $name = $a->text();
-                        $link = $this->base_url . $a->attr('href');
-
-                        $type = $this->_getAreaType($a);
-
-                        if ($type == 'type') {
-                            $type = 'country';
-                            $name = self::$replace_country[$name];
-                        }
-
-                        $parent = $this->_storeArea($parent, $type, $link, $name);
+            ->each(
+                function ($a, $i) use (&$parent) {
+                    if ($i < 3) {
+                        return;
                     }
-                );
+
+                    $name = $a->text();
+                    $link = $this->base_url . $a->attr('href');
+
+                    $type = $this->_getAreaType($a);
+
+                    if ($type == 'type') {
+                        $type = 'country';
+                        $name = self::$replace_country[$name];
+                    }
+
+                    $parent = $this->_storeArea($parent, $type, $link, $name);
+                }
+            );
 
         return [$name, $parent];
     }
@@ -375,9 +379,11 @@ class PlezanjeCrawler extends Command
 
         foreach ($pitches as $key => $value) {
             [$grades] = $this->gradeParser->parse($value);
-            $pitch = $route->pitches()->create([
+            $pitch = $route->pitches()->create(
+                [
                 'length' => null,
-            ]);
+                ]
+            );
             $pitch->saveGrades($grades);
         }
 
@@ -389,12 +395,12 @@ class PlezanjeCrawler extends Command
     private function _storeLink($model, $href)
     {
         $link = $model->links()
-                ->create(
-                    [
+            ->create(
+                [
                         'name' => 'Plezanje.net',
                         'href' => $href
                     ]
-                );
+            );
 
         echo '** LINK: ' . $link->toJson() . "\n";
     }
@@ -448,11 +454,13 @@ class PlezanjeCrawler extends Command
         return (preg_split('/[\\?=]/', $a->attr('href')))[1];
     }
 
-    private function _getRouteTypeId($type) {
+    private function _getRouteTypeId($type)
+    {
         return array_search($type, config('types.routes'));
     }
 
-    private function _getAreaTypeId($type) {
+    private function _getAreaTypeId($type)
+    {
         return array_search($type, config('types.areas'));
     }
 
