@@ -12,6 +12,7 @@
     "webpack": "webpack --mode development"
   },
   "dependencies": {
+    "@capacitor/android": "^3.2.5",
     "@capacitor/core": "^3.2.5",
     "@geoman-io/leaflet-geoman-free": "^2.11.2",
     "@mdi/font": "^5.9.55",
