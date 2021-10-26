@@ -9,7 +9,8 @@
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint",
     "build-report": "vue-cli-service build --report",
-    "webpack": "webpack --mode development"
+    "webpack": "webpack --mode development",
+    "cap:sync": "cp ../api/resources/views/index.blade.php ../api/public/assets/index.html & npx cap sync"
   },
   "dependencies": {
     "@capacitor/android": "^3.2.5",
