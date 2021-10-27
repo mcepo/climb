@@ -1,7 +1,8 @@
-import axios, { AxiosError } from 'axios'
+import axios, { AxiosError, AxiosRequestConfig } from 'axios'
 import store from '.'
 import router from '../router'
 
+// TODO: ovdje za android aplikaciju staviti 'https://climbline.net/api/'
 const baseURL = '/api/'
 
 export { baseURL }
@@ -12,7 +13,7 @@ const api = axios.create({
 })
 
 // Add a request interceptor
-api.interceptors.request.use(function (config) {
+api.interceptors.request.use(function (config: AxiosRequestConfig) {
   const token = store.state.auth && store.state.auth.token
 
   if (token) {

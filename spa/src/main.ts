@@ -9,6 +9,7 @@ import './styles.css'
 
 import { sync } from 'vuex-router-sync'
 
+// TODO: disable serviceworker for android
 import wb from './registerServiceWorker'
 Vue.prototype.$workbox = wb
 

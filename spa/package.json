@@ -4,13 +4,13 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build; npm run cap:sync",
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint",
     "build-report": "vue-cli-service build --report",
     "webpack": "webpack --mode development",
-    "cap:sync": "cp ../api/resources/views/index.blade.php ../api/public/assets/index.html & npx cap sync"
+    "cap:sync": "cp ../api/resources/views/index.blade.php ../api/public/index.html; npx cap sync"
   },
   "dependencies": {
     "@capacitor/android": "^3.2.5",
