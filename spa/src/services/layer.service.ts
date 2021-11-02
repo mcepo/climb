@@ -274,9 +274,9 @@ export class LayerService {
     }
 
     if (
-      !this._lastBounds ||
-      !this._lastBounds.overlaps(layerGroupBounds) ||
-      Math.abs(this._lastSurface - layerGroupBoundsSurface) > 0.0001
+      !this._lastBounds || // if first draw
+      !this._lastBounds.overlaps(layerGroupBounds) || // if a completlly different area
+      Math.abs(this._lastSurface - layerGroupBoundsSurface) > 0.0001 // if a surface change is greated then 1km (i think)
     ) {
       this._lastBounds = layerGroupBounds
       this._lastSurface = layerGroupBoundsSurface
