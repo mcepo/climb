@@ -25,6 +25,8 @@ import layerService from '../../services/layer.service'
 import styleService from '../../services/style.service'
 import geolocationService from '../../services/geolocation.service'
 
+import drawers from '../../services/drawer.service'
+
 export default {
   map: null,
   location: {
@@ -65,6 +67,18 @@ export default {
 
     this.$options.location.trail = new Polyline([])
     this.$options.location.trail.addTo(this.$options.map)
+
+    // recording current map bounds here
+    // so that when the map gets recreated it
+    // will go back where it was before it was destroyed
+    this.$options.map.on('moveend', () => {
+      // only record if the left drawer is close
+      // otherwise i get wrong map bounds because the map div is being reduced
+      // and this event gets fired
+      if (!drawers.state.left) {
+        layerService.lastMapBounds = this.$options.map.getBounds()
+      }
+    })
   },
 
   methods: {

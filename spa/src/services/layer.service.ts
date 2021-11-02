@@ -46,8 +46,15 @@ export class LayerService {
   // because thats when selected entity changes
   private _selected: Array<string>
 
-  private _lastBounds: LatLngBounds | undefined
-  private _lastSurface: number
+  // last bounds defined by the displayed layers
+  // created when the map layers are loaded
+  private _lastLayerBounds: LatLngBounds | undefined
+  // surface that those layers take up
+  private _lastLayerSurfaceSize: number
+
+  // when ever a map changes it bounds it is recorded here
+  // so when the map is recreated we have a starting point for the viewpoint
+  public lastMapBounds: LatLngBounds | undefined
 
   constructor () {
     this._layerGroup = new FeatureGroup()
@@ -58,8 +65,8 @@ export class LayerService {
 
     this._tooltipsClosed = false
 
-    this._lastBounds = undefined
-    this._lastSurface = 1000
+    this._lastLayerBounds = undefined
+    this._lastLayerSurfaceSize = 1000
 
     this.registerHighlightWatch()
   }
@@ -259,33 +266,38 @@ export class LayerService {
       return
     }
 
-    const layerGroupBounds = this._layerGroup.getBounds()
+    const layerBounds = this._layerGroup.getBounds()
 
-    const layerGroupBoundsSurface = this.calculateSurface(layerGroupBounds)
+    const layerSurfaceSize = this.calculateSurface(layerBounds)
 
     let zoom = 18
 
     if (this._features.size === 1) {
       this._features.forEach((feature) => {
         const path = feature.item.path
-        const zoomOffset = 7
+        const zoomOffset = 10
         zoom = path ? zoomOffset + path.split('.').length * 2 : zoomOffset
       })
     }
 
-    if (
-      !this._lastBounds || // if first draw
-      !this._lastBounds.overlaps(layerGroupBounds) || // if a completlly different area
-      Math.abs(this._lastSurface - layerGroupBoundsSurface) > 0.0001 // if a surface change is greated then 1km (i think)
-    ) {
-      this._lastBounds = layerGroupBounds
-      this._lastSurface = layerGroupBoundsSurface
+    const noSurfaceSizeChange = Math.abs(this._lastLayerSurfaceSize - layerSurfaceSize) < 0.0001
 
-      this._map.fitBounds(this._lastBounds, {
-        padding: [100, 100],
-        maxZoom: zoom
-      })
+    const layersOverlap = this._lastLayerBounds && (this._lastLayerBounds.overlaps(layerBounds) || this._lastLayerBounds?.equals(layerBounds))
+
+    // if there was no big move on map keep current map view
+    if(noSurfaceSizeChange && layersOverlap && this.lastMapBounds) {
+      this._map.fitBounds(this.lastMapBounds)
+      return
     }
+
+    this._lastLayerBounds = layerBounds
+    this._lastLayerSurfaceSize = layerSurfaceSize
+
+    this._map.fitBounds(this._lastLayerBounds, {
+      padding: [100, 100],
+      maxZoom: zoom
+    })
+
   }
 
   calculateSurface (bounds: LatLngBounds) {
