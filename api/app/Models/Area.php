@@ -39,7 +39,7 @@ class Area extends Model
         'tag_coverage' => 'float'
     ];
 
-    protected static $logAttributes = ['*'];
+    protected static $logAttributes = ['name', 'orientation', 'altitude', 'type_id', 'parent_id', 'path', 'owner_id'];
 
     protected $fillable = [
         'name', 'orientation', 'altitude', 'type_id', 'parent_id', 'path', 'owner_id'
