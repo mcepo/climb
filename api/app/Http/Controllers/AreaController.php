@@ -11,7 +11,8 @@ class AreaController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index', 'show']]);
+        // currently all users can do everything 
+        // $this->middleware('auth', ['except' => ['index', 'show']]);
         $this->middleware('check-cache', ['only' => ['index', 'show']]);
         $this->middleware('flush-cache', ['except' => ['index', 'show']]);
     }

@@ -57,7 +57,7 @@
 
         <add-trail v-if='hasTrails' :area='item' show-text/>
 
-        <v-btn
+        <!-- <v-btn
           text
           v-if='isArea'
           title="Add a moderator for this area"
@@ -66,7 +66,7 @@
         >
           <v-icon>person_add</v-icon>
           Add moderator
-        </v-btn>
+        </v-btn> -->
 
         <v-btn
           v-if='canHaveArea'

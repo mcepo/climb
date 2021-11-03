@@ -94,22 +94,26 @@ const auth: Module<AuthState, RootState> = {
       return !!state.token && !!state.user
     },
     // check if a user has specific permission
-    authorize: (state, getters) => (
+    authorize: (state) => (
       item: Area | Trail | Image | Route | Tag
     ) => {
-      if (getters.isAdmin) return true
+      // currently setting that all loggedin users
+      // can perform all of the actions
+      return !!state.user && item.path
 
-      if (!item.path) return false
+      // if (getters.isAdmin) return true
 
-      const pathPermissions = state.user?.path_permissions
+      // if (!item.path) return false
 
-      if (pathPermissions) {
-        pathPermissions.find((p) => {
-          return item.path.startsWith(p)
-        })
-      }
+      // const pathPermissions = state.user?.path_permissions
 
-      return state.user && state.user.id === item.owner_id
+      // if (pathPermissions) {
+      //   pathPermissions.find((p) => {
+      //     return item.path.startsWith(p)
+      //   })
+      // }
+
+      // return state.user && state.user.id === item.owner_id
     },
     isAdmin (state) {
       return state.user && state.user.role_id === Role.ADMIN

@@ -9,7 +9,8 @@ class TagController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        // all users can currently do everything
+        // $this->middleware('auth');
         $this->middleware('flush-cache');
     }
 
