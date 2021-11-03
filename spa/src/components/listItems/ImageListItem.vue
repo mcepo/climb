@@ -50,6 +50,7 @@
 import TagControl from '../buttons/TagControl'
 import DeleteButton from '../buttons/DeleteButton'
 import { getUrl } from '../../router'
+import { baseURL } from '@/store/api'
 
 import drawers from '../../services/drawer.service'
 
@@ -62,7 +63,7 @@ export default {
   },
   methods: {
     src (id) {
-      return '/api/image/' + id + '/thumbnail'
+      return baseURL + 'image/' + id + '/thumbnail'
     },
     open (id) {
       this.$router.push(getUrl('image', id))
