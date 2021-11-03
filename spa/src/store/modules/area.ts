@@ -236,14 +236,12 @@ const area: Module<AreaState, RootState> = {
     getFiltered: (state: AreaState, _: any, __: RootState, rootGetters: any) => (id: number|null, query: string|null) => {
       let areaIds: number[]|string[]
 
-      if (id) {
+      if (query) {
+        areaIds = Object.keys(state.byIds)
+      } else if (id) {
         areaIds = state.byIds[id].areas
       } else {
-        if (query) {
-          areaIds = Object.keys(state.byIds)
-        } else {
-          return []
-        }
+        return []
       }
 
       const areas: Array<Area> = []

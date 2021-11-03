@@ -2,13 +2,13 @@
   <v-container>
     <v-text-field v-if='searchable' label="Search areas" v-model="areaQueryString" :loading='loading && areaQueryString !== null'></v-text-field>
     <filtering-alert v-if='wasFiltered' type='areas'></filtering-alert>
-    <details-loading v-if="(loading && !searchable) || (searchable && searching)"></details-loading>
-    <table class='area-table' v-else>
+    <table class='area-table'>
       <tbody>
         <area-list-item v-for="area in limitedAreas" :key="area.id" :area='area' :showType='showType'/>
         <tr v-intersect='loadOnIntersect'></tr>
       </tbody>
     </table>
+    <details-loading v-if="(loading && !searchable) || (searchable && searching)"></details-loading>
   </v-container>
 </template>
 <style>
@@ -91,7 +91,7 @@ export default {
   watch: {
     areaQueryString (newQuery) {
       newQuery = newQuery === '' ? null : newQuery
-      if (!this.area && newQuery) {
+      if (newQuery) {
         this.loadAreasOnce(newQuery)
       }
     },
