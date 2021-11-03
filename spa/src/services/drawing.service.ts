@@ -163,7 +163,12 @@ class DrawingService {
 
     this._layer.addTo(this._map)
 
-    this._layer.pm.enable()
+    // a possible fix for marker not being draggable on mobile devices
+    if (this._layer instanceof L.Marker) {
+      this._layer.dragging && this._layer.dragging.enable()
+    } else {
+      this._layer.pm.enable()
+    }
   }
 
   private registerListenerOnDraw () {

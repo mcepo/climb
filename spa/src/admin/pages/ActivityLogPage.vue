@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <activity-list :activities='activities'></activity-list>
-  </div>
+    <activity-list :activities='activities' style='height:95vh; overflow:auto'></activity-list>
 </template>
 
 <script>

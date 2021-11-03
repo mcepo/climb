@@ -10,3 +10,4 @@ Route::get('email/resend', 'Auth\VerificationController@resend')->name('verifica
 
 Route::get('/a/{path}/{area}/{imageInfo?}', 'WebController@area');
 Route::get('/r/{path}/{route}/{imageInfo?}', 'WebController@route');
+Route::get('/admin/{path}', 'WebController@index');

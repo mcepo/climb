@@ -31,7 +31,7 @@
         <v-tabs-items v-model="tabs" class="mt-2">
 
           <v-tab-item v-if="hasAreas" value="areas">
-            <area-list :area="item" :searchable='item.areas.length > 10'/>
+            <area-list :area="item" :searchable='true'/>
           </v-tab-item>
 
           <v-tab-item v-if="hasRoutes" value="routes">

@@ -7,6 +7,7 @@ use App\Models\Traits\IsTagged;
 use App\Models\Traits\IsDescendent;
 use App\Models\Traits\HasOwner;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Illuminate\Support\Facades\DB;
 
 class Tag extends Model
 {
@@ -15,7 +16,12 @@ class Tag extends Model
         HasOwner,
         LogsActivity;
 
-    protected static $logAttributes = ['*'];
+    protected static $logAttributes = [        
+        'geometry',
+        'image_id',
+        'tagged_type',
+        'tagged_id'
+    ];
 
     // need image_id as well because of admin panel tag view
     protected $hidden = [
@@ -45,7 +51,7 @@ class Tag extends Model
         self::where('id', $this->id)
         ->update(
             [
-            'binary_coordinates' => \DB::raw('ST_GeomFromGeoJSON(geometry::text)')
+            'binary_coordinates' => DB::raw('ST_GeomFromGeoJSON(geometry::text)')
             ]
         );
     }

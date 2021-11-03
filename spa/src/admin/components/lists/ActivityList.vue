@@ -18,7 +18,7 @@
       <pre>{{JSON.stringify(item.properties.attributes, null, 2) }}</pre>
     </template>
 
-    <template v-slot:item.properties="{ item }">
+    <template v-slot:item.old="{ item }">
       <pre>{{JSON.stringify(item.properties.old, null, 2) }}</pre>
     </template>
   </v-data-table>
