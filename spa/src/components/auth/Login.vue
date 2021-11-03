@@ -34,7 +34,7 @@
             </v-btn>
             <v-card-subtitle class="font-weight-light" style='text-align:center'>or</v-card-subtitle>
             <v-btn
-              @click="authProvider('google', 'Google')"
+              @click="authProvider('google')"
               aria-label="Google login">
                 <img  style='height:16px; weight:16px; padding-right:5px' src="/assets/img/icons/google-logo.svg" alt="">
                 Google login
@@ -54,9 +54,30 @@
 <script>
 import api from '../../store/api'
 import { mapActions } from 'vuex'
-import '../../plugins/social-auth'
+import { OAuth2Client } from '@byteowls/capacitor-oauth2'
 
 export default {
+  oAuthOptions: {
+    google: {
+      authorizationBaseUrl: 'https://accounts.google.com/o/oauth2/auth',
+      accessTokenEndpoint: 'https://www.googleapis.com/oauth2/v4/token',
+      scope: 'email profile',
+      resourceUrl: 'https://www.googleapis.com/userinfo/v2/me',
+      logsEnabled: true,
+      web: {
+        appId: process.env.VUE_APP_OAUTH_CLIENT_ID_WEB,
+        responseType: 'token',
+        accessTokenEndpoint: '',
+        redirectUrl: process.env.VUE_APP_GOOGLE_REDIRECT_URI,
+        windowOptions: 'height=600,left=0,top=0'
+      },
+      android: {
+        appId: process.env.VUE_APP_OAUTH_CLIENT_ID_ANDROID,
+        responseType: 'code',
+        redirectUrl: '<net.climbline:/>'
+      }
+    }
+  },
   data: () => ({
     valid: true,
     emailRules: [v => !!v || 'Email is required'],
@@ -64,6 +85,11 @@ export default {
     formData: {},
     statusCode: null
   }),
+
+  created () {
+    console.log(process.env)
+  },
+
   methods: {
     ...mapActions({
       openForm: 'form/open',
@@ -90,24 +116,31 @@ export default {
           this.statusCode = error.response?.status
         })
     },
-    authProvider (provider, providerName) {
+
+    async authProvider (provider) {
       this.$store.dispatch(
         'snackbar/show',
         'Logging in using ' +
-          providerName +
+          provider +
           '<br> This may take a couple of seconds ...'
       )
-      this.$auth.authenticate(provider).then(response => {
-        this.socialLogin(provider, response)
-      })
+
+      try {
+        const userResponse = await OAuth2Client.authenticate(this.$options.oAuthOptions[provider])
+
+        console.log(userResponse)
+
+        this.socialLogin(provider, userResponse)
+        this.closeForm()
+      } catch (error) {
+        console.error(error)
+      }
     },
+
     socialLogin (provider, response) {
       api.post('/social_login/' + provider, response).then(() => {
         this.afterSuccessLogin()
       })
-    },
-    afterSuccessLogin () {
-      this.closeForm()
     }
   }
 }
