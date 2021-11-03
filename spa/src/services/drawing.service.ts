@@ -145,11 +145,6 @@ class DrawingService {
           (position: any) => {
             if (!position) return
 
-            if (position.coords.accuracy > 50) {
-              store.dispatch('snackbar/error', 'Location accuracy too low (' + position.coords.accuracy + ' m), try later!')
-              return
-            }
-
             tag.geometry = {
               type: 'Point',
               coordinates: [position.coords.longitude, position.coords.latitude]
