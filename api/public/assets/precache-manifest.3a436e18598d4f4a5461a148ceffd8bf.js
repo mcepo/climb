@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "8cbcbf8e5bb8cac3555f",
+    "revision": "9d9f562323c694aaf5bd",
     "url": "/assets/css/admin.panel.2ab20800.css"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/css/admin.panel~area.form~moderator.form~route.filters~route.form.f058a909.css"
   },
   {
-    "revision": "8563eaddc432e2320773",
+    "revision": "6259a2bfcf8d2c5357e7",
     "url": "/assets/css/app.fb0abc21.css"
   },
   {
@@ -20,7 +20,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/css/area.form~pitch.form~route.filters~route.form.f9d4f751.css"
   },
   {
-    "revision": "9eaad7085f8d532f0db7",
+    "revision": "df7f0cfa0e5fe0d72597",
     "url": "/assets/css/chunk-vendors.3cc44aee.css"
   },
   {
@@ -60,20 +60,20 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/fonts/MaterialIcons-Regular.da4ea5cd.ttf"
   },
   {
-    "revision": "3b955d2596f8251cf478ca497911a19d",
+    "revision": "c369392e7778e9068ae159d8c4e4e10f",
     "url": "/assets/index.html"
   },
   {
-    "revision": "8cbcbf8e5bb8cac3555f",
-    "url": "/assets/js/admin.panel.ac14b8cb.js"
+    "revision": "9d9f562323c694aaf5bd",
+    "url": "/assets/js/admin.panel.3e1fb142.js"
   },
   {
     "revision": "5ec2b75f686dda5035f9",
     "url": "/assets/js/admin.panel~area.form~moderator.form~route.filters~route.form.9450cd7d.js"
   },
   {
-    "revision": "8563eaddc432e2320773",
-    "url": "/assets/js/app.03fcaebf.js"
+    "revision": "6259a2bfcf8d2c5357e7",
+    "url": "/assets/js/app.2b98b88a.js"
   },
   {
     "revision": "7ae9d6406013e8b732fc",
@@ -104,12 +104,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/js/chunk-2d230c96.89573216.js"
   },
   {
-    "revision": "9eaad7085f8d532f0db7",
-    "url": "/assets/js/chunk-vendors.3d03fe21.js"
+    "revision": "df7f0cfa0e5fe0d72597",
+    "url": "/assets/js/chunk-vendors.213ca595.js"
   },
   {
-    "revision": "6d451114695b75480514",
-    "url": "/assets/js/image.map.fb4f4121.js"
+    "revision": "2257b7a079cd4bf0fbab",
+    "url": "/assets/js/image.map.767eed53.js"
   },
   {
     "revision": "9a47275e7b96048d05b9",
@@ -120,8 +120,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/js/leaflet-geoman.6a8b4c6d.js"
   },
   {
-    "revision": "0a8df4b5f28d61fb2c8d",
-    "url": "/assets/js/leaflet.map.522d025f.js"
+    "revision": "33fad38445abf840a742",
+    "url": "/assets/js/leaflet.map.a2cbd36b.js"
   },
   {
     "revision": "06a503ded3c40fe5acf9",
