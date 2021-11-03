@@ -13,8 +13,11 @@
     "cap:sync": "cp ../api/resources/views/index.blade.php ../api/public/index.html; npx cap sync"
   },
   "dependencies": {
+    "@byteowls/capacitor-oauth2": "^3.0.1",
     "@capacitor/android": "^3.2.5",
+    "@capacitor/app": "^1.0.6",
     "@capacitor/core": "^3.2.5",
+    "@capacitor/geolocation": "^1.1.2",
     "@geoman-io/leaflet-geoman-free": "^2.11.2",
     "@mdi/font": "^5.9.55",
     "@vue/composition-api": "^1.1.5",
