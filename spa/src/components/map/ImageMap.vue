@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { Map, control, CRS } from 'leaflet'
+import { Map, control, CRS, Canvas } from 'leaflet'
 import imageService from '../../services/image.service'
 import layerService from '../../services/layer.service'
 import { getUrl } from '../../router'
@@ -39,7 +39,10 @@ export default {
       maxZoom: 13,
       maxBoundsViscosity: 1.0,
       zoomControl: false,
-      crs: CRS.Simple
+      crs: CRS.Simple,
+      renderer: new Canvas({
+        tolerance: 5
+      })
     })
 
     imageService.map = this.$options.map

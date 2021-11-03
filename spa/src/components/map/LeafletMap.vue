@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { LatLngBounds, LatLng, Map, control, Marker, Circle, Polyline } from 'leaflet'
+import { LatLngBounds, LatLng, Map, control, Marker, Circle, Polyline, Canvas } from 'leaflet'
 import setupTiles from '../../utils/tiles'
 import layerService from '../../services/layer.service'
 import styleService from '../../services/style.service'
@@ -56,7 +56,10 @@ export default {
       maxBounds: bounds,
       maxBoundsViscosity: 1.0,
       center: [0, 0],
-      zoomControl: false
+      zoomControl: false,
+      renderer: new Canvas({
+        tolerance: 5
+      })
     })
 
     setupTiles(this.$options.map)
