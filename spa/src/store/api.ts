@@ -1,9 +1,9 @@
+import { Capacitor } from '@capacitor/core'
 import axios, { AxiosError, AxiosRequestConfig } from 'axios'
 import store from '.'
 import router from '../router'
 
-// TODO: ovdje za android aplikaciju staviti 'https://climbline.net/api/'
-const baseURL = '/api/'
+const baseURL = Capacitor.isNativePlatform() ? 'https://climbline.net/api/' : '/api/'
 
 export { baseURL }
 
