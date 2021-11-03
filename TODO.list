@@ -1,7 +1,5 @@
 -- HOT --
 
-TODO: staviti prava da svi sve mogu editirati za sad
-
 TODO: forma za dodavanje linkova
 
 TODO: welcome and disclamer popup community maintained site .... vuetify overlay
@@ -15,14 +13,6 @@ TODO: razlikovati pristupe i odstupe
 TODO: integrate weather api-s
 
 TODO: publish crag locations to openstreetmap
-
-TODO: activity log every click is logged, possibly to elasticsearch
-
-TODO: error log also to elastic search
-
-TODO: activity reverting on tags only ?
-
-TODO: admin panel user review, tags review and images
 
 TODO: create android application
 
