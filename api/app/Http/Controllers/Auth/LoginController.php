@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use Socialite;
 
 use App\User;
+
+use App\Http\Requests\AuthRequest;
 
 class LoginController extends Controller
 {
@@ -24,7 +25,7 @@ class LoginController extends Controller
         Auth::login($user);
     }
   
-    public function login(Request $request)
+    public function login(AuthRequest $request)
     {
   
         $credentials = $request->only('email', 'password');
