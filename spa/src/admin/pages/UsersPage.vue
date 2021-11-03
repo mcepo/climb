@@ -1,5 +1,5 @@
 <template>
-  <user-list :users='users'></user-list>
+  <user-list :users='users' style='height:95vh; overflow:auto'></user-list>
 </template>
 
 <script>

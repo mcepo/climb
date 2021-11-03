@@ -1,6 +1,6 @@
 <template>
 <div>
-  <image-list v-if='images.length' :images='images'></image-list>
+  <image-list v-if='images.length' :images='images' style='height:95vh; overflow:auto'></image-list>
   <div v-else> All images are reviewed!</div>
 </div>
 </template>
