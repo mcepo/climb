@@ -5,7 +5,7 @@
     <details-loading v-if="(loading && !searchable) || (searchable && searching)"></details-loading>
     <table class='area-table' v-else>
       <tbody>
-        <area-list-item v-for="area in limitedAreas" :key="area.id" :area='area' />
+        <area-list-item v-for="area in limitedAreas" :key="area.id" :area='area' :showType='showType'/>
         <tr v-intersect='loadOnIntersect'></tr>
       </tbody>
     </table>
@@ -28,6 +28,10 @@ export default {
   props: {
     area: Object,
     areaIds: Array,
+    showType: {
+      type: Boolean,
+      default: true
+    },
     searchable: {
       type: Boolean,
       default: false

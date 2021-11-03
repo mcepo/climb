@@ -17,7 +17,7 @@
           <v-icon>add</v-icon>
         </v-btn>
       </div>
-      <area-list :areaIds="rootIds"/>
+      <area-list :areaIds="rootIds" :showType='false'/>
     </v-layout>
     <v-layout column v-if='recentlyViewedIds.length !== 0'>
       <div class="d-flex pa-2">
