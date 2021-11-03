@@ -1,34 +1,32 @@
+-- android --
+
+TODO: splashscreen podesiti
+
+TODO: icona aplikacije dodati
+
+TODO: spremanje u filesystem
+
+TODO: gps popraviti - TESTIRATI
+
 -- HOT --
 
-TODO: popraviti crtanje na mobitelu i ponašanje karte
+TODO: logiranje/registriranje ništa ne radi sve to treba istestirati
 
-TODO: staviti prava da svi sve mogu editirati za sad
-
-TODO: forma za dodavanje linkova
+TODO: mail kriptiran mora biti
 
 TODO: welcome and disclamer popup community maintained site .... vuetify overlay
 
 TODO: prilikom odabira ocjene smjera dodati i odabir ljestvice koje će se po defaultu koristiti za taj smjer
 
-TODO: dodati i broj spitova u smjeru/ cugu
+-- FEATURES --
 
-TODO: razlikovati pristupe i odstupe 
+TODO: dodati i broj spitova u smjeru/ cugu
 
 TODO: integrate weather api-s
 
 TODO: publish crag locations to openstreetmap
 
-TODO: activity log every click is logged, possibly to elasticsearch
-
-TODO: error log also to elastic search
-
-TODO: activity reverting on tags only ?
-
-TODO: admin panel user review, tags review and images
-
-TODO: create android application
-
--- FEATURES --
+TODO: razlikovati pristupe i odstupe 
 
 TODO: color coding route and area tags
 
@@ -40,8 +38,3 @@ TODO: in area/route details put image with the most topos
     in the header under name
 
 -- OPTIMIZATION --
-
--- OFFLINE MODE PRECACHE --
-
-On button click user can precache all the info images included into localstorage
-so when offline you can view the entire area information
