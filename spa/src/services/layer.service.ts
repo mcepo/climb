@@ -285,7 +285,7 @@ export class LayerService {
     const layersOverlap = this._lastLayerBounds && (this._lastLayerBounds.overlaps(layerBounds) || this._lastLayerBounds?.equals(layerBounds))
 
     // if there was no big move on map keep current map view
-    if(noSurfaceSizeChange && layersOverlap && this.lastMapBounds) {
+    if (noSurfaceSizeChange && layersOverlap && this.lastMapBounds) {
       this._map.fitBounds(this.lastMapBounds)
       return
     }
@@ -297,7 +297,6 @@ export class LayerService {
       padding: [100, 100],
       maxZoom: zoom
     })
-
   }
 
   calculateSurface (bounds: LatLngBounds) {
