@@ -1,4 +1,12 @@
--- android --
+-- TESTIRATI --
+
+- login u aplikaciju
+
+- registraciju u aplikaciju
+
+- gps
+
+-- ANDROID --
 
 TODO: splashscreen podesiti
 
@@ -6,9 +14,9 @@ TODO: icona aplikacije dodati
 
 TODO: spremanje u filesystem
 
-TODO: gps popraviti - TESTIRATI
-
 -- HOT --
+
+TODO: FIX index.blade.php se cachira u service workeru, pa onda mi ostane blade markup za title i description
 
 TODO: provjeriti duplikate područja/smjerova u bazi
 
