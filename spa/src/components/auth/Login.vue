@@ -57,23 +57,21 @@ import { mapActions } from 'vuex'
 import { OAuth2Client } from '@byteowls/capacitor-oauth2'
 
 export default {
-  oAuthOptions: {
+  oAuth: {
     google: {
       authorizationBaseUrl: 'https://accounts.google.com/o/oauth2/auth',
       accessTokenEndpoint: 'https://www.googleapis.com/oauth2/v4/token',
       scope: 'email profile',
-      resourceUrl: 'https://www.googleapis.com/userinfo/v2/me',
+      responseType: 'code',
       logsEnabled: true,
       web: {
         appId: process.env.VUE_APP_OAUTH_CLIENT_ID_WEB,
-        responseType: 'token',
         accessTokenEndpoint: '',
         redirectUrl: process.env.VUE_APP_GOOGLE_REDIRECT_URI,
         windowOptions: 'height=600,left=0,top=0'
       },
       android: {
         appId: process.env.VUE_APP_OAUTH_CLIENT_ID_ANDROID,
-        responseType: 'code',
         redirectUrl: '<net.climbline:/>'
       }
     }
@@ -85,10 +83,6 @@ export default {
     formData: {},
     statusCode: null
   }),
-
-  created () {
-    console.log(process.env)
-  },
 
   methods: {
     ...mapActions({
@@ -126,11 +120,9 @@ export default {
       )
 
       try {
-        const userResponse = await OAuth2Client.authenticate(this.$options.oAuthOptions[provider])
+        const userResponse = await OAuth2Client.authenticate(this.$options.oAuth[provider])
 
-        console.log(userResponse)
-
-        this.socialLogin(provider, userResponse)
+        this.socialLogin(provider, userResponse.authorization_response)
         this.closeForm()
       } catch (error) {
         console.error(error)
