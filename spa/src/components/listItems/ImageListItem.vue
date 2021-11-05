@@ -1,7 +1,7 @@
 <template>
   <v-img
     :key="image.id"
-    :src="src(image.id)"
+    :src="src"
     @click.native="open(image.id)"
     class='image-item'
     contain
@@ -50,7 +50,7 @@
 import TagControl from '../buttons/TagControl'
 import DeleteButton from '../buttons/DeleteButton'
 import { getUrl } from '../../router'
-import { baseURL } from '@/store/api'
+import imageService from '../../services/image.service'
 
 import drawers from '../../services/drawer.service'
 
@@ -58,13 +58,19 @@ export default {
   props: ['image'],
   data () {
     return {
-      loading: true
+      loading: true,
+      src: ''
+    }
+  },
+  created () {
+    if (this.image) {
+      imageService.getImage(this.image.id, 'thumbnail').then((data) => {
+        console.log(data)
+        this.src = data
+      })
     }
   },
   methods: {
-    src (id) {
-      return baseURL + 'image/' + id + '/thumbnail'
-    },
     open (id) {
       this.$router.push(getUrl('image', id))
       drawers.setLeft(false)

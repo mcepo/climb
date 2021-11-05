@@ -3,7 +3,7 @@ import axios, { AxiosError, AxiosRequestConfig } from 'axios'
 import store from '.'
 import router from '../router'
 
-const baseURL = Capacitor.isNativePlatform() ? 'https://climbline.net/api/' : '/api/'
+const baseURL = Capacitor.isNativePlatform() ? 'https://climbline.net/api/' : 'https://climbline.net/api/'
 
 export { baseURL }
 

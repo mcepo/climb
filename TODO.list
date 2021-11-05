@@ -32,6 +32,10 @@ TODO: welcome and disclamer popup community maintained site ....
 
 TODO: prilikom odabira ocjene smjera dodati i odabir ljestvice koje će se po defaultu koristiti za taj smjer
 
+TODO: each thumbnail gets requested from the server twice, imagemap se isto učita nepotrebno i isto dva puta se sve dogodi ima sigurno veze sa storom
+
+TODO: clear mapbounds when switch to image
+
 -- FEATURES --
 
 TODO: dodati i broj spitova u smjeru/ cugu
