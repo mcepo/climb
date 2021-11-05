@@ -66,13 +66,12 @@ export default {
       logsEnabled: true,
       web: {
         appId: process.env.VUE_APP_OAUTH_CLIENT_ID_WEB,
-        accessTokenEndpoint: '',
         redirectUrl: process.env.VUE_APP_GOOGLE_REDIRECT_URI,
         windowOptions: 'height=600,left=0,top=0'
       },
       android: {
         appId: process.env.VUE_APP_OAUTH_CLIENT_ID_ANDROID,
-        redirectUrl: '<net.climbline:/>'
+        redirectUrl: 'net.climbline:/'
       }
     }
   },
