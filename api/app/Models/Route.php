@@ -31,13 +31,8 @@ class Route extends Model
         HasOwner,
         LogsActivity;
 
-    protected static $logAttributes = [
-        'name',
-        'length',
-        'area_id',
-        'type_id',
-        'position'
-    ];
+    protected static $logAttributes = ['id', 'name', 'type_id', 'length', 'orientation', 'area_id', 'path', 'position'];
+    protected static $ignoreChangedAttributes = ['ts_vector'];
 
     protected $fillable = [
         'name',

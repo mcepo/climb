@@ -39,7 +39,17 @@ class Area extends Model
         'tag_coverage' => 'float'
     ];
 
-    protected static $logAttributes = ['name', 'orientation', 'altitude', 'type_id', 'parent_id', 'path', 'owner_id'];
+    protected static $logAttributes = ['id', 'name', 'orientation', 'altitude', 'type_id', 'parent_id', 'path', 'owner_id'];
+    protected static $ignoreChangedAttributes = [
+        'ts_vector',
+        'length_stats',
+        'grade_stats',
+        'orientations',
+        'route_stats',
+        'tag_coverage',
+        'image_count',
+        'trail_count'
+    ];
 
     protected $fillable = [
         'name', 'orientation', 'altitude', 'type_id', 'parent_id', 'path', 'owner_id'
@@ -132,7 +142,8 @@ class Area extends Model
         $this->load(['imageTags.image.mapTag', 'imageTags.image']);
 
         $this->setAttribute(
-            'images', $this->imageTags
+            'images',
+            $this->imageTags
                 ->pluck('image') // getting images from image tag collection
                 ->merge($this->images) // merging images with area image
                 ->unique('id')
