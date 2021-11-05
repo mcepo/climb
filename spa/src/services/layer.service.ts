@@ -293,6 +293,8 @@ export class LayerService {
     this._lastLayerBounds = layerBounds
     this._lastLayerSurfaceSize = layerSurfaceSize
 
+    this.lastMapBounds = undefined
+
     this._map.fitBounds(this._lastLayerBounds, {
       padding: [100, 100],
       maxZoom: zoom
