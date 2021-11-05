@@ -149,7 +149,7 @@ export class ImageService {
       const response = await api.get(src, {
         responseType: 'blob'
       })
-      return 'data:image/jpeg;base64,' + ((await this.convertToBase64(response.data)) as string)
+      return (await this.convertToBase64(response.data)) as string
     } catch (e) {
       console.log(e)
       return null

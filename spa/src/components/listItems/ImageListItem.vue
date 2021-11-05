@@ -65,8 +65,7 @@ export default {
   created () {
     if (this.image) {
       imageService.getImage(this.image.id, 'thumbnail').then((data) => {
-        console.log(data)
-        this.src = data
+        this.src = 'data:image/jpeg;base64,' + data
       })
     }
   },
