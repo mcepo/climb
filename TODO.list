@@ -20,19 +20,11 @@ TODO: remove service worker when on android
 
 TODO: add filesystem storage when on mobile for images
 
-TODO: add map cache to filesystem only for tile.thunderforest.com/outdoors/
-
 -- HOT --
-
-TODO: when offline allow only one tile type -> tile.thunderforest.com/outdoors/ 
-
-TODO: change default map to tile.thunderforest.com/outdoors/ better then openstreetmap + caching update
 
 TODO: FIX index.blade.php se cachira u service workeru, pa onda mi ostane blade markup za title i description
 
 TODO: provjeriti duplikate područja/smjerova u bazi
-
-TODO: logiranje/registriranje ništa ne radi sve to treba istestirati
 
 TODO: mail kriptiran mora biti
 
