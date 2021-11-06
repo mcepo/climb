@@ -16,12 +16,17 @@ class Tag extends Model
         HasOwner,
         LogsActivity;
 
-    protected static $logAttributes = [        
+    protected static $logAttributes = [
+        'id',
+        'path',
+        'owner_id',      
         'geometry',
         'image_id',
         'tagged_type',
         'tagged_id'
     ];
+
+    protected static $ignoreChangedAttributes = ['binary_coordinates'];
 
     // need image_id as well because of admin panel tag view
     protected $hidden = [

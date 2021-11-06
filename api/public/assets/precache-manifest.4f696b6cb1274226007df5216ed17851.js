@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/css/admin.panel~area.form~moderator.form~route.filters~route.form.f058a909.css"
   },
   {
-    "revision": "ddfe3049d06b4035d0fe",
+    "revision": "02db860d3618317fb46f",
     "url": "/assets/css/app.fb0abc21.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/css/area.form~pitch.form~route.filters~route.form.f9d4f751.css"
   },
   {
-    "revision": "df7f0cfa0e5fe0d72597",
-    "url": "/assets/css/chunk-vendors.3cc44aee.css"
+    "revision": "af7d4204ea3723a9d8d3",
+    "url": "/assets/css/chunk-vendors.4002c9eb.css"
   },
   {
     "revision": "d91165ec6586f8ca8782",
@@ -60,7 +60,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/fonts/MaterialIcons-Regular.da4ea5cd.ttf"
   },
   {
-    "revision": "0da7912ba497310f8bdb13d739ff174b",
+    "revision": "8127c1c8e6dfc6d4c7da1ea1856e4cf2",
     "url": "/assets/index.html"
   },
   {
@@ -72,8 +72,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/js/admin.panel~area.form~moderator.form~route.filters~route.form.9450cd7d.js"
   },
   {
-    "revision": "ddfe3049d06b4035d0fe",
-    "url": "/assets/js/app.b1b582b0.js"
+    "revision": "02db860d3618317fb46f",
+    "url": "/assets/js/app.f327cee8.js"
   },
   {
     "revision": "2af11a0986fb0c25bebf",
@@ -104,7 +104,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/js/chunk-2d230c96.89573216.js"
   },
   {
-    "revision": "df7f0cfa0e5fe0d72597",
+    "revision": "af7d4204ea3723a9d8d3",
     "url": "/assets/js/chunk-vendors.213ca595.js"
   },
   {
@@ -124,8 +124,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/js/leaflet.map.7eb3c4ea.js"
   },
   {
-    "revision": "9cb8bca524148a97f03f",
-    "url": "/assets/js/login.form.f7609caf.js"
+    "revision": "63021d13bee078f88d19",
+    "url": "/assets/js/login.form.27cc35ae.js"
   },
   {
     "revision": "5a10f0b6b58a4af1f154",

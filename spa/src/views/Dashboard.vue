@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <nav-bar></nav-bar>
+    <info-dialog></info-dialog>
 
     <v-main style='padding:0px' v-if='loadMain'>
       <drawing-actionbar></drawing-actionbar>
@@ -18,6 +19,7 @@ import Vue from 'vue'
 import DrawingActionbar from '../components/common/DrawingActionbar.vue'
 import NotificationSnackbar from '../components/common/NotificationSnackbar.vue'
 import NavBar from '../components/common/NavBar.vue'
+import InfoDialog from '../components/common/InfoDialog.vue'
 import '../plugins/leaflet'
 
 import drawers from '../services/drawer.service'
@@ -27,7 +29,8 @@ export default Vue.extend({
   components: {
     DrawingActionbar,
     NavBar,
-    NotificationSnackbar
+    NotificationSnackbar,
+    InfoDialog
   },
   computed: {
     loadMain () {

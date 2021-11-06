@@ -79,7 +79,13 @@ export class LayerService {
     if (this._map === null) {
       this._unwatchTags && this._unwatchTags()
     } else {
-      this._mapType = store.getters.imageOpen ? 'image' : 'map'
+      if (store.getters.imageOpen) {
+        this._mapType = 'image'
+        this.lastMapBounds = undefined
+      } else {
+        this._mapType = 'map'
+      }
+
       this._layerGroup.addTo(map)
       this.registerTagsWatch()
     }
@@ -292,6 +298,8 @@ export class LayerService {
 
     this._lastLayerBounds = layerBounds
     this._lastLayerSurfaceSize = layerSurfaceSize
+
+    this.lastMapBounds = undefined
 
     this._map.fitBounds(this._lastLayerBounds, {
       padding: [100, 100],
