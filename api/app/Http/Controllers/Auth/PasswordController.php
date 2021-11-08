@@ -23,7 +23,7 @@ class PasswordController extends Controller
         $user = User::where('email', $request->get('email'))->first();
 
         if(!isset($user)) {
-            return abort(400, "User '".$request->get('email')."' doesn\'t exists.");
+            return abort(400, "User '".$request->get('email')."' doesn't exists.");
         }
 
         $user->sendPasswordResetLink();
