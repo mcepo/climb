@@ -47,6 +47,7 @@ export default {
   },
 
   created () {
+    document.title = 'Climbline - comunity maintained climbers guide'
     this.$store.dispatch('area/fetchMany')
   },
   methods: {

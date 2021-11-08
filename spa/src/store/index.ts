@@ -103,6 +103,8 @@ const store = new Vuex.Store<RootState>({
     urlPath: (state) => (itemType: ItemType, id: string) => {
       const item = state[itemType]?.byIds[id]
 
+      document.title = 'Climbline - comunity maintained guide'
+
       if (!item) {
         return null
       }
@@ -120,6 +122,9 @@ const store = new Vuex.Store<RootState>({
       })
 
       if (item.name) {
+
+        document.title = 'Climbline - ' + item.name
+
         names.push(item.name)
       }
 
