@@ -36,7 +36,7 @@ const store = new Vuex.Store<RootState>({
     drawing: false,
     online: navigator.onLine
   },
-  plugins: (process.env.NODE_ENV === 'production' ? [localStorage] : []),
+  plugins: [localStorage],
   mutations: {
     setDrawingMode (state: RootState, drawing: boolean) {
       state.drawing = drawing
@@ -122,7 +122,6 @@ const store = new Vuex.Store<RootState>({
       })
 
       if (item.name) {
-
         document.title = 'Climbline - ' + item.name
 
         names.push(item.name)
