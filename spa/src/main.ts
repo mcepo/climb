@@ -7,6 +7,8 @@ import vuetify from './plugins/vuetify'
 import './material-design-icons.css'
 import './styles.css'
 
+import { App as CapacitorApp } from '@capacitor/app'
+
 import { sync } from 'vuex-router-sync'
 
 // TODO: disable serviceworker for android
@@ -16,6 +18,16 @@ Vue.prototype.$workbox = wb
 sync(store, router, { moduleName: 'url' })
 
 Vue.config.productionTip = false
+
+// mobile backbutton listener
+
+CapacitorApp.addListener('backButton', () => {
+  if (window.history.length < 5 && router.currentRoute.path === '/') {
+    CapacitorApp.exitApp()
+  } else {
+    router.back()
+  }
+})
 
 new Vue({
   router,

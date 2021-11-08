@@ -10,7 +10,11 @@ TODO: splashscreen podesiti
 
 TODO: icona aplikacije dodati
 
+TOD: 
+
 -- HOT --
+
+TODO: email reset link ne radi
 
 TODO: mail kriptiran mora biti
 
@@ -40,3 +44,5 @@ TODO: in area/route details put image with the most topos
     in the header under name
 
 -- OPTIMIZATION --
+
+TODO: move route/image/area fetch in beforeEnter route hook

@@ -1,4 +1,3 @@
-import { App, URLOpenListenerEvent } from '@capacitor/app'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Dashboard from '../views/Dashboard.vue'
@@ -162,21 +161,22 @@ const router = new VueRouter({
   routes
 })
 
-// listener for deep links
-App.addListener('appUrlOpen', function (event: URLOpenListenerEvent) {
-  // Example url: https://beerswift.app/tabs/tabs2
-  // slug = /tabs/tabs2
-  const slug = event.url.split('.net').pop()
+// right now i don't see the point in this
+// // listener for deep links
+// App.addListener('appUrlOpen', function (event: URLOpenListenerEvent) {
+//   // Example url: https://beerswift.app/tabs/tabs2
+//   // slug = /tabs/tabs2
+//   const slug = event.url.split('.net').pop()
 
-  console.log(slug)
+//   console.log(slug)
 
-  // We only push to the route if there is a slug present
-  if (slug) {
-    router.push({
-      path: slug
-    })
-  }
-})
+//   // We only push to the route if there is a slug present
+//   if (slug) {
+//     router.push({
+//       path: slug
+//     })
+//   }
+// })
 
 // solution on how to change one view and keep the other as is
 // not a very good solution
