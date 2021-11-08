@@ -8,10 +8,12 @@ use App\Http\Requests\Request;
 
 use App\User;
 
+use App\Http\Requests\AuthRequest;
+
 class PasswordController extends Controller
 {
 
-    public function forgotten(Request $request)
+    public function forgotten(AuthRequest $request)
     {
 
         if(!$request->has('email')) {
