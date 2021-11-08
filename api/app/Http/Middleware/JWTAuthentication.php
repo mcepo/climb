@@ -48,13 +48,6 @@ class JWTAuthentication
                 // unable to authenticate user from JWT
                 // ignore error
             }
-        } else {
-            if(config('app.debug')) {
-                $user = User::first();
-                if($user) {
-                    Auth::login($user);
-                }
-            }
         }
 
         $response = $next($request);
