@@ -11,7 +11,6 @@ import { App as CapacitorApp } from '@capacitor/app'
 
 import { sync } from 'vuex-router-sync'
 
-// TODO: disable serviceworker for android
 import wb from './registerServiceWorker'
 Vue.prototype.$workbox = wb
 
@@ -51,10 +50,8 @@ new Vue({
         // login user to application
         this.$store.dispatch('auth/login', urlParams.get('token'))
 
-        // remove token from url
-        const uri = window.location.toString()
-        const cleanUri = uri.substring(0, uri.indexOf('?'))
-        window.history.replaceState({}, document.title, cleanUri)
+        const newUrl = window.location.href.replace(window.location.search, '')
+        window.location.href = newUrl
       }
     }
   }
