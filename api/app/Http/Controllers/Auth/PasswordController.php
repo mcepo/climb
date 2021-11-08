@@ -17,13 +17,13 @@ class PasswordController extends Controller
     {
 
         if(!$request->has('email')) {
-            return abort(400);
+            return abort(400, 'Email is required!');
         }
 
         $user = User::where('email', $request->get('email'))->first();
 
         if(!isset($user)) {
-            return abort(400);
+            return abort(400, 'User with this email doesn\'t exists.');
         }
 
         $user->sendPasswordResetLink();
