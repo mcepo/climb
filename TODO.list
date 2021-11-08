@@ -2,11 +2,7 @@
 
 - login u aplikaciju
 
-- registraciju u aplikaciju
-
 - gps
-
-- prava provjerit, sive jeze tag nije točan i ne mogu ga editirati
 
 -- ANDROID --
 
@@ -25,10 +21,6 @@ TODO: mail kriptiran mora biti
 TODO: welcome and disclamer popup community maintained site ....
 
 TODO: prilikom odabira ocjene smjera dodati i odabir ljestvice koje će se po defaultu koristiti za taj smjer
-
-TODO: each thumbnail gets requested from the server twice, imagemap se isto učita nepotrebno i isto dva puta se sve dogodi ima sigurno veze sa storom
-
-TODO: clear mapbounds when switch to image
 
 -- FEATURES --
 
