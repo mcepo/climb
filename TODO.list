@@ -12,10 +12,6 @@ TODO: icona aplikacije dodati
 
 -- HOT --
 
-TODO: FIX index.blade.php se cachira u service workeru, pa onda mi ostane blade markup za title i description
-
-TODO: provjeriti duplikate područja/smjerova u bazi
-
 TODO: mail kriptiran mora biti
 
 TODO: welcome and disclamer popup community maintained site ....
