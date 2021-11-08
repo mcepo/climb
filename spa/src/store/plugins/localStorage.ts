@@ -10,7 +10,7 @@ export default function (store: Store<RootState>) {
       const auth = store.state.auth
 
       // if user logges with token keep auth data
-      if (auth?.token !== '') {
+      if (auth?.user !== undefined) {
         state = { ...state, auth }
       }
 
