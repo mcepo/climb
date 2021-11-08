@@ -60,7 +60,6 @@ export default {
   oAuth: {
     google: {
       authorizationBaseUrl: 'https://accounts.google.com/o/oauth2/auth',
-      accessTokenEndpoint: 'https://www.googleapis.com/oauth2/v4/token',
       scope: 'email profile',
       responseType: 'code',
       logsEnabled: true,
@@ -122,8 +121,6 @@ export default {
         const userResponse = await OAuth2Client.authenticate(this.$options.oAuth[provider])
 
         console.log(userResponse)
-
-        return
 
         this.socialLogin(provider, userResponse.authorization_response)
         this.closeForm()
