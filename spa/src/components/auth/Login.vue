@@ -89,6 +89,7 @@ export default {
     }),
 
     sendPasswordResetMail () {
+      this.statusCode = null
       api.post('/forgot_password/', this.formData).then(response => {
         this.$store.dispatch('snackbar/success', response.data)
       })
