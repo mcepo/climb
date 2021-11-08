@@ -109,19 +109,21 @@ const store = new Vuex.Store<RootState>({
 
       const ancestorsIds = item.path ? item.path.split('.').map((a) => parseInt(a)) : []
 
-      let path = ''
+      const names: Array<string> = []
 
       ancestorsIds.forEach((id) => {
         const ancestor = state.area?.byIds[id]
 
         if (ancestor) {
-          path += ancestor.name + '-'
+          names.push(ancestor.name)
         }
       })
 
-      path += item.name
+      if (item.name) {
+        names.push(item.name)
+      }
 
-      return path.toLowerCase().replace(/[^a-zđčćžš0-9\s\\-]/g, '').replace(/\s/g, '_')
+      return names.join('-').toLowerCase().replace(/[^a-zđčćžš0-9\s\\-]/g, '').replace(/\s/g, '_')
     }
   },
   modules
