@@ -14,12 +14,6 @@ TODO: splashscreen podesiti
 
 TODO: icona aplikacije dodati
 
-TODO: spremanje u filesystem
-
-TODO: remove service worker when on android
-
-TODO: add filesystem storage when on mobile for images
-
 -- HOT --
 
 TODO: FIX index.blade.php se cachira u service workeru, pa onda mi ostane blade markup za title i description
