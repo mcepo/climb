@@ -5,13 +5,20 @@ import { set, get } from 'idb-keyval'
 export default function (store: Store<RootState>) {
   const storeKey = 'state'
 
-  get(storeKey).then(state => {
-    typeof state === 'object' &&
-    state !== null &&
-    store.replaceState({ ...store.state, ...state })
+  get(storeKey).then((state) => {
+    if (typeof state === 'object' && state !== null) {
+      const auth = store.state.auth
+
+      // if user logges with token keep auth data
+      if (auth?.token !== '') {
+        state = { ...state, auth }
+      }
+
+      typeof state === 'object' && store.replaceState({ ...store.state, ...state })
+    }
   })
 
-  const storageTimeout = 5000
+  const storageTimeout = 1000
 
   let cancelToken: number
 
