@@ -107,11 +107,12 @@ export class ImageService {
 
     type = type ?? 'full'
 
-    const base64image = await this.loadImageFromCache(id, type) || await this.getAndCacheImage(id, type, src)
+    // will try using just the service worker for now
+    // const base64image = await this.loadImageFromCache(id, type) || await this.getAndCacheImage(id, type, src)
 
-    if (base64image) {
-      return base64image
-    }
+    // if (base64image) {
+    //   return base64image
+    // }
 
     return src
   }
