@@ -95,11 +95,13 @@ const auth: Module<AuthState, RootState> = {
     },
     // check if a user has specific permission
     authorize: (state) => (
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       item: Area | Trail | Image | Route | Tag
     ) => {
       // currently setting that all loggedin users
       // can perform all of the actions
-      return !!state.user && item.path
+      // removed path since root areas don't have path
+      return !!state.user /* && item.path */
 
       // if (getters.isAdmin) return true
 
