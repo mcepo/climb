@@ -85,11 +85,11 @@ export class ImageService {
       bounds
     )
 
+    this._map.addLayer(this._imageOverlayThumbnail)
+
     this._imageOverlay = imageOverlay(await this.getImage(image.id), bounds, {
       zIndex: 2
     })
-
-    this._map.addLayer(this._imageOverlayThumbnail)
 
     this._map.addLayer(this._imageOverlay)
 
@@ -110,7 +110,7 @@ export class ImageService {
     const base64image = await this.loadImageFromCache(id, type) || await this.getAndCacheImage(id, type, src)
 
     if (base64image) {
-      return 'data:image/jpeg;base64,' + base64image
+      return base64image
     }
 
     return src
@@ -122,7 +122,10 @@ export class ImageService {
         path: type + '-' + id,
         directory: Directory.Cache
       })
-      return content.data
+      // for some reason type isn't stored in the cache only the base64data
+      // but when retrieving the image from server then it has the type in front
+      // but that type isn't being stored in the cache
+      return 'data:image/jpeg;base64,' + content.data
     } catch (e) {
       console.log(e)
       return null
