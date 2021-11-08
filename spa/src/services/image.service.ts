@@ -107,7 +107,13 @@ export class ImageService {
 
     type = type ?? 'full'
 
-    return await this.loadImageFromCache(id, type) || await this.getAndCacheImage(id, type, src) || src
+    const base64image = await this.loadImageFromCache(id, type) || await this.getAndCacheImage(id, type, src)
+
+    if (base64image) {
+      return 'data:image/jpeg;base64,' + base64image
+    }
+
+    return src
   }
 
   async loadImageFromCache (id: number, type: string): Promise<string|null> {
