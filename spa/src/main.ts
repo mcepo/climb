@@ -48,10 +48,9 @@ new Vue({
       // if there is a token in url login user
       if (token) {
         // login user to application
-        this.$store.dispatch('auth/login', urlParams.get('token'))
-
-        const newUrl = window.location.href.replace(window.location.search, '')
-        window.location.href = newUrl
+        this.$store.dispatch('auth/login', token).then(() => {
+          this.$router.replace({ path: this.$router.currentRoute.path, query: {} })
+        })
       }
     }
   }
