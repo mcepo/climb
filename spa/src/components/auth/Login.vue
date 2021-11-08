@@ -67,6 +67,7 @@ export default {
       web: {
         appId: process.env.VUE_APP_OAUTH_CLIENT_ID_WEB,
         redirectUrl: process.env.VUE_APP_GOOGLE_REDIRECT_URI,
+        responseType: 'code',
         windowOptions: 'height=600,left=0,top=0'
       },
       android: {
@@ -103,7 +104,7 @@ export default {
       api
         .post('/login/', this.formData)
         .then(() => {
-          this.afterSuccessLogin()
+          this.closeForm()
         })
         .catch(error => {
           this.statusCode = error.response?.status
@@ -130,7 +131,7 @@ export default {
 
     socialLogin (provider, response) {
       api.post('/social_login/' + provider, response).then(() => {
-        this.afterSuccessLogin()
+        this.closeForm()
       })
     }
   }
