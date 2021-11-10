@@ -10,6 +10,7 @@ import store from '../store'
 Vue.use(VueRouter)
 
 const AdminPanel = () => import(/* webpackChunkName: "admin.panel" */'../views/AdminPanel.vue')
+const PrivacyPolicy = () => import(/* webpackChunkName: "privacy.policy" */'../components/PrivacyPolicy.vue')
 const AdminMenuList = () => import(/* webpackChunkName: "admin.panel" */'../admin/components/lists/MenuList.vue')
 const UsersPage = () => import(/* webpackChunkName: "admin.panel" */'../admin/pages/UsersPage.vue')
 const ActivityLogPage = () => import(/* webpackChunkName: "admin.panel" */'../admin/pages/ActivityLogPage.vue')
@@ -28,6 +29,12 @@ const routes = [
         components: {
           default: Overview,
           map: LeafletMap
+        }
+      },
+      {
+        path: '/privacy',
+        components: {
+          default: PrivacyPolicy
         }
       },
       {

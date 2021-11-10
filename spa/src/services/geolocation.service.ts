@@ -52,15 +52,10 @@ class GeolocationService {
         }
 
         if (position) {
-          if (position.coords.accuracy < 30) {
+          if (position.coords.accuracy < 50) {
             this.watchCallbacks.forEach((callback) => {
               callback(position)
             })
-          } else {
-            store.dispatch(
-              'snackbar/show',
-              'Current locaiton accuracy ' + position.coords.accuracy + 'm, waiting for better accuracy...'
-            )
           }
         } else {
           store.dispatch(
@@ -80,7 +75,7 @@ class GeolocationService {
   _errorMessage () {
     store.dispatch(
       'snackbar/show',
-      'Need permission to use your location'
+      'Make sure that GPS is on and application has permission to use it. '
     )
   }
 }
