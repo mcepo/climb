@@ -60,16 +60,19 @@ export default {
   oAuth: {
     google: {
       authorizationBaseUrl: 'https://accounts.google.com/o/oauth2/auth',
+      accessTokenEndpoint: 'https://www.googleapis.com/oauth2/v4/token',
       scope: 'email profile',
-      responseType: 'code',
       logsEnabled: true,
       web: {
         appId: process.env.VUE_APP_OAUTH_CLIENT_ID_WEB,
+        responseType: 'token',
+        accessTokenEndpoint: '',
         redirectUrl: process.env.VUE_APP_GOOGLE_REDIRECT_URI,
         windowOptions: 'height=600,left=0,top=0'
       },
       android: {
         appId: process.env.VUE_APP_OAUTH_CLIENT_ID_ANDROID,
+        responseType: 'code',
         redirectUrl: 'net.climbline:/'
       }
     }
@@ -121,7 +124,9 @@ export default {
       try {
         const userResponse = await OAuth2Client.authenticate(this.$options.oAuth[provider])
 
-        this.socialLogin(provider, userResponse.authorization_response)
+        console.log(userResponse)
+
+        this.socialLogin(provider, userResponse)
         this.closeForm()
       } catch (error) {
         console.error(error)

@@ -16,7 +16,7 @@ class LoginController extends Controller
     public function socialLogin($provider)
     {
         // Socialite will pick response data automatic 
-        $providerUser = Socialite::driver($provider)->stateless()->user();
+        $providerUser = Socialite::driver($provider)->userFromToken(request()->post('access_token'));
   
         if (!$user = User::getByProviderId($provider, $providerUser->id)) {
             $user = User::registerFromProvider($provider, $providerUser);
