@@ -16,6 +16,8 @@ use App\Mail\EmailPasswordReset;
 
 use App\Models\Area;
 
+use Illuminate\Support\Facades\DB;
+
 class User extends AuthUser  implements MustVerifyEmail
 {
     use SoftDeletes, QueryFilter, Filterable;
@@ -62,7 +64,7 @@ class User extends AuthUser  implements MustVerifyEmail
         $string = $this->name . ' ' . $this->email;
 
         $tsVectorString = str_replace(" ", " || ", $string);
-        $this->ts_vector = \DB::raw('to_tsvector(\'simple\',\'' . $tsVectorString . '\')');
+        $this->ts_vector = DB::raw('to_tsvector(\'simple\',\'' . $tsVectorString . '\')');
     }
 
     public static function search($request)
