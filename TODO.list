@@ -1,10 +1,9 @@
 -- TESTIRATI --
 
-- login u aplikaciju
-
-- gps
-
 -- ANDROID --
+
+TODO: implementirati backgoundGeolocation i ograničiti te funkcionalnosti samo na mobitele
+možda ostaviti jedino prikazivanje trenutne lokacije na mapi i na kompjutere
 
 -- HOT --
 
