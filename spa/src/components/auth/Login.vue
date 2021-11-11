@@ -62,7 +62,7 @@ export default {
       authorizationBaseUrl: 'https://accounts.google.com/o/oauth2/auth',
       accessTokenEndpoint: 'https://www.googleapis.com/oauth2/v4/token',
       scope: 'email profile',
-      logsEnabled: true,
+      // logsEnabled: true,
       web: {
         appId: process.env.VUE_APP_OAUTH_CLIENT_ID_WEB,
         responseType: 'token',
