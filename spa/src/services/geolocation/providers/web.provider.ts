@@ -1,6 +1,8 @@
+import { Position } from '@capacitor/geolocation'
+import { GeolocationProvider } from '../geolocation.service'
 
-class WebProvider {
-  watchCallbacks: Function[]
+class WebProvider implements GeolocationProvider {
+  private _watchId: number | undefined
 
   positionOptions: PositionOptions = {
     enableHighAccuracy: true,
@@ -8,71 +10,31 @@ class WebProvider {
     maximumAge: 10000
   }
 
-  constructor () {
-    this.watchCallbacks = []
-  }
-
-  registerWatch (callback: Function) {
-    this.watchCallbacks.push(callback)
-
-    this._initWatch()
-  }
-
-  getCurrentLocation (callback: Function) {
-    let accuratePosition: Position | null = null
-
-    while (!accuratePosition) {
-      navigator.geolocation.getCurrentPosition(this.positionOptions).then(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (position: any) => {
-          if (position.coords.accuracy < 30) {
-            accuratePosition = position
-          }
-        },
-        () => {
-          this._errorMessage()
-          callback()
-        }
-      )
+  startWatch (callback: Function): void {
+    if (this._watchId) {
+      return
     }
 
-    callback(accuratePosition)
-  }
+    console.log('starting watch')
 
-  _initWatch () {
-    navigator.geolocation.watchPosition(
-      this.positionOptions,
+    this._watchId = navigator.geolocation.watchPosition(
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (position?: Position | null | undefined, err?: any) => {
-        if (err) {
-          this._errorMessage()
-          return
-        }
-
-        if (position) {
-          if (position.coords.accuracy < 50) {
-            this.watchCallbacks.forEach((callback) => {
-              callback(position)
-            })
-          }
-        } else {
-          store.dispatch('snackbar/show', 'Waiting for location...')
-        }
-      }
+      (position?: Position | null) => {
+        callback(position, null)
+      },
+      (positionError) => {
+        callback(null, positionError)
+      },
+      this.positionOptions
     )
   }
 
-  unregisterWatch (callback: Function) {
-    this.watchCallbacks = this.watchCallbacks.filter((c) => {
-      return c !== callback
-    })
-  }
-
-  _errorMessage () {
-    store.dispatch(
-      'snackbar/show',
-      'Make sure that GPS is on and application has permission to use it. '
-    )
+  stopWatch (): void {
+    if (this._watchId) {
+      console.log('stopping watch')
+      navigator.geolocation.clearWatch(this._watchId)
+      this._watchId = undefined
+    }
   }
 }
 

@@ -3,7 +3,7 @@ import { RootState } from '..'
 
 interface SnackbarMessage {
   message: string;
-  status: 'show' | 'error' | 'success';
+  status: 'show' | 'error' | 'success' | 'warning';
 }
 
 interface SnackbarState {
@@ -46,6 +46,9 @@ const snackbar: Module<SnackbarState, RootState> = {
     },
     success ({ commit }, message: string) {
       commit('push', { message, status: 'success' })
+    },
+    warning ({ commit }, message: string) {
+      commit('push', { message, status: 'warning' })
     },
 
     throwError ({ commit }, status: ErrorMessage) {

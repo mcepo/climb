@@ -23,7 +23,7 @@ import { LatLngBounds, LatLng, Map, control, Marker, Circle, Polyline, Canvas } 
 import setupTiles from '../../utils/tiles'
 import layerService from '../../services/layer.service'
 import styleService from '../../services/style.service'
-import geolocationService from '../../services/geolocation.service'
+import geolocationService from '../../services/geolocation/geolocation.service'
 
 import drawers from '../../services/drawer.service'
 
@@ -34,6 +34,7 @@ export default {
     circle: null,
     trail: null
   },
+  watchCallbackId: null,
   goToRequest: false,
 
   computed: {
@@ -89,7 +90,7 @@ export default {
     showLocation () {
       this.$store.dispatch('snackbar/show', 'Getting location,<br>this may take some time ...')
 
-      geolocationService.registerWatch(this.moveMarker)
+      this.$options.watchCallbackId = geolocationService.registerCallback(this.moveMarker)
 
       this.$options.goToRequest = true
 
@@ -141,6 +142,7 @@ export default {
 
   destroyed () {
     layerService.map = null
+    this.$options.watchCallbackId && geolocationService.unregisterCallback(this.$options.watchCallbackId)
   }
 }
 </script>

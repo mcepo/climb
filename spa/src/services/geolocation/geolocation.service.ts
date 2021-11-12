@@ -1,89 +1,60 @@
-import store from '../../store'
-import { Geolocation, Position } from '@capacitor/geolocation'
-
 import { Capacitor } from '@capacitor/core'
+import { Position } from '@capacitor/geolocation'
+import nativeProvider from './providers/native.provider'
+import webProvider from './providers/web.provider'
+
+export interface GeolocationProvider {
+  startWatch(callback: Function): void;
+  stopWatch(): void;
+}
 
 class GeolocationService {
-  watchCallbacks: Function[]
+  private _callbacks: Map<number, Function> = new Map()
+  private _callbackCounter = 0
 
-  private _provider = undefined
+  private _provider: GeolocationProvider
 
-  positionOptions: PositionOptions = {
-    enableHighAccuracy: true,
-    timeout: 40000,
-    maximumAge: 10000
-  }
-
-  constructor (provider) {
-    this.watchCallbacks = []
+  constructor (provider: GeolocationProvider) {
     this._provider = provider
   }
 
-  registerWatch (callback: Function) {
-    this.watchCallbacks.push(callback)
-
-    this._initWatch()
-  }
-
-  getCurrentLocation (callback: Function) {
-    let accuratePosition: Position | null = null
-
-    while (!accuratePosition) {
-      Geolocation.getCurrentPosition(this.positionOptions).then(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (position: any) => {
-          if (position.coords.accuracy < 30) {
-            accuratePosition = position
-          }
-        },
-        () => {
-          this._errorMessage()
-          callback()
-        }
+  registerCallback (callback: Function): number {
+    console.log('callback registered')
+    if (this._callbacks.size === 0) {
+      this._provider.startWatch((position: Position, error) =>
+        this._processPosition(position, error)
       )
     }
 
-    callback(accuratePosition)
+    this._callbackCounter++
+
+    this._callbacks.set(this._callbackCounter, callback)
+
+    return this._callbackCounter
   }
 
-  _initWatch () {
-    Geolocation.watchPosition(
-      this.positionOptions,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (position?: Position | null | undefined, err?: any) => {
-        if (err) {
-          this._errorMessage()
-          return
-        }
-
-        if (position) {
-          if (position.coords.accuracy < 50) {
-            this.watchCallbacks.forEach((callback) => {
-              callback(position)
-            })
-          }
-        } else {
-          store.dispatch('snackbar/show', 'Waiting for location...')
-        }
-      }
-    )
+  private _processPosition (position, error) {
+    console.log(position, error)
+    if (!error && position) {
+      this._callbacks.forEach((callback) => {
+        callback(position)
+      })
+    }
   }
 
-  unregisterWatch (callback: Function) {
-    this.watchCallbacks = this.watchCallbacks.filter((c) => {
-      return c !== callback
-    })
-  }
+  unregisterCallback (callbackId: number): void {
+    this._callbacks.delete(callbackId)
 
-  _errorMessage () {
-    store.dispatch(
-      'snackbar/show',
-      'Make sure that GPS is on and application has permission to use it. '
-    )
+    console.log('callback unregistered')
+    if (this._callbacks.size === 0) {
+      this._provider.stopWatch()
+    }
   }
 }
 
-const geolocationProvider = Capacitor.isNativePlatform() ? await import(/* webpackChunkName: "geolocation-native-provider" */ '../geolocation/providers/native.provider') : await import(/* webpackChunkName: "geolocation-web-provider" */ '../geolocation/providers/web.provider')
+const geolocationProvider = (Capacitor.isNativePlatform()
+  ? nativeProvider
+  : webProvider) as GeolocationProvider
 
 const geolocationService = new GeolocationService(geolocationProvider)
 
