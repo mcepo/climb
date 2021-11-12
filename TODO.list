@@ -1,9 +1,8 @@
 -- TESTIRATI --
 
--- ANDROID --
+- gps web i mobilni, pračenje na karti i tagiranje na lokaciji
 
-TODO: implementirati backgoundGeolocation i ograničiti te funkcionalnosti samo na mobitele
-možda ostaviti jedino prikazivanje trenutne lokacije na mapi i na kompjutere
+-- ANDROID --
 
 -- HOT --
 
