@@ -1,11 +1,18 @@
 import { Store } from 'vuex'
 import { RootState } from '..'
-import { set, get } from 'idb-keyval'
+import { Filesystem, Directory, ReadFileResult } from '@capacitor/filesystem'
 
 export default function (store: Store<RootState>) {
   const storeKey = 'state'
 
-  get(storeKey).then((state) => {
+  Filesystem.readFile({
+    path: storeKey,
+    directory: Directory.Cache
+  }).then(({ data }: ReadFileResult) => {
+    if (!data) return
+
+    let state = JSON.parse(data)
+
     if (typeof state === 'object' && state !== null) {
       const auth = store.state.auth
 
@@ -18,7 +25,7 @@ export default function (store: Store<RootState>) {
     }
   })
 
-  const storageTimeout = 1000
+  const storageTimeout = 300
 
   let cancelToken: number
 
@@ -32,7 +39,15 @@ export default function (store: Store<RootState>) {
       pitch: state.pitch
     }
 
-    set(storeKey, saveState)
+    try {
+      Filesystem.writeFile({
+        path: storeKey,
+        data: JSON.stringify(saveState),
+        directory: Directory.Cache
+      })
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
