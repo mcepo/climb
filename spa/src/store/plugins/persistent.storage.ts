@@ -2,6 +2,8 @@ import { Store } from 'vuex'
 import { RootState } from '..'
 import { Filesystem, Directory, ReadFileResult } from '@capacitor/filesystem'
 
+import { decode, encode } from 'js-base64'
+
 export default function (store: Store<RootState>) {
   const storeKey = 'state'
 
@@ -11,7 +13,7 @@ export default function (store: Store<RootState>) {
   }).then(({ data }: ReadFileResult) => {
     if (!data) return
 
-    let state = JSON.parse(atob(data))
+    let state = JSON.parse(decode(data))
 
     if (typeof state === 'object' && state !== null) {
       const auth = store.state.auth
@@ -41,7 +43,7 @@ export default function (store: Store<RootState>) {
 
     Filesystem.writeFile({
       path: storeKey,
-      data: btoa(JSON.stringify(saveState)),
+      data: encode(JSON.stringify(saveState)),
       directory: Directory.Cache
     })
   }
