@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "2735aa7e91955bbd9b69",
+    "revision": "909812334dc201f18931",
     "url": "/assets/css/admin.panel.2ab20800.css"
   },
   {
@@ -8,11 +8,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/css/admin.panel~area.form~moderator.form~route.filters~route.form.f058a909.css"
   },
   {
-    "revision": "46e8cde8fbcc46b6d93a",
+    "revision": "d86770ffcc51e7010e24",
     "url": "/assets/css/app.fb0abc21.css"
   },
   {
-    "revision": "07be5929d2e3c1ae5372",
+    "revision": "358c5f7274473f95ff05",
     "url": "/assets/css/area.form.09316a61.css"
   },
   {
@@ -20,11 +20,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/css/area.form~pitch.form~route.filters~route.form.f9d4f751.css"
   },
   {
-    "revision": "b7c7562aeca328ad8c2c",
+    "revision": "d39abce23c48c1982438",
     "url": "/assets/css/chunk-vendors.4002c9eb.css"
   },
   {
-    "revision": "08d466ba0fd989a2a62e",
+    "revision": "709c13d804ee961036c9",
     "url": "/assets/css/image.upload.640da394.css"
   },
   {
@@ -32,15 +32,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/css/leaflet-geoman.8c7a4794.css"
   },
   {
-    "revision": "19d38fb0e4b115d004b8",
+    "revision": "9d2d7cdb6dbd10315166",
     "url": "/assets/css/moderator.form.d3de4bc2.css"
   },
   {
-    "revision": "a02e8dd32d937e1bca4c",
+    "revision": "85d43bf7675c5724387c",
     "url": "/assets/css/pitch.form.207437e9.css"
   },
   {
-    "revision": "2a40a73a5ed7505844aa",
+    "revision": "d81d53ccaaf137bd7ae2",
     "url": "/assets/css/route.filters.09316a61.css"
   },
   {
@@ -60,32 +60,32 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/fonts/MaterialIcons-Regular.da4ea5cd.ttf"
   },
   {
-    "revision": "bd35f3f5189acc90467aa2c2ee380365",
+    "revision": "8809cb8ffa936780c08e470467a0b040",
     "url": "/assets/index.html"
   },
   {
-    "revision": "2735aa7e91955bbd9b69",
-    "url": "/assets/js/admin.panel.b22b1d5a.js"
+    "revision": "909812334dc201f18931",
+    "url": "/assets/js/admin.panel.ce444211.js"
   },
   {
     "revision": "5ec2b75f686dda5035f9",
     "url": "/assets/js/admin.panel~area.form~moderator.form~route.filters~route.form.9450cd7d.js"
   },
   {
-    "revision": "46e8cde8fbcc46b6d93a",
-    "url": "/assets/js/app.7a0c62ee.js"
+    "revision": "d86770ffcc51e7010e24",
+    "url": "/assets/js/app.e64ab5e0.js"
   },
   {
-    "revision": "07be5929d2e3c1ae5372",
-    "url": "/assets/js/area.form.9eacf2d7.js"
+    "revision": "358c5f7274473f95ff05",
+    "url": "/assets/js/area.form.aeb2be9e.js"
   },
   {
     "revision": "37f2ab522ff975ba1b8d",
     "url": "/assets/js/area.form~pitch.form~route.filters~route.form.42e79346.js"
   },
   {
-    "revision": "50f1eb0dfbb84d45c12c",
-    "url": "/assets/js/change-password.form.cce40e81.js"
+    "revision": "d54a283e1704919ed9df",
+    "url": "/assets/js/change-password.form.2b6bba0d.js"
   },
   {
     "revision": "f3f3e66ab17077d8a78e",
@@ -104,60 +104,56 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/js/chunk-2d208e4e.23a09d7a.js"
   },
   {
-    "revision": "34cdaec26b5f3a7e31cf",
-    "url": "/assets/js/chunk-2d230c96.89573216.js"
+    "revision": "d39abce23c48c1982438",
+    "url": "/assets/js/chunk-vendors.ec4545da.js"
   },
   {
-    "revision": "b7c7562aeca328ad8c2c",
-    "url": "/assets/js/chunk-vendors.38b2859a.js"
+    "revision": "2b5f9f476fbac63c1028",
+    "url": "/assets/js/image.map.e1867261.js"
   },
   {
-    "revision": "1c22c974eb22ea0fc04c",
-    "url": "/assets/js/image.map.fed11f34.js"
-  },
-  {
-    "revision": "08d466ba0fd989a2a62e",
-    "url": "/assets/js/image.upload.c311bc9d.js"
+    "revision": "709c13d804ee961036c9",
+    "url": "/assets/js/image.upload.0bbace58.js"
   },
   {
     "revision": "ac380fad5131d53d8117",
     "url": "/assets/js/leaflet-geoman.6a8b4c6d.js"
   },
   {
-    "revision": "971488b66cafaf65d0f7",
-    "url": "/assets/js/leaflet.map.65b2d8e6.js"
+    "revision": "9caad5d141f33533c567",
+    "url": "/assets/js/leaflet.map.1d6363d0.js"
   },
   {
-    "revision": "bc9e378116b198889d7d",
-    "url": "/assets/js/login.form.9cf31577.js"
+    "revision": "872c9ee176836384cfbf",
+    "url": "/assets/js/login.form.1d97b6d6.js"
   },
   {
-    "revision": "19d38fb0e4b115d004b8",
-    "url": "/assets/js/moderator.form.40ef7f5f.js"
+    "revision": "9d2d7cdb6dbd10315166",
+    "url": "/assets/js/moderator.form.057c5a29.js"
   },
   {
-    "revision": "a02e8dd32d937e1bca4c",
-    "url": "/assets/js/pitch.form.967861a4.js"
+    "revision": "85d43bf7675c5724387c",
+    "url": "/assets/js/pitch.form.98b422f4.js"
   },
   {
-    "revision": "d5e077df36c107a70bd7",
-    "url": "/assets/js/popup.service.3ccc63e6.js"
+    "revision": "87f0dfe5aab308432830",
+    "url": "/assets/js/popup.service.87743d68.js"
   },
   {
-    "revision": "010567d452eeb18d180e",
-    "url": "/assets/js/privacy.policy.b7a4b280.js"
+    "revision": "929a9169d52b078f8ec3",
+    "url": "/assets/js/privacy.policy.88c5b93c.js"
   },
   {
-    "revision": "39eeaecfd0cc0c69d6dc",
-    "url": "/assets/js/register.form.488dd682.js"
+    "revision": "62fc88d4233ab42a29ff",
+    "url": "/assets/js/register.form.55f63fc1.js"
   },
   {
-    "revision": "2a40a73a5ed7505844aa",
-    "url": "/assets/js/route.filters.91c95ca9.js"
+    "revision": "d81d53ccaaf137bd7ae2",
+    "url": "/assets/js/route.filters.a6570f22.js"
   },
   {
-    "revision": "69ff30605b4b8fb5ac78",
-    "url": "/assets/js/route.form.205ca99e.js"
+    "revision": "11fb3797fbcba3425bb4",
+    "url": "/assets/js/route.form.fb65b200.js"
   },
   {
     "revision": "372d76914e2e36cf8f8a23af440c030f",
