@@ -44,7 +44,7 @@ class NativeProvider implements GeolocationProvider {
 
         // The minimum number of metres between subsequent locations. Defaults
         // to 0.
-        distanceFilter: 10
+        distanceFilter: 2
       },
       function callback (location?: Location, error?: CallbackError) {
         if (error) {

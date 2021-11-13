@@ -1,4 +1,6 @@
-import capacitorProvider from './providers/capacitor.provider'
+import webProvider from './providers/web.provider'
+import nativeProvider from './providers/native.provider'
+import { Capacitor } from '@capacitor/core'
 
 export interface GeolocationProvider {
   startWatch(callback: Function): void;
@@ -56,10 +58,10 @@ class GeolocationService {
   }
 }
 
-// const geolocationProvider = (Capacitor.isNativePlatform()
-//   ? nativeProvider
-//   : webProvider) as GeolocationProvider
+const geolocationProvider = (Capacitor.isNativePlatform()
+  ? nativeProvider
+  : webProvider) as GeolocationProvider
 
-const geolocationService = new GeolocationService(capacitorProvider)
+const geolocationService = new GeolocationService(geolocationProvider)
 
 export default geolocationService
