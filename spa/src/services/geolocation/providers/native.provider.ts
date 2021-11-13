@@ -77,6 +77,8 @@ class NativeProvider implements GeolocationProvider {
     BackgroundGeolocation.removeWatcher({
       id: this._watcherId
     })
+
+    this._watcherId = undefined
   }
 }
 
