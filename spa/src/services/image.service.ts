@@ -107,7 +107,11 @@ export class ImageService {
 
     type = type ?? 'full'
 
-    const base64image = await this.loadImageFromCache(id, type) || await this.getAndCacheImage(id, type, src)
+    return await this.fetchImage(type + '-' + id, src)
+  }
+
+  async fetchImage (cacheKey: string, src: string, type = 'jpeg') {
+    const base64image = await this.loadImageFromCache(cacheKey, type) || await this.getAndCacheImage(cacheKey, src)
 
     if (base64image) {
       return base64image
@@ -116,23 +120,23 @@ export class ImageService {
     return src
   }
 
-  async loadImageFromCache (id: number, type: string): Promise<string|null> {
+  async loadImageFromCache (cacheKey: string, imageType): Promise<string|null> {
     try {
       const content = await Filesystem.readFile({
-        path: type + '-' + id,
+        path: cacheKey,
         directory: Directory.Cache
       })
       // for some reason type isn't stored in the cache only the base64data
       // but when retrieving the image from server then it has the type in front
       // but that type isn't being stored in the cache
-      return 'data:image/jpeg;base64,' + content.data
+      return 'data:image/' + imageType + ';base64,' + content.data
     } catch (e) {
       console.log(e)
       return null
     }
   }
 
-  async getAndCacheImage (id: number, type: string, src: string): Promise<string|null> {
+  async getAndCacheImage (cacheKey, src: string): Promise<string|null> {
     const base64image = await this.getBase64Image(src)
 
     if (!base64image) {
@@ -142,7 +146,7 @@ export class ImageService {
 
     try {
       Filesystem.writeFile({
-        path: type + '-' + id,
+        path: cacheKey,
         data: base64image,
         directory: Directory.Cache
       })

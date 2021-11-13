@@ -1,5 +1,6 @@
 // import 'leaflet.gridlayer.googlemutant'
 import { Map, TileLayer, control } from 'leaflet'
+import PersistantTileLayer from './tiles.storage'
 
 const first = {
   name: 'Cartodb',
@@ -89,9 +90,10 @@ export default function (map: Map) {
 
   // loading all of the other tiles to the map
 
-  const defaultLayer = new TileLayer(first.url, {
+  const defaultLayer = new PersistantTileLayer(first.url, {
     crossOrigin: true
   })
+
   map.addLayer(defaultLayer)
   controls.addBaseLayer(defaultLayer, first.name)
 
