@@ -2,9 +2,8 @@ import layerService from './layer.service'
 import store from '../store'
 import { TaggedType, Tag } from '@/models'
 import api from '@/store/api'
-import geolocationService from './geolocation/geolocation.service'
+import geolocationService, { PositionInterface } from './geolocation/geolocation.service'
 import * as L from 'leaflet'
-import { Position } from '@capacitor/geolocation'
 const drawingTypes = {
   map: {
     area: 'Marker',
@@ -141,19 +140,19 @@ class DrawingService {
     store
       .dispatch('auth/authorize', tag.id ? tag : null)
       .then(() => {
-        let bestPosition: Position|null = null
+        let bestPosition: PositionInterface|null = null
 
         let attempts = 10
 
         const callbackId = geolocationService.registerCallback(
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (position: Position) => {
+          (position: PositionInterface) => {
             // better position actually means a more accurate position then the previous one
-            const betterPositionRecieved = (!bestPosition || (bestPosition && position.coords?.accuracy < bestPosition.coords.accuracy))
+            const betterPositionRecieved = (!bestPosition || (bestPosition && position.accuracy < bestPosition.accuracy))
 
             // if a better position was recieved, but the position is still bad show a message to the user
-            if (position.coords.accuracy > 20 && betterPositionRecieved) {
-              store.dispatch('snackbar/show', 'Low accuracy: ' + Math.round(position.coords.accuracy) + 'm waiting for better accuracy.')
+            if (position.accuracy > 20 && betterPositionRecieved) {
+              store.dispatch('snackbar/show', 'Low accuracy: ' + Math.round(position.accuracy) + 'm waiting for better accuracy.')
             }
 
             // if a better position was recieved store it
@@ -169,7 +168,7 @@ class DrawingService {
 
             geolocationService.unregisterCallback(callbackId)
 
-            const accuracy = Math.round(bestPosition?.coords.accuracy || 1000)
+            const accuracy = Math.round(bestPosition?.accuracy || 1000)
 
             if (accuracy < 20 && accuracy < 100) {
               store.dispatch('snackbar/warning', 'Setting a location with low accuracy: ' + accuracy + 'm.')
@@ -181,7 +180,7 @@ class DrawingService {
             if (bestPosition) {
               tag.geometry = {
                 type: 'Point',
-                coordinates: [bestPosition.coords.longitude, bestPosition.coords.latitude]
+                coordinates: [bestPosition.longitude, bestPosition.latitude]
               }
             } else {
               store.dispatch('snackbar/error', 'No location provided.')

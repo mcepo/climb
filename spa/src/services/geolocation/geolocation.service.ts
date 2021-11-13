@@ -1,11 +1,20 @@
 import { Capacitor } from '@capacitor/core'
-import { Position } from '@capacitor/geolocation'
 import nativeProvider from './providers/native.provider'
 import webProvider from './providers/web.provider'
 
 export interface GeolocationProvider {
   startWatch(callback: Function): void;
   stopWatch(): void;
+}
+
+// these are the parameters that i am currenty using
+// objects returned from native and web plugins differe so
+// if you add more atributes here make su to check that it is compatible with
+// native and web
+export interface PositionInterface {
+  latitude: number;
+  longitude: number;
+  accuracy: number;
 }
 
 class GeolocationService {
@@ -19,9 +28,8 @@ class GeolocationService {
   }
 
   registerCallback (callback: Function): number {
-    console.log('callback registered')
     if (this._callbacks.size === 0) {
-      this._provider.startWatch((position: Position, error) =>
+      this._provider.startWatch((position: PositionInterface, error) =>
         this._processPosition(position, error)
       )
     }
@@ -33,8 +41,7 @@ class GeolocationService {
     return this._callbackCounter
   }
 
-  private _processPosition (position, error) {
-    console.log(position, error)
+  private _processPosition (position: PositionInterface, error) {
     if (!error && position) {
       this._callbacks.forEach((callback) => {
         callback(position)
@@ -45,7 +52,6 @@ class GeolocationService {
   unregisterCallback (callbackId: number): void {
     this._callbacks.delete(callbackId)
 
-    console.log('callback unregistered')
     if (this._callbacks.size === 0) {
       this._provider.stopWatch()
     }

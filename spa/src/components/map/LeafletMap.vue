@@ -109,8 +109,8 @@ export default {
         this.$options.location.circle.remove()
       }
 
-      const locationCenter = [position.coords.latitude, position.coords.longitude]
-      const accuracy = position.coords.accuracy
+      const locationCenter = [position.latitude, position.longitude]
+      const accuracy = position.accuracy
 
       this.$options.location.marker = new Marker(locationCenter, { title: 'My Location' })
         .bindTooltip('My Location<br>' + 'Accuracy: ' + accuracy.toFixed(2) + 'm')
