@@ -12,7 +12,7 @@ import { TrailState } from './modules/trail'
 import { Tag } from '@/models'
 import { UserState } from './modules/user'
 
-import localStorage from './plugins/localStorage'
+import persistentStorage from './plugins/persistent.storage'
 import { PitchState } from './modules/pitch'
 import { ItemType } from '@/services/type.service'
 
@@ -36,7 +36,7 @@ const store = new Vuex.Store<RootState>({
     drawing: false,
     online: navigator.onLine
   },
-  plugins: [localStorage],
+  plugins: [persistentStorage],
   mutations: {
     setDrawingMode (state: RootState, drawing: boolean) {
       state.drawing = drawing
