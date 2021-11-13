@@ -11,7 +11,7 @@ export default function (store: Store<RootState>) {
   }).then(({ data }: ReadFileResult) => {
     if (!data) return
 
-    let state = JSON.parse(data)
+    let state = JSON.parse(atob(data))
 
     if (typeof state === 'object' && state !== null) {
       const auth = store.state.auth
@@ -39,15 +39,11 @@ export default function (store: Store<RootState>) {
       pitch: state.pitch
     }
 
-    try {
-      Filesystem.writeFile({
-        path: storeKey,
-        data: JSON.stringify(saveState),
-        directory: Directory.Cache
-      })
-    } catch (e) {
-      console.log(e)
-    }
+    Filesystem.writeFile({
+      path: storeKey,
+      data: btoa(JSON.stringify(saveState)),
+      directory: Directory.Cache
+    })
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -131,7 +131,6 @@ export class ImageService {
       // but that type isn't being stored in the cache
       return 'data:image/' + imageType + ';base64,' + content.data
     } catch (e) {
-      console.log(e)
       return null
     }
   }
@@ -144,15 +143,11 @@ export class ImageService {
       return null
     }
 
-    try {
-      Filesystem.writeFile({
-        path: cacheKey,
-        data: base64image,
-        directory: Directory.Cache
-      })
-    } catch (e) {
-      console.log(e)
-    }
+    Filesystem.writeFile({
+      path: cacheKey,
+      data: base64image,
+      directory: Directory.Cache
+    })
 
     return base64image
   }
