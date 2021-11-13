@@ -6,6 +6,8 @@
 
 -- HOT --
 
+TODO: add button to stop tracking
+
 TODO: ipak maknuti service workera iz androida, jer nemože se dohvatiti ako nije https, a to nemogu postaviti za local app
 
 TODO: store images, thumbnails in filesystem on android
