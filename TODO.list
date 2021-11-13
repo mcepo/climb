@@ -6,6 +6,14 @@
 
 -- HOT --
 
+TODO: ipak maknuti service workera iz androida, jer nemože se dohvatiti ako nije https, a to nemogu postaviti za local app
+
+TODO: store images, thumbnails in filesystem on android
+
+TODO: store state in filesystem on android
+
+TODO: store tiles in filesystem on android
+
 TODO: mail kriptiran mora biti
 
 TODO: welcome and disclamer popup community maintained site ....
@@ -24,16 +32,7 @@ TODO: integrate weather api-s
 
 TODO: publish crag locations to openstreetmap
 
-TODO: razlikovati pristupe i odstupe 
-
-TODO: color coding route and area tags
-
-TODO: add scale with grades to display
-
 TODO: hide options that you can't use if offline ?
-
-TODO: in area/route details put image with the most topos 
-    in the header under name
 
 -- OPTIMIZATION --
 
