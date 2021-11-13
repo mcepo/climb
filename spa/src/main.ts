@@ -10,9 +10,13 @@ import './styles.css'
 import { App as CapacitorApp } from '@capacitor/app'
 
 import { sync } from 'vuex-router-sync'
+import { Capacitor } from '@capacitor/core'
 
-import wb from './registerServiceWorker'
-Vue.prototype.$workbox = wb
+if (!Capacitor.isNativePlatform()) {
+  require(['./registerServiceWorker'], (module) => {
+    Vue.prototype.$workbox = module.wb
+  })
+}
 
 sync(store, router, { moduleName: 'url' })
 
