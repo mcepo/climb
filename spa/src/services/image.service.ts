@@ -7,7 +7,7 @@ import {
 } from 'leaflet'
 import { Image } from '@/models'
 import store, { RootState } from '@/store'
-import api, { baseURL } from '@/store/api'
+import api from '@/store/api'
 import { Filesystem, Directory } from '@capacitor/filesystem'
 
 export class ImageService {
@@ -99,7 +99,7 @@ export class ImageService {
   }
 
   async getImage (id: number, type: string | null = null): Promise<string> {
-    let src = baseURL + 'image/' + id
+    let src = 'image/' + id
 
     if (type) {
       src += '/' + type
@@ -139,7 +139,6 @@ export class ImageService {
     const base64image = await this.getBase64Image(src)
 
     if (!base64image) {
-      console.log('no base 64 image')
       return null
     }
 
@@ -153,13 +152,14 @@ export class ImageService {
   }
 
   async getBase64Image (src): Promise<string | null> {
+    console.trace()
+    console.log(src)
     try {
       const response = await api.get(src, {
         responseType: 'blob'
       })
       return (await this.convertToBase64(response.data)) as string
     } catch (e) {
-      console.log(e)
       return null
     }
   }
