@@ -152,8 +152,6 @@ export class ImageService {
   }
 
   async getBase64Image (src): Promise<string | null> {
-    console.trace()
-    console.log(src)
     try {
       const response = await api.get(src, {
         responseType: 'blob'
