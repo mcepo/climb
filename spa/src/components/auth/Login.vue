@@ -124,8 +124,6 @@ export default {
       try {
         const userResponse = await OAuth2Client.authenticate(this.$options.oAuth[provider])
 
-        console.log(userResponse)
-
         this.socialLogin(provider, userResponse)
         this.closeForm()
       } catch (error) {
