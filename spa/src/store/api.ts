@@ -16,7 +16,8 @@ const api = axios.create({
 api.interceptors.request.use(function (config: AxiosRequestConfig) {
   const token = store.state.auth && store.state.auth.token
 
-  if (token) {
+  // right now i only request
+  if (token && (config.url?.includes('climbline') || config.url?.includes('localhost'))) {
     config.headers.Authorization = 'Bearer ' + token
   }
   return config
