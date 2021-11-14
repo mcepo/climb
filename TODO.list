@@ -2,27 +2,9 @@
 
 - gps web i mobilni, pračenje na karti i tagiranje na lokaciji
 
-- image, thumbnails, state, tiles filesystem storage
-
 -- ANDROID --
 
 -- HOT --
-
-TODO: when exiting image map keeps zoom from image
-
-TODO: razviti strategiju kako će se osvježavati stanje modela na frontendu, kad se osvježavaju podaci
-najbolje bi bilo prikazati trenutno podatke ako već postoje, istovremeno poslati zahtjev na server da se dohvate novi podaci
-ispisati poruku da je područje osvježeno, a ako aplikacija radi offline i ako nema lokalnih podataka izbaciti grešku i redirectati
-na prethodnu stranicu, i to sve nekako staviti u neki middleware, trebalo bi se primjenjivai na
-    - dohvat područja
-    - dohvat rute
-    - dohvat tagova slike
-    - pretraga ruta
-    - pretraga područja
-
-TODO: add button to stop tracking
-
-TODO: ipak maknuti service workera iz androida, jer nemože se dohvatiti ako nije https, a to nemogu postaviti za local app
 
 TODO: mail kriptiran mora biti
 
@@ -45,6 +27,8 @@ TODO: integrate weather api-s
 TODO: publish crag locations to openstreetmap
 
 TODO: hide options that you can't use if offline ?
+
+TODO: add button to stop tracking
 
 -- OPTIMIZATION --
 
