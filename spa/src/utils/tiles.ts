@@ -1,4 +1,5 @@
 // import 'leaflet.gridlayer.googlemutant'
+import store from '@/store'
 import { Map, TileLayer, control } from 'leaflet'
 import PersistantTileLayer from './tiles.storage'
 
@@ -97,9 +98,13 @@ export default function (map: Map) {
   map.addLayer(defaultLayer)
   controls.addBaseLayer(defaultLayer, first.name)
 
-  tiles.forEach(tile => {
-    controls.addBaseLayer(new TileLayer(tile.url), tile.name)
-  })
+  // since we only cache basic layers if offline don't add the rest of them
+  // because they won't be there
+  if (store.state.online) {
+    tiles.forEach(tile => {
+      controls.addBaseLayer(new TileLayer(tile.url), tile.name)
+    })
+  }
 
   // loading google tiles to map
 
