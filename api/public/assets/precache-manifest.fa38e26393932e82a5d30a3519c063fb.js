@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "99da04b4e066e43c2a68",
+    "revision": "7433d6d95eea29939a71",
     "url": "/assets/css/admin.panel.2ab20800.css"
   },
   {
@@ -8,11 +8,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/css/admin.panel~area.form~moderator.form~route.filters~route.form.f058a909.css"
   },
   {
-    "revision": "6e81f5f6d63d8e73edc7",
+    "revision": "46e6bac83be735926610",
     "url": "/assets/css/app.fb0abc21.css"
   },
   {
-    "revision": "ebe406f59b87343db979",
+    "revision": "e1ae4e33d85450c59982",
     "url": "/assets/css/area.form.09316a61.css"
   },
   {
@@ -32,11 +32,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/css/leaflet-geoman.8c7a4794.css"
   },
   {
-    "revision": "be52dec061f48c56bb85",
+    "revision": "004f9cb3964eb9649a5d",
     "url": "/assets/css/moderator.form.d3de4bc2.css"
   },
   {
-    "revision": "efc93f022d07adb21dcb",
+    "revision": "7efd6ac4dc44f4365ebf",
     "url": "/assets/css/pitch.form.207437e9.css"
   },
   {
@@ -60,32 +60,32 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/fonts/MaterialIcons-Regular.da4ea5cd.ttf"
   },
   {
-    "revision": "0e0fec44702eecb80f99ae63b511a970",
+    "revision": "46d40a4d0357a818857ff2146ba0ee84",
     "url": "/assets/index.html"
   },
   {
-    "revision": "99da04b4e066e43c2a68",
-    "url": "/assets/js/admin.panel.4f078050.js"
+    "revision": "7433d6d95eea29939a71",
+    "url": "/assets/js/admin.panel.3d5c8fc1.js"
   },
   {
     "revision": "5ec2b75f686dda5035f9",
     "url": "/assets/js/admin.panel~area.form~moderator.form~route.filters~route.form.9450cd7d.js"
   },
   {
-    "revision": "6e81f5f6d63d8e73edc7",
-    "url": "/assets/js/app.baef1a37.js"
+    "revision": "46e6bac83be735926610",
+    "url": "/assets/js/app.468d88b5.js"
   },
   {
-    "revision": "ebe406f59b87343db979",
-    "url": "/assets/js/area.form.ba9529b8.js"
+    "revision": "e1ae4e33d85450c59982",
+    "url": "/assets/js/area.form.1fe93abf.js"
   },
   {
     "revision": "37f2ab522ff975ba1b8d",
     "url": "/assets/js/area.form~pitch.form~route.filters~route.form.42e79346.js"
   },
   {
-    "revision": "138ad41f3ecc5428d5b8",
-    "url": "/assets/js/change-password.form.fb09fdd7.js"
+    "revision": "284c00d9e7ef44e48f3f",
+    "url": "/assets/js/change-password.form.2887103f.js"
   },
   {
     "revision": "f3f3e66ab17077d8a78e",
@@ -124,40 +124,40 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/js/leaflet-geoman.6a8b4c6d.js"
   },
   {
-    "revision": "6dce6c230edbf78bec0f",
-    "url": "/assets/js/leaflet.map.9271e993.js"
+    "revision": "0a8a064f54b06df96068",
+    "url": "/assets/js/leaflet.map.777af50f.js"
   },
   {
-    "revision": "96faf7275a1a7721bd84",
-    "url": "/assets/js/login.form.9ebfe228.js"
+    "revision": "cb5dae0ef3e090d9a2cf",
+    "url": "/assets/js/login.form.a9715095.js"
   },
   {
-    "revision": "be52dec061f48c56bb85",
-    "url": "/assets/js/moderator.form.50f2c20e.js"
+    "revision": "004f9cb3964eb9649a5d",
+    "url": "/assets/js/moderator.form.f84329ac.js"
   },
   {
-    "revision": "efc93f022d07adb21dcb",
-    "url": "/assets/js/pitch.form.d3045d0e.js"
+    "revision": "7efd6ac4dc44f4365ebf",
+    "url": "/assets/js/pitch.form.696f3d57.js"
   },
   {
-    "revision": "a0a218c36aa915cbeaa7",
-    "url": "/assets/js/popup.service.76c88d99.js"
+    "revision": "a896d157ab69e686c864",
+    "url": "/assets/js/popup.service.fc0420ae.js"
   },
   {
     "revision": "a1d0e7331e46e03e8096",
     "url": "/assets/js/privacy.policy.b96ddb67.js"
   },
   {
-    "revision": "d896496768390b734418",
-    "url": "/assets/js/register.form.19b5e5eb.js"
+    "revision": "54c0a7d8487d51854237",
+    "url": "/assets/js/register.form.89684566.js"
   },
   {
     "revision": "1f87e5f3024ece580349",
     "url": "/assets/js/route.filters.af9b833f.js"
   },
   {
-    "revision": "1c8a9d742da2a86ae1d5",
-    "url": "/assets/js/route.form.afffa070.js"
+    "revision": "b162237695c65b8f0006",
+    "url": "/assets/js/route.form.66a4ee78.js"
   },
   {
     "revision": "372d76914e2e36cf8f8a23af440c030f",
