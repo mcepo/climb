@@ -70,11 +70,13 @@ const image: Module<ImageState, RootState> = {
       if (fullyLoaded && Number.isInteger(fullyLoaded)) {
         const miliSecSincLastRefresh = Date.now() - fullyLoaded
 
-        // don't refresh if less then an hour has passed
-        if (miliSecSincLastRefresh < 3600000) {
+        // don't refresh if less then an minute has passed
+        if (miliSecSincLastRefresh < 60000) {
           return
         }
-      } else {
+      }
+
+      if (!fullyLoaded) {
         dispatch('snackbar/show', 'Loading image...', { root: true })
         commit('loading', true)
       }

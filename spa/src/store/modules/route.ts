@@ -84,16 +84,16 @@ const route: Module<RouteState, RootState> = {
       if (fullyLoaded && Number.isInteger(fullyLoaded)) {
         const miliSecSincLastRefresh = Date.now() - fullyLoaded
 
-        // don't refresh if less then an hour has passed
-        if (miliSecSincLastRefresh < 3600000) {
+        // don't refresh if less then an minute has passed
+        if (miliSecSincLastRefresh < 60000) {
           setTimeout(() => {
             drawers.setLeft(true)
           }, 1000)
           return
         }
-      } else {
-        commit('loading', true)
       }
+
+      !fullyLoaded && commit('loading', true)
 
       api
         .get<Route>('route/' + id)

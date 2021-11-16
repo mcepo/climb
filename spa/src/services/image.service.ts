@@ -7,7 +7,7 @@ import {
 } from 'leaflet'
 import { Image } from '@/models'
 import store, { RootState } from '@/store'
-import api, { baseURL } from '@/store/api'
+import api from '@/store/api'
 import { Filesystem, Directory } from '@capacitor/filesystem'
 
 export class ImageService {
@@ -99,7 +99,7 @@ export class ImageService {
   }
 
   async getImage (id: number, type: string | null = null): Promise<string> {
-    let src = baseURL + 'image/' + id
+    let src = 'image/' + id
 
     if (type) {
       src += '/' + type
@@ -107,49 +107,46 @@ export class ImageService {
 
     type = type ?? 'full'
 
-    // will try using just the service worker for now
-    // const base64image = await this.loadImageFromCache(id, type) || await this.getAndCacheImage(id, type, src)
+    return await this.fetchImage(type + '-' + id, src)
+  }
 
-    // if (base64image) {
-    //   return base64image
-    // }
+  async fetchImage (cacheKey: string, src: string, type = 'jpeg') {
+    const base64image = await this.loadImageFromCache(cacheKey, type) || await this.getAndCacheImage(cacheKey, src)
+
+    if (base64image) {
+      return base64image
+    }
 
     return src
   }
 
-  async loadImageFromCache (id: number, type: string): Promise<string|null> {
+  async loadImageFromCache (cacheKey: string, imageType): Promise<string|null> {
     try {
       const content = await Filesystem.readFile({
-        path: type + '-' + id,
+        path: cacheKey,
         directory: Directory.Cache
       })
       // for some reason type isn't stored in the cache only the base64data
       // but when retrieving the image from server then it has the type in front
       // but that type isn't being stored in the cache
-      return 'data:image/jpeg;base64,' + content.data
+      return 'data:image/' + imageType + ';base64,' + content.data
     } catch (e) {
-      console.log(e)
       return null
     }
   }
 
-  async getAndCacheImage (id: number, type: string, src: string): Promise<string|null> {
+  async getAndCacheImage (cacheKey, src: string): Promise<string|null> {
     const base64image = await this.getBase64Image(src)
 
     if (!base64image) {
-      console.log('no base 64 image')
       return null
     }
 
-    try {
-      Filesystem.writeFile({
-        path: type + '-' + id,
-        data: base64image,
-        directory: Directory.Cache
-      })
-    } catch (e) {
-      console.log(e)
-    }
+    Filesystem.writeFile({
+      path: cacheKey,
+      data: base64image,
+      directory: Directory.Cache
+    })
 
     return base64image
   }
@@ -161,7 +158,6 @@ export class ImageService {
       })
       return (await this.convertToBase64(response.data)) as string
     } catch (e) {
-      console.log(e)
       return null
     }
   }

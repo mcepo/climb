@@ -1,4 +1,3 @@
-import { Position } from '@capacitor/geolocation'
 import { GeolocationProvider } from '../geolocation.service'
 
 class WebProvider implements GeolocationProvider {
@@ -15,12 +14,12 @@ class WebProvider implements GeolocationProvider {
       return
     }
 
-    console.log('starting watch')
-
     this._watchId = navigator.geolocation.watchPosition(
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (position?: Position | null) => {
-        callback(position, null)
+      (position?: GeolocationPosition | null) => {
+        if (position) {
+          callback(position.coords, null)
+        }
       },
       (positionError) => {
         callback(null, positionError)
@@ -31,7 +30,6 @@ class WebProvider implements GeolocationProvider {
 
   stopWatch (): void {
     if (this._watchId) {
-      console.log('stopping watch')
       navigator.geolocation.clearWatch(this._watchId)
       this._watchId = undefined
     }

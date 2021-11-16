@@ -161,17 +161,19 @@ const area: Module<AreaState, RootState> = {
       if (fullyLoaded && Number.isInteger(fullyLoaded)) {
         const miliSecSincLastRefresh = Date.now() - fullyLoaded
 
-        // don't refresh if less then an hour has passed
-        if (miliSecSincLastRefresh < 3600000) {
+        // don't refresh if less then a minute has passed
+        if (miliSecSincLastRefresh < 60000) {
           commit('loading', false) // just in case, also needed when opening sector
           setTimeout(() => {
             drawers.setLeft(true)
           }, 1000)
           return
         }
-      } else {
-        commit('loading', true)
       }
+
+      // if the area is fully loaded we are just refreshing the area
+      // so don't show the loading progress
+      !fullyLoaded && commit('loading', true)
 
       api
         .get<Area>('area/' + id)

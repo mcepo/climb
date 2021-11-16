@@ -30,7 +30,10 @@ const snackbar: Module<SnackbarState, RootState> = {
   mutations: {
 
     push (state, snackbarMessage: SnackbarMessage) {
-      state.queue.push(snackbarMessage)
+      const existingMessage = state.queue.find((notification) => {
+        return notification.message === snackbarMessage.message
+      })
+      if (!existingMessage) { state.queue.push(snackbarMessage) }
     },
 
     pop (state) {

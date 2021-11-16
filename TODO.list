@@ -12,6 +12,8 @@ TODO: welcome and disclamer popup community maintained site ....
 
 TODO: prilikom odabira ocjene smjera dodati i odabir ljestvice koje će se po defaultu koristiti za taj smjer
 
+TODO: frontend and backend package version upgrade
+
 -- FEATURES --
 
 TODO: store accuracy for area/route locations on map
@@ -24,16 +26,9 @@ TODO: integrate weather api-s
 
 TODO: publish crag locations to openstreetmap
 
-TODO: razlikovati pristupe i odstupe 
-
-TODO: color coding route and area tags
-
-TODO: add scale with grades to display
-
 TODO: hide options that you can't use if offline ?
 
-TODO: in area/route details put image with the most topos 
-    in the header under name
+TODO: add button to stop tracking
 
 -- OPTIMIZATION --
 

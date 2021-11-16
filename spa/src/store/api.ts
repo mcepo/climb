@@ -16,7 +16,8 @@ const api = axios.create({
 api.interceptors.request.use(function (config: AxiosRequestConfig) {
   const token = store.state.auth && store.state.auth.token
 
-  if (token) {
+  // right now i only request
+  if (token && (config.url?.includes('climbline') || config.url?.includes('localhost'))) {
     config.headers.Authorization = 'Bearer ' + token
   }
   return config
@@ -37,17 +38,18 @@ api.interceptors.response.use(
     return response
   },
   (error: AxiosError) => {
-    if (store.state.online === false) {
+    if (!store.state.online) {
       if (error.config.method === 'get') {
-        router.back()
         store.dispatch('snackbar/error', 'Resource unavailable, working offline.')
       } else {
-        store.dispatch('snackbar/show', 'No internet connection, changes will be saved when connection returns.')
+        store.dispatch('snackbar/show', 'No internet connection, changes not stored.')
       }
 
       return Promise.resolve(true)
     }
 
+    // if we are online and the request returns 404 means user has requested something that doesn't exist on te server
+    // return him to home
     if (error.response) {
       store.dispatch('snackbar/throwError', { code: error.response.status, message: error.response.data })
       if (error.response.status === 404) {

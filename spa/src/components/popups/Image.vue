@@ -2,7 +2,7 @@
   <popup :tag="tag" :item="item" type="image">
     <template v-slot:item>
       <v-img
-        :src="imageLink(item.id)"
+        :src="src"
         onerror="this.style.display='none'"
         width="100%"
         @load="loading = false"
@@ -27,6 +27,7 @@
 <script>
 import Vue from 'vue'
 import Popup from './Popup.vue'
+import imageService from '../../services/image.service'
 
 export default Vue.extend({
   props: ['item', 'tag'],
@@ -35,18 +36,21 @@ export default Vue.extend({
   },
   data () {
     return {
-      loading: true
+      loading: true,
+      src: ''
+    }
+  },
+  created () {
+    if (this.item) {
+      imageService.getImage(this.item.id, 'thumbnail').then((data) => {
+        this.src = data
+      })
     }
   },
   computed: {
     height () {
       const aspect = this.item.size[1] / this.item.size[0]
       return (200 * aspect) + 'px'
-    }
-  },
-  methods: {
-    imageLink (id) {
-      return '/api/image/' + id + '/thumbnail'
     }
   }
 })
