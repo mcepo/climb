@@ -39,3 +39,5 @@ TODO: move route/image/area fetch in beforeEnter route hook
 TODO: move geolocation in a seperate bundle
 
 TODO: move current location logic in a seperate service
+
+TODO: remove leaflet from vendor chunk
