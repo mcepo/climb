@@ -1,4 +1,4 @@
-importScripts("/assets/precache-manifest.77e4a9a8c7f7af39eb1f452f9d0caddc.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("/assets/precache-manifest.802ebf32d0a2e8109d3dc47cb0a72530.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 // this is an ugly solution but i needed it so the service worker will
 // detect the change in the root url '/', but also serve it once offline
