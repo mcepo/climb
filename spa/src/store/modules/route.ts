@@ -182,6 +182,10 @@ const route: Module<RouteState, RootState> = {
 
       const routeIds: Array<string> = (area && area.routes?.length !== 0) ? area.routes : state.allIds
 
+      if (!routeIds) {
+        return []
+      }
+
       routeIds.forEach(id => {
         const route = state.byIds[id]
         route && routePassesFilter(route, filters) && filtered.push(route)

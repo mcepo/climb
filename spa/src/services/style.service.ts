@@ -2,8 +2,6 @@ import { DivIcon, Marker, Icon, Polyline } from 'leaflet'
 import { Area, TaggedType, Route } from '@/models'
 import { svgIconUrl } from '../utils/svg'
 
-import gradeService from "../services/grade.service"
-
 interface StylingMarker {
   layer: Marker;
   item: Area|Route;
@@ -97,9 +95,8 @@ const routeLeafletLayerStyle = {
 const routeImageLayerStyle = {
 
   default (obj: StylingPolyline) {
-
     const routeDifficulty = obj.item.grades.find((grade) => {
-      return grade[0] === 10 ? true : false
+      return grade[0] === 10
     })
 
     obj.layer.setStyle({
@@ -138,18 +135,25 @@ const imageLayerStyle = {
 const pitchLayerStyle = {
 
   default (obj: StylingPolyline) {
+    const routeDifficulty = obj.item.grades.find((grade) => {
+      return grade[0] === 10
+    })
+
     obj.layer.setStyle({
-      color: 'red'
+      color: routeDifficultyGradeColors[routeDifficulty ? routeDifficulty[1] : 0],
+      weight: 3
     })
   },
   highlight (obj: StylingPolyline) {
     obj.layer.setStyle({
-      color: highlighColor
+      color: highlighColor,
+      weight: 5
     })
   },
   selected (obj: StylingPolyline) {
     obj.layer.setStyle({
-      color: 'yellow'
+      color: 'yellow',
+      weight: 5
     })
     obj.layer.bringToFront()
   }

@@ -33,8 +33,7 @@ export default {
     }
   },
   async mounted () {
-
-    const backgroundColor = this.type == 10 ? routeDifficultyGradeColors : 'grey'
+    const backgroundColor = parseInt(this.type) === 10 ? routeDifficultyGradeColors : 'grey'
 
     import(/* webpackChunkName: "chart-js" */ 'chart.js')
       .then(
