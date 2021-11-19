@@ -16,8 +16,6 @@ const api = axios.create({
 api.interceptors.request.use(function (config: AxiosRequestConfig) {
   const token = store.state.auth && store.state.auth.token
 
-  console.log(config)
-
   const isLocalCall = !config.url?.includes('http') || (config.url?.includes('http') && (config.url?.includes('climbline') || config.url?.includes('localhost')))
 
   if (token && isLocalCall) {
