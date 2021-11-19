@@ -10,8 +10,7 @@ class TrailController extends Controller
 {
     public function __construct()
     {
-        // all users can currently do everything
-        // $this->middleware('auth');
+        $this->middleware('auth');
         $this->middleware('flush-cache');
     }
 

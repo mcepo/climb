@@ -10,8 +10,7 @@ class RouteController extends Controller
 
     public function __construct()
     {
-        // all users can currently do everything
-        // $this->middleware('auth', ['except' => ['index','show']]);
+        $this->middleware('auth', ['except' => ['index','show']]);
         $this->middleware('check-cache', ['only' => ['show']]);
         $this->middleware('flush-cache', ['except' => ['show', 'index']]);
     }

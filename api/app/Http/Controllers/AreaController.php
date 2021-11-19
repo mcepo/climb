@@ -5,14 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Area;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 class AreaController extends Controller
 {
 
     public function __construct()
     {
-        // currently all users can do everything 
-        // $this->middleware('auth', ['except' => ['index', 'show']]);
+        $this->middleware('auth', ['except' => ['index', 'show']]);
         $this->middleware('check-cache', ['only' => ['index', 'show']]);
         $this->middleware('flush-cache', ['except' => ['index', 'show']]);
     }
