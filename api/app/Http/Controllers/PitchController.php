@@ -29,7 +29,7 @@ class PitchController extends Controller
 
     public function update(Request $request, Pitch $pitch)
     {
-        $this->canUserModify($pitch);
+        // $this->canUserModify($pitch);
 
         $pitch->fill($request->all())->save();
 

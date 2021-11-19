@@ -68,7 +68,7 @@ class RouteController extends Controller
 
     public function update(Request $request, Route $route)
     {
-        $this->canUserModify($route);
+        // $this->canUserModify($route);
 
         $route->fill($request->all())->save();
 

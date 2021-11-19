@@ -26,7 +26,7 @@ class TagController extends Controller
 
     public function update(Request $request, Tag $tag)
     {
-        $this->canUserModify($tag);
+        // $this->canUserModify($tag);
 
         $tag->fill($request->all())->save();
 

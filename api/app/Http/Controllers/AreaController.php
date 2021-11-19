@@ -64,7 +64,7 @@ class AreaController extends Controller
 
     public function update(Request $request, Area $area)
     {
-        $this->canUserModify($area);
+        // $this->canUserModify($area);
         
         $area->fill($request->all());
 
