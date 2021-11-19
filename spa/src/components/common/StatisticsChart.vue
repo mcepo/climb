@@ -5,6 +5,7 @@
 <script>
 
 import gradeService from '../../services/grade.service'
+import { routeDifficultyGradeColors } from '../../services/style.service'
 
 export default {
   props: ['type', 'stats'],
@@ -32,6 +33,9 @@ export default {
     }
   },
   async mounted () {
+
+    const backgroundColor = this.type == 10 ? routeDifficultyGradeColors : 'grey'
+
     import(/* webpackChunkName: "chart-js" */ 'chart.js')
       .then(
         ({ default: Chart }) => {
@@ -58,7 +62,7 @@ export default {
               },
               elements: {
                 rectangle: {
-                  backgroundColor: 'grey'
+                  backgroundColor
                 }
               },
               scales: {
