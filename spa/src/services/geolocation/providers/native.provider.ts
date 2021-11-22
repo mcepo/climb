@@ -49,7 +49,7 @@ class NativeProvider implements GeolocationProvider {
       function callback (location?: Location, error?: CallbackError) {
         if (error) {
           if (error.code === 'NOT_AUTHORIZED') {
-            if (
+            if (error.message === 'Permission denied.' &&
               window.confirm(
                 error.message + '\n\n' +
                   'Open settings now?'
@@ -60,6 +60,8 @@ class NativeProvider implements GeolocationProvider {
               // plugin provides the 'openSettings' method to do exactly
               // this.
               BackgroundGeolocation.openSettings()
+            } else {
+              window.alert(error.message)
             }
           }
         }
