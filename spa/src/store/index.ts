@@ -16,6 +16,8 @@ import persistentStorage from './plugins/persistent.storage'
 import { PitchState } from './modules/pitch'
 import { ItemType } from '@/services/type.service'
 
+import { set as setPageTitle } from '@/utils/pageTitle'
+
 Vue.use(Vuex)
 
 export interface RootState {
@@ -103,7 +105,7 @@ const store = new Vuex.Store<RootState>({
     urlPath: (state) => (itemType: ItemType, id: string) => {
       const item = state[itemType]?.byIds[id]
 
-      document.title = 'Climbline - comunity maintained guide'
+      setPageTitle()
 
       if (!item) {
         return null
@@ -122,7 +124,7 @@ const store = new Vuex.Store<RootState>({
       })
 
       if (item.name) {
-        document.title = 'Climbline - ' + item.name
+        setPageTitle(item.name)
 
         names.push(item.name)
       }

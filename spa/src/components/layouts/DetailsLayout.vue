@@ -65,6 +65,8 @@ import GetDirections from '../buttons/GetDirections'
 import { getUrl } from '../../router'
 import BackButton from '../buttons/BackButton'
 
+import { set as setPageTitle } from '@/utils/pageTitle'
+
 import drawers from '../../services/drawer.service'
 
 export default {
@@ -103,8 +105,8 @@ export default {
       drawers.setLeft(false)
     },
     setTitle () {
-      if (this.item && !document.title.includes(this.item.name)) {
-        document.title = 'ClimbLine' + (' - ' + this.item.name)
+      if (this.item) {
+        setPageTitle(this.item.name)
       }
     }
   },

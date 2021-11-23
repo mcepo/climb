@@ -31,6 +31,7 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import AreaList from './lists/AreaList'
+import { set as setPageTitle } from '../utils/pageTitle'
 
 export default {
   cancelationToken: null,
@@ -47,7 +48,7 @@ export default {
   },
 
   created () {
-    document.title = 'Climbline - comunity maintained climbers guide'
+    setPageTitle()
     this.$store.dispatch('area/fetchMany')
   },
   methods: {
