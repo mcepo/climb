@@ -2,6 +2,8 @@
 
 - gps web i mobilni, pračenje na karti i tagiranje na lokaciji
 
+TODO: gps location point accuracy
+
 -- ANDROID --
 
 -- HOT --
@@ -17,8 +19,6 @@ TODO: prilikom odabira ocjene smjera dodati i odabir ljestvice koje će se po de
 TODO: frontend and backend package version upgrade
 
 -- FEATURES --
-
-TODO: store accuracy for area/route locations on map
 
 TODO: kad se učita područje učitati i sve rute sa svim podacima
 
