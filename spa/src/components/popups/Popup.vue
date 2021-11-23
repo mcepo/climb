@@ -6,6 +6,7 @@
     </a>
     <slot name="content"></slot>
     <v-divider></v-divider>
+    <div class='pt-2' v-if='tag.accuracy'><b>Location accuracy:</b> ~{{tag.accuracy}}m</div>
     <v-card-actions>
       <tag-control :type="type" :item="item"></tag-control>
       <delete-button type="tag" :item="tag"></delete-button>

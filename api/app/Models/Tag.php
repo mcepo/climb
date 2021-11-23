@@ -43,7 +43,8 @@ class Tag extends Model
         'geometry',
         'image_id',
         'tagged_type',
-        'tagged_id'
+        'tagged_id',
+        'accuracy'
     ];
 
     public function image()

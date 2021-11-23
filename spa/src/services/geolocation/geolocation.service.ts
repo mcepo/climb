@@ -23,20 +23,27 @@ class GeolocationService {
 
   private _provider: GeolocationProvider
 
+  private _lastPosition: PositionInterface|null = null;
+
   constructor (provider: GeolocationProvider) {
     this._provider = provider
   }
 
   registerCallback (callback: Function): number {
     if (this._callbacks.size === 0) {
-      this._provider.startWatch((position: PositionInterface, error) =>
+      this._provider.startWatch((position: PositionInterface, error) => {
+        this._lastPosition = position
         this._processPosition(position, error)
-      )
+      })
     }
 
     this._callbackCounter++
 
     this._callbacks.set(this._callbackCounter, callback)
+
+    if (this._lastPosition) {
+      this._processPosition(this._lastPosition, null)
+    }
 
     return this._callbackCounter
   }
@@ -54,6 +61,7 @@ class GeolocationService {
 
     if (this._callbacks.size === 0) {
       this._provider.stopWatch()
+      this._lastPosition = null
     }
   }
 }

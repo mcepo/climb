@@ -160,15 +160,15 @@ class DrawingService {
               bestPosition = position
             }
 
+            const accuracy = Math.round(bestPosition?.accuracy || 1000)
+
             // waiting 10 position for better accuracy, after that try and store what we have
-            if (attempts !== 0) {
+            if (attempts !== 0 && accuracy > 10) {
               attempts--
               return
             }
 
             geolocationService.unregisterCallback(callbackId)
-
-            const accuracy = Math.round(bestPosition?.accuracy || 1000)
 
             if (accuracy < 20 && accuracy < 100) {
               store.dispatch('snackbar/warning', 'Setting a location with low accuracy: ' + accuracy + 'm.')
@@ -182,6 +182,7 @@ class DrawingService {
                 type: 'Point',
                 coordinates: [bestPosition.longitude, bestPosition.latitude]
               }
+              tag.accuracy = accuracy
             } else {
               store.dispatch('snackbar/error', 'No location provided.')
             }

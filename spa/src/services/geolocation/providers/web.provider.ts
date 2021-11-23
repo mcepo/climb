@@ -5,8 +5,8 @@ class WebProvider implements GeolocationProvider {
 
   positionOptions: PositionOptions = {
     enableHighAccuracy: true,
-    timeout: 40000,
-    maximumAge: 10000
+    maximumAge: 10000,
+    timeout: 1000
   }
 
   startWatch (callback: Function): void {
