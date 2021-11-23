@@ -17,7 +17,7 @@ class WebController extends Controller
         // og tags for facebook and twitter
         return view(
             'index', [
-            'title' => 'ClimbLine - Community maintained online climbers guide',
+            'title' => 'Community maintained online climbers guide',
             'description' => 'Home of free route topos and crag locations. Document your favorite crag in an easy and efficient manner while on the crag and share it with others or explore existing topos and crags',
             'keywords' => 'rock climbing guidebook, route topo, crag location, online guide'
             ]
@@ -28,7 +28,7 @@ class WebController extends Controller
     {
         return view(
             'index', [
-            'title' => 'ClimbLine - ' . $route->name,
+            'title' => $route->name,
             'description' => "Explore route '" . $route->name . "' and add missing info.",
             'keywords' => 'rock climbing guidebook, route topo, crag location, online guide'
             ]
@@ -45,7 +45,7 @@ class WebController extends Controller
 
         return view(
             'index', [
-            'title' => 'ClimbLine - ' . $name,
+            'title' => $name,
             'description' => $name . ' currently has a route topo coverage of ' . ($area->tag_coverage * 100) . "%. Explore existing routes and add missing info.",
             'keywords' => 'rock climbing guidebook, route topo, crag location, online guide'
             ]
