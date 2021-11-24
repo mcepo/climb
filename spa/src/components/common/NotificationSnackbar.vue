@@ -21,7 +21,7 @@ export default Vue.extend({
       return this.$store.getters['snackbar/get']
     },
     timeout () {
-      return 1000 + 100 * this.state.message.length
+      return 1000 + 50 * this.state.message.length
     }
   },
   watch: {
