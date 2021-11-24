@@ -1,14 +1,12 @@
 import { Route } from '../../models'
 import { Module } from 'vuex'
-import { RootState } from '..'
+import { RootState, shouldLoadEntity } from '..'
 
 import api from '../api'
 import { normalizeRelations } from '../utils/normalization'
 import { RouteFilters } from '@/models/routeFilters'
 import { routePassesFilter } from '../utils/routeFilters'
 import entityMutations from './utils/entityMutations'
-
-import drawers from '../../services/drawer.service'
 
 export interface RouteState {
   byIds: Record<number, Route>;
@@ -79,21 +77,7 @@ const route: Module<RouteState, RootState> = {
         })
     },
     fetch ({ state, commit, dispatch }, id) {
-      const fullyLoaded = state.byIds[id]?.fullyLoaded
-
-      if (fullyLoaded && Number.isInteger(fullyLoaded)) {
-        const miliSecSincLastRefresh = Date.now() - fullyLoaded
-
-        // don't refresh if less then an minute has passed
-        if (miliSecSincLastRefresh < 60000) {
-          setTimeout(() => {
-            drawers.setLeft(true)
-          }, 1000)
-          return
-        }
-      }
-
-      !fullyLoaded && commit('loading', true)
+      if (!shouldLoadEntity(state.byIds[id]?.fullyLoaded, commit)) return
 
       api
         .get<Route>('route/' + id)

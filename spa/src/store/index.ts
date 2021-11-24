@@ -18,7 +18,33 @@ import { ItemType } from '@/services/type.service'
 
 import { set as setPageTitle } from '@/utils/pageTitle'
 
+import drawers from '../services/drawer.service'
+
 Vue.use(Vuex)
+
+// don't request entites for 3 minutes from the server after they have been fully loaded
+export const staleAfter = 180000
+
+export function shouldLoadEntity (fullyLoaded: number, commit: Function) {
+  if (fullyLoaded && Number.isInteger(fullyLoaded)) {
+    const miliSecSincLastRefresh = Date.now() - fullyLoaded
+
+    // don't refresh if less then a minute has passed
+    if (miliSecSincLastRefresh < staleAfter) {
+      commit('loading', false) // just in case, also needed when opening sector
+      setTimeout(() => {
+        drawers.setLeft(true)
+      }, 1000)
+      return false
+    }
+  }
+
+  // if the entity is fully loaded we are just refreshing the entity
+  // so don't show the loading progress
+  !fullyLoaded && commit('loading', true)
+
+  return true
+}
 
 export interface RootState {
   url?: Route; // route vuex sync module, will contain vue router route data

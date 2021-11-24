@@ -1,5 +1,5 @@
 import { Module } from 'vuex'
-import { RootState } from '..'
+import { RootState, shouldLoadEntity } from '..'
 
 import api from '../api'
 import { Area, Tag, Route } from '../../models'
@@ -156,24 +156,7 @@ const area: Module<AreaState, RootState> = {
     },
 
     fetch ({ state, commit, dispatch }, id) {
-      const fullyLoaded = state.byIds[id]?.fullyLoaded
-
-      if (fullyLoaded && Number.isInteger(fullyLoaded)) {
-        const miliSecSincLastRefresh = Date.now() - fullyLoaded
-
-        // don't refresh if less then a minute has passed
-        if (miliSecSincLastRefresh < 60000) {
-          commit('loading', false) // just in case, also needed when opening sector
-          setTimeout(() => {
-            drawers.setLeft(true)
-          }, 1000)
-          return
-        }
-      }
-
-      // if the area is fully loaded we are just refreshing the area
-      // so don't show the loading progress
-      !fullyLoaded && commit('loading', true)
+      if (!shouldLoadEntity(state.byIds[id]?.fullyLoaded, commit)) return
 
       api
         .get<Area>('area/' + id)
