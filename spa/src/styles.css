@@ -62,3 +62,7 @@ html {
 table {
   width:100%;
 }
+
+.list_border {
+  border-bottom: 1px solid lightgray;
+}
