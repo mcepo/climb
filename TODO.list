@@ -8,20 +8,22 @@ TODO: gps location point accuracy
 
 -- HOT --
 
+TODO: prilikom odabira ocjene smjera dodati i odabir ljestvice koje će se po defaultu koristiti za taj smjer
+
 TODO: icons update pwa, web, mobile
 
 TODO: mail kriptiran mora biti
 
 TODO: welcome and disclamer popup community maintained site ....
 
-TODO: prilikom odabira ocjene smjera dodati i odabir ljestvice koje će se po defaultu koristiti za taj smjer
-
 TODO: frontend and backend package version upgrade
 
 -- FEATURES --
 
 TODO: kad se učita područje učitati i sve rute sa svim podacima -> jako puno bi se dohvačalo duplih podataka, jer bi onda i prilikom
-otvaranja svake rute dohvačao podatke o toj ruti. 
+otvaranja svake rute dohvačao podatke o toj ruti. Trenutno sam stavio da ima timeout od 3 minute na dohvačen entitet
+mogao bi staviti da kad se dohvate i sve rute tog područja da i na njih odmah stavi timeout od 3min, onda bi to
+donekle bilo bolje
 
 TODO: integrate weather api-s
 
