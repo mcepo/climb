@@ -3,7 +3,8 @@
     @mouseenter="onMouseOver()"
     @mouseleave="onMouseOut()"
     @click="link()"
-    :class="{area_list_hover: highlight}"
+    :class="{area_list_hover: highlight, list_border:true}"
+
   >
     <td style='max-width:160px; min-width:120px; padding-left:15px'>
       <v-list-item-subtitle class="area_type"><span v-if='showType'>{{typeName}}</span></v-list-item-subtitle>

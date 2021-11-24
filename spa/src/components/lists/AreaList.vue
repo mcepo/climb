@@ -15,6 +15,10 @@
 .area-table {
   cursor: pointer;
   border-spacing: 0px;
+  border-collapse: collapse;
+}
+.area-table > tr {
+  border-bottom: 1px solid lightgray;
 }
 </style>
 <script>

@@ -13,7 +13,7 @@
           :key="index"
           @mouseenter="onMouseEnter(type + pitch.id)"
           @mouseleave="onMouseLeave()"
-          :class="{pitch_row_hover: highlighted(type + pitch.id)}"
+          :class="{pitch_row_hover: highlighted(type + pitch.id), list_border: true}"
           >
           <td>{{ index + 1 }}</td>
           <td>{{ forgeGrade(pitch.grades) }}</td>

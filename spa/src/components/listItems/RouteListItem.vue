@@ -3,7 +3,7 @@
     @mouseenter.native="onMouseOver()"
     @mouseleave.native="onMouseOut()"
     @click.prevent="link()"
-    :class="{route_list_hover: highlight}"
+    :class="{route_list_hover: highlight, list_border:true}"
   >
     <v-list-item-content class='pl-2'>
       <v-list-item-subtitle>
