@@ -233,7 +233,7 @@ const area: Module<AreaState, RootState> = {
 
       const routeFilters = rootGetters['route/filters']
 
-      areaIds.forEach((id) => {
+      areaIds && areaIds.forEach((id) => {
         const area = state.byIds[id]
 
         area && areaPassesFilter(area, routeFilters, query) && areas.push(area)

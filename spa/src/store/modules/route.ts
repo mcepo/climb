@@ -102,7 +102,7 @@ const route: Module<RouteState, RootState> = {
 
       const area = rootGetters['area/get']
 
-      if (area && area.routes.length) return
+      if (area && area.routes?.length) return
 
       commit('loading', true)
 
