@@ -142,7 +142,7 @@ class DrawingService {
       .then(() => {
         let bestPosition: PositionInterface|null = null
 
-        let attempts = 10
+        let attempts = 5
 
         const callbackId = geolocationService.registerCallback(
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -151,7 +151,7 @@ class DrawingService {
             const betterPositionRecieved = (!bestPosition || (bestPosition && position.accuracy < bestPosition.accuracy))
 
             // if a better position was recieved, but the position is still bad show a message to the user
-            if (position.accuracy > 20 && betterPositionRecieved) {
+            if (position.accuracy > 10 && betterPositionRecieved) {
               store.dispatch('snackbar/show', 'Low accuracy: ' + Math.round(position.accuracy) + 'm waiting for better accuracy.')
             }
 
@@ -170,11 +170,13 @@ class DrawingService {
 
             geolocationService.unregisterCallback(callbackId)
 
-            if (accuracy < 20 && accuracy < 100) {
-              store.dispatch('snackbar/warning', 'Setting a location with low accuracy: ' + accuracy + 'm.')
-            } else {
+            if (accuracy > 50) {
               store.dispatch('snackbar/error', 'Bad location accuracy:' + accuracy + 'm, not storing tag, please try again later.')
               return
+            }
+
+            if (accuracy > 10) {
+              store.dispatch('snackbar/warning', 'Setting a location with low accuracy: ' + accuracy + 'm.')
             }
 
             if (bestPosition) {
