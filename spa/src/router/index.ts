@@ -34,7 +34,8 @@ const routes = [
       {
         path: '/privacy',
         components: {
-          default: PrivacyPolicy
+          default: Overview,
+          map: PrivacyPolicy
         }
       },
       {

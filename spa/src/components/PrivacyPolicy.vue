@@ -1,18 +1,8 @@
 <template>
-  <div>
+  <div style='padding-top: 80px; padding-bottom:50px; height:100vh; overflow-x:auto'>
     <div class="header">
       <div class="container">
         <p class="title">Privacy Policy for ClimbLine</p>
-      </div>
-    </div>
-
-    <div class="translations-list-container">
-      <div class="container">
-        <ul class="translations-list">
-          <li class="en translations-list-item">
-            <a class="tab-link active" href="#en">English</a>
-          </li>
-        </ul>
       </div>
     </div>
 
@@ -524,7 +514,8 @@ import drawers from '../services/drawer.service'
 
 export default Vue.extend({
   created () {
-    drawers.setLeft(true)
+    drawers.setLeft(false)
+    drawers.setRight(false)
   }
 })
 </script>

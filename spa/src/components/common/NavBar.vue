@@ -44,6 +44,10 @@
             <v-list-item-title><v-icon>perm_identity</v-icon>{{getUserName()}}</v-list-item-title>
           </v-list-item>
           <v-divider></v-divider>
+          <v-list-item @click="$router.push('/privacy')">
+            <v-list-item-title>Privacy policy</v-list-item-title>
+          </v-list-item>
+          <v-divider></v-divider>
           <v-list-item @click="openAuthorizedForm({form: {component: 'change-password-form', params: null}})">
             <v-list-item-title>Change password</v-list-item-title>
           </v-list-item>
