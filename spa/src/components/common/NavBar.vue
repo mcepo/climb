@@ -67,6 +67,10 @@
           <v-list-item @click="openForm({component: 'login-form', params: null})">
             <v-list-item-title>Sign in / Register</v-list-item-title>
           </v-list-item>
+          <v-divider></v-divider>
+          <v-list-item @click="$router.push('/privacy')">
+            <v-list-item-title>Privacy policy</v-list-item-title>
+          </v-list-item>
           <v-divider v-if='installable'></v-divider>
           <v-list-item v-if='installable' @click='installApp()'>
             <v-list-item-title><v-icon>mobile_friendly</v-icon>Install app</v-list-item-title>
