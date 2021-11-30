@@ -7,9 +7,10 @@
     fab
     small
     style='position: fixed'
-    @click='showLocation()'
+    @click='toggleTracking()'
     >
-    <v-icon>gps_fixed</v-icon>
+    <v-icon v-if='!!trackingId'>gps_off</v-icon>
+    <v-icon v-else>gps_fixed</v-icon>
   </v-btn>
   <div id="leaflet-map" class="map"></div>
   <v-overlay :absolute='true' :opacity='0.5' :z-index='199' :value='loading'>
@@ -34,12 +35,15 @@ export default {
     circle: null,
     trail: null
   },
-  watchCallbackId: null,
-  goToRequest: false,
-
   computed: {
     loading () {
       return this.$store.state.area.loading
+    }
+  },
+
+  data () {
+    return {
+      trackingId: null
     }
   },
 
@@ -87,15 +91,23 @@ export default {
 
   methods: {
 
-    showLocation () {
-      this.$store.dispatch('snackbar/show', 'Getting location,<br>this may take some time ...')
+    toggleTracking () {
+      if (this.trackingId) {
+        this.$store.dispatch('snackbar/show', 'GPS location disabled.')
 
-      this.$options.watchCallbackId = geolocationService.registerCallback(this.moveMarker)
+        geolocationService.unregisterCallback(this.trackingId)
 
-      this.$options.goToRequest = true
+        this.trackingId = null
 
-      // TODO: map my trail, when walking it should map a trail show it on the map and be able
-      // to store it to the server
+        this.$options.location.marker.remove()
+        this.$options.location.circle.remove()
+        this.$options.location.trail.remove()
+        this.$options.location.trail = new Polyline([])
+      } else {
+        this.$store.dispatch('snackbar/show', 'Getting location,<br>this may take some time ...')
+
+        this.trackingId = geolocationService.registerCallback(this.moveMarker)
+      }
     },
 
     moveMarker (position) {
@@ -126,10 +138,7 @@ export default {
         this.$options.location.trail.addLatLng(locationCenter)
       }
 
-      if (this.$options.goToRequest) {
-        this.$options.goToRequest = false
-        this.goToLocation()
-      }
+      this.goToLocation()
     },
 
     goToLocation () {
