@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/css/admin.panel~area.form~moderator.form~route.filters~route.form.f058a909.css"
   },
   {
-    "revision": "a78d6e5a430805bc1248",
+    "revision": "ef5269c5a7d003f24dca",
     "url": "/assets/css/app.a05defb1.css"
   },
   {
@@ -60,7 +60,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/fonts/MaterialIcons-Regular.da4ea5cd.ttf"
   },
   {
-    "revision": "29379bf89b28a24f7620a5ea46e4397e",
+    "revision": "a08f54b2162ac23bf746a7af197401be",
     "url": "/assets/index.html"
   },
   {
@@ -72,8 +72,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/js/admin.panel~area.form~moderator.form~route.filters~route.form.9450cd7d.js"
   },
   {
-    "revision": "a78d6e5a430805bc1248",
-    "url": "/assets/js/app.00ac3aa9.js"
+    "revision": "ef5269c5a7d003f24dca",
+    "url": "/assets/js/app.23ee70c3.js"
   },
   {
     "revision": "89cb1baa329e2416b715",
@@ -124,8 +124,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/js/leaflet-geoman.6a8b4c6d.js"
   },
   {
-    "revision": "b58d2c257432366b76e7",
-    "url": "/assets/js/leaflet.map.dac7f064.js"
+    "revision": "2c870c6df9d6a274f9b0",
+    "url": "/assets/js/leaflet.map.f6498ae8.js"
   },
   {
     "revision": "a6f6aa5da47ab1cbaa37",
@@ -144,8 +144,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/js/popup.service.06c7ba15.js"
   },
   {
-    "revision": "8fac76eae57566edbdf4",
-    "url": "/assets/js/privacy.policy.8ae9cc0b.js"
+    "revision": "6b7313df1f9099de5c0a",
+    "url": "/assets/js/privacy.policy.af297deb.js"
   },
   {
     "revision": "0658ea1891ab847f6f67",
