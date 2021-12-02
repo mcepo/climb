@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/css/admin.panel~area.form~moderator.form~route.filters~route.form.f058a909.css"
   },
   {
-    "revision": "ef5269c5a7d003f24dca",
+    "revision": "95f9c874b7cba2c60dc4",
     "url": "/assets/css/app.a05defb1.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/css/area.form~pitch.form~route.filters~route.form.f9d4f751.css"
   },
   {
-    "revision": "81edc33b15879e4b2aa7",
-    "url": "/assets/css/chunk-vendors.4002c9eb.css"
+    "revision": "655705cc8dbfb5091087",
+    "url": "/assets/css/chunk-vendors.3cc44aee.css"
   },
   {
     "revision": "b4124d492be5628b5fc4",
@@ -60,7 +60,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/fonts/MaterialIcons-Regular.da4ea5cd.ttf"
   },
   {
-    "revision": "a08f54b2162ac23bf746a7af197401be",
+    "revision": "1d94df6180d5d18bf47e115308ffd834",
     "url": "/assets/index.html"
   },
   {
@@ -72,8 +72,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/js/admin.panel~area.form~moderator.form~route.filters~route.form.9450cd7d.js"
   },
   {
-    "revision": "ef5269c5a7d003f24dca",
-    "url": "/assets/js/app.23ee70c3.js"
+    "revision": "95f9c874b7cba2c60dc4",
+    "url": "/assets/js/app.85af9fbb.js"
   },
   {
     "revision": "89cb1baa329e2416b715",
@@ -108,7 +108,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/js/chunk-601f2513.562f6ea2.js"
   },
   {
-    "revision": "81edc33b15879e4b2aa7",
+    "revision": "655705cc8dbfb5091087",
     "url": "/assets/js/chunk-vendors.c57ab7d3.js"
   },
   {
@@ -124,8 +124,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/js/leaflet-geoman.6a8b4c6d.js"
   },
   {
-    "revision": "2c870c6df9d6a274f9b0",
-    "url": "/assets/js/leaflet.map.f6498ae8.js"
+    "revision": "9431a14340ffb38cefde",
+    "url": "/assets/js/leaflet.map.15a5c0ec.js"
   },
   {
     "revision": "a6f6aa5da47ab1cbaa37",
