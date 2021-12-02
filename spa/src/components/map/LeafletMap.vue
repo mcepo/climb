@@ -9,7 +9,7 @@
     style='position: fixed'
     @click='toggleTracking()'
     >
-    <v-icon v-if='!!trackingId'>gps_off</v-icon>
+    <v-icon v-if='tracking'>gps_off</v-icon>
     <v-icon v-else>gps_fixed</v-icon>
   </v-btn>
   <div id="leaflet-map" class="map"></div>
@@ -20,21 +20,15 @@
 </template>
 
 <script>
-import { LatLngBounds, LatLng, Map, control, Marker, Circle, Polyline, Canvas } from 'leaflet'
+import { LatLngBounds, LatLng, Map, control, Canvas } from 'leaflet'
 import setupTiles from '../../utils/tiles'
 import layerService from '../../services/layer.service'
-import styleService from '../../services/style.service'
-import geolocationService from '../../services/geolocation/geolocation.service'
+import myLocation from '../../services/myLocation.service'
 
 import drawers from '../../services/drawer.service'
 
 export default {
   map: null,
-  location: {
-    marker: null,
-    circle: null,
-    trail: null
-  },
   computed: {
     loading () {
       return this.$store.state.area.loading
@@ -43,8 +37,12 @@ export default {
 
   data () {
     return {
-      trackingId: null
+      tracking: false
     }
+  },
+
+  created () {
+    this.tracking = myLocation.isTracking()
   },
 
   mounted () {
@@ -68,13 +66,12 @@ export default {
     })
 
     setupTiles(this.$options.map)
+
     layerService.map = this.$options.map
+    myLocation.setMap(this.$options.map)
 
     control.zoom({ position: 'bottomright' }).addTo(this.$options.map)
     control.scale().addTo(this.$options.map)
-
-    this.$options.location.trail = new Polyline([])
-    this.$options.location.trail.addTo(this.$options.map)
 
     // recording current map bounds here
     // so that when the map gets recreated it
@@ -90,68 +87,14 @@ export default {
   },
 
   methods: {
-
     toggleTracking () {
-      if (this.trackingId) {
-        this.$store.dispatch('snackbar/show', 'GPS location disabled.')
-
-        geolocationService.unregisterCallback(this.trackingId)
-
-        this.trackingId = null
-
-        this.$options.location.marker.remove()
-        this.$options.location.circle.remove()
-        this.$options.location.trail.remove()
-        this.$options.location.trail = new Polyline([])
-      } else {
-        this.$store.dispatch('snackbar/show', 'Getting location,<br>this may take some time ...')
-
-        this.trackingId = geolocationService.registerCallback(this.moveMarker)
-      }
-    },
-
-    moveMarker (position) {
-      if (!position) return
-
-      if (this.$options.location.marker) {
-        this.$options.location.marker.remove()
-      }
-
-      if (this.$options.location.circle) {
-        this.$options.location.circle.remove()
-      }
-
-      const locationCenter = [position.latitude, position.longitude]
-      const accuracy = position.accuracy
-
-      this.$options.location.marker = new Marker(locationCenter, { title: 'My Location' })
-        .bindTooltip('My Location<br>' + 'Accuracy: ' + accuracy.toFixed(2) + 'm')
-      styleService.currentLocation.default(this.$options.location.marker)
-      this.$options.location.marker.addTo(this.$options.map)
-
-      if (accuracy > 10) {
-        this.$options.location.circle = new Circle(locationCenter, { radius: accuracy, stroke: false })
-        this.$options.location.circle.addTo(this.$options.map)
-      }
-
-      if (accuracy < 100) {
-        this.$options.location.trail.addLatLng(locationCenter)
-      }
-
-      this.goToLocation()
-    },
-
-    goToLocation () {
-      if (this.$options.location.marker) {
-        this.$options.map.setView(this.$options.location.marker.getLatLng(), 12)
-        this.$options.location.marker.openTooltip()
-      }
+      this.tracking = myLocation.toggleTracking()
     }
   },
 
   destroyed () {
     layerService.map = null
-    this.$options.watchCallbackId && geolocationService.unregisterCallback(this.$options.watchCallbackId)
+    myLocation.removeMap()
   }
 }
 </script>

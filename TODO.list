@@ -37,10 +37,8 @@ TODO: add button to stop tracking
 
 -- OPTIMIZATION --
 
-TODO: move route/image/area fetch in beforeEnter route hook
-
 TODO: move geolocation in a seperate bundle
 
-TODO: move current location logic in a seperate service
+TODO: add my location marker to tags in layer service probably throu store
 
 TODO: remove leaflet from vendor chunk
