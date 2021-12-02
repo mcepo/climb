@@ -49,7 +49,6 @@ export default {
 
   created () {
     setPageTitle()
-    this.$store.dispatch('area/fetchMany')
   },
   methods: {
     ...mapActions({

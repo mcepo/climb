@@ -29,6 +29,10 @@ const routes = [
         components: {
           default: Overview,
           map: LeafletMap
+        },
+        beforeEnter (to, from, next) {
+          store.dispatch('area/fetchMany')
+          next()
         }
       },
       {
@@ -43,13 +47,10 @@ const routes = [
         components: {
           default: Overview,
           map: ImageMap
-        }
-      },
-      {
-        path: 'area/:areaId',
-        components: {
-          default: AreaDetails,
-          map: LeafletMap
+        },
+        beforeEnter (to, from, next) {
+          store.dispatch('image/fetch', to.params.imageId)
+          next()
         }
       },
       {
@@ -58,13 +59,10 @@ const routes = [
         components: {
           default: AreaDetails,
           map: LeafletMap
-        }
-      },
-      {
-        path: 'area/:areaId/image/:imageId',
-        components: {
-          default: AreaDetails,
-          map: ImageMap
+        },
+        beforeEnter (to, from, next) {
+          store.dispatch('area/fetch', to.params.areaId)
+          next()
         }
       },
       {
@@ -73,13 +71,11 @@ const routes = [
         components: {
           default: AreaDetails,
           map: ImageMap
-        }
-      },
-      {
-        path: 'route/:routeId',
-        components: {
-          default: RouteDetails,
-          map: LeafletMap
+        },
+        beforeEnter (to, from, next) {
+          store.dispatch('area/fetch', to.params.areaId)
+          store.dispatch('image/fetch', to.params.imageId)
+          next()
         }
       },
       {
@@ -88,13 +84,10 @@ const routes = [
         components: {
           default: RouteDetails,
           map: LeafletMap
-        }
-      },
-      {
-        path: 'route/:routeId/image/:imageId',
-        components: {
-          default: RouteDetails,
-          map: ImageMap
+        },
+        beforeEnter (to, from, next) {
+          store.dispatch('route/fetch', to.params.routeId)
+          next()
         }
       },
       {
@@ -103,6 +96,11 @@ const routes = [
         components: {
           default: RouteDetails,
           map: ImageMap
+        },
+        beforeEnter (to, from, next) {
+          store.dispatch('route/fetch', to.params.routeId)
+          store.dispatch('image/fetch', to.params.imageId)
+          next()
         }
       },
       // TODO: is this really needed
@@ -161,6 +159,10 @@ const routes = [
         }
       }
     ]
+  },
+  {
+    path: '*',
+    redirect: '/'
   }
 ]
 

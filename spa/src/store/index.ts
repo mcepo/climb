@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import registerWatches from './watches'
 
 import modules from './modules'
 import { AuthState } from './modules/auth'
@@ -161,6 +160,14 @@ const store = new Vuex.Store<RootState>({
   modules
 })
 
-registerWatches(store)
+window.addEventListener('online', () => {
+  store.commit('updateOnlineStatus', true)
+  store.dispatch('snackbar/success', 'Online!')
+})
+
+window.addEventListener('offline', () => {
+  store.commit('updateOnlineStatus', false)
+  store.dispatch('snackbar/error', 'Working offline!')
+})
 
 export default store
