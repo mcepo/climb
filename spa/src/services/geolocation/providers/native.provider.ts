@@ -26,11 +26,11 @@ class NativeProvider implements GeolocationProvider {
         // On Android, a notification must be shown to continue receiving
         // location updates in the background. This option specifies the text of
         // that notification.
-        backgroundMessage: 'Close app to stop tracking.',
+        backgroundMessage: 'Displaying your trail in app',
 
         // The title of the notification mentioned above. Defaults to "Using
         // your location".
-        backgroundTitle: 'Tracking your path.',
+        backgroundTitle: 'Using GPS',
 
         // Whether permissions should be requested from the user automatically,
         // if they are not already granted. Defaults to "true".
