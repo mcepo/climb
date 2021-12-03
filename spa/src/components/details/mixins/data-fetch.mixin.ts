@@ -1,8 +1,15 @@
 
 import store from '../../../store'
 
-function fetchData (to) {
-  const params = to.params
+function fetchData (to, from) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const params: any = {}
+
+  for (const key of Object.keys(to.params)) {
+    if (!from.params[key] || (from.params[key] !== to.params[key])) {
+      params[key] = to.params[key]
+    }
+  }
 
   params.areaId && store.dispatch('area/fetch', params.areaId)
   params.imageId && store.dispatch('image/fetch', params.imageId)
@@ -11,11 +18,11 @@ function fetchData (to) {
 
 export default {
   beforeRouteEnter (to, from, next) {
-    fetchData(to)
+    fetchData(to, from)
     next()
   },
   beforeRouteUpdate (to, from, next) {
-    fetchData(to)
+    fetchData(to, from)
     next()
   }
 }
