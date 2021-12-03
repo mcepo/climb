@@ -28,6 +28,8 @@ export class MyLocationService {
 
     private trackingId: number|null = null
 
+    private shouldGoToLocation: boolean = true
+
     constructor () {
       this.location = new MyLocation()
     }
@@ -39,6 +41,8 @@ export class MyLocationService {
         geolocationService.unregisterCallback(this.trackingId)
 
         this.trackingId = null
+
+        this.shouldGoToLocation = true
 
         this.eraseLocationData()
         return false
@@ -87,7 +91,10 @@ export class MyLocationService {
         this.location.trail.addLatLng(locationCenter)
       }
 
-      this.goToLocation()
+      if (this.shouldGoToLocation) {
+        this.goToLocation()
+        this.shouldGoToLocation = false
+      }
     }
 
     goToLocation () {
