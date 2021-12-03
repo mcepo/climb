@@ -34,8 +34,10 @@ import { mapGetters } from 'vuex'
 import gradeService from '../../services/grade.service'
 
 import { ItemType } from '../../services/type.service'
+import DataFetchMixin from './mixins/data-fetch.mixin'
 
 export default {
+  mixins: [DataFetchMixin],
   computed: {
     ...mapGetters({
       area: 'area/get'

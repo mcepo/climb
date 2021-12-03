@@ -33,8 +33,10 @@ import { mapState, mapActions } from 'vuex'
 import AreaList from './lists/AreaList'
 import { set as setPageTitle } from '../utils/pageTitle'
 
+import DataFetchMixin from './details/mixins/data-fetch.mixin'
+
 export default {
-  cancelationToken: null,
+  mixins: [DataFetchMixin],
   data () {
     return {
       areaQueryString: ''
@@ -49,6 +51,7 @@ export default {
 
   created () {
     setPageTitle()
+    this.$store.dispatch('area/fetchMany')
   },
   methods: {
     ...mapActions({

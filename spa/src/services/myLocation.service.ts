@@ -28,7 +28,7 @@ export class MyLocationService {
 
     private trackingId: number|null = null
 
-    private shouldGoToLocation: boolean = true
+    private shouldGoToLocation = true
 
     constructor () {
       this.location = new MyLocation()

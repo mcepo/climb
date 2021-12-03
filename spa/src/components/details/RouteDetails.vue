@@ -27,8 +27,10 @@ import DetailsLoading from '../common/DetailsLoading.vue'
 import typeService, { ItemType } from '../../services/type.service'
 import { mapGetters } from 'vuex'
 import gradeService from '../../services/grade.service'
+import DataFetchMixin from './mixins/data-fetch.mixin'
 
 export default {
+  mixins: [DataFetchMixin],
   computed: {
     ...mapGetters({
       route: 'route/get'

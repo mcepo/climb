@@ -29,10 +29,6 @@ const routes = [
         components: {
           default: Overview,
           map: LeafletMap
-        },
-        beforeEnter (to, from, next) {
-          store.dispatch('area/fetchMany')
-          next()
         }
       },
       {
@@ -47,10 +43,6 @@ const routes = [
         components: {
           default: Overview,
           map: ImageMap
-        },
-        beforeEnter (to, from, next) {
-          store.dispatch('image/fetch', to.params.imageId)
-          next()
         }
       },
       {
@@ -59,10 +51,6 @@ const routes = [
         components: {
           default: AreaDetails,
           map: LeafletMap
-        },
-        beforeEnter (to, from, next) {
-          store.dispatch('area/fetch', to.params.areaId)
-          next()
         }
       },
       {
@@ -71,11 +59,6 @@ const routes = [
         components: {
           default: AreaDetails,
           map: ImageMap
-        },
-        beforeEnter (to, from, next) {
-          store.dispatch('area/fetch', to.params.areaId)
-          store.dispatch('image/fetch', to.params.imageId)
-          next()
         }
       },
       {
@@ -84,10 +67,6 @@ const routes = [
         components: {
           default: RouteDetails,
           map: LeafletMap
-        },
-        beforeEnter (to, from, next) {
-          store.dispatch('route/fetch', to.params.routeId)
-          next()
         }
       },
       {
@@ -96,11 +75,6 @@ const routes = [
         components: {
           default: RouteDetails,
           map: ImageMap
-        },
-        beforeEnter (to, from, next) {
-          store.dispatch('route/fetch', to.params.routeId)
-          store.dispatch('image/fetch', to.params.imageId)
-          next()
         }
       },
       // TODO: is this really needed
@@ -170,23 +144,6 @@ const router = new VueRouter({
   mode: 'history',
   routes
 })
-
-// right now i don't see the point in this
-// // listener for deep links
-// App.addListener('appUrlOpen', function (event: URLOpenListenerEvent) {
-//   // Example url: https://beerswift.app/tabs/tabs2
-//   // slug = /tabs/tabs2
-//   const slug = event.url.split('.net').pop()
-
-//   console.log(slug)
-
-//   // We only push to the route if there is a slug present
-//   if (slug) {
-//     router.push({
-//       path: slug
-//     })
-//   }
-// })
 
 // solution on how to change one view and keep the other as is
 // not a very good solution

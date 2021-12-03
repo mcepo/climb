@@ -51,7 +51,7 @@ class DrawingService {
       await import(/* webpackChunkName: "leaflet-geoman" */ '../plugins/geoman')
       L.PM.reInitLayer(this._map)
 
-      this._map.pm.setGlobalOptions({ snappable: false });
+      this._map.pm.setGlobalOptions({ snappable: false })
     }
   }
 
