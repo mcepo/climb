@@ -16,6 +16,8 @@ TODO: frontend and backend package version upgrade
 
 -- FEATURES --
 
+TODO: images tagged on other images remove from area image list
+
 TODO: maybe add loading overlay with countdown while tagging at current location
 
 TODO: kad se učita područje učitati i sve rute sa svim podacima -> jako puno bi se dohvačalo duplih podataka, jer bi onda i prilikom
