@@ -50,8 +50,6 @@ class DrawingService {
     if (!this._map.pm) {
       await import(/* webpackChunkName: "leaflet-geoman" */ '../plugins/geoman')
       L.PM.reInitLayer(this._map)
-
-      this._map.pm.setGlobalOptions({ snappable: false })
     }
   }
 
@@ -205,7 +203,7 @@ class DrawingService {
     if (this._layer instanceof L.Marker) {
       this._layer.dragging && this._layer.dragging.enable()
     } else {
-      this._layer.pm.enable()
+      this._layer.pm.enable({ snappable: false, pinning: false })
     }
   }
 
@@ -215,7 +213,7 @@ class DrawingService {
 
       this._layer = e.layer
 
-      this._layer.pm.enable()
+      this._layer.pm.enable({ snappable: false, pinning: false })
     })
 
     // added this so that i can save the layer without actually
@@ -230,11 +228,7 @@ class DrawingService {
 
   private enableDrawing () {
     this._map.pm.enableDraw(this._drawingType, {
-      snappable: true,
-
-      snapDistance: 20,
-
-      snapMiddle: true
+      snappable: false
     })
   }
 
