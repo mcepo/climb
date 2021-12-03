@@ -33,8 +33,6 @@ TODO: publish crag locations to openstreetmap
 
 TODO: hide options that you can't use if offline ?
 
-TODO: add button to stop tracking
-
 -- OPTIMIZATION --
 
 TODO: move geolocation in a seperate bundle
