@@ -70,6 +70,10 @@ export class ImageService {
       ? this.getBounds(image.boundary)
       : this.getBoundsDepricated(image.size)
 
+    this._map.setMaxBounds(this.getMaxBounds(bounds))
+
+    this._map.fitBounds(bounds)
+
     if (this._imageOverlayThumbnail) {
       this._map.removeLayer(this._imageOverlayThumbnail)
     }
@@ -92,10 +96,6 @@ export class ImageService {
     })
 
     this._map.addLayer(this._imageOverlay)
-
-    this._map.setMaxBounds(this.getMaxBounds(bounds))
-
-    this._map.fitBounds(bounds)
   }
 
   async getImage (id: number, type: string | null = null): Promise<string> {
