@@ -18,8 +18,6 @@ TODO: frontend and backend package version upgrade
 
 TODO: images tagged on other images remove from area image list
 
-TODO: maybe add loading overlay with countdown while tagging at current location
-
 TODO: kad se učita područje učitati i sve rute sa svim podacima -> jako puno bi se dohvačalo duplih podataka, jer bi onda i prilikom
 otvaranja svake rute dohvačao podatke o toj ruti. Trenutno sam stavio da ima timeout od 3 minute na dohvačen entitet
 mogao bi staviti da kad se dohvate i sve rute tog područja da i na njih odmah stavi timeout od 3min, onda bi to
