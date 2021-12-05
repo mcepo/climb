@@ -31,8 +31,6 @@ TODO: hide options that you can't use if offline ?
 
 -- OPTIMIZATION --
 
-TODO: move geolocation in a seperate bundle
-
 TODO: add my location marker to tags in layer service probably throu store
 
 TODO: remove leaflet from vendor chunk
