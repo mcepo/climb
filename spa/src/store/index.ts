@@ -56,12 +56,14 @@ export interface RootState {
   drawing: boolean;
   user?: UserState;
   online: boolean;
+  tracking: boolean;
 }
 
 const store = new Vuex.Store<RootState>({
   state: {
     drawing: false,
-    online: navigator.onLine
+    online: navigator.onLine,
+    tracking: false
   },
   plugins: [persistentStorage],
   mutations: {
@@ -70,6 +72,9 @@ const store = new Vuex.Store<RootState>({
     },
     updateOnlineStatus (state: RootState, online) {
       state.online = online
+    },
+    tracking (state: RootState, tracking: boolean) {
+      state.tracking = tracking
     }
   },
   getters: {

@@ -34,30 +34,27 @@ export class MyLocationService {
       this.location = new MyLocation()
     }
 
-    toggleTracking () {
-      if (this.trackingId) {
-        store.dispatch('snackbar/show', 'GPS location disabled.')
+    startTracking (map: LeafletMap) {
+      store.dispatch('snackbar/show', 'Getting location,<br>this may take some time ...')
 
-        geolocationService.unregisterCallback(this.trackingId)
+      this.map = map
+      this.location.trail.addTo(this.map)
+      this.trackingId && this.location.circle && this.location.circle.addTo(this.map)
+      this.trackingId && this.location.marker && this.location.marker.addTo(this.map)
 
-        this.trackingId = null
-
-        this.shouldGoToLocation = true
-
-        this.eraseLocationData()
-        return false
-      } else {
-        store.dispatch('snackbar/show', 'Getting location,<br>this may take some time ...')
-
-        this.trackingId = geolocationService.registerCallback((position) => {
-          this.moveMarker(position)
-        })
-        return true
-      }
+      !this.trackingId && (this.trackingId = geolocationService.registerCallback((position) => {
+        this.moveMarker(position)
+      }))
     }
 
-    isTracking () {
-      return !!this.trackingId
+    stopTracking () {
+      store.dispatch('snackbar/show', 'GPS location disabled.')
+
+      this.trackingId && geolocationService.unregisterCallback(this.trackingId)
+      this.trackingId = null
+      this.shouldGoToLocation = true
+
+      this.eraseLocationData()
     }
 
     moveMarker (position) {
@@ -83,7 +80,7 @@ export class MyLocationService {
 
       this.location.marker = new Marker(locationCenter)
       this.map && this.location.marker.addTo(this.map)
-        .bindTooltip('My Location<br>' + 'Accuracy: ' + accuracy.toFixed(2) + 'm')
+        .bindTooltip('My Location<br>' + 'Accuracy: ' + accuracy.toFixed(2) + 'm').openTooltip()
 
       styleService.currentLocation.default(this.location.marker)
 
@@ -102,13 +99,6 @@ export class MyLocationService {
         this.map.setView(this.location.marker.getLatLng(), 12)
         this.location.marker.openTooltip()
       }
-    }
-
-    setMap (map: LeafletMap) {
-      this.map = map
-      this.trackingId && this.location.trail.addTo(this.map)
-      this.trackingId && this.location.circle && this.location.circle.addTo(this.map)
-      this.trackingId && this.location.marker && this.location.marker.addTo(this.map)
     }
 
     removeMap () {

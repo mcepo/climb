@@ -23,7 +23,6 @@
 import { LatLngBounds, LatLng, Map, control, Canvas } from 'leaflet'
 import setupTiles from '../../utils/tiles'
 import layerService from '../../services/layer.service'
-import myLocation from '../../services/myLocation.service'
 
 import drawers from '../../services/drawer.service'
 
@@ -32,17 +31,15 @@ export default {
   computed: {
     loading () {
       return this.$store.state.area.loading
+    },
+    tracking: {
+      get () {
+        return this.$store.state.tracking
+      },
+      set (value) {
+        this.$store.commit('tracking', value)
+      }
     }
-  },
-
-  data () {
-    return {
-      tracking: false
-    }
-  },
-
-  created () {
-    this.tracking = myLocation.isTracking()
   },
 
   mounted () {
@@ -68,7 +65,13 @@ export default {
     setupTiles(this.$options.map)
 
     layerService.map = this.$options.map
-    myLocation.setMap(this.$options.map)
+
+    if (this.tracking) {
+      import(/* webpackChunkName: "myLocation.service" */ '../../services/myLocation.service')
+        .then(myLocationService => {
+          myLocationService.default.startTracking(this.$options.map)
+        })
+    }
 
     control.zoom({ position: 'bottomright' }).addTo(this.$options.map)
     control.scale().addTo(this.$options.map)
@@ -88,13 +91,25 @@ export default {
 
   methods: {
     toggleTracking () {
-      this.tracking = myLocation.toggleTracking()
+      import(/* webpackChunkName: "myLocation.service" */ '../../services/myLocation.service')
+        .then(myLocationService => {
+          if (this.tracking) {
+            myLocationService.default.stopTracking()
+            this.tracking = false
+          } else {
+            myLocationService.default.startTracking(this.$options.map)
+            this.tracking = true
+          }
+        })
     }
   },
 
   destroyed () {
     layerService.map = null
-    myLocation.removeMap()
+      import(/* webpackChunkName: "myLocation.service" */ '../../services/myLocation.service')
+        .then(myLocationService => {
+          myLocationService.default.removeMap()
+        })
   }
 }
 </script>
