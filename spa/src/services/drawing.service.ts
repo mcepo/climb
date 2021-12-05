@@ -4,6 +4,7 @@ import { TaggedType, Tag } from '@/models'
 import api from '@/store/api'
 import geolocationService, { PositionInterface } from './geolocation/geolocation.service'
 import * as L from 'leaflet'
+import '../plugins/geoman'
 const drawingTypes = {
   map: {
     area: 'Marker',
@@ -48,7 +49,6 @@ class DrawingService {
 
   private async loadGeoman () {
     if (!this._map.pm) {
-      await import(/* webpackChunkName: "leaflet-geoman" */ '../plugins/geoman')
       L.PM.reInitLayer(this._map)
     }
   }

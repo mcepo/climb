@@ -13,7 +13,6 @@
 
 <script>
 import Vue from 'vue'
-import drawingService from '../../services/drawing.service'
 import drawers from '../../services/drawer.service'
 import { ItemType } from '../../services/type.service'
 
@@ -46,12 +45,18 @@ export default Vue.extend({
     createTag (e) {
       this.stop && e.stopPropagation()
       this.closeDrawerIfMobile()
-      drawingService.createTag(this.type, this.item)
+      import(/* webpackChunkName: "drawing.service" */ '../../services/drawing.service')
+        .then(drawingService => {
+          drawingService.default.createTag(this.type, this.item)
+        })
     },
     editTag (e) {
       this.stop && e.stopPropagation()
       this.closeDrawerIfMobile()
-      drawingService.editTag(this.type, this.item)
+      import(/* webpackChunkName: "drawing.service" */ '../../services/drawing.service')
+        .then(drawingService => {
+          drawingService.default.editTag(this.type, this.item)
+        })
     },
     closeDrawerIfMobile () {
       if (this.$vuetify.breakpoint.xs) {

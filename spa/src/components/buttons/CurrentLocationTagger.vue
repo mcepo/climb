@@ -14,8 +14,6 @@
 
 <script>
 
-import drawingService from '../../services/drawing.service'
-
 export default {
   props: {
     type: String,
@@ -24,7 +22,10 @@ export default {
   },
   methods: {
     setTag () {
-      drawingService.setTagAtCurrentLocation(this.type, this.item)
+      import(/* webpackChunkName: "drawing.service" */ '../../services/drawing.service')
+        .then(drawingService => {
+          drawingService.default.setTagAtCurrentLocation(this.type, this.item)
+        })
     }
   }
 }

@@ -24,8 +24,6 @@
 
 import { mapState } from 'vuex'
 
-import drawingService from '../../services/drawing.service'
-
 export default {
 
   computed: {
@@ -33,10 +31,16 @@ export default {
   },
   methods: {
     save () {
-      drawingService.storeTag()
+      import(/* webpackChunkName: "drawing.service" */ '../../services/drawing.service')
+        .then(drawingService => {
+          drawingService.default.storeTag()
+        })
     },
     discard () {
-      drawingService.discardLayer()
+      import(/* webpackChunkName: "drawing.service" */ '../../services/drawing.service')
+        .then(drawingService => {
+          drawingService.default.discardLayer()
+        })
     }
   }
 }

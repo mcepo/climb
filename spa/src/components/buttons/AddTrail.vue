@@ -9,7 +9,6 @@
 
 <script>
 import Vue from 'vue'
-import drawingService from '../../services/drawing.service'
 
 import drawers from '../../services/drawer.service'
 
@@ -30,7 +29,10 @@ export default Vue.extend({
       // i need it in the back end to know in what area is this
       // trail located
       // not a very good solution, but the easiest for now
-      drawingService.createTag('trail', { id: this.area.id })
+      import(/* webpackChunkName: "drawing.service" */ '../../services/drawing.service')
+        .then(drawingService => {
+          drawingService.default.createTag('trail', { id: this.area.id })
+        })
     },
     closeDrawerIfMobile () {
       if (this.$vuetify.breakpoint.xs) {
