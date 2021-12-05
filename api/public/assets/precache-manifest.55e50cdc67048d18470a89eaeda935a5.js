@@ -1,15 +1,15 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "5029af99effff43d4553",
+    "revision": "5e608b64f1dd2994ed0e",
     "url": "/assets/css/admin.panel.2ab20800.css"
   },
   {
-    "revision": "5ec2b75f686dda5035f9",
+    "revision": "a27bbf7c585e7d9b7a2b",
     "url": "/assets/css/admin.panel~area.form~moderator.form~route.filters~route.form.f058a909.css"
   },
   {
-    "revision": "49efa91a05810988a9cb",
-    "url": "/assets/css/app.a05defb1.css"
+    "revision": "83eb97a7957c0bec2c30",
+    "url": "/assets/css/app.dd153a2a.css"
   },
   {
     "revision": "89cb1baa329e2416b715",
@@ -20,16 +20,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/css/area.form~pitch.form~route.filters~route.form.f9d4f751.css"
   },
   {
-    "revision": "655705cc8dbfb5091087",
+    "revision": "021addee0db28ac81051",
     "url": "/assets/css/chunk-vendors.3cc44aee.css"
+  },
+  {
+    "revision": "d826c839b4e58a609ca0",
+    "url": "/assets/css/drawing.service.8c7a4794.css"
   },
   {
     "revision": "b4124d492be5628b5fc4",
     "url": "/assets/css/image.upload.640da394.css"
-  },
-  {
-    "revision": "ac380fad5131d53d8117",
-    "url": "/assets/css/leaflet-geoman.8c7a4794.css"
   },
   {
     "revision": "0bf5e8dc92222449f59e",
@@ -60,20 +60,20 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/fonts/MaterialIcons-Regular.da4ea5cd.ttf"
   },
   {
-    "revision": "cb70d31e838eca27bc55e33b709fa3d8",
+    "revision": "24bdcedc09402ed916f9fd0782f492f0",
     "url": "/assets/index.html"
   },
   {
-    "revision": "5029af99effff43d4553",
-    "url": "/assets/js/admin.panel.716f59eb.js"
+    "revision": "5e608b64f1dd2994ed0e",
+    "url": "/assets/js/admin.panel.fc6c815c.js"
   },
   {
-    "revision": "5ec2b75f686dda5035f9",
-    "url": "/assets/js/admin.panel~area.form~moderator.form~route.filters~route.form.9450cd7d.js"
+    "revision": "a27bbf7c585e7d9b7a2b",
+    "url": "/assets/js/admin.panel~area.form~moderator.form~route.filters~route.form.ee15d4fc.js"
   },
   {
-    "revision": "49efa91a05810988a9cb",
-    "url": "/assets/js/app.9121c50e.js"
+    "revision": "83eb97a7957c0bec2c30",
+    "url": "/assets/js/app.bd6f9cfd.js"
   },
   {
     "revision": "89cb1baa329e2416b715",
@@ -108,24 +108,24 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/js/chunk-601f2513.562f6ea2.js"
   },
   {
-    "revision": "655705cc8dbfb5091087",
-    "url": "/assets/js/chunk-vendors.c57ab7d3.js"
+    "revision": "021addee0db28ac81051",
+    "url": "/assets/js/chunk-vendors.a0bf4ec6.js"
   },
   {
-    "revision": "834c8d3f68c3ad8ceb6c",
-    "url": "/assets/js/image.map.6d5551bb.js"
+    "revision": "d826c839b4e58a609ca0",
+    "url": "/assets/js/drawing.service.532de07c.js"
+  },
+  {
+    "revision": "1a844010f85f0524388a",
+    "url": "/assets/js/image.map.13ba24fc.js"
   },
   {
     "revision": "b4124d492be5628b5fc4",
     "url": "/assets/js/image.upload.c90dd13d.js"
   },
   {
-    "revision": "ac380fad5131d53d8117",
-    "url": "/assets/js/leaflet-geoman.6a8b4c6d.js"
-  },
-  {
-    "revision": "55443581a34f04d1d89e",
-    "url": "/assets/js/leaflet.map.4c1a97c6.js"
+    "revision": "3a43fde99fb6f1c427ec",
+    "url": "/assets/js/leaflet.map.e6c8b727.js"
   },
   {
     "revision": "a6f6aa5da47ab1cbaa37",
@@ -134,6 +134,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "0bf5e8dc92222449f59e",
     "url": "/assets/js/moderator.form.65c0213a.js"
+  },
+  {
+    "revision": "786043d6ad6bfac88e3d",
+    "url": "/assets/js/myLocation.service.c4180e20.js"
   },
   {
     "revision": "108fdcb92d72c4cd0ecf",
