@@ -18,7 +18,7 @@ import Vue from 'vue'
 import DrawingActionbar from '../components/common/DrawingActionbar.vue'
 import NotificationSnackbar from '../components/common/NotificationSnackbar.vue'
 import NavBar from '../components/common/NavBar.vue'
-import '../plugins/leaflet'
+import 'leaflet/dist/leaflet.css'
 
 import drawers from '../services/drawer.service'
 

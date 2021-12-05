@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import '../../plugins/leaflet'
 import { LatLngBounds, LatLng, Map, control, Canvas } from 'leaflet'
 import setupTiles from '../../utils/tiles'
 import layerService from '../../services/layer.service'

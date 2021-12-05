@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import '../../plugins/leaflet'
 import { Map, control, CRS, Canvas } from 'leaflet'
 import imageService from '../../services/image.service'
 import layerService from '../../services/layer.service'
