@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "5e608b64f1dd2994ed0e",
+    "revision": "3bb7b302fb30dad86b74",
     "url": "/assets/css/admin.panel.2ab20800.css"
   },
   {
@@ -8,11 +8,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/css/admin.panel~area.form~moderator.form~route.filters~route.form.f058a909.css"
   },
   {
-    "revision": "83eb97a7957c0bec2c30",
-    "url": "/assets/css/app.dd153a2a.css"
+    "revision": "2154ebc5f67d5564373c",
+    "url": "/assets/css/app.f0c099b4.css"
   },
   {
-    "revision": "89cb1baa329e2416b715",
+    "revision": "717cbd434be0a1ca904e",
     "url": "/assets/css/area.form.09316a61.css"
   },
   {
@@ -20,16 +20,28 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/css/area.form~pitch.form~route.filters~route.form.f9d4f751.css"
   },
   {
-    "revision": "021addee0db28ac81051",
-    "url": "/assets/css/chunk-vendors.3cc44aee.css"
+    "revision": "8147475885b07cb3713b",
+    "url": "/assets/css/chunk-vendors.bbd73ee4.css"
   },
   {
-    "revision": "d826c839b4e58a609ca0",
+    "revision": "dd0d514a6933226f4520",
     "url": "/assets/css/drawing.service.8c7a4794.css"
+  },
+  {
+    "revision": "228217f27c163903b518",
+    "url": "/assets/css/image.map.df2c9dda.css"
+  },
+  {
+    "revision": "1ad10a9c88dc0c4d949a",
+    "url": "/assets/css/image.map~leaflet.map.3de502ed.css"
   },
   {
     "revision": "b4124d492be5628b5fc4",
     "url": "/assets/css/image.upload.640da394.css"
+  },
+  {
+    "revision": "1ce1e157c6be872651b8",
+    "url": "/assets/css/leaflet.map.df2c9dda.css"
   },
   {
     "revision": "0bf5e8dc92222449f59e",
@@ -40,7 +52,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/css/pitch.form.207437e9.css"
   },
   {
-    "revision": "7e0ebf829ee29fb67de3",
+    "revision": "7d6430a6141568266e32",
     "url": "/assets/css/route.filters.09316a61.css"
   },
   {
@@ -60,24 +72,24 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/fonts/MaterialIcons-Regular.da4ea5cd.ttf"
   },
   {
-    "revision": "24bdcedc09402ed916f9fd0782f492f0",
+    "revision": "ae038876f1693c4b270a8f776a14282b",
     "url": "/assets/index.html"
   },
   {
-    "revision": "5e608b64f1dd2994ed0e",
-    "url": "/assets/js/admin.panel.fc6c815c.js"
+    "revision": "3bb7b302fb30dad86b74",
+    "url": "/assets/js/admin.panel.743dc98b.js"
   },
   {
     "revision": "a27bbf7c585e7d9b7a2b",
     "url": "/assets/js/admin.panel~area.form~moderator.form~route.filters~route.form.ee15d4fc.js"
   },
   {
-    "revision": "83eb97a7957c0bec2c30",
-    "url": "/assets/js/app.bd6f9cfd.js"
+    "revision": "2154ebc5f67d5564373c",
+    "url": "/assets/js/app.f0567ea6.js"
   },
   {
-    "revision": "89cb1baa329e2416b715",
-    "url": "/assets/js/area.form.20e057ae.js"
+    "revision": "717cbd434be0a1ca904e",
+    "url": "/assets/js/area.form.f161f899.js"
   },
   {
     "revision": "37f2ab522ff975ba1b8d",
@@ -108,24 +120,40 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/js/chunk-601f2513.562f6ea2.js"
   },
   {
-    "revision": "021addee0db28ac81051",
-    "url": "/assets/js/chunk-vendors.a0bf4ec6.js"
+    "revision": "8147475885b07cb3713b",
+    "url": "/assets/js/chunk-vendors.11403253.js"
   },
   {
-    "revision": "d826c839b4e58a609ca0",
-    "url": "/assets/js/drawing.service.532de07c.js"
+    "revision": "dd0d514a6933226f4520",
+    "url": "/assets/js/drawing.service.5af062b8.js"
   },
   {
-    "revision": "1a844010f85f0524388a",
-    "url": "/assets/js/image.map.13ba24fc.js"
+    "revision": "e5713994a895782d6d8d",
+    "url": "/assets/js/drawing.service~image.map~image.service~leaflet.map.26c4435f.js"
+  },
+  {
+    "revision": "118773afc5e304112d96",
+    "url": "/assets/js/drawing.service~image.map~leaflet.map.2b8042a2.js"
+  },
+  {
+    "revision": "228217f27c163903b518",
+    "url": "/assets/js/image.map.8ec0be0c.js"
+  },
+  {
+    "revision": "1ad10a9c88dc0c4d949a",
+    "url": "/assets/js/image.map~leaflet.map.d0dc9014.js"
+  },
+  {
+    "revision": "3aa435bbc0c4b7d58177",
+    "url": "/assets/js/image.service.b2e10f8d.js"
   },
   {
     "revision": "b4124d492be5628b5fc4",
     "url": "/assets/js/image.upload.c90dd13d.js"
   },
   {
-    "revision": "3a43fde99fb6f1c427ec",
-    "url": "/assets/js/leaflet.map.e6c8b727.js"
+    "revision": "1ce1e157c6be872651b8",
+    "url": "/assets/js/leaflet.map.77fd9479.js"
   },
   {
     "revision": "a6f6aa5da47ab1cbaa37",
@@ -136,16 +164,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/js/moderator.form.65c0213a.js"
   },
   {
-    "revision": "786043d6ad6bfac88e3d",
-    "url": "/assets/js/myLocation.service.c4180e20.js"
+    "revision": "f32725f30bef39433628",
+    "url": "/assets/js/myLocation.service.9c6285b6.js"
   },
   {
     "revision": "108fdcb92d72c4cd0ecf",
     "url": "/assets/js/pitch.form.dfd5c454.js"
   },
   {
-    "revision": "ed4a59f708e15235dc73",
-    "url": "/assets/js/popup.service.06c7ba15.js"
+    "revision": "d5df9e5a4d23799de013",
+    "url": "/assets/js/popup.service.05c3bc1d.js"
   },
   {
     "revision": "6b7313df1f9099de5c0a",
@@ -156,12 +184,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/js/register.form.e14b8b05.js"
   },
   {
-    "revision": "7e0ebf829ee29fb67de3",
-    "url": "/assets/js/route.filters.77741a70.js"
+    "revision": "7d6430a6141568266e32",
+    "url": "/assets/js/route.filters.4eddb7f1.js"
   },
   {
-    "revision": "57b6839b409565a4a5b9",
-    "url": "/assets/js/route.form.cab6e057.js"
+    "revision": "3150ad0a63d2ab3391b8",
+    "url": "/assets/js/route.form.f4b6597f.js"
   },
   {
     "revision": "372d76914e2e36cf8f8a23af440c030f",
