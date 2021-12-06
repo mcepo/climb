@@ -42,8 +42,10 @@ export default Vue.extend({
   },
   created () {
     if (this.item) {
-      imageService.getImage(this.item.id, 'thumbnail').then((data) => {
-        this.src = data
+      import(/* webpackChunkName: "image.service" */ '../../services/image.service').then(imageService => {
+        imageService.default.getImage(this.item.id, 'thumbnail').then((data) => {
+          this.src = data
+        })
       })
     }
   },

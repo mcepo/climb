@@ -2,6 +2,10 @@ import { Route, Area } from '@/models'
 
 import store from '../store'
 
+// this is here only so that we can load style.service and leaflet in a seperate bundle
+// 73 ocjene trenutno imamo
+export const routeDifficultyGradeColors = ['#01579B', '#43A047', '#43A047', '#43A047', '#43A047', '#43A047', '#43A047', '#43A047', '#388E3C', '#388E3C', '#388E3C', '#388E3C', '#388E3C', '#388E3C', '#388E3C', '#388E3C', '#388E3C', '#388E3C', '#388E3C', '#1B5E20', '#1B5E20', '#1B5E20', '#1B5E20', '#1B5E20', '#1B5E20', '#1B5E20', '#1B5E20', '#1B5E20', '#1B5E20', '#1B5E20', '#1B5E20', '#FB8C00', '#FB8C00', '#FB8C00', '#FB8C00', '#F57C00', '#F57C00', '#F57C00', '#F57C00', '#EF6C00', '#EF6C00', '#EF6C00', '#EF6C00', '#E53935', '#E53935', '#E53935', '#E53935', '#D32F2F', '#D32F2F', '#D32F2F', '#D32F2F', '#C62828', '#C62828', '#C62828', '#C62828', '#8E24AA', '#8E24AA', '#8E24AA', '#8E24AA', '#7B1FA2', '#7B1FA2', '#7B1FA2', '#7B1FA2', '#6A1B9A', '#6A1B9A', '#6A1B9A', '#6A1B9A', '#4A148C', '#4A148C', '#4A148C', '#4A148C', '#4A148C', '#4A148C']
+
 export enum AreaDatabaseId {
   Country = 0,
   Area = 1,

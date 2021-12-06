@@ -50,7 +50,6 @@
 import TagControl from '../buttons/TagControl'
 import DeleteButton from '../buttons/DeleteButton'
 import { getUrl } from '../../router'
-import imageService from '../../services/image.service'
 
 import drawers from '../../services/drawer.service'
 
@@ -64,8 +63,10 @@ export default {
   },
   created () {
     if (this.image) {
-      imageService.getImage(this.image.id, 'thumbnail').then((data) => {
-        this.src = data
+      import(/* webpackChunkName: "image.service" */ '../../services/image.service').then(imageService => {
+        imageService.default.getImage(this.image.id, 'thumbnail').then((data) => {
+          this.src = data
+        })
       })
     }
   },

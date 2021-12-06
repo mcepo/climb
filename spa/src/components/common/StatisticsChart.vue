@@ -5,7 +5,7 @@
 <script>
 
 import gradeService from '../../services/grade.service'
-import { routeDifficultyGradeColors } from '../../services/style.service'
+import { routeDifficultyGradeColors } from '../../services/type.service'
 
 export default {
   props: ['type', 'stats'],

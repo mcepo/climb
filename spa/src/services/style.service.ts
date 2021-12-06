@@ -1,6 +1,7 @@
 import { DivIcon, Marker, Icon, Polyline } from 'leaflet'
 import { Area, TaggedType, Route } from '@/models'
 import { svgIconUrl } from '../utils/svg'
+import { routeDifficultyGradeColors } from './type.service'
 
 interface StylingMarker {
   layer: Marker;
@@ -44,9 +45,6 @@ function setMarkerStyle (layer: Marker, svg: string) {
     })
   )
 }
-
-// 73 ocjene trenutno imamo
-export const routeDifficultyGradeColors = ['#01579B', '#43A047', '#43A047', '#43A047', '#43A047', '#43A047', '#43A047', '#43A047', '#388E3C', '#388E3C', '#388E3C', '#388E3C', '#388E3C', '#388E3C', '#388E3C', '#388E3C', '#388E3C', '#388E3C', '#388E3C', '#1B5E20', '#1B5E20', '#1B5E20', '#1B5E20', '#1B5E20', '#1B5E20', '#1B5E20', '#1B5E20', '#1B5E20', '#1B5E20', '#1B5E20', '#1B5E20', '#FB8C00', '#FB8C00', '#FB8C00', '#FB8C00', '#F57C00', '#F57C00', '#F57C00', '#F57C00', '#EF6C00', '#EF6C00', '#EF6C00', '#EF6C00', '#E53935', '#E53935', '#E53935', '#E53935', '#D32F2F', '#D32F2F', '#D32F2F', '#D32F2F', '#C62828', '#C62828', '#C62828', '#C62828', '#8E24AA', '#8E24AA', '#8E24AA', '#8E24AA', '#7B1FA2', '#7B1FA2', '#7B1FA2', '#7B1FA2', '#6A1B9A', '#6A1B9A', '#6A1B9A', '#6A1B9A', '#4A148C', '#4A148C', '#4A148C', '#4A148C', '#4A148C', '#4A148C']
 
 const areaLayerStyle = {
 
