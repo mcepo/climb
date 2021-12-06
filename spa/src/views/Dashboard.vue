@@ -4,7 +4,7 @@
 
     <v-main style='padding:0px' v-if='loadMain'>
       <drawing-actionbar></drawing-actionbar>
-      <router-view name='map'></router-view>
+      <router-view name='content'></router-view>
     </v-main>
 
     <notification-snackbar></notification-snackbar>
@@ -18,7 +18,6 @@ import Vue from 'vue'
 import DrawingActionbar from '../components/common/DrawingActionbar.vue'
 import NotificationSnackbar from '../components/common/NotificationSnackbar.vue'
 import NavBar from '../components/common/NavBar.vue'
-import 'leaflet/dist/leaflet.css'
 
 import drawers from '../services/drawer.service'
 
@@ -36,9 +35,3 @@ export default Vue.extend({
   }
 })
 </script>
-
-<style>
-.map{
-  height: 100vh;
-}
-</style>

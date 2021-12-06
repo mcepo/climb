@@ -15,7 +15,6 @@
 import Vue from 'vue'
 import NotificationSnackbar from '../components/common/NotificationSnackbar.vue'
 import NavBar from '../components/common/NavBar.vue'
-import '../plugins/leaflet'
 
 export default Vue.extend({
 

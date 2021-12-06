@@ -14,7 +14,7 @@
           left: () => swipeLeft()
         }'
     >
-      <router-view></router-view>
+      <router-view name='sidebar'></router-view>
     </v-navigation-drawer>
 
     <v-app-bar app clipped-right clipped-left style='z-index:900'>

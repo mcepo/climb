@@ -114,3 +114,35 @@ export default {
   }
 }
 </script>
+
+<style>
+.map-button{
+  z-index: 191;
+  bottom: 100px;
+  right: 7px;
+}
+
+.leaflet-pane {
+  z-index: 190;
+}
+
+.leaflet-control {
+  z-index: 190;
+}
+
+.leaflet-top {
+  top: 70px;
+  z-index: 190;
+}
+
+.leaflet-bottom {
+  position: fixed;
+  z-index: 190;
+}
+
+/* Default icon URLs */
+/* this is a fix for marker not shown when drawing */
+.leaflet-default-icon-path {
+	background-image: none;
+}
+</style>

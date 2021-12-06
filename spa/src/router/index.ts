@@ -4,6 +4,7 @@ import Dashboard from '../views/Dashboard.vue'
 import Overview from '../components/Overview.vue'
 import AreaDetails from '../components/details/AreaDetails.vue'
 import RouteDetails from '../components/details/RouteDetails.vue'
+import MapPlaceholder from '../components/map/MapPlaceholder.vue'
 
 import store from '../store'
 
@@ -16,8 +17,6 @@ const UsersPage = () => import(/* webpackChunkName: "admin.panel" */'../admin/pa
 const ActivityLogPage = () => import(/* webpackChunkName: "admin.panel" */'../admin/pages/ActivityLogPage.vue')
 const ImagesPage = () => import(/* webpackChunkName: "admin.panel" */'../admin/pages/ImagesPage.vue')
 const UserOverviewPage = () => import(/* webpackChunkName: "admin.panel" */'../admin/pages/UserOverviewPage.vue')
-const LeafletMap = () => import(/* webpackChunkName: "leaflet.map" */'../components/map/LeafletMap.vue')
-const ImageMap = () => import(/* webpackChunkName: "image.map" */'../components/map/ImageMap.vue')
 
 const routes = [
   {
@@ -27,54 +26,54 @@ const routes = [
       {
         path: '',
         components: {
-          default: Overview,
-          map: LeafletMap
+          sidebar: Overview,
+          content: MapPlaceholder
         }
       },
       {
         path: '/privacy',
         components: {
-          default: Overview,
-          map: PrivacyPolicy
+          sidebar: Overview,
+          content: PrivacyPolicy
         }
       },
       {
         path: 'image/:imageId',
         components: {
-          default: Overview,
-          map: ImageMap
+          sidebar: Overview,
+          content: MapPlaceholder
         }
       },
       {
         // /a/croatia-paklenica-anica_kuk-trapez/123
         path: 'a/:path/:areaId',
         components: {
-          default: AreaDetails,
-          map: LeafletMap
+          sidebar: AreaDetails,
+          content: MapPlaceholder
         }
       },
       {
         // /a/croatia-paklenica-anica_kuk-trapez/123/image/1
         path: 'a/:path/:areaId/image/:imageId',
         components: {
-          default: AreaDetails,
-          map: ImageMap
+          sidebar: AreaDetails,
+          content: MapPlaceholder
         }
       },
       {
         // /r/croatia-paklenica-anica_kuk-trapez-mosoraski/123
         path: 'r/:path/:routeId',
         components: {
-          default: RouteDetails,
-          map: LeafletMap
+          sidebar: RouteDetails,
+          content: MapPlaceholder
         }
       },
       {
         // /r/croatia-paklenica-anica_kuk-trapez-mosoraski/123/image/1
         path: 'r/:path/:routeId/image/:imageId',
         components: {
-          default: RouteDetails,
-          map: ImageMap
+          sidebar: RouteDetails,
+          content: MapPlaceholder
         }
       },
       // TODO: is this really needed
@@ -100,35 +99,35 @@ const routes = [
       {
         path: '',
         components: {
-          default: AdminMenuList,
+          sidebar: AdminMenuList,
           content: UsersPage
         }
       },
       {
         path: 'users',
         components: {
-          default: AdminMenuList,
+          sidebar: AdminMenuList,
           content: UsersPage
         }
       },
       {
         path: 'user/:id',
         components: {
-          default: AdminMenuList,
+          sidebar: AdminMenuList,
           content: UserOverviewPage
         }
       },
       {
         path: 'images',
         components: {
-          default: AdminMenuList,
+          sidebar: AdminMenuList,
           content: ImagesPage
         }
       },
       {
         path: 'activities',
         components: {
-          default: AdminMenuList,
+          sidebar: AdminMenuList,
           content: ActivityLogPage
         }
       }
